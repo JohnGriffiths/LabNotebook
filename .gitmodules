@@ -1,0 +1,6 @@
+[submodule "site_source/theme/labnotebook-pelican-octopress-theme"]
+	path = site_source/theme/labnotebook-pelican-octopress-theme
+	url = https://github.com/JohnGriffiths/labnotebook-pelican-octopress-theme.git
+[submodule "site_source/plugins/pelican-plugins"]
+	path = site_source/plugins/pelican-plugins
+	url = https://github.com/JohnGriffiths/pelican-plugins
