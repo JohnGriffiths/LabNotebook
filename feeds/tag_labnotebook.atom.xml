@@ -1,5 +1,963 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>JDG Lab Notebook</title><link href="https://johngriffiths.github.io/LabNotebook/" rel="alternate"></link><link href="https://johngriffiths.github.io/LabNotebook/feeds/tag_labnotebook.atom.xml" rel="self"></link><id>https://johngriffiths.github.io/LabNotebook/</id><updated>2015-04-16T00:00:00-07:00</updated><entry><title>Workdocs-Cloudfiles</title><link href="https://johngriffiths.github.io/LabNotebook/about-workdocs-cloudfiles.html" rel="alternate"></link><updated>2015-04-16T00:00:00-07:00</updated><author><name>John Grif</name></author><id>tag:https://johngriffiths.github.io/LabNotebook,2015-04-16:about-workdocs-cloudfiles.html</id><summary type="html">&lt;p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>JDG Lab Notebook</title><link href="https://johngriffiths.github.io/LabNotebook/" rel="alternate"></link><link href="https://johngriffiths.github.io/LabNotebook/feeds/tag_labnotebook.atom.xml" rel="self"></link><id>https://johngriffiths.github.io/LabNotebook/</id><updated>2015-06-17T00:00:00-07:00</updated><entry><title>Collapsible code cells in the LN</title><link href="https://johngriffiths.github.io/LabNotebook/collapsible-code-cells.html" rel="alternate"></link><updated>2015-06-17T00:00:00-07:00</updated><author><name>John Grif</name></author><id>tag:johngriffiths.github.io,2015-06-17:LabNotebook/collapsible-code-cells.html</id><summary type="html">&lt;p&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="contents"&gt;Contents&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#Colla-what-cells?"&gt;Colla-what cells?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Usage-in-the-LabNotebook"&gt;Usage in the LabNotebook&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Technical-deets"&gt;Technical deets&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Examples"&gt;Examples&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#Usage-option-1---hiding-uninteresting-content"&gt;Usage option 1 - hiding uninteresting content&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Usage-option-2---toggling-interesting-content"&gt;Usage option 2 - toggling interesting content&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Colla-what-cells?"&gt;Colla-what cells?&lt;a class="anchor-link" href="#Colla-what-cells?"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Collapsible code cells are one of the many things that modern browser-based documents offer over the conventional dead tree variety, and indeed conventional digital word processors also.&lt;/p&gt;
+&lt;p&gt;The idea is simply to have a button that toggles in and out of view some section of text. Conceptually, and procedurally, this is very similar to pop-up messages that are often included with e.g. images on websits, which appears when the mouse hovers over the image for a small period of time.&lt;/p&gt;
+&lt;p&gt;So it isn't really something specific to code per se. But it is certainly ideally suited to scientific and data-journalistic documents that want to maximize readability and reproducibility.&lt;/p&gt;
+&lt;p&gt;For a taste of where this could go, see &lt;a href="http://notebooks.jsvine.com/introducing-reporter/"&gt;this example&lt;/a&gt; by Jeremy Singer-Vine. I personally think that this is the future of data journalism, if not journalism in general, and will expound on this at more length in a future entry.&lt;/p&gt;
+&lt;p&gt;Right now I'm just getting down some quick notes for documentation purposes.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Usage-in-the-LabNotebook"&gt;Usage in the LabNotebook&lt;a class="anchor-link" href="#Usage-in-the-LabNotebook"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;There are two ways in which I am using collapsible code cells in the LN:&lt;/p&gt;
+&lt;ol style="list-style-type: decimal"&gt;
+&lt;li&gt;&lt;em&gt;Hide boring/uninteresting code&lt;/em&gt;. Most of the time this will be the code used to display a figure in the IPython/Jupyer notebooks that the entries are written in, which is just visual clutter.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Hide and show interesting collapsible content&lt;/em&gt;. This second usage option is for LN entries that are modelled more directly on the JS Vine 'Reporter' notebooks linked to above, where the analysis code is available, but readability is primary consideration.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Usage cases of the second variety will be relatively rare, because the LN is first and foremost a research documentation tool, and showing the code alongside the figures and rich text commentary is a central design consideration. But I will certainly be dabbling.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Technical-deets"&gt;Technical deets&lt;a class="anchor-link" href="#Technical-deets"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;I have implemented these taking the lead from Joerg Dietrich (see &lt;a href="http://joergdietrich.github.io/notebook-collapse-input.html"&gt;here&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;...implementation; files changed...&lt;/p&gt;
+&lt;p&gt;A key point is that, unfortunately, the code toggle functionality doesn't appear to play ball with the javascript plugin I'm using for encrypted entries.&lt;/p&gt;
+&lt;p&gt;So the result is that any cells marked with the 'hide' tag stay hidden. The button to show them is there, but it won't do anything.&lt;/p&gt;
+&lt;p&gt;Therefore I don't put any interesting content in those code inputs; just that used to generate the figure.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Examples"&gt;Examples&lt;a class="anchor-link" href="#Examples"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Usage-option-1---hiding-uninteresting-content"&gt;Usage option 1 - hiding uninteresting content&lt;a class="anchor-link" href="#Usage-option-1---hiding-uninteresting-content"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# Setup&lt;/span&gt;
+&lt;span class="c"&gt;# -----&lt;/span&gt;
+
+&lt;span class="c"&gt;# (in longer and more tehnical code-oriented entries, this &lt;/span&gt;
+&lt;span class="c"&gt;#  goes in the &amp;#39;setup&amp;#39; section at the start )&lt;/span&gt;
+
+&lt;span class="c"&gt;# Define some variables&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;run&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;set_localenv_vars&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="c"&gt;# put &amp;#39;le&amp;#39; dict of system-specific paths in the namespace&lt;/span&gt;
+&lt;span class="n"&gt;nb_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;collapsible_code_cells&amp;#39;&lt;/span&gt;
+
+&lt;span class="c"&gt;# Importage&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;le&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;ipynb_workdocs_dir&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;new_utils&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cloudfiles_nb&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;dropbox&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.display&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;clear_output&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;display&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;
+
+
+&lt;span class="c"&gt;# Initialize dropbox api and workdocs-cloudfiles folder&lt;/span&gt;
+
+&lt;span class="c"&gt;#dbx_app_key = &amp;#39;drowssaperucesyreva&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;#dbx_app_secret = &amp;#39;?teytidettopsuoyevah&amp;#39;  &lt;/span&gt;
+
+&lt;span class="n"&gt;flow&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dropbox&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DropboxOAuth2FlowNoRedirect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dbx_app_key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dbx_app_secret&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;authorize_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;flow&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;authorize_url&lt;/span&gt;
+&lt;span class="n"&gt;code&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;raw_input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Enter the authorization code here: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;dbx_access_token&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;user_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;flow&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;finish&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;cnb&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cloudfiles_nb&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dbx_access_token&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;initialize_folder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;clear_output&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+
+
+&lt;span class="c"&gt;# Display figure&lt;/span&gt;
+&lt;span class="c"&gt;# ---------------&lt;/span&gt;
+
+&lt;span class="c"&gt;# These are the commands used to embed figures with &lt;/span&gt;
+&lt;span class="c"&gt;# workdocs-cloudfile, which takes care of uploading the figures &lt;/span&gt;
+&lt;span class="c"&gt;# to a private dropbox folder, inserting the url into the html &lt;/span&gt;
+&lt;span class="c"&gt;# webpage, and also keeping a local copy so that they can be &lt;/span&gt;
+&lt;span class="c"&gt;# included in generated pdfs. &lt;/span&gt;
+
+&lt;span class="c"&gt;# It is a good example of code content that needs to be included, &lt;/span&gt;
+&lt;span class="c"&gt;# but is best removed from view.&lt;/span&gt;
+
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;le&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;labnb_dir&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/resources/images/batwatchers_breakfast.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;this is a caption&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;this is a label&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;1.1&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://dl.dropboxusercontent.com/1/view/wod4yx6zz89pr09/workdocs-cloudfiles/collapsible_code_cells/batwatchers_breakfast.png" alt="broken link"                   title="Figure 1.1. this is a caption. this is a label" height="800px" width="500px" /&gt;                  Figure 1.1. this is a label. this is a caption &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Usage-option-2---toggling-interesting-content"&gt;Usage option 2 - toggling interesting content&lt;a class="anchor-link" href="#Usage-option-2---toggling-interesting-content"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;As another nod to the early pioneer of collapsible code cells JS Vine, the second example here is taken straight from the website linked to above.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;First clone the repository with the data in&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="input_area box-flex1 white"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;bn_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;le&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;code_dir&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/libraries_of_others/github/babynames&amp;#39;&lt;/span&gt;
+
+&lt;span class="o"&gt;!&lt;/span&gt;git clone https://github.com/jsvine/babynames.git &lt;span class="nv"&gt;$bn_dir&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;Cloning into &amp;apos;/alexandra/mcintosh_lab/john/Code/libraries_of_others/github/babynames&amp;apos;...
+remote: Counting objects: 22, done.[K
+remote: Total 22 (delta 0), reused 0 (delta 0), pack-reused 22[K
+Unpacking objects: 100% (22/22), done.
+Checking connectivity... done.
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Here is the bar chart&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;mpl&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;mplstyle&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;mplstyle.styles.simple&lt;/span&gt;
+&lt;span class="n"&gt;mplstyle&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mplstyle&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;styles&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;simple&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;mplstyle&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;figure.figsize&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)})&lt;/span&gt;
+
+&lt;span class="c"&gt;# Data from the Social Security Administration&lt;/span&gt;
+&lt;span class="c"&gt;# Source data: http://www.ssa.gov/oact/babynames/limits.html&lt;/span&gt;
+&lt;span class="c"&gt;# Parsed data: https://github.com/jsvine/babynames&lt;/span&gt;
+&lt;span class="c"&gt;#names = pd.read_csv(&amp;quot;/Users/jsvine/Dropbox/babynames/data/name-counts.csv&amp;quot;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# JG: change this to the location of the cloned repo&lt;/span&gt;
+&lt;span class="n"&gt;name_counts_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;bn_dir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/data/name-counts.csv&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;names&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name_counts_file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="c"&gt;# Select only newborns named Barack&lt;/span&gt;
+&lt;span class="n"&gt;baracks&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;names&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;names&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Barack&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;year&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# Plot this data as a bar chart&lt;/span&gt;
+&lt;span class="n"&gt;ax&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;baracks&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;count&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;kind&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;bar&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+    &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;teal&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+    &lt;span class="n"&gt;alpha&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# Give the chart a little breathing room at the top&lt;/span&gt;
+&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_ylim&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;baracks&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;count&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mf"&gt;1.1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# Turn off the vertical grid lines&lt;/span&gt;
+&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xaxis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# Remove the pesky, mysterious stray line&lt;/span&gt;
+&lt;span class="c"&gt;#ax.lines[0].remove() # JG: this line not needed when I run this code&lt;/span&gt;
+
+&lt;span class="c"&gt;# Fix the x-axis tick rotation&lt;/span&gt;
+&lt;span class="n"&gt;mpl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pyplot&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xticks&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rotation&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# Label the chart&lt;/span&gt;
+&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_title&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;American Newborns Named Barack, 2007-2012&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_xlabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Year&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_ylabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Newborns&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# Add numbers to the top of each bar&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;baracks&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
+    &lt;span class="n"&gt;bar&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;patches&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;xpos&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;bar&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_x&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;bar&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_width&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+    &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;baracks&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;count&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iget&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;xpos&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;ha&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;center&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    
+&lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_png output_subarea "&gt;
+&lt;img src="data:image/png;base64,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
+ZQ2EscEAAAAASUVORK5CYII=
+"
+&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Here is the table&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;baracks&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reset_index&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;div style="max-width:1500px;overflow:auto;"&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;year&lt;/th&gt;
+      &lt;th&gt;name&lt;/th&gt;
+      &lt;th&gt;sex&lt;/th&gt;
+      &lt;th&gt;count&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt;2007&lt;/td&gt;
+      &lt;td&gt;Barack&lt;/td&gt;
+      &lt;td&gt;M&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;2008&lt;/td&gt;
+      &lt;td&gt;Barack&lt;/td&gt;
+      &lt;td&gt;M&lt;/td&gt;
+      &lt;td&gt;52&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt;2009&lt;/td&gt;
+      &lt;td&gt;Barack&lt;/td&gt;
+      &lt;td&gt;M&lt;/td&gt;
+      &lt;td&gt;69&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt;2010&lt;/td&gt;
+      &lt;td&gt;Barack&lt;/td&gt;
+      &lt;td&gt;M&lt;/td&gt;
+      &lt;td&gt;28&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt;2011&lt;/td&gt;
+      &lt;td&gt;Barack&lt;/td&gt;
+      &lt;td&gt;M&lt;/td&gt;
+      &lt;td&gt;15&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;5&lt;/th&gt;
+      &lt;td&gt;2012&lt;/td&gt;
+      &lt;td&gt;Barack&lt;/td&gt;
+      &lt;td&gt;M&lt;/td&gt;
+      &lt;td&gt;16&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;&lt;/p&gt;</summary><category term="LabNotebook"></category></entry><entry><title>Proposed work plan for 2015</title><link href="https://johngriffiths.github.io/LabNotebook/proposed-workplan-2015.html" rel="alternate"></link><updated>2015-06-17T00:00:00-07:00</updated><author><name>John Grif</name></author><id>tag:johngriffiths.github.io,2015-06-17:LabNotebook/proposed-workplan-2015.html</id><summary type="html">&lt;p&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Alternative versions: &lt;a href="https://johngriffiths.github.io/LabNotebook/about-workdocs-cloudfiles.html"&gt;LabNotebook&lt;/a&gt;, &lt;a href="http://nbviewer.ipython.org/urls/dl.dropboxusercontent.com/1/view/82f49bwrmxkad0j/workdocs-cloudfiles/about_workdocs-cloudfiles/about_workdocs-cloudfiles__html_nb__2015-05-26.txt"&gt;nbviewer&lt;/a&gt;, &lt;a href="https://slideviewer.herokuapp.com/urls/dl.dropboxusercontent.com/1/view/82f49bwrmxkad0j/workdocs-cloudfiles/about_workdocs-cloudfiles/about_workdocs-cloudfiles__html_nb__2015-05-26.txt"&gt;slideviewer&lt;/a&gt;, &lt;a href="https://dl.dropboxusercontent.com/1/view/e6iu5pxvbg8hz7f/workdocs-cloudfiles/about_workdocs-cloudfiles/about_workdocs-cloudfiles__pdf_nb__2015-05-26_tidied.pdf"&gt;pdf&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="table-of-contents"&gt;Table of Contents&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#Proposed-Work-Plan-2015-2016"&gt;Proposed Work Plan 2015-2016&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#Overview"&gt;Overview&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Notebook-Setup"&gt;Notebook Setup&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Topics"&gt;Topics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Notes"&gt;Notes&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#Small-Big-networks"&gt;Small-Big networks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Modes"&gt;Modes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#TVB-SPM+DCM---detailed"&gt;TVB-SPM+DCM - detailed&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Timeline"&gt;Timeline&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Footnotes"&gt;Footnotes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Bibtex"&gt;Bibtex&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Graveyard"&gt;Graveyard&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Workdocs-Conversion"&gt;Workdocs Conversion&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Copy-to-blog-dir-and-make-entry"&gt;Copy to blog dir and make entry&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Styling"&gt;Styling&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Overview"&gt;Overview&lt;a class="anchor-link" href="#Overview"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;This is a &lt;em&gt;preliminary&lt;/em&gt;, &lt;em&gt;proposed&lt;/em&gt;, work plan for the next few months, starting mid June 2015. At this point it is entirely subject to major or complete revision, pending discussions, advice, recommendations, and clarifications of research priorities. The main emphasis - integrating TVB and SPM+DCM modelling methodologies and research programs, is nevertheless a topic we've already discussed and, I believe, have agreed is of both mutual and scientific interest.&lt;/p&gt;
+&lt;p&gt;So, the primary purpose of this document is to think through this set of research directions in detail, from scientific, methodological, and pragmatic perspectives.&lt;/p&gt;
+&lt;p&gt;The secondary purpose is to draw links to a number of other research directions that I think would be worth pursuing, including the relationship between circumscribed neural systems / cognitive networks and whole brain dynamics, modelling of cognitive activation topographies, and (eigen) modes of activity and connectivity &lt;a href="#fn:otherareas" rel="footnote"&gt;[1]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It seemed best to open with the broader discussion first, however, and so the next few sections expand fairly concisely on these additional research directions and how they relate each other and to the core set of proposals. After that, I get into the finer details of what a tvb-spm+dcm research project would look like, and what we would hope to get from it.&lt;/p&gt;
+&lt;p&gt;Again, this is all up for discussion and both constructive and destructive critique. The more of all of these the better.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Topics"&gt;Topics&lt;a class="anchor-link" href="#Topics"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;ul&gt;
+&lt;li&gt;tvb-dcm&lt;/li&gt;
+&lt;li&gt;big/small/embedded networks&lt;/li&gt;
+&lt;li&gt;topographies&lt;/li&gt;
+&lt;li&gt;modes&lt;/li&gt;
+&lt;li&gt;cognitive networks&lt;/li&gt;
+&lt;li&gt;conduction delays + microstructure&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Notes"&gt;Notes&lt;a class="anchor-link" href="#Notes"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Small-Big-networks"&gt;Small-Big networks&lt;a class="anchor-link" href="#Small-Big-networks"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;ul&gt;
+&lt;li&gt;the small-big network thing is at risk of being too focused on DCM/SPM methodology, rather than 'real science questions'&lt;/li&gt;
+&lt;li&gt;...to broaden it out, can think about 'cognitive systems' in terms of small / embedded networks. This generalizes the question and makes it much more important: every textbook, and most neuroscience research, focuses on specific systems in isolation. So we are speaking to a much broader audience in that case&lt;/li&gt;
+&lt;li&gt;...this starts to move towards the questions of cognitive network / activation topographies, which is another area I want to explore&lt;/li&gt;
+&lt;li&gt;key points here will be Deco and people on resting state network topographies, and I think UCL Tom on language network topographies with TVB&lt;/li&gt;
+&lt;li&gt;also could move toward 'hybrid' (both biophysical + cognitive, like e.g. Tim Behrens, Friston? ; and biophysical 'large' + biophysical 'small', like e.g. Cliff Kerr?)&lt;/li&gt;
+&lt;li&gt;...perhaps then think about going to nengo workshop next year with ideas about integration&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Modes"&gt;Modes&lt;a class="anchor-link" href="#Modes"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;ul&gt;
+&lt;li&gt;Robinson stuff&lt;/li&gt;
+&lt;li&gt;Robinson PRE paper links to DCM...&lt;/li&gt;
+&lt;li&gt;Multivariate analysis links to McIntosh stuff (?)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="TVB-SPM+DCM---detailed"&gt;TVB-SPM+DCM - detailed&lt;a class="anchor-link" href="#TVB-SPM+DCM---detailed"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;ul&gt;
+&lt;li&gt;lots of things&lt;/li&gt;
+&lt;li&gt;delays; multiple routes;&lt;/li&gt;
+&lt;li&gt;possible paper strucutres / abstracts&lt;/li&gt;
+&lt;li&gt;estimation vs. 'reality'&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Timeline"&gt;Timeline&lt;a class="anchor-link" href="#Timeline"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;ul&gt;
+&lt;li&gt;June 15-August 15
+&lt;ul&gt;
+&lt;li&gt;test + compare TVB Zetterberg Jansen and SPM David model&lt;/li&gt;
+&lt;li&gt;compile DCM + SPM literature review, summarizing options for extending literature publications&lt;/li&gt;
+&lt;li&gt;develop small/big/embedded network modelling methodology + concepts&lt;/li&gt;
+&lt;li&gt;pilot studies of some study replications&lt;/li&gt;
+&lt;li&gt;design structure of study(s) / paper(s)&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;August 15 - Oct 15
+&lt;ul&gt;
+&lt;li&gt;run + analyze selected simulations wrt selected core questions&lt;/li&gt;
+&lt;li&gt;get results!&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Oct 15-Christmas
+&lt;ul&gt;
+&lt;li&gt;collate study results; design + write paper; plan for next&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Footnotes"&gt;Footnotes&lt;a class="anchor-link" href="#Footnotes"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;script type="text/javascript" src="http://themodernscientist.com/static/js/jquery-2.1.3.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="http://themodernscientist.com/static/js/bigfoot.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+    var bigfoot = $.bigfoot(
+        {
+            activateOnHover: true,
+            deleteOnUnhover: true,
+            preventPageScroll: false,
+            hoverDelay: 500
+        }
+    );
+&lt;/script&gt;
+
+
+&lt;p&gt;&lt;link href="http://themodernscientist.com/static/css/bigfoot-number.css" rel="stylesheet" type="text/css"&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;li id="fn:otherareas"&gt;
+[1] This excludes other areas I am also interested in pursuing but don't directly relate to the issues at hand - including amongst other things ageing, white matter microstructure, and conduction delays. So just flagging those here for completeness.
+&lt;/li&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;</summary><category term="LabNotebook"></category><category term="McIntosh"></category></entry><entry><title>Workdocs-Cloudfiles</title><link href="https://johngriffiths.github.io/LabNotebook/about-workdocs-cloudfiles.html" rel="alternate"></link><updated>2015-04-16T00:00:00-07:00</updated><author><name>John Grif</name></author><id>tag:johngriffiths.github.io,2015-04-16:LabNotebook/about-workdocs-cloudfiles.html</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -30,8 +988,8 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;A very nice feature of IPython/Jupyter notebooks is they allow embedded images, without the need for potentially breakable references to external image files. However, the flip-side of this is that notebooks with lots of images in become very large, and unwieldy in various ways - particularly in combination with git and github repositories. Github is not designed to be passing large binary file objects such as .png files (or notebooks with embedded .png files) as they do not diff well, and can clog up repositories causing all kinds of problems, such as obscenely slow git command line calls, warnings or downright refusals from github to accept pushes containing large files. Also, nbviewer does not work well with very large notebooks, and we very much want things to be working with nbviewer. &lt;/p&gt;
-&lt;p&gt;Now that I&amp;#39;m ramping up use of the LabNotebook, it is therefore becoming apparent that a different approach to images is needed. &lt;/p&gt;
+&lt;p&gt;A very nice feature of IPython/Jupyter notebooks is they allow embedded images, without the need for potentially breakable references to external image files. However, the flip-side of this is that notebooks with lots of images in become very large, and unwieldy in various ways - particularly in combination with git and github repositories. Github is not designed to be passing large binary file objects such as .png files (or notebooks with embedded .png files) as they do not diff well, and can clog up repositories causing all kinds of problems, such as obscenely slow git command line calls, warnings or downright refusals from github to accept pushes containing large files. Also, nbviewer does not work well with very large notebooks, and we very much want things to be working with nbviewer.&lt;/p&gt;
+&lt;p&gt;Now that I'm ramping up use of the LabNotebook, it is therefore becoming apparent that a different approach to images is needed.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -40,7 +998,7 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Carl Boettiger&amp;#39;s solution to this problem is to store all images on flickr, and simply link to them. He has a very streamlined solution to this which involves knitr and hash-based file indexing. I want a similar solution to this, but with the following differences: &lt;/p&gt;
+&lt;p&gt;Carl Boettiger's solution to this problem is to store all images on flickr, and simply link to them. He has a very streamlined solution to this which involves knitr and hash-based file indexing. I want a similar solution to this, but with the following differences:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;I am working with python + ipython/jupyter + nbconvert, rather than R + knitr&lt;/li&gt;
 &lt;li&gt;I am using the ipynb-workdocs system, which involves having a master notebook that spawns into pdf files, html/nbviewer files, and reveal slideshows, with variable contents according to a per-cell tag&lt;/li&gt;
@@ -53,8 +1011,8 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;The solution I have come up with has two components. &lt;/p&gt;
-&lt;p&gt;The first is a mechanism for pushing figures to a cloud storage as soon as they are added, so that they can be linked to in html and derivative nbviewer notebook, labnotebook webpages, and web-hosted reveal slideshows. The second component is a custom figure class that uses IPython&amp;#39;s custom display logic to expose two a different command call for nbconverted latex (and subsequently compile PDFs), which links to local files rather than cloud-hosted files. &lt;/p&gt;
+&lt;p&gt;The solution I have come up with has two components.&lt;/p&gt;
+&lt;p&gt;The first is a mechanism for pushing figures to a cloud storage as soon as they are added, so that they can be linked to in html and derivative nbviewer notebook, labnotebook webpages, and web-hosted reveal slideshows. The second component is a custom figure class that uses IPython's custom display logic to expose two a different command call for nbconverted latex (and subsequently compile PDFs), which links to local files rather than cloud-hosted files.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -63,9 +1021,9 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;For the cloud-hosting, I played around with the flickr python api a bit, but kept getting errors, so turned to dropbox, which so far seems to be working very well. This object is initialized at the top of the notebook, and new folder is created if necessary. When files are uploaded, it first checks whether a file already exists with the same name, and if so deletes it before proceeding to upload the file. &lt;/p&gt;
-&lt;p&gt;An additional advantage of having the dropbox api for uploading figures is that we can also upload the nbconverted pdf to the same folder, which we can also link to from the labnotebook webpage, the nbviewer notebook, and generally share with collaborators, rather than e-mailing large pdfs etc. &lt;/p&gt;
-&lt;p&gt;The end result that notebooks (and various nbconverted derivatives) sans all embedded images are slimmed down enormously, and things such as a github-hosted LabNotebook repository become scalable in the medium-term. &lt;/p&gt;
+&lt;p&gt;For the cloud-hosting, I played around with the flickr python api a bit, but kept getting errors, so turned to dropbox, which so far seems to be working very well. This object is initialized at the top of the notebook, and new folder is created if necessary. When files are uploaded, it first checks whether a file already exists with the same name, and if so deletes it before proceeding to upload the file.&lt;/p&gt;
+&lt;p&gt;An additional advantage of having the dropbox api for uploading figures is that we can also upload the nbconverted pdf to the same folder, which we can also link to from the labnotebook webpage, the nbviewer notebook, and generally share with collaborators, rather than e-mailing large pdfs etc.&lt;/p&gt;
+&lt;p&gt;The end result that notebooks (and various nbconverted derivatives) sans all embedded images are slimmed down enormously, and things such as a github-hosted LabNotebook repository become scalable in the medium-term.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -74,7 +1032,7 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Ok, let&amp;#39;s get cracking:&lt;/p&gt;
+&lt;p&gt;Ok, let's get cracking:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -293,7 +1251,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Everything goes inside a folder in my dropbox root called &amp;#39;workdocs-cloudfiles&amp;#39;. Under that, we will have separate folders on a per-notebook basis, with the folders having the same names as the notebook files. &lt;/p&gt;
+&lt;p&gt;Everything goes inside a folder in my dropbox root called 'workdocs-cloudfiles'. Under that, we will have separate folders on a per-notebook basis, with the folders having the same names as the notebook files.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -354,7 +1312,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Just to demonstrate how to use the api, let&amp;#39;s upload one of the image files:&lt;/p&gt;
+&lt;p&gt;Just to demonstrate how to use the api, let's upload one of the image files:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -546,7 +1504,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;In general, however, we will use the custom figure class defined below for inserting figures, which uses html &lt;code&gt;img&lt;/code&gt; tags rather than IPython&amp;#39;s &lt;code&gt;display.Image&lt;/code&gt; class.&lt;/p&gt;
+&lt;p&gt;In general, however, we will use the custom figure class defined below for inserting figures, which uses html &lt;code&gt;img&lt;/code&gt; tags rather than IPython's &lt;code&gt;display.Image&lt;/code&gt; class.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -641,7 +1599,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now let&amp;#39;s incorporate this cloud storage mechanism into a custom figure class:&lt;/p&gt;
+&lt;p&gt;Now let's incorporate this cloud storage mechanism into a custom figure class:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -660,7 +1618,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;This class uses the &lt;code&gt;_repr_html_&lt;/code&gt; and &lt;code&gt;_repr_latex_&lt;/code&gt; to essentially put different text strings into html-related and pdf-related nbconvert outputs, which refer to the uploaded cloud figures and to the original local image files, respectively. &lt;/p&gt;
+&lt;p&gt;This class uses the &lt;code&gt;_repr_html_&lt;/code&gt; and &lt;code&gt;_repr_latex_&lt;/code&gt; to essentially put different text strings into html-related and pdf-related nbconvert outputs, which refer to the uploaded cloud figures and to the original local image files, respectively.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -714,7 +1672,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;The usage is fairly straightforward: when adding a figure, we provide it with the local image file, a figure label, a figure number, a figure caption, and the dropbox api object instance defined above. &lt;/p&gt;
+&lt;p&gt;The usage is fairly straightforward: when adding a figure, we provide it with the local image file, a figure label, a figure number, a figure caption, and the dropbox api object instance defined above.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -723,7 +1681,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Let&amp;#39;s start with the BB figure:&lt;/p&gt;
+&lt;p&gt;Let's start with the BB figure:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -764,7 +1722,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Note a nice feature of using the html &lt;code&gt;img&lt;/code&gt; tag the way we are doing is that if you hover your cursor over the image, you will see the full image title and caption flash up. Just an added tidbit :) &lt;/p&gt;
+&lt;p&gt;Note a nice feature of using the html &lt;code&gt;img&lt;/code&gt; tag the way we are doing is that if you hover your cursor over the image, you will see the full image title and caption flash up. Just an added tidbit :)&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -773,7 +1731,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now let&amp;#39;s generate the second figure and insert:&lt;/p&gt;
+&lt;p&gt;Now let's generate the second figure and insert:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -880,9 +1838,9 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;The next thing to do after setting up the cloud storage api and creating the figures is run nbconvert. &lt;/p&gt;
-&lt;p&gt;A key point here is that the way I do this is to use ipynb-workdocs to tag cells for inclusion in html, pdf, and slides outputs. In general, the pdf-tagged cells are a small subset of the html-tagged cells, as I generally want to use html for more complete code documentation, and pdfs for summaries of key results. Rough notes, personal reminders, and anything else not intended for either html, pdf, or slideshows, is simply not tagged, and remains in the master notebook for only my eyes to see. &lt;/p&gt;
-&lt;p&gt;In this notebook I have tagged a few of the main documentation paragraphs, section headings, and the figures for inclusion in the pdf. &lt;/p&gt;
+&lt;p&gt;The next thing to do after setting up the cloud storage api and creating the figures is run nbconvert.&lt;/p&gt;
+&lt;p&gt;A key point here is that the way I do this is to use ipynb-workdocs to tag cells for inclusion in html, pdf, and slides outputs. In general, the pdf-tagged cells are a small subset of the html-tagged cells, as I generally want to use html for more complete code documentation, and pdfs for summaries of key results. Rough notes, personal reminders, and anything else not intended for either html, pdf, or slideshows, is simply not tagged, and remains in the master notebook for only my eyes to see.&lt;/p&gt;
+&lt;p&gt;In this notebook I have tagged a few of the main documentation paragraphs, section headings, and the figures for inclusion in the pdf.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -891,7 +1849,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;The nbconvert command is run separately to the cells in this notebook, but allowing that the flow has been interrupted briefly while I have run that command, let&amp;#39;s now use the cloud api tool to upload the resulting PDF to the notebook cloud folder:&lt;/p&gt;
+&lt;p&gt;The nbconvert command is run separately to the cells in this notebook, but allowing that the flow has been interrupted briefly while I have run that command, let's now use the cloud api tool to upload the resulting PDF to the notebook cloud folder:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -940,7 +1898,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;We can grab the download link for the PDF: &lt;/p&gt;
+&lt;p&gt;We can grab the download link for the PDF:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -977,7 +1935,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;As the PDF is only short, we&amp;#39;ll also, for completeness, insert it into the notebook (but not the pdf itself; i.e. the following cell is tagged &amp;#39;html&amp;#39; but not &amp;#39;pdf&amp;#39;):&lt;/p&gt;
+&lt;p&gt;As the PDF is only short, we'll also, for completeness, insert it into the notebook (but not the pdf itself; i.e. the following cell is tagged 'html' but not 'pdf'):&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7213,7 +8171,7 @@ bgBQREYtMS41IAVcCzkAAAAASUVORK5CYII=
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/p&gt;</summary><category term="LabNotebook"></category><category term="IPython"></category></entry><entry><title>About the notebook</title><link href="https://johngriffiths.github.io/LabNotebook/about-the-notebook.html" rel="alternate"></link><updated>2015-03-28T00:00:00-07:00</updated><author><name>John Grif</name></author><id>tag:https://johngriffiths.github.io/LabNotebook,2015-03-28:about-the-notebook.html</id><summary type="html">&lt;p&gt;
+&lt;/div&gt;&lt;/p&gt;</summary><category term="LabNotebook"></category><category term="IPython"></category></entry><entry><title>About the notebook</title><link href="https://johngriffiths.github.io/LabNotebook/about-the-notebook.html" rel="alternate"></link><updated>2015-03-28T00:00:00-07:00</updated><author><name>John Grif</name></author><id>tag:johngriffiths.github.io,2015-03-28:LabNotebook/about-the-notebook.html</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -7229,8 +8187,8 @@ bgBQREYtMS41IAVcCzkAAAAASUVORK5CYII=
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;...to my open, digital lab notebook. &lt;/p&gt;
-&lt;p&gt;I have been inspired to adopt this new format for scientific record-keeping primarily by Carl Boettiger&amp;#39;s &lt;a href="http://www.carlboettiger.info/lab-notebook.html"&gt;impressive efforts&lt;/a&gt;. The benefits of &lt;a href="http://en.wikipedia.org/wiki/Open_notebook_science"&gt;Open Notebook Science&lt;/a&gt; for individual researchers, collaboration networks, and to the scientific community in general are, I think, pretty compelling. Most of my daily work as a computational research scientist involves small-scale problem solving, which in my case is centred around coding for computer simulations and statistical data analysis. Occasionally, (I like to think) I have interesting ideas also. In general, the best thing that could possibly happen to the fruits of this labour is for other people to see them and find them useful. This isn&amp;#39;t some kind of wishful head-in-the-clouds altruism: maximizing the transparency of my work to my close collaborators, and to a lesser extent to other peers, reviewers, and to myself in the future, has clear practical benefits, and I stand to be the primary beneficiary. However I would be lying if I said that this is a completely ideology-free exercise. &lt;/p&gt;
+&lt;p&gt;...to my open, digital lab notebook.&lt;/p&gt;
+&lt;p&gt;I have been inspired to adopt this new format for scientific record-keeping primarily by Carl Boettiger's &lt;a href="http://www.carlboettiger.info/lab-notebook.html"&gt;impressive efforts&lt;/a&gt;. The benefits of &lt;a href="http://en.wikipedia.org/wiki/Open_notebook_science"&gt;Open Notebook Science&lt;/a&gt; for individual researchers, collaboration networks, and to the scientific community in general are, I think, pretty compelling. Most of my daily work as a computational research scientist involves small-scale problem solving, which in my case is centred around coding for computer simulations and statistical data analysis. Occasionally, (I like to think) I have interesting ideas also. In general, the best thing that could possibly happen to the fruits of this labour is for other people to see them and find them useful. This isn't some kind of wishful head-in-the-clouds altruism: maximizing the transparency of my work to my close collaborators, and to a lesser extent to other peers, reviewers, and to myself in the future, has clear practical benefits, and I stand to be the primary beneficiary. However I would be lying if I said that this is a completely ideology-free exercise.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7259,9 +8217,9 @@ bgBQREYtMS41IAVcCzkAAAAASUVORK5CYII=
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;&amp;quot;Disclaimer: this is not a blog.&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;&lt;em&gt;...This is the active, permanent record of my scientific research, standing in place of the traditional paper bound lab notebook. The notebook is primarily a tool for me to do science, not communicate it. I write my entries with the hope that they are intelligible to my future self; and maybe my collaborators and experts in my field. Only the occasional entry will be written for a more general audience. […] In these pages you will find not only thoughts and ideas, but references to the literature I read, the codes or manuscripts I write, derivations I scribble and graphs I create and mistakes I make.&amp;quot;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;&amp;quot;Disclaimer: this is not a blog.&lt;/em&gt;&lt;/strong&gt;&lt;br /&gt;&lt;em&gt;...This is the active, permanent record of my scientific research, standing in place of the traditional paper bound lab notebook. The notebook is primarily a tool for me to do science, not communicate it. I write my entries with the hope that they are intelligible to my future self; and maybe my collaborators and experts in my field. Only the occasional entry will be written for a more general audience. […] In these pages you will find not only thoughts and ideas, but references to the literature I read, the codes or manuscripts I write, derivations I scribble and graphs I create and mistakes I make.&amp;quot;&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;...all of which applies in equal measure to the following pages. &lt;/p&gt;
+&lt;p&gt;...all of which applies in equal measure to the following pages.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7280,7 +8238,7 @@ bgBQREYtMS41IAVcCzkAAAAASUVORK5CYII=
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Clearly one of the trickiest parts of maintaining an on online digital notebook is choosing what not to make publicly available immediately  &lt;a href="#fn:availableimmediately" rel="footnote"&gt;[1]&lt;/a&gt;, so that any novel ideas and/or discoveries don&amp;#39;t get &amp;#39;scooped&amp;#39;. In my fields of computational and cognitive neuroscience, where the heat isn&amp;#39;t turned up quite as high as in more commercialization-driven fields such as genetics or quantum computing, such concerns seem to me a little OTT. They are nevertheless perfectly valid concerns, particularly for close collaborators - and to my mind these are precisely the people who stand to benefit most from the OpenNotebook approach. &lt;/p&gt;
+&lt;p&gt;Clearly one of the trickiest parts of maintaining an on online digital notebook is choosing what not to make publicly available immediately &lt;a href="#fn:availableimmediately" rel="footnote"&gt;[1]&lt;/a&gt;, so that any novel ideas and/or discoveries don't get 'scooped'. In my fields of computational and cognitive neuroscience, where the heat isn't turned up quite as high as in more commercialization-driven fields such as genetics or quantum computing, such concerns seem to me a little OTT. They are nevertheless perfectly valid concerns, particularly for close collaborators - and to my mind these are precisely the people who stand to benefit most from the OpenNotebook approach.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7289,7 +8247,7 @@ bgBQREYtMS41IAVcCzkAAAAASUVORK5CYII=
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Fortunately, I have found a handy solution to this problem in the &lt;a href="https://github.com/mindcruzer/pelican-encrypt-content"&gt;pelican encrypt-content plugin&lt;/a&gt;. This little gem adds password-protection on a per-entry basis using &lt;a href="http://en.wikipedia.org/wiki/Advanced_Encryption_Standard"&gt;AES&lt;/a&gt; 256-bit encryption, which is decoded at the browser level with the &lt;em&gt;Crypto-JS&lt;/em&gt; javascript library. From a security point of view, the end-result is entirely analogous to a password-protected dropbox folder, or indeed sending attachments via e-mail &lt;a href="#fn:security" rel="footnote"&gt;[2]&lt;/a&gt;, both of which are commonplace media for collarborative work. &lt;/p&gt;
+&lt;p&gt;Fortunately, I have found a handy solution to this problem in the &lt;a href="https://github.com/mindcruzer/pelican-encrypt-content"&gt;pelican encrypt-content plugin&lt;/a&gt;. This little gem adds password-protection on a per-entry basis using &lt;a href="http://en.wikipedia.org/wiki/Advanced_Encryption_Standard"&gt;AES&lt;/a&gt; 256-bit encryption, which is decoded at the browser level with the &lt;em&gt;Crypto-JS&lt;/em&gt; javascript library. From a security point of view, the end-result is entirely analogous to a password-protected dropbox folder, or indeed sending attachments via e-mail &lt;a href="#fn:security" rel="footnote"&gt;[2]&lt;/a&gt;, both of which are commonplace media for collarborative work.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7298,7 +8256,7 @@ bgBQREYtMS41IAVcCzkAAAAASUVORK5CYII=
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;At a practical level, this probably means that most people will find that they are unable to view some non-negligible proportion of the posts on this site. If you are frustrated by this, I apologize. My personal feeling is that it&amp;#39;s a reasonable compromise. &lt;/p&gt;
+&lt;p&gt;At a practical level, this probably means that most people will find that they are unable to view some non-negligible proportion of the posts on this site. If you are frustrated by this, I apologize. My personal feeling is that it's a reasonable compromise.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7317,7 +8275,7 @@ bgBQREYtMS41IAVcCzkAAAAASUVORK5CYII=
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;I will add a more thorough and technical post soon on how the digital notebook is set up and managed. Please also feel free contact me or leave comments if you have some constructive feedback. This is still in experimental stages and will likely evolve considerably over the months and years. &lt;/p&gt;
+&lt;p&gt;I will add a more thorough and technical post soon on how the digital notebook is set up and managed. Please also feel free contact me or leave comments if you have some constructive feedback. This is still in experimental stages and will likely evolve considerably over the months and years.&lt;/p&gt;
 &lt;p&gt;Happy browsing :)&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7327,7 +8285,7 @@ bgBQREYtMS41IAVcCzkAAAAASUVORK5CYII=
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;hr&gt;
+&lt;hr /&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7350,7 +8308,7 @@ bgBQREYtMS41IAVcCzkAAAAASUVORK5CYII=
 &lt;/script&gt;
 
 
-&lt;link href="http://themodernscientist.com/static/css/bigfoot-number.css" rel="stylesheet" type="text/css"&gt;
+&lt;p&gt;&lt;link href="http://themodernscientist.com/static/css/bigfoot-number.css" rel="stylesheet" type="text/css"&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7359,9 +8317,13 @@ bgBQREYtMS41IAVcCzkAAAAASUVORK5CYII=
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;li id="fn:availableimmediately"&gt;[1] obviously, eventually (probably after acceptance or submission for publication), everything should be expected to be made publicly available. This is Open Science, after all.  &lt;/li&gt;
+&lt;li id="fn:availableimmediately"&gt;
+[1] obviously, eventually (probably after acceptance or submission for publication), everything should be expected to be made publicly available. This is Open Science, after all.
+&lt;/li&gt;
 
-&lt;li id="fn:security"&gt;[2] In fact, browser-level decryption is almost certainly more secure than these and most other ways of storing information in, or pushing it through, the cloud. The password-protected LabNotebook pages are only decrypted when you read them; until that point the information in them is, for all intents and purposes, gobbledeygook. &lt;/li&gt;
+&lt;li id="fn:security"&gt;
+[2] In fact, browser-level decryption is almost certainly more secure than these and most other ways of storing information in, or pushing it through, the cloud. The password-protected LabNotebook pages are only decrypted when you read them; until that point the information in them is, for all intents and purposes, gobbledeygook.
+&lt;/li&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/p&gt;</summary><category term="LabNotebook"></category></entry></feed>
