@@ -1761,7 +1761,7 @@ jQuery(document).ready(function($) {
 <header>
       <h1 class="entry-title">About workdocs-cloudfiles</h1>
     <p class="meta">
-<time datetime="2015-07-03T00:00:00-07:00" pubdate>Fri 03 July 2015</time>    </p>
+<time datetime="2015-07-07T00:00:00-07:00" pubdate>Tue 07 July 2015</time>    </p>
 </header>
 
   <div class="entry-content"><p>
@@ -1783,7 +1783,11 @@ jQuery(document).ready(function($) {
 <ul>
 <li><a href="#Overview">Overview</a></li>
 <li><a href="#Notebook-Setup">Notebook Setup</a></li>
-<li><a href="#Dropbox-API-Class">Dropbox API Class</a></li>
+<li><a href="#API-Classes">API Classes</a>
+<ul>
+<li><a href="#AWS-S3">AWS S3</a></li>
+<li><a href="#Dropbox">Dropbox</a></li>
+</ul></li>
 <li><a href="#Custom-figure-class">Custom figure class</a></li>
 <li><a href="#Movies">Movies</a></li>
 <li><a href="#Using-with-nbconvert">Using with nbconvert</a></li>
@@ -1816,7 +1820,7 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Carl Boettiger's solution to this problem is to store all images on flickr, and simply link to them. He has a very streamlined solution to this which involves knitr and hash-based file indexing. I want a similar solution to this, but with the following differences:</p>
+<p>Carl Boettiger's <a href="http://www.carlboettiger.info/2012/03/21/knitr-github-and-a-new-phase-for-the-lab-notebook.html">solution to this kind of problem</a> is to store all images on flickr, and simply link to them. He has a very streamlined solution, which involves knitr and hash-based file indexing. I want a similar solution to this, but with the following differences:</p>
 <ul>
 <li>I am working with python + ipython/jupyter + nbconvert, rather than R + knitr</li>
 <li>I am using the ipynb-workdocs system, which involves having a master notebook that spawns into pdf files, html/nbviewer files, and reveal slideshows, with variable contents according to a per-cell tag</li>
@@ -1839,8 +1843,17 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For the cloud-hosting, I played around with the flickr python api a bit, but kept getting errors, so turned to dropbox, which so far seems to be working very well (see documention and tutorial <a href="https://www.dropbox.com/developers/core/docs/python">here</a> and <a href="https://www.dropbox.com/developers/core/start/python">here</a>. This object is initialized at the top of the notebook, and new folder is created if necessary. When files are uploaded, it first checks whether a file already exists with the same name, and if so deletes it before proceeding to upload the file.</p>
-<p>An additional advantage of having the dropbox api for uploading figures is that we can also upload the nbconverted pdf to the same folder, which we can also link to from the labnotebook webpage, the nbviewer notebook, and generally share with collaborators, rather than e-mailing large pdfs etc.</p>
+<p>For the cloud-hosting, I played around with the flickr python api a bit, but kept getting errors. I then turned to dropbox, and was able to get down a nicely functioning high-level wrapper that achieved the above nicely (c.f. the dropbox python api documentation <a href="https://www.dropbox.com/developers/core/docs/python">here</a> and <a href="https://www.dropbox.com/developers/core/start/python">here</a>). However, it subsequently came to my attention that <strong><em>dropbox api urls expire after 30 days, unless you are a pro or business user</em></strong>. As I am neither of those, my nice dropbox solution doesn't do the job for me, although it could well do for others who do pay dropbox money. So I hunted around again, and am now currently favouring amazon S3, via a nice api called <code>boto</code>. This is still not entirely free, but certainly better value for money. And, it turns out, a lot smoother to use, plus providing some additional features like website hosting.</p>
+<p>The code below describes the aws/boto implementation, and for good measure also the dropbox one, although as noted the latter will have only have non-broken links for up to 30 days after the time writing.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In addition to figures, we can also use upload other useful content to the cloud-hosted folders, such as data files, nbconverted pdfs (preferable to e-mailing if these are large files), etc.</p>
 <p>The end result that notebooks (and various nbconverted derivatives) sans all embedded images are slimmed down enormously, and things such as a github-hosted LabNotebook repository become scalable in the medium-term.</p>
 </div>
 </div>
@@ -1864,6 +1877,72 @@ jQuery(document).ready(function($) {
 </div>
 </div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Define some variables</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># put some system-specific variables in the namespace (&#39;le&#39; dict)</span>
+<span class="o">%</span><span class="k">run</span> <span class="o">~/</span><span class="n">set_localenv_vars</span><span class="o">.</span><span class="n">py</span>
+
+<span class="n">outdir</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s">&#39;data_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/notebooks/about_workdocs-cloudfiles&#39;</span> <span class="c"># output folder</span>
+<span class="o">!</span>mkdir -p <span class="nv">$outdir</span>
+
+<span class="n">nbc_dir</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s">&#39;nbconverted_dir&#39;</span><span class="p">]</span>  <span class="c"># nbconverted dir</span>
+<span class="n">nb_name</span> <span class="o">=</span> <span class="s">&#39;about_workdocs-cloudfiles&#39;</span> <span class="c"># notebook name  (for use with dropbox api)</span>
+
+<span class="c"># local image files</span>
+<span class="n">imfile1</span> <span class="o">=</span>  <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/batwatchers_breakfast.png&#39;</span>
+<span class="n">imfile2</span> <span class="o">=</span>  <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/mpl3d_example.png&#39;</span> <span class="c"># we will generate this</span>
+<span class="n">movfile</span> <span class="o">=</span>  <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/example_movie.mp4&#39;</span>
+
+<span class="n">imfile1_fname</span> <span class="o">=</span> <span class="n">imfile1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">nb_name</span> <span class="o">=</span> <span class="s">&#39;about_workdocs-cloudfiles&#39;</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">aws_key</span> <span class="o">=</span> <span class="s">&#39;drowssaperucesyreva&#39;</span>
+<span class="n">aws_secret</span> <span class="o">=</span> <span class="s">&#39;?teytidettopsuoyevah&#39;</span>  
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">dbx_key</span> <span class="o">=</span> <span class="s">&#39;drowssaperucesyreva&#39;</span>
+<span class="n">dbx_secret</span> <span class="o">=</span> <span class="s">&#39;?teytidettopsuoyevah&#39;</span>  
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -1911,99 +1990,6 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Define some variables</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-
-<div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># put some system-specific variables in the namespace (&#39;le&#39; dict)</span>
-<span class="o">%</span><span class="k">run</span> <span class="o">~/</span><span class="n">set_localenv_vars</span><span class="o">.</span><span class="n">py</span>
-
-<span class="n">outdir</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s">&#39;data_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/notebooks/about_workdocs-cloudfiles&#39;</span> <span class="c"># output folder</span>
-<span class="o">!</span>mkdir -p <span class="nv">$outdir</span>
-
-<span class="n">nbc_dir</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s">&#39;nbconverted_dir&#39;</span><span class="p">]</span>  <span class="c"># nbconverted dir</span>
-<span class="n">nb_name</span> <span class="o">=</span> <span class="s">&#39;about_workdocs-cloudfiles&#39;</span> <span class="c"># notebook name  (for use with dropbox api)</span>
-
-<span class="c"># local image files</span>
-<span class="n">imfile1</span> <span class="o">=</span>  <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/batwatchers_breakfast.png&#39;</span>
-<span class="n">imfile2</span> <span class="o">=</span>  <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/mpl3d_example.png&#39;</span> <span class="c"># we will generate this</span>
-<span class="n">movfile</span> <span class="o">=</span>  <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/example_movie.mp4&#39;</span>
-</pre></div>
-
-</div>
-
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Initialize dropbox api</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-
-<div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">dbx_app_key</span> <span class="o">=</span> <span class="s">&#39;drowssaperucesyreva&#39;</span>
-<span class="n">dbx_app_secret</span> <span class="o">=</span> <span class="s">&#39;?teytidettopsuoyevah&#39;</span>  
-</pre></div>
-
-</div>
-
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-
-<div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">flow</span> <span class="o">=</span> <span class="n">dropbox</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">DropboxOAuth2FlowNoRedirect</span><span class="p">(</span><span class="n">dbx_app_key</span><span class="p">,</span> <span class="n">dbx_app_secret</span><span class="p">)</span>
-<span class="n">authorize_url</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-<span class="k">print</span> <span class="n">authorize_url</span>
-<span class="n">code</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&quot;Enter the authorization code here: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-<span class="n">dbx_access_token</span><span class="p">,</span> <span class="n">user_id</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">finish</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
-<span class="n">clear_output</span><span class="p">()</span>
-</pre></div>
-
-</div>
-
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-
-<div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">le</span><span class="p">[</span><span class="s">&#39;code_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/libraries_of_mine/github/ipynb-workdocs&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">new_utils</span> <span class="kn">import</span> <span class="n">nb_fig</span><span class="p">,</span><span class="n">cloudfiles_nb</span>
-
-<span class="n">nb_name</span> <span class="o">=</span> <span class="s">&#39;about_workdocs-cloudfiles&#39;</span>
-
-<span class="n">cnb</span> <span class="o">=</span> <span class="n">cloudfiles_nb</span><span class="p">(</span><span class="n">dbx_access_token</span><span class="p">)</span>
-</pre></div>
-
-</div>
-
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <p>Calico document tools</p>
 </div>
 </div>
@@ -2014,7 +2000,8 @@ jQuery(document).ready(function($) {
 
 <div class="input_area box-flex1 white">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">javascript</span>
-<span class="n">IPython</span><span class="o">.</span><span class="n">load_extensions</span><span class="p">(</span><span class="s">&#39;calico-spell-check&#39;</span><span class="p">,</span> <span class="s">&#39;calico-document-tools&#39;</span><span class="p">,</span><span class="s">&#39;calico-cell-tools&#39;</span><span class="p">);</span>
+<span class="n">IPython</span><span class="o">.</span><span class="n">load_extensions</span><span class="p">(</span><span class="s">&#39;calico-spell-check&#39;</span><span class="p">,</span> <span class="s">&#39;calico-document-tools&#39;</span><span class="p">,</span>
+                        <span class="s">&#39;calico-cell-tools&#39;</span><span class="p">);</span>
 </pre></div>
 
 </div>
@@ -2040,25 +2027,12 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-
-<div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c">#%load /home/jgriffiths/Code/libraries_of_mine/github/ipynb-thesis/Notebooks/chapter_utils.py</span>
-</pre></div>
-
-</div>
-
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Dropbox-API-Class">Dropbox API Class<a class="anchor-link" href="#Dropbox-API-Class">&#182;</a></h2>
+<h2 id="API-Classes">API Classes<a class="anchor-link" href="#API-Classes">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -2068,85 +2042,20 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This class takes care of uploading and getting links for new images</p>
+<p>The cloudfiles api classes take care of uploading and getting links for new images. For the most part we will not be using them directly, but rather calling them via the wrappers for embedding figures, shown below. Here's how they look anyway:</p>
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-
-<div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="k">class</span> <span class="nc">cloudfiles_nb</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">access_token</span><span class="p">):</span><span class="c">#app_key,app_secret)</span>
-
-    <span class="kn">from</span> <span class="nn">dropbox.client</span> <span class="kn">import</span> <span class="n">DropboxClient</span>
-    <span class="kn">from</span> <span class="nn">dropbox.session</span> <span class="kn">import</span> <span class="n">DropboxSession</span>    
-  
-    <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">DropboxClient</span><span class="p">(</span><span class="n">access_token</span><span class="p">)</span>
-    
-    <span class="bp">self</span><span class="o">.</span><span class="n">base_dir</span> <span class="o">=</span> <span class="s">&#39;workdocs-cloudfiles&#39;</span>        
-    <span class="bp">self</span><span class="o">.</span><span class="n">folders_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="s">&#39;path&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;/</span><span class="si">%s</span><span class="s">/&#39;</span> <span class="o">%</span><span class="k">self</span><span class="o">.</span><span class="n">base_dir</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>\
-                         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">metadata</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_dir</span><span class="p">)[</span><span class="s">&#39;contents&#39;</span><span class="p">]]</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">upload_file_res</span> <span class="o">=</span> <span class="p">{}</span>
-    
-  <span class="k">def</span> <span class="nf">initialize_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">folder_name</span><span class="p">):</span>
-    
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">thisfolder</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_dir</span><span class="p">,</span><span class="n">folder_name</span><span class="p">)</span>
-    
-    <span class="k">if</span> <span class="n">folder_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">folders_list</span><span class="p">:</span>
-      <span class="k">print</span> <span class="s">&#39;folder already exists&#39;</span>
-      <span class="n">res</span> <span class="o">=</span> <span class="bp">None</span>
-    <span class="k">else</span><span class="p">:</span>
-      <span class="k">print</span> <span class="s">&#39;creating folder&#39;</span>
-      <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">file_create_folder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thisfolder</span><span class="p">)</span>
-        
-    <span class="c"># do something for error</span>
-    
-    <span class="k">return</span> <span class="n">res</span>
-
-    
-  <span class="k">def</span> <span class="nf">upload_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filepath</span><span class="p">):</span>
-        
-    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">filepath</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-
-    <span class="n">newfile</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thisfolder</span><span class="p">,</span><span class="n">filename</span><span class="p">)</span>
-    
-    <span class="c"># if filename alread exists, delate and replace</span>
-    <span class="c">#filecheck = self.client.search(self.thisfolder, filename)</span>
-    <span class="c">#if filecheck: del_res = self.client.file_delete(newfile)</span>
-        
-    <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">put_file</span><span class="p">(</span><span class="n">newfile</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
- 
-    <span class="k">return</span> <span class="n">res</span>
-
-
-  <span class="k">def</span> <span class="nf">get_file_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">getfile</span><span class="p">):</span>
-        
-    <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">media</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thisfolder</span><span class="p">,</span><span class="n">getfile</span><span class="p">))</span>
-    
-    <span class="c"># something for error</span>
-    
-    <span class="k">return</span> <span class="n">res</span>
-</pre></div>
-
-</div>
-
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Everything goes inside a folder in my dropbox root called 'workdocs-cloudfiles'. Under that, we will have separate folders on a per-notebook basis, with the folders having the same names as the notebook files.</p>
+<h3 id="AWS-S3">AWS S3<a class="anchor-link" href="#AWS-S3">&#182;</a></h3>
 </div>
 </div>
 </div>
+
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -2161,7 +2070,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cnb</span> <span class="o">=</span> <span class="n">cloudfiles_nb</span><span class="p">(</span><span class="n">dbx_access_token</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cnb_aws</span> <span class="o">=</span> <span class="n">cloudfiles_nb</span><span class="p">(</span><span class="s">&#39;aws&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">aws_key</span><span class="p">,</span><span class="n">aws_secret</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -2174,37 +2083,13 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">res</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">initialize_folder</span><span class="p">(</span><span class="n">nb_name</span><span class="p">)</span>
-<span class="n">res</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cnb_aws</span><span class="o">.</span><span class="n">initialize_folder</span><span class="p">(</span><span class="n">nb_name</span><span class="p">)</span>
 </pre></div>
 
 </div>
 
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre class="ipynb">folder already exists
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>When we initialize the folder for the first time, <code>cnb.initialize_folder</code> will report that it has created a new folder; after that it will simply note that the folder already exists. I've run the above cell a few times in the process of writing this notebook, so we get the latter.</p>
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -2247,38 +2132,11 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">res</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="n">imfile1</span><span class="p">)</span>
-<span class="n">d</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cnb_aws</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="n">imfile1</span><span class="p">)</span>
 </pre></div>
 
 </div>
 
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-
-
-<pre class="ipynb">{u&apos;bytes&apos;: 227764,
- u&apos;client_mtime&apos;: u&apos;Thu, 02 Jul 2015 16:59:23 +0000&apos;,
- u&apos;icon&apos;: u&apos;page_white_picture&apos;,
- u&apos;is_dir&apos;: False,
- u&apos;mime_type&apos;: u&apos;image/png&apos;,
- u&apos;modified&apos;: u&apos;Thu, 02 Jul 2015 16:59:23 +0000&apos;,
- u&apos;path&apos;: u&apos;/workdocs-cloudfiles/about_workdocs-cloudfiles/batwatchers_breakfast.png&apos;,
- u&apos;rev&apos;: u&apos;41737009579ca&apos;,
- u&apos;revision&apos;: 268087,
- u&apos;root&apos;: u&apos;dropbox&apos;,
- u&apos;shareable&apos;: False,
- u&apos;size&apos;: u&apos;222.4 KB&apos;,
- u&apos;thumb_exists&apos;: True}</pre>
-
-</div>
-
-</div>
 </div>
 
 </div>
@@ -2287,7 +2145,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now searching for this file confirms it is there:</p>
+<p>Getting the file link is a common thing we want to do, so it has a higher-level method call that is the same for both aws and dropbox</p>
 </div>
 </div>
 </div>
@@ -2296,86 +2154,20 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">res</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">thisfolder</span><span class="p">,</span><span class="n">imfile1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">d</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">res</span> <span class="o">=</span> <span class="n">cnb_aws</span><span class="o">.</span><span class="n">get_file_link</span><span class="p">(</span><span class="n">imfile1_fname</span><span class="p">)</span>
 </pre></div>
 
 </div>
 
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-
-
-<pre class="ipynb">[{u&apos;bytes&apos;: 227764,
-  u&apos;client_mtime&apos;: u&apos;Thu, 02 Jul 2015 16:59:23 +0000&apos;,
-  u&apos;icon&apos;: u&apos;page_white_picture&apos;,
-  u&apos;is_dir&apos;: False,
-  u&apos;mime_type&apos;: u&apos;image/png&apos;,
-  u&apos;modified&apos;: u&apos;Thu, 02 Jul 2015 16:59:23 +0000&apos;,
-  u&apos;modifier&apos;: None,
-  u&apos;path&apos;: u&apos;/workdocs-cloudfiles/about_workdocs-cloudfiles/batwatchers_breakfast.png&apos;,
-  u&apos;read_only&apos;: False,
-  u&apos;rev&apos;: u&apos;41737009579ca&apos;,
-  u&apos;revision&apos;: 268087,
-  u&apos;root&apos;: u&apos;dropbox&apos;,
-  u&apos;size&apos;: u&apos;222.4 KB&apos;,
-  u&apos;thumb_exists&apos;: True}]</pre>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can get the url for the file and link to it in the notebook:</p>
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">res</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">get_file_link</span><span class="p">(</span><span class="s">&#39;batwatchers_breakfast.png&#39;</span><span class="p">)</span>
-<span class="n">d</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
-</pre></div>
-
-</div>
-
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-
-
-<pre class="ipynb">{u&apos;expires&apos;: u&apos;Thu, 02 Jul 2015 20:59:38 +0000&apos;,
- u&apos;url&apos;: u&apos;https://dl.dropboxusercontent.com/1/view/5h0x71e5k1dbhp6/workdocs-cloudfiles/about_workdocs-cloudfiles/batwatchers_breakfast.png&apos;}</pre>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-
-<div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s">&#39;url&#39;</span><span class="p">],</span> <span class="n">embed</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">embed</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -6410,7 +6202,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can also delete the file (note the slightly different form to the upload syntax))</p>
+<p>The wide variety of other methods provided by <code>boto</code> for interacting with aws can be accessed via the <code>cnb.bucket</code> attribute.</p>
 </div>
 </div>
 </div>
@@ -6419,7 +6211,286 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">file_delete</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">thisfolder</span><span class="p">,</span> <span class="n">imfile1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])))</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">cnb_aws</span><span class="o">.</span><span class="n">bucket</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">&lt;Bucket: about_workdocs-cloudfiles&gt;</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Dropbox">Dropbox<a class="anchor-link" href="#Dropbox">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Initializing the dropbox api is a little more involved than with aws.</p>
+<p>It requires running the following cell to get the access token, which is obtained by following a link provided, and copy-pasting the provided text string into an input box.</p>
+<p>The output of the dropbox 'flow' commands will print access token info to the cell output, so I've added a <code>clear_output()</code> call so that this sensitive info doesn't get kept in the notebook.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">flow</span> <span class="o">=</span> <span class="n">dropbox</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">DropboxOAuth2FlowNoRedirect</span><span class="p">(</span><span class="n">dbx_key</span><span class="p">,</span> <span class="n">dbx_secret</span><span class="p">)</span>
+<span class="n">authorize_url</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">authorize_url</span>
+<span class="n">code</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&quot;Enter the authorization code here: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="n">dbx_token</span><span class="p">,</span> <span class="n">user_id</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">finish</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+<span class="n">clear_output</span><span class="p">()</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The cloudfiles folder can now be initialized using the access token obtained from the above step</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cnb_dbx</span> <span class="o">=</span> <span class="n">cloudfiles_nb</span><span class="p">(</span><span class="s">&#39;dropbox&#39;</span><span class="p">,</span> <span class="n">dbx_token</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cnb_dbx</span><span class="o">.</span><span class="n">initialize_folder</span><span class="p">(</span><span class="n">nb_name</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">folder already exists
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When we initialize the folder for the first time using <code>initialize_folder</code>, the dropbox api will report that it has created a new folder; after that it will simply note that the folder already exists. I've run the above cell a few times in the process of writing this notebook, so we get the latter.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The way the class has been written, everything goes inside a folder in my dropbox root called 'workdocs-cloudfiles'. Under that, we will have separate folders on a per-notebook basis, with the folders having the same names as the notebook files.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Uploading files uses the same call as with the aws api above, although the dropbox api will give some feedback</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">res</span> <span class="o">=</span> <span class="n">cnb_dbx</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="n">imfile1</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">{u&apos;bytes&apos;: 227764,
+ u&apos;client_mtime&apos;: u&apos;Fri, 03 Jul 2015 18:30:51 +0000&apos;,
+ u&apos;icon&apos;: u&apos;page_white_picture&apos;,
+ u&apos;is_dir&apos;: False,
+ u&apos;mime_type&apos;: u&apos;image/png&apos;,
+ u&apos;modified&apos;: u&apos;Fri, 03 Jul 2015 18:30:51 +0000&apos;,
+ u&apos;path&apos;: u&apos;/workdocs-cloudfiles/about_workdocs-cloudfiles/batwatchers_breakfast.png&apos;,
+ u&apos;rev&apos;: u&apos;41753009579ca&apos;,
+ u&apos;revision&apos;: 268115,
+ u&apos;root&apos;: u&apos;dropbox&apos;,
+ u&apos;shareable&apos;: False,
+ u&apos;size&apos;: u&apos;222.4 KB&apos;,
+ u&apos;thumb_exists&apos;: True}</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Similarly, getting the file link uses the same call as with the aws api:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">res</span> <span class="o">=</span> <span class="n">cnb_dbx</span><span class="o">.</span><span class="n">get_file_link</span><span class="p">(</span><span class="s">&#39;batwatchers_breakfast.png&#39;</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">u&apos;https://dl.dropboxusercontent.com/1/view/remwniunmp0c1cb/workdocs-cloudfiles/about_workdocs-cloudfiles/batwatchers_breakfast.png&apos;</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The actual dropbox api methods directly by accessing the <code>client</code> attribute.</p>
+<p>For example, we can search for files in the notebook folder (or elsewhere):</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">res</span> <span class="o">=</span> <span class="n">cnb_dbx</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">cnb_dbx</span><span class="o">.</span><span class="n">thisfolder</span><span class="p">,</span><span class="n">imfile1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">d</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">[{u&apos;bytes&apos;: 227764,
+  u&apos;client_mtime&apos;: u&apos;Fri, 03 Jul 2015 18:30:51 +0000&apos;,
+  u&apos;icon&apos;: u&apos;page_white_picture&apos;,
+  u&apos;is_dir&apos;: False,
+  u&apos;mime_type&apos;: u&apos;image/png&apos;,
+  u&apos;modified&apos;: u&apos;Fri, 03 Jul 2015 18:30:51 +0000&apos;,
+  u&apos;modifier&apos;: None,
+  u&apos;path&apos;: u&apos;/workdocs-cloudfiles/about_workdocs-cloudfiles/batwatchers_breakfast.png&apos;,
+  u&apos;read_only&apos;: False,
+  u&apos;rev&apos;: u&apos;41753009579ca&apos;,
+  u&apos;revision&apos;: 268115,
+  u&apos;root&apos;: u&apos;dropbox&apos;,
+  u&apos;size&apos;: u&apos;222.4 KB&apos;,
+  u&apos;thumb_exists&apos;: True}]</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To delete files:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">cnb_dbx</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">file_delete</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">cnb_dbx</span><span class="o">.</span><span class="n">thisfolder</span><span class="p">,</span> <span class="n">imfile1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])))</span>
 </pre></div>
 
 </div>
@@ -6439,12 +6510,12 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
  u&apos;is_deleted&apos;: True,
  u&apos;is_dir&apos;: False,
  u&apos;mime_type&apos;: u&apos;image/png&apos;,
- u&apos;modified&apos;: u&apos;Thu, 02 Jul 2015 17:00:00 +0000&apos;,
+ u&apos;modified&apos;: u&apos;Fri, 03 Jul 2015 18:31:28 +0000&apos;,
  u&apos;modifier&apos;: None,
  u&apos;path&apos;: u&apos;/workdocs-cloudfiles/about_workdocs-cloudfiles/batwatchers_breakfast.png&apos;,
  u&apos;read_only&apos;: False,
- u&apos;rev&apos;: u&apos;41738009579ca&apos;,
- u&apos;revision&apos;: 268088,
+ u&apos;rev&apos;: u&apos;41754009579ca&apos;,
+ u&apos;revision&apos;: 268116,
  u&apos;root&apos;: u&apos;dropbox&apos;,
  u&apos;size&apos;: u&apos;0 bytes&apos;,
  u&apos;thumb_exists&apos;: True}</pre>
@@ -6478,7 +6549,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">thisfolder</span><span class="p">,</span><span class="n">imfile1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">cnb_dbx</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">cnb_dbx</span><span class="o">.</span><span class="n">thisfolder</span><span class="p">,</span><span class="n">imfile1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
 </pre></div>
 
 </div>
@@ -6525,6 +6596,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This class uses the <code>_repr_html_</code> and <code>_repr_latex_</code> to essentially put different text strings into html-related and pdf-related nbconvert outputs, which refer to the uploaded cloud figures and to the original local image files, respectively.</p>
+<p>It will accept either the dropbox or aws cloudfiles object, and usage is now independent of which of those is being used.</p>
 </div>
 </div>
 </div>
@@ -6554,7 +6626,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">cap</span> <span class="o">=</span> <span class="s">&#39;Come to the batwatchers breakfast, where all is joy and happiness.&#39;</span>
 <span class="n">label</span> <span class="o">=</span> <span class="s">&#39;BB figure&#39;</span>
 <span class="n">fignum</span> <span class="o">=</span> <span class="s">&#39;1.1&#39;</span>
-<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">imfile1</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">fignum</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">))</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">imfile1</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">fignum</span><span class="p">,</span><span class="n">cnb_aws</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">))</span>
 <span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
 </pre></div>
 
@@ -6569,7 +6641,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 <div class="output_area"><div class="prompt"></div>
 
 <div class="output_html rendered_html output_subarea ">
-<center><img src="https://dl.dropboxusercontent.com/1/view/5h0x71e5k1dbhp6/workdocs-cloudfiles/about_workdocs-cloudfiles/batwatchers_breakfast.png" alt="Just in case"                   title="Figure 1.1. Come to the batwatchers breakfast, where all is joy and happiness.. BB figure" height="800px" width="500px" />                  Figure 1.1. BB figure. Come to the batwatchers breakfast, where all is joy and happiness. </center>
+<center><img src="https://about_workdocs-cloudfiles.s3.amazonaws.com/batwatchers_breakfast.png" alt="broken link"                   title="Figure 1.1. Come to the batwatchers breakfast, where all is joy and happiness.. BB figure" height="800px" width="500px" />                  Figure 1.1. BB figure. Come to the batwatchers breakfast, where all is joy and happiness. </center>
 </div>
 
 </div>
@@ -6634,7 +6706,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">cap</span> <span class="o">=</span> <span class="s">&#39;This is a nice example of 3D plotting with matplotlib. &#39;</span>
 <span class="n">label</span> <span class="o">=</span> <span class="s">&#39;Mplot3D figure. &#39;</span>
 <span class="n">fignum</span> <span class="o">=</span> <span class="s">&#39;2.1&#39;</span>
-<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">imfile2</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">fignum</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">))</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">imfile2</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">fignum</span><span class="p">,</span><span class="n">cnb_aws</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">))</span>
 <span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
 </pre></div>
 
@@ -6649,7 +6721,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 <div class="output_area"><div class="prompt"></div>
 
 <div class="output_html rendered_html output_subarea ">
-<center><img src="https://dl.dropboxusercontent.com/1/view/o0im827h8lsu0l7/workdocs-cloudfiles/about_workdocs-cloudfiles/mpl3d_example.png" alt="Just in case"                   title="Figure 2.1. This is a nice example of 3D plotting with matplotlib. . Mplot3D figure. " height="800px" width="500px" />                  Figure 2.1. Mplot3D figure. . This is a nice example of 3D plotting with matplotlib.  </center>
+<center><img src="https://about_workdocs-cloudfiles.s3.amazonaws.com/mpl3d_example.png" alt="broken link"                   title="Figure 2.1. This is a nice example of 3D plotting with matplotlib. . Mplot3D figure. " height="800px" width="500px" />                  Figure 2.1. Mplot3D figure. . This is a nice example of 3D plotting with matplotlib.  </center>
 </div>
 
 </div>
@@ -6715,7 +6787,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 [MoviePy] Done.
 [MoviePy] &gt;&gt;&gt;&gt; Video ready: /alexandra/mcintosh_lab/john/Data/notebooks/about_workdocs-cloudfiles/example_movie.mp4 
 
-Animation with MoviePy : 7.51 seconds
+Animation with MoviePy : 4.17 seconds
 </pre>
 </div>
 </div>
@@ -6742,7 +6814,7 @@ Animation with MoviePy : 7.51 seconds
        <span class="s">&#39;whilst keeping the actual notebook file very lightweight&#39;</span>
 <span class="n">label</span> <span class="o">=</span> <span class="s">&#39;A slightly dull movie&#39;</span>
 <span class="n">fignum</span> <span class="o">=</span> <span class="s">&#39;1.3&#39;</span>
-<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">movfile</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">fignum</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">filetype</span><span class="o">=</span><span class="s">&#39;movie&#39;</span><span class="p">)</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">movfile</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">fignum</span><span class="p">,</span><span class="n">cnb_aws</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">filetype</span><span class="o">=</span><span class="s">&#39;movie&#39;</span><span class="p">)</span>
 <span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
 </pre></div>
 
@@ -6757,7 +6829,7 @@ Animation with MoviePy : 7.51 seconds
 <div class="output_area"><div class="prompt"></div>
 
 <div class="output_html rendered_html output_subarea ">
-<center><iframe                   height="800"                   width="500"                   src="https://dl.dropboxusercontent.com/1/view/kj5jixxne182sxt/workdocs-cloudfiles/about_workdocs-cloudfiles/example_movie.mp4"                   frameborder="0"                   allowfullscreen                   ></iframe></center>                   <center>Figure 1.3. This is a nice example of including movie files stored in the cloud, whilst keeping the actual notebook file very lightweight. A slightly dull movie</center>
+<center><iframe                   height="800"                   width="500"                   src="https://about_workdocs-cloudfiles.s3.amazonaws.com/example_movie.mp4"                   frameborder="0"                   allowfullscreen                   ></iframe></center>                   <center>Figure 1.3. A slightly dull movie. This is a nice example of including movie files stored in the cloud, whilst keeping the actual notebook file very lightweight</center>
 </div>
 
 </div>
@@ -6810,40 +6882,27 @@ Animation with MoviePy : 7.51 seconds
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">pdf_file</span> <span class="o">=</span> <span class="s">&#39;about_workdocs-cloudfiles__workdocs__2015-07-02/&#39;</span>\
-           <span class="s">&#39;about_workdocs-cloudfiles__pdf_nb__2015-07-02_tidied.pdf&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">pdf_file</span> <span class="o">=</span> <span class="s">&#39;about_workdocs-cloudfiles__workdocs__2015-07-03/&#39;</span>\
+           <span class="s">&#39;about_workdocs-cloudfiles__pdf_nb__2015-07-03_tidied.pdf&#39;</span>
     
-<span class="n">d</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="n">nbc_dir</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="n">pdf_file</span><span class="p">))</span>
+<span class="n">pdf_filename</span> <span class="o">=</span> <span class="n">pdf_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 
 </div>
 
 </div>
 
-<div class="output_wrapper">
-<div class="output">
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
 
-<div class="output_area"><div class="prompt"></div>
-
-
-<pre class="ipynb">{u&apos;bytes&apos;: 512440,
- u&apos;client_mtime&apos;: u&apos;Thu, 02 Jul 2015 17:10:30 +0000&apos;,
- u&apos;icon&apos;: u&apos;page_white_acrobat&apos;,
- u&apos;is_dir&apos;: False,
- u&apos;mime_type&apos;: u&apos;application/pdf&apos;,
- u&apos;modified&apos;: u&apos;Thu, 02 Jul 2015 17:10:29 +0000&apos;,
- u&apos;path&apos;: u&apos;/workdocs-cloudfiles/about_workdocs-cloudfiles/about_workdocs-cloudfiles__pdf_nb__2015-07-02_tidied.pdf&apos;,
- u&apos;rev&apos;: u&apos;4173c009579ca&apos;,
- u&apos;revision&apos;: 268092,
- u&apos;root&apos;: u&apos;dropbox&apos;,
- u&apos;shareable&apos;: False,
- u&apos;size&apos;: u&apos;500.4 KB&apos;,
- u&apos;thumb_exists&apos;: False}</pre>
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cnb_aws</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="n">nbc_dir</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="n">pdf_file</span><span class="p">)</span>
+</pre></div>
 
 </div>
 
-</div>
 </div>
 
 </div>
@@ -6861,7 +6920,8 @@ Animation with MoviePy : 7.51 seconds
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">get_file_link</span><span class="p">(</span><span class="n">pdf_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">pdf_link</span> <span class="o">=</span> <span class="n">cnb_aws</span><span class="o">.</span><span class="n">get_file_link</span><span class="p">(</span><span class="n">pdf_filename</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">pdf_link</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -6875,8 +6935,7 @@ Animation with MoviePy : 7.51 seconds
 <div class="output_area"><div class="prompt"></div>
 
 
-<pre class="ipynb">{u&apos;expires&apos;: u&apos;Thu, 02 Jul 2015 21:10:35 +0000&apos;,
- u&apos;url&apos;: u&apos;https://dl.dropboxusercontent.com/1/view/6mbuersutey8sz7/workdocs-cloudfiles/about_workdocs-cloudfiles/about_workdocs-cloudfiles__pdf_nb__2015-07-02_tidied.pdf&apos;}</pre>
+<pre class="ipynb">&apos;https://about_workdocs-cloudfiles.s3.amazonaws.com/about_workdocs-cloudfiles__pdf_nb__2015-07-03_tidied.pdf&apos;</pre>
 
 </div>
 
@@ -6926,8 +6985,8 @@ PDF Page 1
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAmQAAAMYCAQAAADPjzM5AAAABGdBTUEAALGPC/xhBQAAAAFzUkdC
 AK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAJiS0dE
-AACqjSMyAAAACXBIWXMAAABIAAAASABGyWs+AAAS70lEQVR42u3b3XEbSYKF0Zsb4wAM2Jeax33E
-mgCZgDYBbQJlAmWCaIJogmDCwISGBRsDE3IfCFLgr6TunqBuxDmIDhEFVCKLHfqiKlEaMwDd/uu9
+AACqjSMyAAAACXBIWXMAAABIAAAASABGyWs+AAATHElEQVR42u3b3XEbSYKF0Zsb4wAM2Jeax33E
+mgCZgDYBbQJlAmWCaIJogmDCwISGBRsNE3IfCFLgr6TpnqBuxDmIDgFFVCKLHfqiKlEaMwDd/uu9
 JwDwVwkZUE/IgHpCBtQTMqCekAH1hAyoJ2RAPSED6gkZUE/IgHpCBtQTMqCekAH1hAyoJ2RAPSED
 6gkZUE/IgHpCBtQTMqCekAH1hAyoJ2RAPSED6gkZUE/IgHpCBtQTMqCekAH1hAyoJ2RAPSED6gkZ
 UE/IgHpCBtQTMqCekAH1hAyoJ2RAPSED6gkZUE/IgHpCBtQTMqCekAH1hAyoJ2RAPSED6gkZUE/I
@@ -6946,55 +7005,51 @@ MqCekAH1hAyoJ2RAPSED6gkZUE/IgHpCBtQTMqCekAH1hAyoJ2RAPSED6gkZUE/IgHpCBtQTMqCe
 kAH1hAyoJ2RAPSED6gkZUE/IgHpCBtQTMqCekAH1hAyoJ2RAPSED6gkZUE/IgHpCBtQTMqCekAH1
 hAyoJ2RAPSED6gkZUE/IgHpCBtQTMqCekAH1hAyoJ2RAPSED6gkZUE/IgHpCBtQTMqCekAH1hAyo
 J2RAPSED6gkZUE/IgHpCBtQTMqCekAH1hAyoJ2RAPSED6gkZUE/IgHpCBtQTMqCekAH1hAyoJ2RA
-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
+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
+z9yH7Om42Vx+6XA3Yjbn0K7us3G/yP5s79VDMr/m+j7BM89Ctrw4y02+/siRPp/H5bE/DlnW96Pl
+6rUZefy6D2tkTVZjMzZjk9NLq2TzmGWs83AhmLz8vjed19/m6f75OC+OvzDu/vGuY5ft+TJs+2wt
+6+ne24eLxN/nx9zm6/gyrsYyL8ac+zz7UuLRPXTfP9LtT6ypbXM8/3aT5eUZ8esSshpjm09zP/dz
+Pz9mNV5eil/l8e2yb36/+cKttftvQZiHZKyzPsfpe+MuOWQ5z+r5T5/u/fCOeUzmIf/MPqt8vbuv
+a3wdX8cuyf7ZlxLbN8Z87ue+3T2ef7uf5m+XM/qpMXgnQlbk4hu8m1fOtQ45Pvrr+/b5xLPvLudt
+VuPqYa/bbHP/md8b9zgP+T3XY/XyT5/svb/M0NjN07yZH/Mhu/nh/LhJ8uny5t9krHJ6Y8znfuZs
+6vjttzFWlzP6iTF4N0JWYjw+17q8BeO8fWzzaZ7mTZa7M62xymruk/u//GN1Ea7lxfOxJNln+xDM
+fXb3l4AvjPvMPOY2V8ncZ/Xw3vVLe899MtYP817u7oybx0ehytzndny+2LCbF3eSff9In8/jdfPm
+/jcyVtm8NiN+VW6/qDA2uU7Gww0W2WY1vuRm7pN8HLscs2Q5307we67GPqus725emIdxGtucssoh
+23Gcx7kfV2ObZX564aMuzpXm7dhd3HxwMe7YZJdlXN994vnVbt4kuRrJTT7katytcR3G53yax6ez
+yodcjSWnrObtWLIZxyTr3DyezPw4tuNzDjlmleXup2OT7fnTvnukT+eR5W6m2efuHzztH8a6O75D
+TslbM+LX9Ff/KRy/hLE8vttprB5diJ5fj9W3bZfPX9/ze+N+f06PP/OlWX1/5LHO6rX7uX7gSJ/N
+4405/+CM+NUIGVDPGhlQT8iAekIG1BMyoJ6QAfWEDKgnZEA9IQPqCRlQT8iAekIG1BMyoJ6QAfWE
 DKgnZEA9IQPqCRlQT8iAekIG1BMyoJ6QAfWEDKgnZEA9IQPqCRlQT8iAekIG1BMyoJ6QAfWEDKgn
-ZEA9IQPq/eO9J0CLsUmSHOfxYtuSZe7fe2YgZPy4bZJPT7Zd539fe/vYZskqh3n71itjm1NWOc7D
-2GST0/yUJONzTkmO8+a9D5oGQsYPmvuxSS7Px5J5HKfX3j/OURp/jP08vfZKVlnPj8n4mg85JVmd
-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
+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
@@ -7011,10 +7066,14 @@ GVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBP
 yIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6
 QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbU
 EzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKg
-npAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9f4fax2+/x0K9qIAAAAldEVYdGRhdGU6Y3Jl
-YXRlADIwMTUtMDctMDJUMTM6MTA6NDAtMDQ6MDDAVC7vAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE1
-LTA3LTAyVDEzOjEwOjQwLTA0OjAwsQmWUwAAABR0RVh0cGRmOlZlcnNpb24AUERGLTEuNSAFXAs5
-AAAAAElFTkSuQmCC
+npAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB
+9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQM
+qCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdk
+QD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0h
+A+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJ
+GVBPyIB6QgbUEzKgnpAB9YQMqPf/o9vAVawhg5QAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTUtMDct
+MDNUMTQ6MzI6NDUtMDQ6MDAd7v99AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE1LTA3LTAzVDE0OjMy
+OjQ1LTA0OjAwbLNHwQAAABR0RVh0cGRmOlZlcnNpb24AUERGLTEuNSAFXAs5AAAAAElFTkSuQmCC
 "
 >
 </div>
@@ -7436,8 +7495,8 @@ ZISQ6mEiI4RUDxMZIaR6mMgIIdXDREYIqR4mMkJI9TCREUKqh4mMEFI9TGSEkOphIiOEVA8TGSGk
 epjICCHVw0RGCKkeJjJCSPUwkRFCqoeJjBBSPUxkhJDqYSIjhFQPExkhpHqYyAgh1cNERgipHiYy
 Qkj1MJERQqqHiYwQUj1MZISQ6mEiI4RUDxMZIaR6mMgIIdXDREYIqR4mMkJI9TCREUKqh4mMEFI9
 TGSEkOphIiOEVA8TGSGkepjICCHVw0RGCKkeJjJCSPUwkRFCqoeJjBBSPUxkhJDq+f8ByMdY04SP
-pZwAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTUtMDctMDJUMTM6MTA6NDEtMDQ6MDBmIyVbAAAAJXRF
-WHRkYXRlOm1vZGlmeQAyMDE1LTA3LTAyVDEzOjEwOjQxLTA0OjAwF36d5wAAABR0RVh0cGRmOlZl
+pZwAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTUtMDctMDNUMTQ6MzI6NDYtMDQ6MDAsBuXgAAAAJXRF
+WHRkYXRlOm1vZGlmeQAyMDE1LTA3LTAzVDE0OjMyOjQ2LTA0OjAwXVtdXAAAABR0RVh0cGRmOlZl
 cnNpb24AUERGLTEuNSAFXAs5AAAAAElFTkSuQmCC
 "
 >
@@ -7945,9 +8004,9 @@ z/DWknwqssMRgwDPj7aEfM/w1pIQUj28tSSEVA8TGSGkepjICCHVw0RGCKkeJjJCSPUwkRFCqoeJ
 jBBSPUxkhJDqYSIjhFQPExkhpHqYyAgh1cNERgipHiYyQkj1MJERQqqHiYwQUj1MZISQ6mEiI4RU
 DxMZIaR6mMgIIdXDREYIqR4mMkJI9TCREUKqh4mMEFI9TGSEkOphIiOEVA8TGSGkepjICCHVw0RG
 CKkeJjJCSPUwkRFCqoeJjBBSPUxkhJDqYSIjhFQPExkhpHqYyAgh1cNERgipHiYyQkj1MJERQqqH
-iYwQUj1MZISQ6mEiI4RUz/8PrfXyZj61T6cAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTUtMDctMDJU
-MTM6MTA6NDEtMDQ6MDBmIyVbAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE1LTA3LTAyVDEzOjEwOjQx
-LTA0OjAwF36d5wAAABR0RVh0cGRmOlZlcnNpb24AUERGLTEuNSAFXAs5AAAAAElFTkSuQmCC
+iYwQUj1MZISQ6mEiI4RUz/8PrfXyZj61T6cAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTUtMDctMDNU
+MTQ6MzI6NDctMDQ6MDCKce5UAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE1LTA3LTAzVDE0OjMyOjQ3
+LTA0OjAw+yxW6AAAABR0RVh0cGRmOlZlcnNpb24AUERGLTEuNSAFXAs5AAAAAElFTkSuQmCC
 "
 >
 </div>
@@ -11313,8 +11372,8 @@ QRAEYc+IIBMEQRAEQdgzIsgEQRAEQRD2jAgyQRAEQRCEPSOCTBAEQRAEYc+IIBMEQRAEQdgzIsgE
 QRAEQRD2jAgyQRAEQRCEPSOCTBAEQRAEYc+IIBMEQRAEQdgzIsgEQRAEQRD2jAgyQRAEQRCEPSOC
 TBAEQRAEYc+IIBMEQRAEQdgzIsgEQRAEQRD2jAgyQRAEQRCEPSOCTBAEQRAEYc+IIBMEQRAEQdgz
 IsgEQRAEQRD2jAgyQRAEQRCEPSOCTBAEQRAEYc+IIBMEQRAEQdgz/z8ggTG9tpmAUAAAACV0RVh0
-ZGF0ZTpjcmVhdGUAMjAxNS0wNy0wMlQxMzoxMDo0Mi0wNDowMFfLP8YAAAAldEVYdGRhdGU6bW9k
-aWZ5ADIwMTUtMDctMDJUMTM6MTA6NDItMDQ6MDAmlod6AAAAFHRFWHRwZGY6VmVyc2lvbgBQREYt
+ZGF0ZTpjcmVhdGUAMjAxNS0wNy0wM1QxNDozMjo0OC0wNDowMHw5nr0AAAAldEVYdGRhdGU6bW9k
+aWZ5ADIwMTUtMDctMDNUMTQ6MzI6NDgtMDQ6MDANZCYBAAAAFHRFWHRwZGY6VmVyc2lvbgBQREYt
 MS41IAVcCzkAAAAASUVORK5CYII=
 "
 >
@@ -12293,9 +12352,9 @@ AMAyAhkAAIBlBDIAAADLCGQAAACWEcgAAAAsI5ABAABYRiADAACwjEAGAABgGYEMAADAMgIZAACA
 ZQQyAAAAywhkAAAAlhHIAAAALCOQAQAAWEYgAwAAsIxABgAAYBmBDAAAwDICGQAAgGUEMgAAAMsI
 ZAAAAJYRyAAAACwjkAEAAFhGIAMAALCMQAYAAGAZgQwAAMAyAhkAAIBlBDIAAADLCGQAAACWEcgA
 AAAsI5ABAABYRiADAACwjEAGAABgGYEMAADAMgIZAACAZQQyAAAAywhkAAAAlhHIAAAALCOQAQAA
-WEYgAwAAsIxABgAAYNn/B1P+t/ar4UAYAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE1LTA3LTAyVDEz
-OjEwOjQzLTA0OjAw8bw0cgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNS0wNy0wMlQxMzoxMDo0My0w
-NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
+WEYgAwAAsIxABgAAYNn/B1P+t/ar4UAYAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE1LTA3LTAzVDE0
+OjMyOjQ5LTA0OjAw2k6VCQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNS0wNy0wM1QxNDozMjo0OS0w
+NDowMKsTLbUAAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 "
 >
 </div>
@@ -12320,20 +12379,36 @@ NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># unfortunately, weirdly, it appears that the dropbox api will not accept files for </span>
-<span class="c"># upload with the extension &#39;.ipynb&#39;, or even &#39;.json&#39;. It will accept &#39;.txt&#39; files, </span>
-<span class="c"># however, and nbviewer will still render those files properly. So that what</span>
-<span class="c"># we&#39;ll do...</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">nb_file</span> <span class="o">=</span> <span class="n">nbc_dir</span> <span class="o">+</span> <span class="s">&#39;/about_workdocs-cloudfiles__workdocs__2015-07-03/&#39;</span>\
+                     <span class="s">&#39;about_workdocs-cloudfiles__html_nb__2015-07-03.ipynb&#39;</span>
+<span class="n">nb_filename</span> <span class="o">=</span> <span class="n">nb_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
 
-<span class="n">nb_file</span> <span class="o">=</span> <span class="n">nbc_dir</span> <span class="o">+</span> <span class="s">&#39;/about_workdocs-cloudfiles__workdocs__2015-07-02/&#39;</span>\
-                     <span class="s">&#39;about_workdocs-cloudfiles__html_nb__2015-07-02.ipynb&#39;</span>
-    
-<span class="n">nb_txt_file</span> <span class="o">=</span> <span class="n">nb_file</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;.ipynb&#39;</span><span class="p">,</span> <span class="s">&#39;.txt&#39;</span><span class="p">)</span>
+</div>
 
-<span class="o">!</span>cp <span class="nv">$nb_file</span> <span class="nv">$nb_txt_file</span>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
 
-<span class="n">d</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="n">nb_txt_file</span><span class="p">))</span>
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cnb_aws</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="n">nb_file</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">nb_link</span> <span class="o">=</span> <span class="n">cnb_aws</span><span class="o">.</span><span class="n">get_file_link</span><span class="p">(</span><span class="n">nb_filename</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">nb_link</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12347,19 +12422,7 @@ NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 <div class="output_area"><div class="prompt"></div>
 
 
-<pre class="ipynb">{u&apos;bytes&apos;: 787393,
- u&apos;client_mtime&apos;: u&apos;Thu, 02 Jul 2015 17:10:58 +0000&apos;,
- u&apos;icon&apos;: u&apos;page_white_text&apos;,
- u&apos;is_dir&apos;: False,
- u&apos;mime_type&apos;: u&apos;text/plain&apos;,
- u&apos;modified&apos;: u&apos;Thu, 02 Jul 2015 17:10:58 +0000&apos;,
- u&apos;path&apos;: u&apos;/workdocs-cloudfiles/about_workdocs-cloudfiles/about_workdocs-cloudfiles__html_nb__2015-07-02.txt&apos;,
- u&apos;rev&apos;: u&apos;4173d009579ca&apos;,
- u&apos;revision&apos;: 268093,
- u&apos;root&apos;: u&apos;dropbox&apos;,
- u&apos;shareable&apos;: False,
- u&apos;size&apos;: u&apos;768.9 KB&apos;,
- u&apos;thumb_exists&apos;: False}</pre>
+<pre class="ipynb">&apos;https://about_workdocs-cloudfiles.s3.amazonaws.com/about_workdocs-cloudfiles__html_nb__2015-07-03.ipynb&apos;</pre>
 
 </div>
 
@@ -12372,21 +12435,8 @@ NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">nb_txt_file_db_link</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">get_file_link</span><span class="p">(</span><span class="n">nb_txt_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])[</span><span class="s">&#39;url&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;https://&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-
-<div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">nb_txt_file_nbv_link</span> <span class="o">=</span> <span class="s">&#39;http://nbviewer.ipython.org/urls/&#39;</span> <span class="o">+</span> <span class="n">nb_txt_file_db_link</span>
-<span class="n">d</span><span class="p">(</span><span class="n">nb_txt_file_nbv_link</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">nbv_link</span> <span class="o">=</span> <span class="n">cnb_aws</span><span class="o">.</span><span class="n">get_nbviewer_link</span><span class="p">(</span><span class="n">nb_filename</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">nbv_link</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12400,7 +12450,7 @@ NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 <div class="output_area"><div class="prompt"></div>
 
 
-<pre class="ipynb">u&apos;http://nbviewer.ipython.org/urls/dl.dropboxusercontent.com/1/view/k3gdixce8652u88/workdocs-cloudfiles/about_workdocs-cloudfiles/about_workdocs-cloudfiles__html_nb__2015-07-02.txt&apos;</pre>
+<pre class="ipynb">&apos;http://nbviewer.ipython.org/urls/about_workdocs-cloudfiles.s3.amazonaws.com/about_workdocs-cloudfiles__html_nb__2015-07-03.ipynb&apos;</pre>
 
 </div>
 
@@ -12414,6 +12464,7 @@ NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>And voila, that link gives a pleasantly styled html render of the notebook. Whilst the content is mostly the same as the LabNotebook webpage, this format can be more useful for some purposes, and can be downloaded and run and/or modified directly. rather than copy-pasting code, For the purposes of reproducibility and open science (which is what the LabNotebook is all about, really), this would be the relevant link to share <a href="#fn:links" rel="footnote">[1]</a>.</p>
+<p>(Note: unfortunately, weirdly, it appears that the dropbox api will not accept files for upload with the extension '.ipynb', or even '.json'. It will accept '.txt' files, however, and nbviewer will still render those files properly. So to do the above with dropbox, one first needs to rename the .ipynb files to e.g. .txt. The above calls will then work fine, although bear in mind that if downloading the file from the link, the extension should be changed back to .ipynb for the files to work properly)</p>
 </div>
 </div>
 </div>
@@ -12431,8 +12482,8 @@ NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">nb_txt_file_sv_link</span> <span class="o">=</span> <span class="s">&#39;https://slideviewer.herokuapp.com/urls/&#39;</span> <span class="o">+</span> <span class="n">nb_txt_file_db_link</span> 
-<span class="n">d</span><span class="p">(</span><span class="n">nb_txt_file_sv_link</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">sv_link</span> <span class="o">=</span> <span class="n">cnb_aws</span><span class="o">.</span><span class="n">get_slideviewer_link</span><span class="p">(</span><span class="n">nb_filename</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">sv_link</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12446,7 +12497,7 @@ NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 <div class="output_area"><div class="prompt"></div>
 
 
-<pre class="ipynb">u&apos;https://slideviewer.herokuapp.com/urls/dl.dropboxusercontent.com/1/view/k3gdixce8652u88/workdocs-cloudfiles/about_workdocs-cloudfiles/about_workdocs-cloudfiles__html_nb__2015-07-02.txt&apos;</pre>
+<pre class="ipynb">&apos;https://slideviewer.herokuapp.com/urls/about_workdocs-cloudfiles.s3.amazonaws.com/about_workdocs-cloudfiles__html_nb__2015-07-03.ipynb&apos;</pre>
 
 </div>
 
@@ -12523,6 +12574,59 @@ NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 </li>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">nb_txt_file</span> <span class="o">=</span> <span class="n">nb_file</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;.ipynb&#39;</span><span class="p">,</span> <span class="s">&#39;.txt&#39;</span><span class="p">)</span>
+
+<span class="o">!</span>cp <span class="nv">$nb_file</span> <span class="nv">$nb_txt_file</span>
+
+<span class="n">d</span><span class="p">(</span><span class="n">cnb_aws</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="n">nb_txt_file</span><span class="p">))</span>
+
+
+<span class="n">nb_txt_file_db_link</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">get_file_link</span><span class="p">(</span><span class="n">nb_txt_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])[</span><span class="s">&#39;url&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;https://&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+
+<span class="n">nb_txt_file_nbv_link</span> <span class="o">=</span> <span class="s">&#39;http://nbviewer.ipython.org/urls/&#39;</span> <span class="o">+</span> <span class="n">nb_txt_file_db_link</span>
+
+<span class="n">d</span><span class="p">(</span><span class="n">nb_txt_file_nbv_link</span><span class="p">)</span>
+
+<span class="n">nb_txt_file_sv_link</span> <span class="o">=</span> <span class="s">&#39;https://slideviewer.herokuapp.com/urls/&#39;</span> <span class="o">+</span> <span class="n">nb_txt_file_db_link</span> 
+<span class="n">d</span><span class="p">(</span><span class="n">nb_txt_file_sv_link</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">{u&apos;bytes&apos;: 787393,
+ u&apos;client_mtime&apos;: u&apos;Thu, 02 Jul 2015 17:10:58 +0000&apos;,
+ u&apos;icon&apos;: u&apos;page_white_text&apos;,
+ u&apos;is_dir&apos;: False,
+ u&apos;mime_type&apos;: u&apos;text/plain&apos;,
+ u&apos;modified&apos;: u&apos;Thu, 02 Jul 2015 17:10:58 +0000&apos;,
+ u&apos;path&apos;: u&apos;/workdocs-cloudfiles/about_workdocs-cloudfiles/about_workdocs-cloudfiles__html_nb__2015-07-02.txt&apos;,
+ u&apos;rev&apos;: u&apos;4173d009579ca&apos;,
+ u&apos;revision&apos;: 268093,
+ u&apos;root&apos;: u&apos;dropbox&apos;,
+ u&apos;shareable&apos;: False,
+ u&apos;size&apos;: u&apos;768.9 KB&apos;,
+ u&apos;thumb_exists&apos;: False}</pre>
+
+</div>
+
+</div>
+</div>
+
 </div></p>
 </div>
     <footer>
@@ -12532,7 +12636,7 @@ NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
         John Grif
     </span>
   </span>
-<time datetime="2015-07-03T00:00:00-07:00" pubdate>Fri 03 July 2015</time>  <span class="categories">
+<time datetime="2015-07-07T00:00:00-07:00" pubdate>Tue 07 July 2015</time>  <span class="categories">
     <a class='category' href='https://johngriffiths.github.io/LabNotebook/category/misc.html'>misc</a>
   </span>
   <span class="categories">

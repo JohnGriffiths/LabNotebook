@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>JDG Lab Notebook</title><link href="https://johngriffiths.github.io/LabNotebook/" rel="alternate"></link><link href="https://johngriffiths.github.io/LabNotebook/feeds/tag_ipython.atom.xml" rel="self"></link><id>https://johngriffiths.github.io/LabNotebook/</id><updated>2015-07-03T00:00:00-07:00</updated><entry><title>About workdocs-cloudfiles</title><link href="https://johngriffiths.github.io/LabNotebook/about-workdocs-cloudfiles.html" rel="alternate"></link><updated>2015-07-03T00:00:00-07:00</updated><author><name>John Grif</name></author><id>tag:johngriffiths.github.io,2015-07-03:LabNotebook/about-workdocs-cloudfiles.html</id><summary type="html">&lt;p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>JDG Lab Notebook</title><link href="https://johngriffiths.github.io/LabNotebook/" rel="alternate"></link><link href="https://johngriffiths.github.io/LabNotebook/feeds/tag_ipython.atom.xml" rel="self"></link><id>https://johngriffiths.github.io/LabNotebook/</id><updated>2015-07-07T00:00:00-07:00</updated><entry><title>About workdocs-cloudfiles</title><link href="https://johngriffiths.github.io/LabNotebook/about-workdocs-cloudfiles.html" rel="alternate"></link><updated>2015-07-07T00:00:00-07:00</updated><author><name>John Grif</name></author><id>tag:johngriffiths.github.io,2015-07-07:LabNotebook/about-workdocs-cloudfiles.html</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -18,7 +18,11 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="#Overview"&gt;Overview&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#Notebook-Setup"&gt;Notebook Setup&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#Dropbox-API-Class"&gt;Dropbox API Class&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#API-Classes"&gt;API Classes&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#AWS-S3"&gt;AWS S3&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Dropbox"&gt;Dropbox&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#Custom-figure-class"&gt;Custom figure class&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#Movies"&gt;Movies&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#Using-with-nbconvert"&gt;Using with nbconvert&lt;/a&gt;&lt;/li&gt;
@@ -51,7 +55,7 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Carl Boettiger's solution to this problem is to store all images on flickr, and simply link to them. He has a very streamlined solution to this which involves knitr and hash-based file indexing. I want a similar solution to this, but with the following differences:&lt;/p&gt;
+&lt;p&gt;Carl Boettiger's &lt;a href="http://www.carlboettiger.info/2012/03/21/knitr-github-and-a-new-phase-for-the-lab-notebook.html"&gt;solution to this kind of problem&lt;/a&gt; is to store all images on flickr, and simply link to them. He has a very streamlined solution, which involves knitr and hash-based file indexing. I want a similar solution to this, but with the following differences:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;I am working with python + ipython/jupyter + nbconvert, rather than R + knitr&lt;/li&gt;
 &lt;li&gt;I am using the ipynb-workdocs system, which involves having a master notebook that spawns into pdf files, html/nbviewer files, and reveal slideshows, with variable contents according to a per-cell tag&lt;/li&gt;
@@ -74,8 +78,17 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;For the cloud-hosting, I played around with the flickr python api a bit, but kept getting errors, so turned to dropbox, which so far seems to be working very well (see documention and tutorial &lt;a href="https://www.dropbox.com/developers/core/docs/python"&gt;here&lt;/a&gt; and &lt;a href="https://www.dropbox.com/developers/core/start/python"&gt;here&lt;/a&gt;. This object is initialized at the top of the notebook, and new folder is created if necessary. When files are uploaded, it first checks whether a file already exists with the same name, and if so deletes it before proceeding to upload the file.&lt;/p&gt;
-&lt;p&gt;An additional advantage of having the dropbox api for uploading figures is that we can also upload the nbconverted pdf to the same folder, which we can also link to from the labnotebook webpage, the nbviewer notebook, and generally share with collaborators, rather than e-mailing large pdfs etc.&lt;/p&gt;
+&lt;p&gt;For the cloud-hosting, I played around with the flickr python api a bit, but kept getting errors. I then turned to dropbox, and was able to get down a nicely functioning high-level wrapper that achieved the above nicely (c.f. the dropbox python api documentation &lt;a href="https://www.dropbox.com/developers/core/docs/python"&gt;here&lt;/a&gt; and &lt;a href="https://www.dropbox.com/developers/core/start/python"&gt;here&lt;/a&gt;). However, it subsequently came to my attention that &lt;strong&gt;&lt;em&gt;dropbox api urls expire after 30 days, unless you are a pro or business user&lt;/em&gt;&lt;/strong&gt;. As I am neither of those, my nice dropbox solution doesn't do the job for me, although it could well do for others who do pay dropbox money. So I hunted around again, and am now currently favouring amazon S3, via a nice api called &lt;code&gt;boto&lt;/code&gt;. This is still not entirely free, but certainly better value for money. And, it turns out, a lot smoother to use, plus providing some additional features like website hosting.&lt;/p&gt;
+&lt;p&gt;The code below describes the aws/boto implementation, and for good measure also the dropbox one, although as noted the latter will have only have non-broken links for up to 30 days after the time writing.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;In addition to figures, we can also use upload other useful content to the cloud-hosted folders, such as data files, nbconverted pdfs (preferable to e-mailing if these are large files), etc.&lt;/p&gt;
 &lt;p&gt;The end result that notebooks (and various nbconverted derivatives) sans all embedded images are slimmed down enormously, and things such as a github-hosted LabNotebook repository become scalable in the medium-term.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -99,6 +112,72 @@
 &lt;/div&gt;
 &lt;/div&gt;
 
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Define some variables&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="input_area box-flex1 white"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# put some system-specific variables in the namespace (&amp;#39;le&amp;#39; dict)&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;run&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;set_localenv_vars&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+
+&lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;le&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;data_dir&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/notebooks/about_workdocs-cloudfiles&amp;#39;&lt;/span&gt; &lt;span class="c"&gt;# output folder&lt;/span&gt;
+&lt;span class="o"&gt;!&lt;/span&gt;mkdir -p &lt;span class="nv"&gt;$outdir&lt;/span&gt;
+
+&lt;span class="n"&gt;nbc_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;le&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;nbconverted_dir&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;  &lt;span class="c"&gt;# nbconverted dir&lt;/span&gt;
+&lt;span class="n"&gt;nb_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;about_workdocs-cloudfiles&amp;#39;&lt;/span&gt; &lt;span class="c"&gt;# notebook name  (for use with dropbox api)&lt;/span&gt;
+
+&lt;span class="c"&gt;# local image files&lt;/span&gt;
+&lt;span class="n"&gt;imfile1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/batwatchers_breakfast.png&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;imfile2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/mpl3d_example.png&amp;#39;&lt;/span&gt; &lt;span class="c"&gt;# we will generate this&lt;/span&gt;
+&lt;span class="n"&gt;movfile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/example_movie.mp4&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;imfile1_fname&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;imfile1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="n"&gt;nb_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;about_workdocs-cloudfiles&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="input_area box-flex1 white"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;aws_key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;drowssaperucesyreva&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;aws_secret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;?teytidettopsuoyevah&amp;#39;&lt;/span&gt;  
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="input_area box-flex1 white"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;dbx_key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;drowssaperucesyreva&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;dbx_secret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;?teytidettopsuoyevah&amp;#39;&lt;/span&gt;  
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -146,99 +225,6 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Define some variables&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# put some system-specific variables in the namespace (&amp;#39;le&amp;#39; dict)&lt;/span&gt;
-&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;run&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;set_localenv_vars&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
-
-&lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;le&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;data_dir&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/notebooks/about_workdocs-cloudfiles&amp;#39;&lt;/span&gt; &lt;span class="c"&gt;# output folder&lt;/span&gt;
-&lt;span class="o"&gt;!&lt;/span&gt;mkdir -p &lt;span class="nv"&gt;$outdir&lt;/span&gt;
-
-&lt;span class="n"&gt;nbc_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;le&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;nbconverted_dir&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;  &lt;span class="c"&gt;# nbconverted dir&lt;/span&gt;
-&lt;span class="n"&gt;nb_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;about_workdocs-cloudfiles&amp;#39;&lt;/span&gt; &lt;span class="c"&gt;# notebook name  (for use with dropbox api)&lt;/span&gt;
-
-&lt;span class="c"&gt;# local image files&lt;/span&gt;
-&lt;span class="n"&gt;imfile1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/batwatchers_breakfast.png&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;imfile2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/mpl3d_example.png&amp;#39;&lt;/span&gt; &lt;span class="c"&gt;# we will generate this&lt;/span&gt;
-&lt;span class="n"&gt;movfile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/example_movie.mp4&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Initialize dropbox api&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;dbx_app_key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;drowssaperucesyreva&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;dbx_app_secret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;?teytidettopsuoyevah&amp;#39;&lt;/span&gt;  
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;flow&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dropbox&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DropboxOAuth2FlowNoRedirect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dbx_app_key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dbx_app_secret&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;authorize_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;flow&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;authorize_url&lt;/span&gt;
-&lt;span class="n"&gt;code&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;raw_input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Enter the authorization code here: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="n"&gt;dbx_access_token&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;user_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;flow&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;finish&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;clear_output&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;le&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;code_dir&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/libraries_of_mine/github/ipynb-workdocs&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;new_utils&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cloudfiles_nb&lt;/span&gt;
-
-&lt;span class="n"&gt;nb_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;about_workdocs-cloudfiles&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;cnb&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cloudfiles_nb&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dbx_access_token&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Calico document tools&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -249,7 +235,8 @@
 
 &lt;div class="input_area box-flex1 white"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;javascript&lt;/span&gt;
-&lt;span class="n"&gt;IPython&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load_extensions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;calico-spell-check&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;calico-document-tools&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;calico-cell-tools&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;IPython&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load_extensions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;calico-spell-check&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;calico-document-tools&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                        &lt;span class="s"&gt;&amp;#39;calico-cell-tools&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
@@ -275,25 +262,12 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;#%load /home/jgriffiths/Code/libraries_of_mine/github/ipynb-thesis/Notebooks/chapter_utils.py&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Dropbox-API-Class"&gt;Dropbox API Class&lt;a class="anchor-link" href="#Dropbox-API-Class"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="API-Classes"&gt;API Classes&lt;a class="anchor-link" href="#API-Classes"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -303,85 +277,20 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;This class takes care of uploading and getting links for new images&lt;/p&gt;
+&lt;p&gt;The cloudfiles api classes take care of uploading and getting links for new images. For the most part we will not be using them directly, but rather calling them via the wrappers for embedding figures, shown below. Here's how they look anyway:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;cloudfiles_nb&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;access_token&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;&lt;span class="c"&gt;#app_key,app_secret)&lt;/span&gt;
-
-    &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;dropbox.client&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;DropboxClient&lt;/span&gt;
-    &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;dropbox.session&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;DropboxSession&lt;/span&gt;    
-  
-    &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;DropboxClient&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;access_token&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    
-    &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;base_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;workdocs-cloudfiles&amp;#39;&lt;/span&gt;        
-    &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;folders_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;path&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;/&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;base_dir&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;\
-                         &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;metadata&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;base_dir&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;contents&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
-    &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;upload_file_res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
-    
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize_folder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;folder_name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    
-
-    &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;thisfolder&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;/&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;base_dir&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;folder_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;folder_name&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;folders_list&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-      &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;folder already exists&amp;#39;&lt;/span&gt;
-      &lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-      &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;creating folder&amp;#39;&lt;/span&gt;
-      &lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;file_create_folder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;thisfolder&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        
-    &lt;span class="c"&gt;# do something for error&lt;/span&gt;
-    
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;res&lt;/span&gt;
-
-    
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;upload_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;filepath&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        
-    &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filepath&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;r&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;filename&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;filepath&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-    &lt;span class="n"&gt;newfile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;/&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;thisfolder&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    
-    &lt;span class="c"&gt;# if filename alread exists, delate and replace&lt;/span&gt;
-    &lt;span class="c"&gt;#filecheck = self.client.search(self.thisfolder, filename)&lt;/span&gt;
-    &lt;span class="c"&gt;#if filecheck: del_res = self.client.file_delete(newfile)&lt;/span&gt;
-        
-    &lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;newfile&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;overwrite&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
- 
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;res&lt;/span&gt;
-
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_file_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;getfile&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        
-    &lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;media&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;/&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;thisfolder&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;getfile&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-    
-    &lt;span class="c"&gt;# something for error&lt;/span&gt;
-    
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;res&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Everything goes inside a folder in my dropbox root called 'workdocs-cloudfiles'. Under that, we will have separate folders on a per-notebook basis, with the folders having the same names as the notebook files.&lt;/p&gt;
+&lt;h3 id="AWS-S3"&gt;AWS S3&lt;a class="anchor-link" href="#AWS-S3"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -396,7 +305,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;cnb&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cloudfiles_nb&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dbx_access_token&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;cnb_aws&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cloudfiles_nb&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;aws&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;aws_key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;aws_secret&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
@@ -409,37 +318,13 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;initialize_folder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;res&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;cnb_aws&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;initialize_folder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
 
 &lt;/div&gt;
 
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
-&lt;pre class="ipynb"&gt;folder already exists
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;When we initialize the folder for the first time, &lt;code&gt;cnb.initialize_folder&lt;/code&gt; will report that it has created a new folder; after that it will simply note that the folder already exists. I've run the above cell a few times in the process of writing this notebook, so we get the latter.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
@@ -482,38 +367,11 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;upload_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;imfile1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;cnb_aws&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;upload_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;imfile1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
 
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-
-&lt;pre class="ipynb"&gt;{u&amp;apos;bytes&amp;apos;: 227764,
- u&amp;apos;client_mtime&amp;apos;: u&amp;apos;Thu, 02 Jul 2015 16:59:23 +0000&amp;apos;,
- u&amp;apos;icon&amp;apos;: u&amp;apos;page_white_picture&amp;apos;,
- u&amp;apos;is_dir&amp;apos;: False,
- u&amp;apos;mime_type&amp;apos;: u&amp;apos;image/png&amp;apos;,
- u&amp;apos;modified&amp;apos;: u&amp;apos;Thu, 02 Jul 2015 16:59:23 +0000&amp;apos;,
- u&amp;apos;path&amp;apos;: u&amp;apos;/workdocs-cloudfiles/about_workdocs-cloudfiles/batwatchers_breakfast.png&amp;apos;,
- u&amp;apos;rev&amp;apos;: u&amp;apos;41737009579ca&amp;apos;,
- u&amp;apos;revision&amp;apos;: 268087,
- u&amp;apos;root&amp;apos;: u&amp;apos;dropbox&amp;apos;,
- u&amp;apos;shareable&amp;apos;: False,
- u&amp;apos;size&amp;apos;: u&amp;apos;222.4 KB&amp;apos;,
- u&amp;apos;thumb_exists&amp;apos;: True}&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -522,7 +380,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now searching for this file confirms it is there:&lt;/p&gt;
+&lt;p&gt;Getting the file link is a common thing we want to do, so it has a higher-level method call that is the same for both aws and dropbox&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -531,86 +389,20 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;thisfolder&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;imfile1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cnb_aws&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_file_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;imfile1_fname&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
 
 &lt;/div&gt;
 
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-
-&lt;pre class="ipynb"&gt;[{u&amp;apos;bytes&amp;apos;: 227764,
-  u&amp;apos;client_mtime&amp;apos;: u&amp;apos;Thu, 02 Jul 2015 16:59:23 +0000&amp;apos;,
-  u&amp;apos;icon&amp;apos;: u&amp;apos;page_white_picture&amp;apos;,
-  u&amp;apos;is_dir&amp;apos;: False,
-  u&amp;apos;mime_type&amp;apos;: u&amp;apos;image/png&amp;apos;,
-  u&amp;apos;modified&amp;apos;: u&amp;apos;Thu, 02 Jul 2015 16:59:23 +0000&amp;apos;,
-  u&amp;apos;modifier&amp;apos;: None,
-  u&amp;apos;path&amp;apos;: u&amp;apos;/workdocs-cloudfiles/about_workdocs-cloudfiles/batwatchers_breakfast.png&amp;apos;,
-  u&amp;apos;read_only&amp;apos;: False,
-  u&amp;apos;rev&amp;apos;: u&amp;apos;41737009579ca&amp;apos;,
-  u&amp;apos;revision&amp;apos;: 268087,
-  u&amp;apos;root&amp;apos;: u&amp;apos;dropbox&amp;apos;,
-  u&amp;apos;size&amp;apos;: u&amp;apos;222.4 KB&amp;apos;,
-  u&amp;apos;thumb_exists&amp;apos;: True}]&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;We can get the url for the file and link to it in the notebook:&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_file_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;batwatchers_breakfast.png&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-
-&lt;pre class="ipynb"&gt;{u&amp;apos;expires&amp;apos;: u&amp;apos;Thu, 02 Jul 2015 20:59:38 +0000&amp;apos;,
- u&amp;apos;url&amp;apos;: u&amp;apos;https://dl.dropboxusercontent.com/1/view/5h0x71e5k1dbhp6/workdocs-cloudfiles/about_workdocs-cloudfiles/batwatchers_breakfast.png&amp;apos;}&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;url&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;embed&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;embed&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
@@ -4645,7 +4437,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;We can also delete the file (note the slightly different form to the upload syntax))&lt;/p&gt;
+&lt;p&gt;The wide variety of other methods provided by &lt;code&gt;boto&lt;/code&gt; for interacting with aws can be accessed via the &lt;code&gt;cnb.bucket&lt;/code&gt; attribute.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4654,7 +4446,286 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;file_delete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;/&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;thisfolder&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;imfile1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])))&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cnb_aws&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bucket&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;pre class="ipynb"&gt;&amp;lt;Bucket: about_workdocs-cloudfiles&amp;gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Dropbox"&gt;Dropbox&lt;a class="anchor-link" href="#Dropbox"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Initializing the dropbox api is a little more involved than with aws.&lt;/p&gt;
+&lt;p&gt;It requires running the following cell to get the access token, which is obtained by following a link provided, and copy-pasting the provided text string into an input box.&lt;/p&gt;
+&lt;p&gt;The output of the dropbox 'flow' commands will print access token info to the cell output, so I've added a &lt;code&gt;clear_output()&lt;/code&gt; call so that this sensitive info doesn't get kept in the notebook.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="input_area box-flex1 white"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;flow&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dropbox&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DropboxOAuth2FlowNoRedirect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dbx_key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dbx_secret&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;authorize_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;flow&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;authorize_url&lt;/span&gt;
+&lt;span class="n"&gt;code&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;raw_input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Enter the authorization code here: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;dbx_token&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;user_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;flow&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;finish&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;clear_output&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The cloudfiles folder can now be initialized using the access token obtained from the above step&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="input_area box-flex1 white"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;cnb_dbx&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cloudfiles_nb&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;dropbox&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dbx_token&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="input_area box-flex1 white"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;cnb_dbx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;initialize_folder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;folder already exists
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;When we initialize the folder for the first time using &lt;code&gt;initialize_folder&lt;/code&gt;, the dropbox api will report that it has created a new folder; after that it will simply note that the folder already exists. I've run the above cell a few times in the process of writing this notebook, so we get the latter.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The way the class has been written, everything goes inside a folder in my dropbox root called 'workdocs-cloudfiles'. Under that, we will have separate folders on a per-notebook basis, with the folders having the same names as the notebook files.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Uploading files uses the same call as with the aws api above, although the dropbox api will give some feedback&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="input_area box-flex1 white"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cnb_dbx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;upload_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;imfile1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;pre class="ipynb"&gt;{u&amp;apos;bytes&amp;apos;: 227764,
+ u&amp;apos;client_mtime&amp;apos;: u&amp;apos;Fri, 03 Jul 2015 18:30:51 +0000&amp;apos;,
+ u&amp;apos;icon&amp;apos;: u&amp;apos;page_white_picture&amp;apos;,
+ u&amp;apos;is_dir&amp;apos;: False,
+ u&amp;apos;mime_type&amp;apos;: u&amp;apos;image/png&amp;apos;,
+ u&amp;apos;modified&amp;apos;: u&amp;apos;Fri, 03 Jul 2015 18:30:51 +0000&amp;apos;,
+ u&amp;apos;path&amp;apos;: u&amp;apos;/workdocs-cloudfiles/about_workdocs-cloudfiles/batwatchers_breakfast.png&amp;apos;,
+ u&amp;apos;rev&amp;apos;: u&amp;apos;41753009579ca&amp;apos;,
+ u&amp;apos;revision&amp;apos;: 268115,
+ u&amp;apos;root&amp;apos;: u&amp;apos;dropbox&amp;apos;,
+ u&amp;apos;shareable&amp;apos;: False,
+ u&amp;apos;size&amp;apos;: u&amp;apos;222.4 KB&amp;apos;,
+ u&amp;apos;thumb_exists&amp;apos;: True}&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Similarly, getting the file link uses the same call as with the aws api:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="input_area box-flex1 white"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cnb_dbx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_file_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;batwatchers_breakfast.png&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;pre class="ipynb"&gt;u&amp;apos;https://dl.dropboxusercontent.com/1/view/remwniunmp0c1cb/workdocs-cloudfiles/about_workdocs-cloudfiles/batwatchers_breakfast.png&amp;apos;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The actual dropbox api methods directly by accessing the &lt;code&gt;client&lt;/code&gt; attribute.&lt;/p&gt;
+&lt;p&gt;For example, we can search for files in the notebook folder (or elsewhere):&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="input_area box-flex1 white"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cnb_dbx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cnb_dbx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;thisfolder&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;imfile1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;pre class="ipynb"&gt;[{u&amp;apos;bytes&amp;apos;: 227764,
+  u&amp;apos;client_mtime&amp;apos;: u&amp;apos;Fri, 03 Jul 2015 18:30:51 +0000&amp;apos;,
+  u&amp;apos;icon&amp;apos;: u&amp;apos;page_white_picture&amp;apos;,
+  u&amp;apos;is_dir&amp;apos;: False,
+  u&amp;apos;mime_type&amp;apos;: u&amp;apos;image/png&amp;apos;,
+  u&amp;apos;modified&amp;apos;: u&amp;apos;Fri, 03 Jul 2015 18:30:51 +0000&amp;apos;,
+  u&amp;apos;modifier&amp;apos;: None,
+  u&amp;apos;path&amp;apos;: u&amp;apos;/workdocs-cloudfiles/about_workdocs-cloudfiles/batwatchers_breakfast.png&amp;apos;,
+  u&amp;apos;read_only&amp;apos;: False,
+  u&amp;apos;rev&amp;apos;: u&amp;apos;41753009579ca&amp;apos;,
+  u&amp;apos;revision&amp;apos;: 268115,
+  u&amp;apos;root&amp;apos;: u&amp;apos;dropbox&amp;apos;,
+  u&amp;apos;size&amp;apos;: u&amp;apos;222.4 KB&amp;apos;,
+  u&amp;apos;thumb_exists&amp;apos;: True}]&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;To delete files:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="input_area box-flex1 white"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cnb_dbx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;file_delete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;/&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cnb_dbx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;thisfolder&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;imfile1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
@@ -4674,12 +4745,12 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
  u&amp;apos;is_deleted&amp;apos;: True,
  u&amp;apos;is_dir&amp;apos;: False,
  u&amp;apos;mime_type&amp;apos;: u&amp;apos;image/png&amp;apos;,
- u&amp;apos;modified&amp;apos;: u&amp;apos;Thu, 02 Jul 2015 17:00:00 +0000&amp;apos;,
+ u&amp;apos;modified&amp;apos;: u&amp;apos;Fri, 03 Jul 2015 18:31:28 +0000&amp;apos;,
  u&amp;apos;modifier&amp;apos;: None,
  u&amp;apos;path&amp;apos;: u&amp;apos;/workdocs-cloudfiles/about_workdocs-cloudfiles/batwatchers_breakfast.png&amp;apos;,
  u&amp;apos;read_only&amp;apos;: False,
- u&amp;apos;rev&amp;apos;: u&amp;apos;41738009579ca&amp;apos;,
- u&amp;apos;revision&amp;apos;: 268088,
+ u&amp;apos;rev&amp;apos;: u&amp;apos;41754009579ca&amp;apos;,
+ u&amp;apos;revision&amp;apos;: 268116,
  u&amp;apos;root&amp;apos;: u&amp;apos;dropbox&amp;apos;,
  u&amp;apos;size&amp;apos;: u&amp;apos;0 bytes&amp;apos;,
  u&amp;apos;thumb_exists&amp;apos;: True}&lt;/pre&gt;
@@ -4713,7 +4784,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;thisfolder&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;imfile1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cnb_dbx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cnb_dbx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;thisfolder&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;imfile1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
@@ -4760,6 +4831,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;This class uses the &lt;code&gt;_repr_html_&lt;/code&gt; and &lt;code&gt;_repr_latex_&lt;/code&gt; to essentially put different text strings into html-related and pdf-related nbconvert outputs, which refer to the uploaded cloud figures and to the original local image files, respectively.&lt;/p&gt;
+&lt;p&gt;It will accept either the dropbox or aws cloudfiles object, and usage is now independent of which of those is being used.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4789,7 +4861,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Come to the batwatchers breakfast, where all is joy and happiness.&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;BB figure&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;1.1&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;imfile1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;imfile1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb_aws&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -4804,7 +4876,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://dl.dropboxusercontent.com/1/view/5h0x71e5k1dbhp6/workdocs-cloudfiles/about_workdocs-cloudfiles/batwatchers_breakfast.png" alt="Just in case"                   title="Figure 1.1. Come to the batwatchers breakfast, where all is joy and happiness.. BB figure" height="800px" width="500px" /&gt;                  Figure 1.1. BB figure. Come to the batwatchers breakfast, where all is joy and happiness. &lt;/center&gt;
+&lt;center&gt;&lt;img src="https://about_workdocs-cloudfiles.s3.amazonaws.com/batwatchers_breakfast.png" alt="broken link"                   title="Figure 1.1. Come to the batwatchers breakfast, where all is joy and happiness.. BB figure" height="800px" width="500px" /&gt;                  Figure 1.1. BB figure. Come to the batwatchers breakfast, where all is joy and happiness. &lt;/center&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -4869,7 +4941,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;This is a nice example of 3D plotting with matplotlib. &amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Mplot3D figure. &amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;2.1&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;imfile2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;imfile2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb_aws&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -4884,7 +4956,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://dl.dropboxusercontent.com/1/view/o0im827h8lsu0l7/workdocs-cloudfiles/about_workdocs-cloudfiles/mpl3d_example.png" alt="Just in case"                   title="Figure 2.1. This is a nice example of 3D plotting with matplotlib. . Mplot3D figure. " height="800px" width="500px" /&gt;                  Figure 2.1. Mplot3D figure. . This is a nice example of 3D plotting with matplotlib.  &lt;/center&gt;
+&lt;center&gt;&lt;img src="https://about_workdocs-cloudfiles.s3.amazonaws.com/mpl3d_example.png" alt="broken link"                   title="Figure 2.1. This is a nice example of 3D plotting with matplotlib. . Mplot3D figure. " height="800px" width="500px" /&gt;                  Figure 2.1. Mplot3D figure. . This is a nice example of 3D plotting with matplotlib.  &lt;/center&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -4950,7 +5022,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 [MoviePy] Done.
 [MoviePy] &amp;gt;&amp;gt;&amp;gt;&amp;gt; Video ready: /alexandra/mcintosh_lab/john/Data/notebooks/about_workdocs-cloudfiles/example_movie.mp4 
 
-Animation with MoviePy : 7.51 seconds
+Animation with MoviePy : 4.17 seconds
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4977,7 +5049,7 @@ Animation with MoviePy : 7.51 seconds
        &lt;span class="s"&gt;&amp;#39;whilst keeping the actual notebook file very lightweight&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;A slightly dull movie&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;1.3&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;movfile&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;filetype&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;movie&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;movfile&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb_aws&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;filetype&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;movie&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -4992,7 +5064,7 @@ Animation with MoviePy : 7.51 seconds
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;iframe                   height="800"                   width="500"                   src="https://dl.dropboxusercontent.com/1/view/kj5jixxne182sxt/workdocs-cloudfiles/about_workdocs-cloudfiles/example_movie.mp4"                   frameborder="0"                   allowfullscreen                   &gt;&lt;/iframe&gt;&lt;/center&gt;                   &lt;center&gt;Figure 1.3. This is a nice example of including movie files stored in the cloud, whilst keeping the actual notebook file very lightweight. A slightly dull movie&lt;/center&gt;
+&lt;center&gt;&lt;iframe                   height="800"                   width="500"                   src="https://about_workdocs-cloudfiles.s3.amazonaws.com/example_movie.mp4"                   frameborder="0"                   allowfullscreen                   &gt;&lt;/iframe&gt;&lt;/center&gt;                   &lt;center&gt;Figure 1.3. A slightly dull movie. This is a nice example of including movie files stored in the cloud, whilst keeping the actual notebook file very lightweight&lt;/center&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -5045,40 +5117,27 @@ Animation with MoviePy : 7.51 seconds
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;pdf_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;about_workdocs-cloudfiles__workdocs__2015-07-02/&amp;#39;&lt;/span&gt;\
-           &lt;span class="s"&gt;&amp;#39;about_workdocs-cloudfiles__pdf_nb__2015-07-02_tidied.pdf&amp;#39;&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;pdf_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;about_workdocs-cloudfiles__workdocs__2015-07-03/&amp;#39;&lt;/span&gt;\
+           &lt;span class="s"&gt;&amp;#39;about_workdocs-cloudfiles__pdf_nb__2015-07-03_tidied.pdf&amp;#39;&lt;/span&gt;
     
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;upload_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nbc_dir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;pdf_file&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;pdf_filename&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pdf_file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
 
 &lt;/div&gt;
 
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 
 
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-
-&lt;pre class="ipynb"&gt;{u&amp;apos;bytes&amp;apos;: 512440,
- u&amp;apos;client_mtime&amp;apos;: u&amp;apos;Thu, 02 Jul 2015 17:10:30 +0000&amp;apos;,
- u&amp;apos;icon&amp;apos;: u&amp;apos;page_white_acrobat&amp;apos;,
- u&amp;apos;is_dir&amp;apos;: False,
- u&amp;apos;mime_type&amp;apos;: u&amp;apos;application/pdf&amp;apos;,
- u&amp;apos;modified&amp;apos;: u&amp;apos;Thu, 02 Jul 2015 17:10:29 +0000&amp;apos;,
- u&amp;apos;path&amp;apos;: u&amp;apos;/workdocs-cloudfiles/about_workdocs-cloudfiles/about_workdocs-cloudfiles__pdf_nb__2015-07-02_tidied.pdf&amp;apos;,
- u&amp;apos;rev&amp;apos;: u&amp;apos;4173c009579ca&amp;apos;,
- u&amp;apos;revision&amp;apos;: 268092,
- u&amp;apos;root&amp;apos;: u&amp;apos;dropbox&amp;apos;,
- u&amp;apos;shareable&amp;apos;: False,
- u&amp;apos;size&amp;apos;: u&amp;apos;500.4 KB&amp;apos;,
- u&amp;apos;thumb_exists&amp;apos;: False}&lt;/pre&gt;
+&lt;div class="input_area box-flex1 white"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;cnb_aws&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;upload_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nbc_dir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;pdf_file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
 
-&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -5096,7 +5155,8 @@ Animation with MoviePy : 7.51 seconds
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_file_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pdf_file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;pdf_link&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cnb_aws&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_file_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pdf_filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pdf_link&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
@@ -5110,8 +5170,7 @@ Animation with MoviePy : 7.51 seconds
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 
-&lt;pre class="ipynb"&gt;{u&amp;apos;expires&amp;apos;: u&amp;apos;Thu, 02 Jul 2015 21:10:35 +0000&amp;apos;,
- u&amp;apos;url&amp;apos;: u&amp;apos;https://dl.dropboxusercontent.com/1/view/6mbuersutey8sz7/workdocs-cloudfiles/about_workdocs-cloudfiles/about_workdocs-cloudfiles__pdf_nb__2015-07-02_tidied.pdf&amp;apos;}&lt;/pre&gt;
+&lt;pre class="ipynb"&gt;&amp;apos;https://about_workdocs-cloudfiles.s3.amazonaws.com/about_workdocs-cloudfiles__pdf_nb__2015-07-03_tidied.pdf&amp;apos;&lt;/pre&gt;
 
 &lt;/div&gt;
 
@@ -5161,8 +5220,8 @@ PDF Page 1
 &lt;div class="output_png output_subarea "&gt;
 &lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAmQAAAMYCAQAAADPjzM5AAAABGdBTUEAALGPC/xhBQAAAAFzUkdC
 AK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAJiS0dE
-AACqjSMyAAAACXBIWXMAAABIAAAASABGyWs+AAAS70lEQVR42u3b3XEbSYKF0Zsb4wAM2Jeax33E
-mgCZgDYBbQJlAmWCaIJogmDCwISGBRsDE3IfCFLgr6TunqBuxDmIDhEFVCKLHfqiKlEaMwDd/uu9
+AACqjSMyAAAACXBIWXMAAABIAAAASABGyWs+AAATHElEQVR42u3b3XEbSYKF0Zsb4wAM2Jeax33E
+mgCZgDYBbQJlAmWCaIJogmDCwISGBRsNE3IfCFLgr6TpnqBuxDmIDgFFVCKLHfqiKlEaMwDd/uu9
 JwDwVwkZUE/IgHpCBtQTMqCekAH1hAyoJ2RAPSED6gkZUE/IgHpCBtQTMqCekAH1hAyoJ2RAPSED
 6gkZUE/IgHpCBtQTMqCekAH1hAyoJ2RAPSED6gkZUE/IgHpCBtQTMqCekAH1hAyoJ2RAPSED6gkZ
 UE/IgHpCBtQTMqCekAH1hAyoJ2RAPSED6gkZUE/IgHpCBtQTMqCekAH1hAyoJ2RAPSED6gkZUE/I
@@ -5181,55 +5240,51 @@ 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
-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
+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
+z9yH7Om42Vx+6XA3Yjbn0K7us3G/yP5s79VDMr/m+j7BM89Ctrw4y02+/siRPp/H5bE/DlnW96Pl
+6rUZefy6D2tkTVZjMzZjk9NLq2TzmGWs83AhmLz8vjed19/m6f75OC+OvzDu/vGuY5ft+TJs+2wt
+6+ne24eLxN/nx9zm6/gyrsYyL8ac+zz7UuLRPXTfP9LtT6ypbXM8/3aT5eUZ8esSshpjm09zP/dz
+Pz9mNV5eil/l8e2yb36/+cKttftvQZiHZKyzPsfpe+MuOWQ5z+r5T5/u/fCOeUzmIf/MPqt8vbuv
+a3wdX8cuyf7ZlxLbN8Z87ue+3T2ef7uf5m+XM/qpMXgnQlbk4hu8m1fOtQ45Pvrr+/b5xLPvLudt
+VuPqYa/bbHP/md8b9zgP+T3XY/XyT5/svb/M0NjN07yZH/Mhu/nh/LhJ8uny5t9krHJ6Y8znfuZs
+6vjttzFWlzP6iTF4N0JWYjw+17q8BeO8fWzzaZ7mTZa7M62xymruk/u//GN1Ea7lxfOxJNln+xDM
+fXb3l4AvjPvMPOY2V8ncZ/Xw3vVLe899MtYP817u7oybx0ehytzndny+2LCbF3eSff9In8/jdfPm
+/jcyVtm8NiN+VW6/qDA2uU7Gww0W2WY1vuRm7pN8HLscs2Q5307we67GPqus725emIdxGtucssoh
+23Gcx7kfV2ObZX564aMuzpXm7dhd3HxwMe7YZJdlXN994vnVbt4kuRrJTT7katytcR3G53yax6ez
+yodcjSWnrObtWLIZxyTr3DyezPw4tuNzDjlmleXup2OT7fnTvnukT+eR5W6m2efuHzztH8a6O75D
+TslbM+LX9Ff/KRy/hLE8vttprB5diJ5fj9W3bZfPX9/ze+N+f06PP/OlWX1/5LHO6rX7uX7gSJ/N
+4405/+CM+NUIGVDPGhlQT8iAekIG1BMyoJ6QAfWEDKgnZEA9IQPqCRlQT8iAekIG1BMyoJ6QAfWE
 DKgnZEA9IQPqCRlQT8iAekIG1BMyoJ6QAfWEDKgnZEA9IQPqCRlQT8iAekIG1BMyoJ6QAfWEDKgn
-ZEA9IQPq/eO9J0CLsUmSHOfxYtuSZe7fe2YgZPy4bZJPT7Zd539fe/vYZskqh3n71itjm1NWOc7D
-2GST0/yUJONzTkmO8+a9D5oGQsYPmvuxSS7Px5J5HKfX3j/OURp/jP08vfZKVlnPj8n4mg85JVmd
-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
+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
@@ -5246,10 +5301,14 @@ GVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBP
 yIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6
 QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbU
 EzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKg
-npAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9f4fax2+/x0K9qIAAAAldEVYdGRhdGU6Y3Jl
-YXRlADIwMTUtMDctMDJUMTM6MTA6NDAtMDQ6MDDAVC7vAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE1
-LTA3LTAyVDEzOjEwOjQwLTA0OjAwsQmWUwAAABR0RVh0cGRmOlZlcnNpb24AUERGLTEuNSAFXAs5
-AAAAAElFTkSuQmCC
+npAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB
+9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQM
+qCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdk
+QD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0h
+A+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJGVBPyIB6QgbUEzKgnpAB9YQMqCdkQD0hA+oJ
+GVBPyIB6QgbUEzKgnpAB9YQMqPf/o9vAVawhg5QAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTUtMDct
+MDNUMTQ6MzI6NDUtMDQ6MDAd7v99AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE1LTA3LTAzVDE0OjMy
+OjQ1LTA0OjAwbLNHwQAAABR0RVh0cGRmOlZlcnNpb24AUERGLTEuNSAFXAs5AAAAAElFTkSuQmCC
 "
 &gt;
 &lt;/div&gt;
@@ -5671,8 +5730,8 @@ ZISQ6mEiI4RUDxMZIaR6mMgIIdXDREYIqR4mMkJI9TCREUKqh4mMEFI9TGSEkOphIiOEVA8TGSGk
 epjICCHVw0RGCKkeJjJCSPUwkRFCqoeJjBBSPUxkhJDqYSIjhFQPExkhpHqYyAgh1cNERgipHiYy
 Qkj1MJERQqqHiYwQUj1MZISQ6mEiI4RUDxMZIaR6mMgIIdXDREYIqR4mMkJI9TCREUKqh4mMEFI9
 TGSEkOphIiOEVA8TGSGkepjICCHVw0RGCKkeJjJCSPUwkRFCqoeJjBBSPUxkhJDq+f8ByMdY04SP
-pZwAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTUtMDctMDJUMTM6MTA6NDEtMDQ6MDBmIyVbAAAAJXRF
-WHRkYXRlOm1vZGlmeQAyMDE1LTA3LTAyVDEzOjEwOjQxLTA0OjAwF36d5wAAABR0RVh0cGRmOlZl
+pZwAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTUtMDctMDNUMTQ6MzI6NDYtMDQ6MDAsBuXgAAAAJXRF
+WHRkYXRlOm1vZGlmeQAyMDE1LTA3LTAzVDE0OjMyOjQ2LTA0OjAwXVtdXAAAABR0RVh0cGRmOlZl
 cnNpb24AUERGLTEuNSAFXAs5AAAAAElFTkSuQmCC
 "
 &gt;
@@ -6180,9 +6239,9 @@ z/DWknwqssMRgwDPj7aEfM/w1pIQUj28tSSEVA8TGSGkepjICCHVw0RGCKkeJjJCSPUwkRFCqoeJ
 jBBSPUxkhJDqYSIjhFQPExkhpHqYyAgh1cNERgipHiYyQkj1MJERQqqHiYwQUj1MZISQ6mEiI4RU
 DxMZIaR6mMgIIdXDREYIqR4mMkJI9TCREUKqh4mMEFI9TGSEkOphIiOEVA8TGSGkepjICCHVw0RG
 CKkeJjJCSPUwkRFCqoeJjBBSPUxkhJDqYSIjhFQPExkhpHqYyAgh1cNERgipHiYyQkj1MJERQqqH
-iYwQUj1MZISQ6mEiI4RUz/8PrfXyZj61T6cAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTUtMDctMDJU
-MTM6MTA6NDEtMDQ6MDBmIyVbAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE1LTA3LTAyVDEzOjEwOjQx
-LTA0OjAwF36d5wAAABR0RVh0cGRmOlZlcnNpb24AUERGLTEuNSAFXAs5AAAAAElFTkSuQmCC
+iYwQUj1MZISQ6mEiI4RUz/8PrfXyZj61T6cAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTUtMDctMDNU
+MTQ6MzI6NDctMDQ6MDCKce5UAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE1LTA3LTAzVDE0OjMyOjQ3
+LTA0OjAw+yxW6AAAABR0RVh0cGRmOlZlcnNpb24AUERGLTEuNSAFXAs5AAAAAElFTkSuQmCC
 "
 &gt;
 &lt;/div&gt;
@@ -9548,8 +9607,8 @@ QRAEYc+IIBMEQRAEQdgzIsgEQRAEQRD2jAgyQRAEQRCEPSOCTBAEQRAEYc+IIBMEQRAEQdgzIsgE
 QRAEQRD2jAgyQRAEQRCEPSOCTBAEQRAEYc+IIBMEQRAEQdgzIsgEQRAEQRD2jAgyQRAEQRCEPSOC
 TBAEQRAEYc+IIBMEQRAEQdgzIsgEQRAEQRD2jAgyQRAEQRCEPSOCTBAEQRAEYc+IIBMEQRAEQdgz
 IsgEQRAEQRD2jAgyQRAEQRCEPSOCTBAEQRAEYc+IIBMEQRAEQdgz/z8ggTG9tpmAUAAAACV0RVh0
-ZGF0ZTpjcmVhdGUAMjAxNS0wNy0wMlQxMzoxMDo0Mi0wNDowMFfLP8YAAAAldEVYdGRhdGU6bW9k
-aWZ5ADIwMTUtMDctMDJUMTM6MTA6NDItMDQ6MDAmlod6AAAAFHRFWHRwZGY6VmVyc2lvbgBQREYt
+ZGF0ZTpjcmVhdGUAMjAxNS0wNy0wM1QxNDozMjo0OC0wNDowMHw5nr0AAAAldEVYdGRhdGU6bW9k
+aWZ5ADIwMTUtMDctMDNUMTQ6MzI6NDgtMDQ6MDANZCYBAAAAFHRFWHRwZGY6VmVyc2lvbgBQREYt
 MS41IAVcCzkAAAAASUVORK5CYII=
 "
 &gt;
@@ -10528,9 +10587,9 @@ AMAyAhkAAIBlBDIAAADLCGQAAACWEcgAAAAsI5ABAABYRiADAACwjEAGAABgGYEMAADAMgIZAACA
 ZQQyAAAAywhkAAAAlhHIAAAALCOQAQAAWEYgAwAAsIxABgAAYBmBDAAAwDICGQAAgGUEMgAAAMsI
 ZAAAAJYRyAAAACwjkAEAAFhGIAMAALCMQAYAAGAZgQwAAMAyAhkAAIBlBDIAAADLCGQAAACWEcgA
 AAAsI5ABAABYRiADAACwjEAGAABgGYEMAADAMgIZAACAZQQyAAAAywhkAAAAlhHIAAAALCOQAQAA
-WEYgAwAAsIxABgAAYNn/B1P+t/ar4UAYAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE1LTA3LTAyVDEz
-OjEwOjQzLTA0OjAw8bw0cgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNS0wNy0wMlQxMzoxMDo0My0w
-NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
+WEYgAwAAsIxABgAAYNn/B1P+t/ar4UAYAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE1LTA3LTAzVDE0
+OjMyOjQ5LTA0OjAw2k6VCQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNS0wNy0wM1QxNDozMjo0OS0w
+NDowMKsTLbUAAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 "
 &gt;
 &lt;/div&gt;
@@ -10555,20 +10614,36 @@ NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# unfortunately, weirdly, it appears that the dropbox api will not accept files for &lt;/span&gt;
-&lt;span class="c"&gt;# upload with the extension &amp;#39;.ipynb&amp;#39;, or even &amp;#39;.json&amp;#39;. It will accept &amp;#39;.txt&amp;#39; files, &lt;/span&gt;
-&lt;span class="c"&gt;# however, and nbviewer will still render those files properly. So that what&lt;/span&gt;
-&lt;span class="c"&gt;# we&amp;#39;ll do...&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;nb_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nbc_dir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/about_workdocs-cloudfiles__workdocs__2015-07-03/&amp;#39;&lt;/span&gt;\
+                     &lt;span class="s"&gt;&amp;#39;about_workdocs-cloudfiles__html_nb__2015-07-03.ipynb&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;nb_filename&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
-&lt;span class="n"&gt;nb_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nbc_dir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/about_workdocs-cloudfiles__workdocs__2015-07-02/&amp;#39;&lt;/span&gt;\
-                     &lt;span class="s"&gt;&amp;#39;about_workdocs-cloudfiles__html_nb__2015-07-02.ipynb&amp;#39;&lt;/span&gt;
-    
-&lt;span class="n"&gt;nb_txt_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;.ipynb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;.txt&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/div&gt;
 
-&lt;span class="o"&gt;!&lt;/span&gt;cp &lt;span class="nv"&gt;$nb_file&lt;/span&gt; &lt;span class="nv"&gt;$nb_txt_file&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 
 
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;upload_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_txt_file&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;div class="input_area box-flex1 white"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;cnb_aws&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;upload_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="input_area box-flex1 white"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;nb_link&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cnb_aws&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_file_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_link&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
@@ -10582,19 +10657,7 @@ NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 
-&lt;pre class="ipynb"&gt;{u&amp;apos;bytes&amp;apos;: 787393,
- u&amp;apos;client_mtime&amp;apos;: u&amp;apos;Thu, 02 Jul 2015 17:10:58 +0000&amp;apos;,
- u&amp;apos;icon&amp;apos;: u&amp;apos;page_white_text&amp;apos;,
- u&amp;apos;is_dir&amp;apos;: False,
- u&amp;apos;mime_type&amp;apos;: u&amp;apos;text/plain&amp;apos;,
- u&amp;apos;modified&amp;apos;: u&amp;apos;Thu, 02 Jul 2015 17:10:58 +0000&amp;apos;,
- u&amp;apos;path&amp;apos;: u&amp;apos;/workdocs-cloudfiles/about_workdocs-cloudfiles/about_workdocs-cloudfiles__html_nb__2015-07-02.txt&amp;apos;,
- u&amp;apos;rev&amp;apos;: u&amp;apos;4173d009579ca&amp;apos;,
- u&amp;apos;revision&amp;apos;: 268093,
- u&amp;apos;root&amp;apos;: u&amp;apos;dropbox&amp;apos;,
- u&amp;apos;shareable&amp;apos;: False,
- u&amp;apos;size&amp;apos;: u&amp;apos;768.9 KB&amp;apos;,
- u&amp;apos;thumb_exists&amp;apos;: False}&lt;/pre&gt;
+&lt;pre class="ipynb"&gt;&amp;apos;https://about_workdocs-cloudfiles.s3.amazonaws.com/about_workdocs-cloudfiles__html_nb__2015-07-03.ipynb&amp;apos;&lt;/pre&gt;
 
 &lt;/div&gt;
 
@@ -10607,21 +10670,8 @@ NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;nb_txt_file_db_link&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_file_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_txt_file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;url&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;https://&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;nb_txt_file_nbv_link&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;http://nbviewer.ipython.org/urls/&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;nb_txt_file_db_link&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_txt_file_nbv_link&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;nbv_link&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cnb_aws&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_nbviewer_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nbv_link&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
@@ -10635,7 +10685,7 @@ NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 
-&lt;pre class="ipynb"&gt;u&amp;apos;http://nbviewer.ipython.org/urls/dl.dropboxusercontent.com/1/view/k3gdixce8652u88/workdocs-cloudfiles/about_workdocs-cloudfiles/about_workdocs-cloudfiles__html_nb__2015-07-02.txt&amp;apos;&lt;/pre&gt;
+&lt;pre class="ipynb"&gt;&amp;apos;http://nbviewer.ipython.org/urls/about_workdocs-cloudfiles.s3.amazonaws.com/about_workdocs-cloudfiles__html_nb__2015-07-03.ipynb&amp;apos;&lt;/pre&gt;
 
 &lt;/div&gt;
 
@@ -10649,6 +10699,7 @@ NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;And voila, that link gives a pleasantly styled html render of the notebook. Whilst the content is mostly the same as the LabNotebook webpage, this format can be more useful for some purposes, and can be downloaded and run and/or modified directly. rather than copy-pasting code, For the purposes of reproducibility and open science (which is what the LabNotebook is all about, really), this would be the relevant link to share &lt;a href="#fn:links" rel="footnote"&gt;[1]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;(Note: unfortunately, weirdly, it appears that the dropbox api will not accept files for upload with the extension '.ipynb', or even '.json'. It will accept '.txt' files, however, and nbviewer will still render those files properly. So to do the above with dropbox, one first needs to rename the .ipynb files to e.g. .txt. The above calls will then work fine, although bear in mind that if downloading the file from the link, the extension should be changed back to .ipynb for the files to work properly)&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -10666,8 +10717,8 @@ NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;nb_txt_file_sv_link&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;https://slideviewer.herokuapp.com/urls/&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;nb_txt_file_db_link&lt;/span&gt; 
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_txt_file_sv_link&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;sv_link&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cnb_aws&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_slideviewer_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sv_link&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
@@ -10681,7 +10732,7 @@ NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 
-&lt;pre class="ipynb"&gt;u&amp;apos;https://slideviewer.herokuapp.com/urls/dl.dropboxusercontent.com/1/view/k3gdixce8652u88/workdocs-cloudfiles/about_workdocs-cloudfiles/about_workdocs-cloudfiles__html_nb__2015-07-02.txt&amp;apos;&lt;/pre&gt;
+&lt;pre class="ipynb"&gt;&amp;apos;https://slideviewer.herokuapp.com/urls/about_workdocs-cloudfiles.s3.amazonaws.com/about_workdocs-cloudfiles__html_nb__2015-07-03.ipynb&amp;apos;&lt;/pre&gt;
 
 &lt;/div&gt;
 
@@ -10758,4 +10809,57 @@ NDowMIDhjM4AAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 &lt;/li&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="input_area box-flex1 white"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;nb_txt_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;.ipynb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;.txt&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="o"&gt;!&lt;/span&gt;cp &lt;span class="nv"&gt;$nb_file&lt;/span&gt; &lt;span class="nv"&gt;$nb_txt_file&lt;/span&gt;
+
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cnb_aws&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;upload_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_txt_file&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+
+&lt;span class="n"&gt;nb_txt_file_db_link&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_file_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_txt_file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;url&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;https://&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;nb_txt_file_nbv_link&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;http://nbviewer.ipython.org/urls/&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;nb_txt_file_db_link&lt;/span&gt;
+
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_txt_file_nbv_link&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;nb_txt_file_sv_link&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;https://slideviewer.herokuapp.com/urls/&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;nb_txt_file_db_link&lt;/span&gt; 
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_txt_file_sv_link&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;pre class="ipynb"&gt;{u&amp;apos;bytes&amp;apos;: 787393,
+ u&amp;apos;client_mtime&amp;apos;: u&amp;apos;Thu, 02 Jul 2015 17:10:58 +0000&amp;apos;,
+ u&amp;apos;icon&amp;apos;: u&amp;apos;page_white_text&amp;apos;,
+ u&amp;apos;is_dir&amp;apos;: False,
+ u&amp;apos;mime_type&amp;apos;: u&amp;apos;text/plain&amp;apos;,
+ u&amp;apos;modified&amp;apos;: u&amp;apos;Thu, 02 Jul 2015 17:10:58 +0000&amp;apos;,
+ u&amp;apos;path&amp;apos;: u&amp;apos;/workdocs-cloudfiles/about_workdocs-cloudfiles/about_workdocs-cloudfiles__html_nb__2015-07-02.txt&amp;apos;,
+ u&amp;apos;rev&amp;apos;: u&amp;apos;4173d009579ca&amp;apos;,
+ u&amp;apos;revision&amp;apos;: 268093,
+ u&amp;apos;root&amp;apos;: u&amp;apos;dropbox&amp;apos;,
+ u&amp;apos;shareable&amp;apos;: False,
+ u&amp;apos;size&amp;apos;: u&amp;apos;768.9 KB&amp;apos;,
+ u&amp;apos;thumb_exists&amp;apos;: False}&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
 &lt;/div&gt;&lt;/p&gt;</summary><category term="LabNotebook"></category><category term="IPython"></category></entry></feed>
