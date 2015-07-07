@@ -12574,59 +12574,6 @@ NDowMKsTLbUAAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 </li>
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-
-<div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">nb_txt_file</span> <span class="o">=</span> <span class="n">nb_file</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;.ipynb&#39;</span><span class="p">,</span> <span class="s">&#39;.txt&#39;</span><span class="p">)</span>
-
-<span class="o">!</span>cp <span class="nv">$nb_file</span> <span class="nv">$nb_txt_file</span>
-
-<span class="n">d</span><span class="p">(</span><span class="n">cnb_aws</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="n">nb_txt_file</span><span class="p">))</span>
-
-
-<span class="n">nb_txt_file_db_link</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">get_file_link</span><span class="p">(</span><span class="n">nb_txt_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])[</span><span class="s">&#39;url&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;https://&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
-
-<span class="n">nb_txt_file_nbv_link</span> <span class="o">=</span> <span class="s">&#39;http://nbviewer.ipython.org/urls/&#39;</span> <span class="o">+</span> <span class="n">nb_txt_file_db_link</span>
-
-<span class="n">d</span><span class="p">(</span><span class="n">nb_txt_file_nbv_link</span><span class="p">)</span>
-
-<span class="n">nb_txt_file_sv_link</span> <span class="o">=</span> <span class="s">&#39;https://slideviewer.herokuapp.com/urls/&#39;</span> <span class="o">+</span> <span class="n">nb_txt_file_db_link</span> 
-<span class="n">d</span><span class="p">(</span><span class="n">nb_txt_file_sv_link</span><span class="p">)</span>
-</pre></div>
-
-</div>
-
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-
-
-<pre class="ipynb">{u&apos;bytes&apos;: 787393,
- u&apos;client_mtime&apos;: u&apos;Thu, 02 Jul 2015 17:10:58 +0000&apos;,
- u&apos;icon&apos;: u&apos;page_white_text&apos;,
- u&apos;is_dir&apos;: False,
- u&apos;mime_type&apos;: u&apos;text/plain&apos;,
- u&apos;modified&apos;: u&apos;Thu, 02 Jul 2015 17:10:58 +0000&apos;,
- u&apos;path&apos;: u&apos;/workdocs-cloudfiles/about_workdocs-cloudfiles/about_workdocs-cloudfiles__html_nb__2015-07-02.txt&apos;,
- u&apos;rev&apos;: u&apos;4173d009579ca&apos;,
- u&apos;revision&apos;: 268093,
- u&apos;root&apos;: u&apos;dropbox&apos;,
- u&apos;shareable&apos;: False,
- u&apos;size&apos;: u&apos;768.9 KB&apos;,
- u&apos;thumb_exists&apos;: False}</pre>
-
-</div>
-
-</div>
-</div>
-
 </div></p>
 </div>
     <footer>

@@ -10809,59 +10809,6 @@ NDowMKsTLbUAAAAUdEVYdHBkZjpWZXJzaW9uAFBERi0xLjUgBVwLOQAAAABJRU5ErkJggg==
 &lt;/li&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;nb_txt_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;.ipynb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;.txt&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="o"&gt;!&lt;/span&gt;cp &lt;span class="nv"&gt;$nb_file&lt;/span&gt; &lt;span class="nv"&gt;$nb_txt_file&lt;/span&gt;
-
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cnb_aws&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;upload_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_txt_file&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-
-
-&lt;span class="n"&gt;nb_txt_file_db_link&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_file_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_txt_file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;url&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;https://&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;nb_txt_file_nbv_link&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;http://nbviewer.ipython.org/urls/&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;nb_txt_file_db_link&lt;/span&gt;
-
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_txt_file_nbv_link&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;nb_txt_file_sv_link&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;https://slideviewer.herokuapp.com/urls/&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;nb_txt_file_db_link&lt;/span&gt; 
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nb_txt_file_sv_link&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-
-&lt;pre class="ipynb"&gt;{u&amp;apos;bytes&amp;apos;: 787393,
- u&amp;apos;client_mtime&amp;apos;: u&amp;apos;Thu, 02 Jul 2015 17:10:58 +0000&amp;apos;,
- u&amp;apos;icon&amp;apos;: u&amp;apos;page_white_text&amp;apos;,
- u&amp;apos;is_dir&amp;apos;: False,
- u&amp;apos;mime_type&amp;apos;: u&amp;apos;text/plain&amp;apos;,
- u&amp;apos;modified&amp;apos;: u&amp;apos;Thu, 02 Jul 2015 17:10:58 +0000&amp;apos;,
- u&amp;apos;path&amp;apos;: u&amp;apos;/workdocs-cloudfiles/about_workdocs-cloudfiles/about_workdocs-cloudfiles__html_nb__2015-07-02.txt&amp;apos;,
- u&amp;apos;rev&amp;apos;: u&amp;apos;4173d009579ca&amp;apos;,
- u&amp;apos;revision&amp;apos;: 268093,
- u&amp;apos;root&amp;apos;: u&amp;apos;dropbox&amp;apos;,
- u&amp;apos;shareable&amp;apos;: False,
- u&amp;apos;size&amp;apos;: u&amp;apos;768.9 KB&amp;apos;,
- u&amp;apos;thumb_exists&amp;apos;: False}&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
 &lt;/div&gt;&lt;/p&gt;</summary><category term="LabNotebook"></category><category term="IPython"></category></entry><entry><title>Collapsible code cells in the LN</title><link href="https://johngriffiths.github.io/LabNotebook/collapsible-code-cells.html" rel="alternate"></link><updated>2015-07-03T00:00:00-07:00</updated><author><name>John Grif</name></author><id>tag:johngriffiths.github.io,2015-07-03:LabNotebook/collapsible-code-cells.html</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
