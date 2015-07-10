@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive &mdash; JDG Lab Notebook</title>
+  <title>Using pandas and itertools to manage and run tvb simulations &mdash; JDG Lab Notebook</title>
   <meta name="author" content="John D. Griffiths">
 
 
@@ -1712,6 +1712,8 @@ jQuery(document).ready(function($) {
 
 
 
+
+
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
@@ -1748,78 +1750,3761 @@ jQuery(document).ready(function($) {
     <li><a href="https://johngriffiths.github.io/LabNotebook/archives.html">Archives</a></li>
     <li><a href="https://github.com/JohnGriffiths/LabNotebook.html">Github repo</a></li>
     <li><a href="http://en.wikipedia.org/wiki/Open_notebook_science">Open Notebook Science</a></li>
-      <li >
+      <li class="active">
         <a href="https://johngriffiths.github.io/LabNotebook/category/misc.html">Misc</a>
       </li>
 </ul></nav>
   <div id="main">
     <div id="content">
 <div>
-	<article role="article">
-    	<header>
-    		<h1 class="entry-title">Blog Archive</h1>
-    	</header>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Using pandas and itertools to manage and run tvb simulations</h1>
+    <p class="meta">
+<time datetime="2015-07-10T00:00:00-07:00" pubdate>Fri 10 July 2015</time>    </p>
+</header>
 
-    	<div id="blog-archives">
-            <h2>2015</h2>
-                    <article>
-                        <h1><a href="https://johngriffiths.github.io/LabNotebook/about-the-notebook.html">About the notebook</a></h1>
-                        <time datetime="2015-07-09 00:00:00-07:00" pubdate>
-                            <span class="month">Jul</span>
-                            <span class="day">09</span>
-                            <span class="year">2015</span>
-                        </time>
-                        <footer>
-                            <span class="categories">posted in
-                                <a class='category' href='https://johngriffiths.github.io/LabNotebook/category/misc.html'>misc</a>
-                                
-                            </span>
-                        </footer>
-                    </article>
-                    <article>
-                        <h1><a href="https://johngriffiths.github.io/LabNotebook/about-workdocs-cloudfiles.html">About workdocs-cloudfiles</a></h1>
-                        <time datetime="2015-07-09 00:00:00-07:00" pubdate>
-                            <span class="month">Jul</span>
-                            <span class="day">09</span>
-                            <span class="year">2015</span>
-                        </time>
-                        <footer>
-                            <span class="categories">posted in
-                                <a class='category' href='https://johngriffiths.github.io/LabNotebook/category/misc.html'>misc</a>
-                                
-                            </span>
-                        </footer>
-                    </article>
-                    <article>
-                        <h1><a href="https://johngriffiths.github.io/LabNotebook/mse-study-background.html">MSE TVB Study - Background notes</a></h1>
-                        <time datetime="2015-07-10 00:00:00-07:00" pubdate>
-                            <span class="month">Jul</span>
-                            <span class="day">10</span>
-                            <span class="year">2015</span>
-                        </time>
-                        <footer>
-                            <span class="categories">posted in
-                                <a class='category' href='https://johngriffiths.github.io/LabNotebook/category/misc.html'>misc</a>
-                                
-                            </span>
-                        </footer>
-                    </article>
-                    <article>
-                        <h1><a href="https://johngriffiths.github.io/LabNotebook/tvb-pandas-itertools.html">Using pandas and itertools to manage and run tvb simulations</a></h1>
-                        <time datetime="2015-07-10 00:00:00-07:00" pubdate>
-                            <span class="month">Jul</span>
-                            <span class="day">10</span>
-                            <span class="year">2015</span>
-                        </time>
-                        <footer>
-                            <span class="categories">posted in
-                                <a class='category' href='https://johngriffiths.github.io/LabNotebook/category/misc.html'>misc</a>
-                                
-                            </span>
-                        </footer>
-                    </article>
-	    </div>
-    </article>
+  <div class="entry-content"><p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>Pandas</em> and <em>itertools</em> are two very handy python libraries that will make your life easier and make you a happier person.</p>
+<p>The following are some notes on how to wield these tools in managing and analyzing tvb simulations.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="contents">Contents</h3>
+<ul>
+<li><a href="#Notebook-setup">Notebook setup</a></li>
+<li><a href="#Background---pandas">Background - pandas</a></li>
+<li><a href="#Run-TVB-Simulations">Run TVB Simulations</a>
+<ul>
+<li><a href="#Run-simulation-function">Run simulation function</a></li>
+<li><a href="#Parameter-iteration">Parameter iteration</a></li>
+<li><a href="#Do-it">Do it</a></li>
+</ul></li>
+<li><a href="#Looking-at-simulation-results">Looking at simulation results</a>
+<ul>
+<li><a href="#Concatenate-sim-results-and-write-to-file.">Concatenate sim results and write to file.</a></li>
+<li><a href="#Manipulating-the-sim-dataframe">Manipulating the sim dataframe</a></li>
+<li><a href="#Correlation-matrices">Correlation matrices</a>
+<ul>
+<li><a href="#Seaborn">Seaborn</a></li>
+<li><a href="#Nitime">Nitime</a></li>
+</ul></li>
+<li><a href="#Split-the-df-into-a-list-of-individual-parameter-dfs">Split the df into a list of individual parameter dfs</a></li>
+<li><a href="#Comparing-simulated-and-empirical-FC-matrices">Comparing simulated and empirical FC matrices</a></li>
+<li><a href="#Looking-at-tvb-analyzer-outputs">Looking at tvb analyzer outputs</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Notebook-setup">Notebook setup<a class="anchor-link" href="#Notebook-setup">&#182;</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Define some variables</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># define system-specific filepaths etc</span>
+<span class="o">%</span><span class="k">run</span> <span class="o">~/</span><span class="n">set_localenv_vars</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c"># output dir</span>
+<span class="n">outdir</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s">&#39;data_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/notebooks/tvb_pandas_itertools&#39;</span>
+<span class="o">!</span>mkdir -p <span class="nv">$outdir</span>
+
+<span class="c"># stuff for dropbox api</span>
+<span class="n">nb_name</span> <span class="o">=</span> <span class="s">&#39;tvb_pandas_itertools&#39;</span>
+
+<span class="c"># Root path to tvb-library, tvb-data, etc. libraries. </span>
+<span class="n">tvb_folder</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s">&#39;code_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/libraries_of_others/github/tvb-pack&#39;</span>
+
+<span class="n">sim_df_outfile_base</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/tvb_pandit_sims_&#39;</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>(Note: once you have worked through the simulation section and saved the results to file using the above filename, you can open this notebook from fresh later on in another session and continue from the subsequent section onwards - </em>as long as* you also execute the setup cells here. If you have the ipython 'init cell' extension installed, you can simply click the init button (all the code cells in this section are tagged as initialization cells))*</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Importage</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Generic stuff</span>
+
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">datetime</span><span class="o">,</span><span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.io.matlab</span> <span class="kn">import</span> <span class="n">loadmat</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+
+<span class="c"># Visualization stuff</span>
+
+
+<span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+
+<span class="kn">import</span> <span class="nn">plotly</span> 
+
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span> <span class="k">as</span> <span class="n">d</span><span class="p">,</span><span class="n">HTML</span><span class="p">,</span><span class="n">Image</span><span class="p">,</span><span class="n">clear_output</span>
+<span class="kn">from</span> <span class="nn">IPython.html.widgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span>
+
+<span class="c">#from ipywidgets import StaticInteract, RangeWidget, RadioWidget</span>
+
+
+<span class="c"># TVB stuff</span>
+
+<span class="c"># note on these imports: I recently (02/05/2015) tried running this in a fresh installation, and found that </span>
+<span class="c"># a) I had to first call these imports from a python shell in the tvb-pack/scripts folder for them to then </span>
+<span class="c">#   work in from arbitrary locations in subsequent python sessions</span>
+<span class="c"># b) the nlatest ipython/jupyter notebook was still crashing. pip install ipython==2.4 gives the most stable </span>
+<span class="c">#    notebook kernels at present. </span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span> <span class="o">+=</span> <span class="p">[</span><span class="n">tvb_folder</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;tvb-library&#39;</span><span class="p">,</span> <span class="s">&#39;tvb-data&#39;</span><span class="p">,</span> <span class="s">&#39;tvb-framework&#39;</span><span class="p">,</span>
+                                            <span class="s">&#39;matlab&#39;</span><span class="p">,</span> <span class="s">&#39;external-geodesic&#39;</span><span class="p">]]</span>
+
+<span class="kn">from</span> <span class="nn">tvb.simulator</span> <span class="kn">import</span> <span class="n">models</span><span class="p">,</span><span class="n">monitors</span><span class="p">,</span><span class="n">coupling</span><span class="p">,</span><span class="n">integrators</span><span class="p">,</span><span class="n">noise</span><span class="p">,</span><span class="n">simulator</span>
+<span class="kn">from</span> <span class="nn">tvb.datatypes</span> <span class="kn">import</span> <span class="n">connectivity</span><span class="p">,</span><span class="n">projections</span>
+<span class="kn">from</span> <span class="nn">tvb.datatypes.time_series</span> <span class="kn">import</span> <span class="n">TimeSeriesRegion</span>
+
+<span class="kn">from</span> <span class="nn">tvb.analyzers</span> <span class="kn">import</span> <span class="n">metric_variance_of_node_variance</span> <span class="k">as</span> <span class="n">metric_varnodevar</span>
+<span class="kn">from</span> <span class="nn">tvb.analyzers</span> <span class="kn">import</span> <span class="n">metric_variance_global</span> <span class="k">as</span> <span class="n">metric_varglob</span>
+
+<span class="kn">from</span> <span class="nn">tvb.analyzers</span> <span class="kn">import</span> <span class="n">metric_proxy_metastability</span>
+<span class="kn">from</span> <span class="nn">tvb.analyzers</span> <span class="kn">import</span> <span class="n">metric_kuramoto_index</span>
+
+<span class="kn">from</span> <span class="nn">tvb.analyzers</span> <span class="kn">import</span> <span class="p">(</span><span class="n">pca</span><span class="p">,</span><span class="n">node_coherence</span><span class="p">,</span><span class="n">node_complex_coherence</span><span class="p">,</span>
+                           <span class="n">node_covariance</span><span class="p">,</span><span class="n">correlation_coefficient</span><span class="p">,</span>
+                           <span class="n">cross_correlation</span><span class="p">,</span><span class="n">ica</span><span class="p">)</span>
+
+
+
+<span class="c"># Neuroimaging analysis stuff</span>
+
+<span class="kn">import</span> <span class="nn">nitime</span>
+<span class="kn">from</span> <span class="nn">nitime.timeseries</span> <span class="kn">import</span> <span class="n">TimeSeries</span>
+<span class="kn">from</span> <span class="nn">nitime.analysis</span> <span class="kn">import</span> <span class="n">CorrelationAnalyzer</span><span class="p">,</span> <span class="n">CoherenceAnalyzer</span>
+<span class="kn">from</span> <span class="nn">nitime.utils</span> <span class="kn">import</span> <span class="n">percent_change</span>
+<span class="kn">from</span> <span class="nn">nitime.viz</span> <span class="kn">import</span> <span class="n">drawmatrix_channels</span><span class="p">,</span> <span class="n">drawgraph_channels</span><span class="p">,</span> <span class="n">plot_xcorr</span>
+
+
+<span class="c"># Workdocs-cloudfiles stuff</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">le</span><span class="p">[</span><span class="s">&#39;ipynb_workdocs_dir&#39;</span><span class="p">])</span>
+<span class="kn">from</span> <span class="nn">new_utils</span> <span class="kn">import</span> <span class="n">nb_fig</span><span class="p">,</span><span class="n">cloudfiles_nb</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Initialize aws api and workdocs-cloudfiles folder</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">aws_key</span> <span class="o">=</span> <span class="s">&#39;drowssaperucesyreva&#39;</span>
+<span class="n">aws_secret</span> <span class="o">=</span> <span class="s">&#39;?teytidettopsuoyevah&#39;</span>  
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cnb</span> <span class="o">=</span> <span class="n">cloudfiles_nb</span><span class="p">(</span><span class="s">&#39;aws&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">aws_key</span><span class="p">,</span><span class="n">aws_secret</span><span class="p">])</span>
+<span class="n">cnb</span><span class="o">.</span><span class="n">initialize_folder</span><span class="p">(</span><span class="n">nb_name</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Calico document tools</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">javascript</span>
+<span class="n">IPython</span><span class="o">.</span><span class="n">load_extensions</span><span class="p">(</span><span class="s">&#39;calico-spell-check&#39;</span><span class="p">,</span>
+                        <span class="s">&#39;calico-document-tools&#39;</span><span class="p">,</span><span class="s">&#39;calico-cell-tools&#39;</span><span class="p">);</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cell-tools');
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First some brief comments on the whats and the whys. <strong>These are not tutorials</strong>. Newbies are strongly encouraged to <strong>read the bloody documentation</strong> and google promiscuously when troubleshooting or trying to understand stuff.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>[Handy tip when researching python type things: including 'nbviewer' in your search terms. This often brings up <a href="www.nbviewer.ipython.org">nbviewer</a> renders of notebooks. The quality of the hits are often variable, but in my experience this strategy frequently brings up excellent tutorials and useful snippets, which tend to be readable and usable without be excessively technical (unlike e.g. most <a href="https://docs.python.org/2/library/itertools.html">python documentation pages</a> ). ]</em></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Background---pandas">Background - pandas<a class="anchor-link" href="#Background---pandas">&#182;</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Documentation <a href="http://pandas.pydata.org/">here</a>. Make sure you check the <a href="http://pandas.pydata.org/pandas-docs/stable/advanced.html">section on multi-indexing</a>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Tutorials:</p>
+<ul>
+<li><p>Julia Evans' <em>pandas-cookbook</em> (<a href="https://github.com/jvns/pandas-cookbook">github</a>, <a href="http://nbviewer.ipython.org/github/jvns/pandas-cookbook/tree/master/cookbook/">nbviewer</a> )</p></li>
+<li><p>Chris Fonnesbeck's <em>statistical analysis in python</em> tutorial (<a href="https://github.com/fonnesbeck/statistical-analysis-python-tutorial">github</a>; follow the links for nbviewer gists).</p></li>
+<li><p>Marcel Caraciolo's <em>big-data</em> tutorial (<a href="https://github.com/marcelcaraciolo/bigdata-tutorial-2014">github</a>, <a href="http://nbviewer.ipython.org/github/marcelcaraciolo/big-data-tutorial/tree/master/tutorial/">nbviewer</a> )</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div align="center">
+<sub>~</sub>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Manipulating sets of numbers is a central task in many walks of life. In computational research science it is your bread and butter. You generate blocks of numbers, place them in some data structure, and then will want to be able to flexible access that data structure, access that data structure, write to file, read in again, etc. etc. Over and over again, day after day after day. When working in python the three basic types of data structures you might use for this are lists, dictionaries, and numpy arrays. But I put it to to you: if you're building a wall, why use a wheel-barrow and mud when there's a fork-lift truck and cement mixer available to you at no extra cost?</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>Pandas</em> is a library that provides some simple but powerful data structures for reading, writing, storing, indexing, manipulating, and visualizing blocks of numbers. At its core is the the <em>DataFrame</em> structure, which are essentially 2D arrays of numbers with many special powers. However their multi-indexing capabilities, which we shall be making use of, make them more like a hybrid between a spreadsheet and a hierarchically nested python dictionary or matlab structure. Very similar to Microsoft Excel pivot tables in that respect (which are actually very neat), but as we all know Excel should be avoided like the plague whenever large amounts of data, and/or anything more than trivial numerical operations are involved.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pandas dataframes are explicitly based on the dataframe objects in <em>R</em>, which deserve a large amount of the credit for the (still unmatched) power and popularity of the R language for data analysis. An added bonus is therefore that pandas dataframes are highly compatible with R (via the Ipython R magics and rpy2 library), and are a must-have for any dual python/R practioners.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <em>most</em> useful aspects of pandas Datframes are the ability to easily read from and write to a wide variety of file formats (c.f. documentation), and the tight integration with the plotting capabilities of matplotlib. However here we shall be focusing more on how to exploit multi-indexing when doing simulations or data analyses that are repeated across multiple parameter combinations.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Run-TVB-Simulations">Run TVB Simulations<a class="anchor-link" href="#Run-TVB-Simulations">&#182;</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For demonstration purposes, we shall use a very basic example from the tvb demos folder, the <code>generate_region_demo_data.py</code> demo, with a few minor modifications.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For reference: to make the modifications, I simply loaded in the .py file with the following two lines:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<pre class="sourceCode python"><code class="sourceCode python">tvb_folder = <span class="st">&#39;/media/sf_SharedFolder/Code/git_repos_of_mine/tvb-pack/tvb-library&#39;</span>
+%load $tvb_folder/tvb/simulator/demos/generate_region_demo_data.py</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>(if I didn't have it locally, I could also have loaded it directly from the interweb with the same command):</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<pre class="sourceCode python"><code class="sourceCode python">fileincloud  = <span class="st">&#39;https://raw.githubusercontent.com/the-virtual-brain/tvb-library/trunk/tvb/simulator/demos/generate_region_demo_data.py&#39;</span>
+%load $fileincloud</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>After loading came a bit of hacking, and the result is the below. This is a very useful and (for me, at least) common procedure for modifying and re-using code snippets.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>Caveat: as this is primarily intended as a demonstration, the emphasis in this example has primarily been on explicitness and simplicity, over elegance and generality. For more general (if not more elegant) alternatives, see e.g. the the classes in the 'runner.py' function in <a href="https://github.com/JohnGriffiths/tvb-scripting">tvb-scripting</a>.</em></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Run-simulation-function">Run simulation function<a class="anchor-link" href="#Run-simulation-function">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">run_sim</span><span class="p">(</span><span class="n">sim_len</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span><span class="n">lincouple_a</span> <span class="o">=</span> <span class="mf">0.033</span><span class="p">,</span>
+            <span class="n">speed</span> <span class="o">=</span> <span class="mf">4.0</span><span class="p">,</span><span class="n">add_noise_nsig</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">monitors2use</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;tavg&#39;</span><span class="p">,</span> <span class="s">&#39;fmri&#39;</span><span class="p">,</span> <span class="s">&#39;eeg&#39;</span><span class="p">],</span> 
+            <span class="n">monitor_periods</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;tavg&#39;</span><span class="p">:</span> <span class="mf">0.48828125</span><span class="p">,</span><span class="s">&#39;fmri&#39;</span><span class="p">:</span> <span class="mf">500.</span><span class="p">,</span> <span class="s">&#39;eeg&#39;</span><span class="p">:</span> <span class="mf">1e3</span><span class="o">/</span><span class="mi">4096</span><span class="p">},</span>
+            <span class="n">stochast_int_dt</span> <span class="o">=</span> <span class="mf">0.06103515625</span><span class="p">,</span>
+            <span class="n">g2do_a</span><span class="o">=</span><span class="mf">1.05</span><span class="p">,</span><span class="n">g2do_b</span><span class="o">=-</span><span class="mf">1.</span><span class="p">,</span><span class="n">g2do_c</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">g2do_d</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+            <span class="n">g2do_e</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">g2do_f</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span><span class="n">g2do_g</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">g2do_alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+            <span class="n">g2do_beta</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="n">g2do_tau</span><span class="o">=</span><span class="mf">1.25</span><span class="p">,</span><span class="n">g2do_gamma</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">):</span>
+
+  <span class="n">oscillator</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Generic2dOscillator</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">g2do_a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="n">g2do_b</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">g2do_c</span><span class="p">,</span><span class="n">d</span><span class="o">=</span><span class="n">g2do_d</span><span class="p">,</span>
+                                        <span class="n">e</span><span class="o">=</span><span class="n">g2do_e</span><span class="p">,</span><span class="n">f</span><span class="o">=</span><span class="n">g2do_f</span><span class="p">,</span><span class="n">g</span><span class="o">=</span><span class="n">g2do_g</span><span class="p">,</span>
+                                        <span class="n">alpha</span><span class="o">=</span><span class="n">g2do_alpha</span><span class="p">,</span><span class="n">beta</span><span class="o">=</span><span class="n">g2do_beta</span><span class="p">,</span>
+                                        <span class="n">tau</span><span class="o">=</span><span class="n">g2do_tau</span><span class="p">,</span><span class="n">gamma</span><span class="o">=</span><span class="n">g2do_gamma</span><span class="p">)</span>
+
+  <span class="n">white_matter</span> <span class="o">=</span> <span class="n">connectivity</span><span class="o">.</span><span class="n">Connectivity</span><span class="p">()</span><span class="o">.</span><span class="n">default</span><span class="p">()</span>
+  <span class="n">white_matter</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span>
+  <span class="n">white_matter_coupling</span> <span class="o">=</span> <span class="n">coupling</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">lincouple_a</span><span class="p">)</span>
+
+  <span class="c">#Initialise an Integrator</span>
+  <span class="n">hiss</span> <span class="o">=</span> <span class="n">noise</span><span class="o">.</span><span class="n">Additive</span><span class="p">(</span><span class="n">nsig</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">add_noise_nsig</span><span class="p">]))</span>
+  <span class="n">heunint</span> <span class="o">=</span> <span class="n">integrators</span><span class="o">.</span><span class="n">HeunStochastic</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="n">stochast_int_dt</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="n">hiss</span><span class="p">)</span> 
+
+ 
+  <span class="n">mon_list</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">if</span> <span class="s">&#39;tavg&#39;</span> <span class="ow">in</span> <span class="n">monitors2use</span><span class="p">:</span>    
+    <span class="n">mon_tavg</span> <span class="o">=</span> <span class="n">monitors</span><span class="o">.</span><span class="n">TemporalAverage</span><span class="p">(</span><span class="n">period</span><span class="o">=</span><span class="n">monitor_periods</span><span class="p">[</span><span class="s">&#39;tavg&#39;</span><span class="p">])</span>
+    <span class="n">mon_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mon_tavg</span><span class="p">)</span>
+ 
+  <span class="k">if</span> <span class="s">&#39;fmri&#39;</span> <span class="ow">in</span> <span class="n">monitors2use</span><span class="p">:</span>  
+    <span class="n">mon_fmri</span> <span class="o">=</span> <span class="n">monitors</span><span class="o">.</span><span class="n">Bold</span><span class="p">(</span><span class="n">period</span><span class="o">=</span><span class="n">monitor_periods</span><span class="p">[</span><span class="s">&#39;fmri&#39;</span><span class="p">])</span>
+    <span class="n">mon_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mon_fmri</span><span class="p">)</span>
+    
+  <span class="k">if</span> <span class="s">&#39;eeg&#39;</span> <span class="ow">in</span> <span class="n">monitors2use</span><span class="p">:</span>
+    <span class="n">proj_mat_path</span> <span class="o">=</span> <span class="n">tvb_folder</span><span class="o">+</span> <span class="s">&#39;/tvb-data/tvb_data/projectionMatrix/&#39;</span>\
+                                <span class="s">&#39;region_conn_74_eeg_1020_62.mat&#39;</span>
+    <span class="n">eeg_projection</span> <span class="o">=</span> <span class="n">loadmat</span><span class="p">(</span><span class="n">proj_mat_path</span><span class="p">)[</span><span class="s">&quot;ProjectionMatrix&quot;</span><span class="p">]</span>
+    <span class="n">pr</span> <span class="o">=</span> <span class="n">projections</span><span class="o">.</span><span class="n">ProjectionRegionEEG</span><span class="p">()</span>
+    <span class="n">pr</span><span class="o">.</span><span class="n">projection_data</span> <span class="o">=</span> <span class="n">eeg_projection</span>
+    <span class="n">mon_eeg</span> <span class="o">=</span> <span class="n">monitors</span><span class="o">.</span><span class="n">EEG</span><span class="p">(</span><span class="n">projection_matrix_data</span><span class="o">=</span><span class="n">pr</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="n">monitor_periods</span><span class="p">[</span><span class="s">&#39;eeg&#39;</span><span class="p">])</span>
+    <span class="n">mon_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mon_eeg</span><span class="p">)</span>
+    
+  <span class="n">what_to_watch</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">mon_list</span><span class="p">)</span>
+    
+    
+  <span class="c">#Initialise a Simulator -- Model, Connectivity, Integrator, and Monitors.</span>
+  <span class="n">sim</span> <span class="o">=</span> <span class="n">simulator</span><span class="o">.</span><span class="n">Simulator</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">oscillator</span><span class="p">,</span> <span class="n">connectivity</span><span class="o">=</span><span class="n">white_matter</span><span class="p">,</span>
+                          <span class="n">coupling</span><span class="o">=</span><span class="n">white_matter_coupling</span><span class="p">,</span>
+                          <span class="n">integrator</span><span class="o">=</span><span class="n">heunint</span><span class="p">,</span> <span class="n">monitors</span><span class="o">=</span><span class="n">mon_list</span><span class="p">)</span>
+    
+  <span class="n">sim</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span>
+
+  <span class="c">#Perform the simulation</span>
+
+  <span class="n">sim_time_lists</span> <span class="o">=</span> <span class="p">{};</span> <span class="n">sim_data_lists</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">monitors2use</span><span class="p">:</span> 
+      <span class="n">sim_time_lists</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+      <span class="n">sim_data_lists</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+ 
+  <span class="k">for</span> <span class="n">sim_it</span> <span class="ow">in</span> <span class="n">sim</span><span class="p">(</span><span class="n">simulation_length</span> <span class="o">=</span> <span class="n">sim_len</span><span class="p">):</span> 
+    <span class="k">for</span> <span class="n">m_it</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">monitors2use</span><span class="p">):</span>
+      <span class="k">if</span> <span class="n">sim_it</span><span class="p">[</span><span class="n">m_it</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">sim_time_lists</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sim_it</span><span class="p">[</span><span class="n">m_it</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">sim_data_lists</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sim_it</span><span class="p">[</span><span class="n">m_it</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> 
+ 
+  <span class="n">sim_data_arrs</span> <span class="o">=</span> <span class="p">{};</span> <span class="n">sim_time_arrs</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">monitors2use</span><span class="p">:</span>
+    <span class="n">sim_data_arrs</span><span class="p">[</span><span class="n">m</span><span class="p">]</span>  <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sim_data_lists</span><span class="p">[</span><span class="n">m</span><span class="p">])</span>
+    <span class="n">sim_time_arrs</span><span class="p">[</span><span class="n">m</span><span class="p">]</span>  <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sim_time_lists</span><span class="p">[</span><span class="n">m</span><span class="p">])</span>
+            
+  <span class="n">sim_analyzers</span> <span class="o">=</span> <span class="p">{}</span>            
+  <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">monitors2use</span><span class="p">:</span>
+    <span class="c">#  for nam,dat,per in zip([&#39;tavg&#39;, &#39;eeg&#39;], </span>
+    <span class="c">#                         [tavg_data_arr, eeg_data_arr ],</span>
+    <span class="c">#                         [mon_tavg_period, mon_eeg_period]):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sim_data_arrs</span><span class="p">[</span><span class="n">m</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">tsr</span> <span class="o">=</span> <span class="n">TimeSeriesRegion</span><span class="p">(</span><span class="n">connectivity</span><span class="o">=</span><span class="n">sim</span><span class="o">.</span><span class="n">connectivity</span><span class="p">,</span>
+                           <span class="n">data</span><span class="o">=</span><span class="n">sim_data_arrs</span><span class="p">[</span><span class="n">m</span><span class="p">],</span>
+                           <span class="n">sample_period</span><span class="o">=</span><span class="n">monitor_periods</span><span class="p">[</span><span class="n">m</span><span class="p">])</span>
+      <span class="n">tsr</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span>
+    
+      <span class="n">vnv</span> <span class="o">=</span> <span class="n">metric_varnodevar</span><span class="o">.</span><span class="n">VarianceNodeVariance</span><span class="p">(</span><span class="n">time_series</span><span class="o">=</span><span class="n">tsr</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">()</span>
+      <span class="n">vglob</span> <span class="o">=</span> <span class="n">metric_varglob</span><span class="o">.</span><span class="n">GlobalVariance</span><span class="p">(</span><span class="n">time_series</span><span class="o">=</span><span class="n">tsr</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">()</span>
+    
+      <span class="n">sim_analyzers</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;tsr&#39;</span><span class="p">:</span> <span class="n">tsr</span><span class="p">,</span> <span class="s">&#39;vnv&#39;</span><span class="p">:</span> <span class="n">vnv</span><span class="p">,</span> <span class="s">&#39;vglob&#39;</span><span class="p">:</span> <span class="n">vglob</span><span class="p">}</span>
+
+    <span class="c"># other analyzers?</span>
+        
+        
+  <span class="n">returntome</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;sim&#39;</span><span class="p">,</span>
+                <span class="s">&#39;sim_analyzers&#39;</span><span class="p">,</span> 
+                <span class="s">&#39;sim_data_arrs&#39;</span><span class="p">,</span> 
+                <span class="s">&#39;sim_time_arrs&#39;</span><span class="p">]</span>
+                
+  <span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">returntome</span><span class="p">:</span> <span class="n">res</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        
+  <span class="k">return</span> <span class="n">res</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Parameter-iteration">Parameter iteration<a class="anchor-link" href="#Parameter-iteration">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this demonstration we shall vary two simulation parameters: conduction velocity ('speed'), the magnitude of linear coupling function 'a';</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">myparams</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;speed&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
+            <span class="s">&#39;lincouple_a&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.012</span><span class="p">,</span><span class="mf">0.042</span><span class="p">,</span><span class="mf">0.002</span><span class="p">)}</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">myparams</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">{&apos;lincouple_a&apos;: array([ 0.012,  0.014,  0.016,  0.018,  0.02 ,  0.022,  0.024,  0.026,
+         0.028,  0.03 ,  0.032,  0.034,  0.036,  0.038,  0.04 ]),
+ &apos;speed&apos;: array([1, 2, 3, 4, 5, 6, 7, 8, 9])}</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Use the 'product' function from the 'itertools' library to create a list of all possible permutations of these two parameters</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">myparams_combs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">myparams</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">myparams_combs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">[(1, 0.012), (1, 0.014), (1, 0.016), (1, 0.018000000000000002), (1, 0.02)]</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">myparams_combs</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">135</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now put these parameter combos into a dataframe</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_mpc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">myparams_combs</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">myparams</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">df_mpc</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>speed</th>
+      <th>lincouple_a</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0.012</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0.014</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>0.016</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>0.018</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>0.020</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">df_mpc</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">(135, 2)</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Because this is an example notebook, I will only run sims for a subset of the full parameter ranges identified above. The subset is defined as follows:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">params_df</span> <span class="o">=</span> <span class="n">df_mpc</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">df_mpc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">10</span><span class="p">)]</span>
+<span class="n">d</span><span class="p">(</span><span class="n">params_df</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>speed</th>
+      <th>lincouple_a</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0.012</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>1</td>
+      <td>0.032</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2</td>
+      <td>0.022</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>3</td>
+      <td>0.012</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>3</td>
+      <td>0.032</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>4</td>
+      <td>0.022</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <td>5</td>
+      <td>0.012</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <td>5</td>
+      <td>0.032</td>
+    </tr>
+    <tr>
+      <th>80</th>
+      <td>6</td>
+      <td>0.022</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>7</td>
+      <td>0.012</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>7</td>
+      <td>0.032</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <td>8</td>
+      <td>0.022</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>9</td>
+      <td>0.012</td>
+    </tr>
+    <tr>
+      <th>130</th>
+      <td>9</td>
+      <td>0.032</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Do-it">Do it<a class="anchor-link" href="#Do-it">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now run the simulations: iterate through the parameters, and store in a dataframe:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note: depending on the number of parameters and the duration of the simulations, this could take several minutes or several hours, or more.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># this takes a few hours to run</span>
+
+<span class="n">sim_len</span> <span class="o">=</span> <span class="mi">30000</span> <span class="c"># 30ms</span>
+<span class="n">monitors2use</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;tavg&#39;</span><span class="p">,</span> <span class="s">&#39;fmri&#39;</span><span class="p">,</span> <span class="s">&#39;eeg&#39;</span><span class="p">]</span>      
+<span class="n">all_res</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">all_dfs</span> <span class="o">=</span> <span class="p">{</span><span class="n">m</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">monitors2use</span><span class="p">}</span>
+
+<span class="k">for</span> <span class="n">pdf_it</span><span class="p">,</span> <span class="n">pdf</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">params_df</span><span class="o">.</span><span class="n">index</span><span class="p">):</span>
+    
+  <span class="k">print</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> of </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">pdf_it</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">params_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+  <span class="c">#_s,_a,_b = df_mpc.ix[d][[&#39;speed&#39;, &#39;alpha&#39;, &#39;beta&#39;]]</span>
+
+  <span class="n">varied_params</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="n">params_df</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">pdf</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">params_df</span><span class="o">.</span><span class="n">columns</span><span class="p">}</span>    
+  <span class="n">params</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">varied_params</span><span class="p">)</span>
+  <span class="n">params</span><span class="p">[</span><span class="s">&#39;monitors2use&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">monitors2use</span>
+  <span class="n">params</span><span class="p">[</span><span class="s">&#39;sim_len&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sim_len</span>
+  <span class="n">res</span> <span class="o">=</span> <span class="n">run_sim</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+  
+  <span class="n">all_res</span><span class="p">[</span><span class="n">pdf</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
+    
+  <span class="k">for</span> <span class="n">m_it</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">monitors2use</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s">&#39;sim_data_arrs&#39;</span><span class="p">][</span><span class="n">m</span><span class="p">])</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>    <span class="c"># (mainly for fmri...)</span>
+    
+      <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="p">(</span><span class="s">&#39;tavg&#39;</span> <span class="ow">or</span> <span class="s">&#39;fmri&#39;</span><span class="p">):</span> <span class="n">labs</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s">&#39;sim&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">connectivity</span><span class="o">.</span><span class="n">region_labels</span>
+      <span class="k">elif</span> <span class="n">m</span> <span class="ow">is</span> <span class="s">&#39;eeg&#39;</span><span class="p">:</span> <span class="n">labs</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;chan</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="k">s</span> \
+                               <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span>\
+                               <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s">&#39;sim_data_arrs&#39;</span><span class="p">][</span><span class="s">&#39;eeg&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    
+      <span class="n">mi_arrays_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">labs</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">labs</span><span class="p">))</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">varied_params</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+      <span class="n">mi_names_list</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;label&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">varied_params</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>  
+      <span class="n">mi</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_arrays</span><span class="p">(</span><span class="n">mi_arrays_list</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">mi_names_list</span><span class="p">)</span>
+
+      <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s">&#39;sim_data_arrs&#39;</span><span class="p">][</span><span class="n">m</span><span class="p">]),</span>
+                      <span class="n">index</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s">&#39;sim_time_arrs&#39;</span><span class="p">][</span><span class="n">m</span><span class="p">],</span>
+                      <span class="n">columns</span><span class="o">=</span><span class="n">mi</span><span class="p">)</span>
+      <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;time&#39;</span>
+    
+      <span class="n">all_dfs</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        
+    <span class="c">#if d_it==0: _merged = _df</span>
+    <span class="c">#else: _merged = pd.merge(_merged,_df,join=&#39;inner&#39;)</span>
+        
+    <span class="c">#_df = collate_results(_r,_t,_sim)</span>
+    <span class="c">#_r,_t</span>
+
+ 
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">1 of (14,)
+2 of (14,)
+3 of (14,)
+4 of (14,)
+5 of (14,)
+6 of (14,)
+7 of (14,)
+8 of (14,)
+9 of (14,)
+10 of (14,)
+11 of (14,)
+12 of (14,)
+13 of (14,)
+14 of (14,)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Side note: the following will suppress warning messages in the notebook. Normally warnings should most definitely eb paid attention to, but once one has done that and is then trying to make clean documentation, they rather cramp one's style.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">l</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+<span class="n">l</span><span class="o">.</span><span class="n">getEffectiveLevel</span><span class="p">()</span>
+<span class="n">l</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Concatenate-sim-results-and-write-to-file.">Concatenate sim results and write to file.<a class="anchor-link" href="#Concatenate-sim-results-and-write-to-file.">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Final step in assembling the simulation data is to concatenate the dataframes that we've been appending to the list <code>all_dfs</code> on each iteration of the loop.</p>
+<p>There are several options when writing to file. <code>.pkl</code> is the easiest for intermediate work. For finished products <code>.csv</code> is a useful option, as is <code>.hdf5</code>.</p>
+<p>We will take a look at these data structures after we have saved them to file and re-loaded them.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First the analyzers data</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">mons2do</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;tavg&#39;</span><span class="p">,</span> <span class="s">&#39;fmri&#39;</span><span class="p">,</span> <span class="s">&#39;eeg&#39;</span><span class="p">]</span> <span class="c"># not using fmri monitor here</span>
+<span class="n">new_thing</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">all_res</span><span class="p">:</span>
+ <span class="n">sp</span> <span class="o">=</span> <span class="n">params_df</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="s">&#39;speed&#39;</span><span class="p">]</span>
+ <span class="n">la</span> <span class="o">=</span> <span class="n">params_df</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="s">&#39;lincouple_a&#39;</span><span class="p">]</span> 
+ <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;vnv&#39;</span><span class="p">,</span> <span class="s">&#39;vglob&#39;</span><span class="p">]:</span>
+  <span class="k">for</span> <span class="n">te</span> <span class="ow">in</span> <span class="n">mons2do</span><span class="p">:</span>
+    <span class="n">new_thing</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="n">la</span><span class="p">,</span> <span class="n">te</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">all_res</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="s">&#39;sim_analyzers&#39;</span><span class="p">][</span><span class="n">te</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="p">])</span>
+  
+<span class="n">df_analyzers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">new_thing</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;sim_num&#39;</span><span class="p">,</span> <span class="s">&#39;speed&#39;</span><span class="p">,</span> <span class="s">&#39;lincouple_a&#39;</span><span class="p">,</span> 
+                                                <span class="s">&#39;monitor&#39;</span><span class="p">,</span> <span class="s">&#39;metric&#39;</span><span class="p">,</span> <span class="s">&#39;val&#39;</span><span class="p">])</span>
+<span class="n">df_analyzers</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">&#39;sim_num&#39;</span><span class="p">,</span> <span class="s">&#39;speed&#39;</span><span class="p">,</span> <span class="s">&#39;lincouple_a&#39;</span><span class="p">,</span> <span class="s">&#39;monitor&#39;</span><span class="p">,</span> <span class="s">&#39;metric&#39;</span><span class="p">],</span>
+                       <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>    
+
+<span class="n">df_analyzers</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">sim_df_outfile_base</span> <span class="o">+</span> <span class="s">&#39;_analyzers.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_sim_tavg</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">all_dfs</span><span class="p">[</span><span class="s">&#39;tavg&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_sim_tavg</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">sim_df_outfile_base</span> <span class="o">+</span> <span class="s">&#39;_tavg.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_sim_fmri</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">all_dfs</span><span class="p">[</span><span class="s">&#39;fmri&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_sim_fmri</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">sim_df_outfile_base</span> <span class="o">+</span> <span class="s">&#39;_fmri.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_sim_eeg</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">all_dfs</span><span class="p">[</span><span class="s">&#39;eeg&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_sim_eeg</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">sim_df_outfile_base</span> <span class="o">+</span> <span class="s">&#39;_eeg.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note: depending on your system and the duration of your simulation / size of parameter space, you may not be allowed to do this concatenation step, and get 'Memory Errors'. This is most likely to be a problem for simulated EEG data. The only real solution to this if it occurs is to chop your data into chunks.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We only need to run all of the above once. Once written to file, we can take a break and pick up where we left off in a different session by loading the saved files back in.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Manipulating-the-sim-dataframe">Manipulating the sim dataframe<a class="anchor-link" href="#Manipulating-the-sim-dataframe">&#182;</a></h4>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_sim_tavg</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">sim_df_outfile_base</span> <span class="o">+</span> <span class="s">&#39;_tavg.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_sim_fmri</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">sim_df_outfile_base</span> <span class="o">+</span> <span class="s">&#39;_fmri.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_sim_eeg</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">sim_df_outfile_base</span> <span class="o">+</span> <span class="s">&#39;_eeg.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In a lot of the following I want to show snippets of dataframes. Normally the <code>.head()</code> method is adequate for that, but right now it's a little more effective to specify some indices for showing small snippets of dataframes.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">ters</span> <span class="o">=</span> <span class="n">df_sim_tavg</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>   <span class="c"># example rows</span>
+<span class="n">tecs</span> <span class="o">=</span> <span class="n">df_sim_tavg</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="c"># example columns</span>
+
+<span class="n">eers</span> <span class="o">=</span> <span class="n">df_sim_eeg</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>   <span class="c"># example rows</span>
+<span class="n">eecs</span> <span class="o">=</span> <span class="n">df_sim_eeg</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="c"># example columns</span>
+
+<span class="n">fers</span> <span class="o">=</span> <span class="n">df_sim_fmri</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>   <span class="c"># example rows</span>
+<span class="n">fecs</span> <span class="o">=</span> <span class="n">df_sim_fmri</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="c"># example columns</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So let's take a quick peek now at these dataframes</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">df_sim_tavg</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">(61440, 1036)</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">df_sim_tavg</span><span class="p">[</span><span class="n">tecs</span><span class="p">]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">ters</span><span class="p">])</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th>label</th>
+      <th>lA1</th>
+      <th>lA2</th>
+      <th>lAMYG</th>
+      <th>lCCA</th>
+      <th>lCCP</th>
+    </tr>
+    <tr>
+      <th>speed</th>
+      <th>1</th>
+      <th>1</th>
+      <th>1</th>
+      <th>1</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <th>lincouple_a</th>
+      <th>0.012</th>
+      <th>0.012</th>
+      <th>0.012</th>
+      <th>0.012</th>
+      <th>0.012</th>
+    </tr>
+    <tr>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0.244141</th>
+      <td>0.974873</td>
+      <td>1.002680</td>
+      <td>1.005106</td>
+      <td>0.914935</td>
+      <td>1.019114</td>
+    </tr>
+    <tr>
+      <th>0.732422</th>
+      <td>0.969507</td>
+      <td>1.012972</td>
+      <td>1.049227</td>
+      <td>0.896829</td>
+      <td>1.060719</td>
+    </tr>
+    <tr>
+      <th>1.220703</th>
+      <td>0.994259</td>
+      <td>0.966510</td>
+      <td>1.084911</td>
+      <td>0.852414</td>
+      <td>1.100583</td>
+    </tr>
+    <tr>
+      <th>1.708984</th>
+      <td>0.991722</td>
+      <td>0.921848</td>
+      <td>1.117038</td>
+      <td>0.840954</td>
+      <td>1.132655</td>
+    </tr>
+    <tr>
+      <th>2.197266</th>
+      <td>0.975444</td>
+      <td>0.875518</td>
+      <td>1.135900</td>
+      <td>0.878228</td>
+      <td>1.179683</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">df_sim_eeg</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">(122880, 868)</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">df_sim_eeg</span><span class="p">[</span><span class="n">eecs</span><span class="p">]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">eers</span><span class="p">])</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th>label</th>
+      <th>chan1</th>
+      <th>chan2</th>
+      <th>chan3</th>
+      <th>chan4</th>
+      <th>chan5</th>
+    </tr>
+    <tr>
+      <th>speed</th>
+      <th>1</th>
+      <th>1</th>
+      <th>1</th>
+      <th>1</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <th>lincouple_a</th>
+      <th>0.012</th>
+      <th>0.012</th>
+      <th>0.012</th>
+      <th>0.012</th>
+      <th>0.012</th>
+    </tr>
+    <tr>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0.122070</th>
+      <td>-0.509663</td>
+      <td>0.125987</td>
+      <td>0.752483</td>
+      <td>0.057992</td>
+      <td>-1.252670</td>
+    </tr>
+    <tr>
+      <th>0.366211</th>
+      <td>-0.247632</td>
+      <td>0.159637</td>
+      <td>0.599065</td>
+      <td>0.073594</td>
+      <td>-1.563508</td>
+    </tr>
+    <tr>
+      <th>0.610352</th>
+      <td>-0.335572</td>
+      <td>-0.006121</td>
+      <td>0.401648</td>
+      <td>0.345336</td>
+      <td>-1.765863</td>
+    </tr>
+    <tr>
+      <th>0.854492</th>
+      <td>-0.200264</td>
+      <td>-0.008887</td>
+      <td>0.473726</td>
+      <td>0.360605</td>
+      <td>-1.980310</td>
+    </tr>
+    <tr>
+      <th>1.098633</th>
+      <td>-0.301833</td>
+      <td>0.022276</td>
+      <td>0.335948</td>
+      <td>0.170228</td>
+      <td>-1.957351</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">df_sim_fmri</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">(60, 1036)</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">df_sim_fmri</span><span class="p">[</span><span class="n">fecs</span><span class="p">]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">fers</span><span class="p">])</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th>label</th>
+      <th>lA1</th>
+      <th>lA2</th>
+      <th>lAMYG</th>
+      <th>lCCA</th>
+      <th>lCCP</th>
+    </tr>
+    <tr>
+      <th>speed</th>
+      <th>1</th>
+      <th>1</th>
+      <th>1</th>
+      <th>1</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <th>lincouple_a</th>
+      <th>0.012</th>
+      <th>0.012</th>
+      <th>0.012</th>
+      <th>0.012</th>
+      <th>0.012</th>
+    </tr>
+    <tr>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>500</th>
+      <td>5.130601</td>
+      <td>-5.220680</td>
+      <td>4.610563</td>
+      <td>6.558027</td>
+      <td>14.498668</td>
+    </tr>
+    <tr>
+      <th>1000</th>
+      <td>4.434944</td>
+      <td>0.145685</td>
+      <td>4.218770</td>
+      <td>4.639515</td>
+      <td>7.990363</td>
+    </tr>
+    <tr>
+      <th>1500</th>
+      <td>3.836063</td>
+      <td>4.694045</td>
+      <td>3.847215</td>
+      <td>3.239050</td>
+      <td>2.603489</td>
+    </tr>
+    <tr>
+      <th>2000</th>
+      <td>3.519187</td>
+      <td>6.843039</td>
+      <td>3.659793</td>
+      <td>2.658710</td>
+      <td>0.173350</td>
+    </tr>
+    <tr>
+      <th>2500</th>
+      <td>3.523891</td>
+      <td>6.646291</td>
+      <td>3.697028</td>
+      <td>2.785391</td>
+      <td>0.486498</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For the simulated data, one of the things we are primarily interested in is correlation matrices.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pandas has some convenient in-built functions for computing correlations. But first we need isolate the simulation results for individual parameter sets, as the 'df_sim' dataframes each contain sim results from all combinations of the 'speed' and 'lincouple_a' parameters.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are a few ways to do this, but the most convenient is the 'query' method:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">dsf1</span> <span class="o">=</span> <span class="n">df_sim_fmri</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s">&#39;lincouple_a == 0.012 &amp; speed == 1.0&#39;</span><span class="p">)</span>
+<span class="n">dse1</span> <span class="o">=</span> <span class="n">df_sim_eeg</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s">&#39;lincouple_a == 0.012 &amp; speed == 1.0&#39;</span><span class="p">)</span>
+<span class="n">dst1</span> <span class="o">=</span> <span class="n">df_sim_tavg</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s">&#39;lincouple_a == 0.012 &amp; speed == 1.0&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>(Note the transpose (<code>.T</code>) means I need to switch around the example rows and example columns)</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">dsf1</span><span class="p">[</span><span class="n">fers</span><span class="p">]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">fecs</span><span class="p">])</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>time</th>
+      <th>500.0</th>
+      <th>1000.0</th>
+      <th>1500.0</th>
+      <th>2000.0</th>
+      <th>2500.0</th>
+    </tr>
+    <tr>
+      <th>label</th>
+      <th>speed</th>
+      <th>lincouple_a</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>lA1</th>
+      <th>1</th>
+      <th>0.012</th>
+      <td>5.130601</td>
+      <td>4.434944</td>
+      <td>3.836063</td>
+      <td>3.519187</td>
+      <td>3.523891</td>
+    </tr>
+    <tr>
+      <th>lA2</th>
+      <th>1</th>
+      <th>0.012</th>
+      <td>-5.220680</td>
+      <td>0.145685</td>
+      <td>4.694045</td>
+      <td>6.843039</td>
+      <td>6.646291</td>
+    </tr>
+    <tr>
+      <th>lAMYG</th>
+      <th>1</th>
+      <th>0.012</th>
+      <td>4.610563</td>
+      <td>4.218770</td>
+      <td>3.847215</td>
+      <td>3.659793</td>
+      <td>3.697028</td>
+    </tr>
+    <tr>
+      <th>lCCA</th>
+      <th>1</th>
+      <th>0.012</th>
+      <td>6.558027</td>
+      <td>4.639515</td>
+      <td>3.239050</td>
+      <td>2.658710</td>
+      <td>2.785391</td>
+    </tr>
+    <tr>
+      <th>lCCP</th>
+      <th>1</th>
+      <th>0.012</th>
+      <td>14.498668</td>
+      <td>7.990363</td>
+      <td>2.603489</td>
+      <td>0.173350</td>
+      <td>0.486498</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Don't worry about the transpose; it's just the case that some pandas operations are more conveniently done on indices and some on columns, so it can be convenient to transpose the dataframe accordingly.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To prove that what we've done here is pick out N rois by N data points time series, take a look at the shape</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">dsf1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">(74, 60)</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>...N data points is naturally longer for the tavg or eeg data than the fmri data</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">dse1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">(62, 122880)</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can also easily remove the now-redundant multi-index from these single-parameter-set dataframes;</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">dsf1dl</span> <span class="o">=</span> <span class="n">dsf1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">dsf1dl</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">dsf1dl</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">droplevel</span><span class="p">([</span><span class="s">&#39;speed&#39;</span><span class="p">,</span> <span class="s">&#39;lincouple_a&#39;</span><span class="p">])</span>
+<span class="c">#dsf1dl[fers].ix[fecs]</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>(to take a look at these we do need to make some example row and column indices though...)</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># (do need to make some new example )</span>
+<span class="n">fersdl</span> <span class="o">=</span> <span class="n">dsf1dl</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">fecsdl</span> <span class="o">=</span> <span class="n">dsf1dl</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">dsf1dl</span><span class="p">[</span><span class="n">fersdl</span><span class="p">]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">fecsdl</span><span class="p">])</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>time</th>
+      <th>500.0</th>
+      <th>1000.0</th>
+      <th>1500.0</th>
+      <th>2000.0</th>
+      <th>2500.0</th>
+    </tr>
+    <tr>
+      <th>label</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>lA1</th>
+      <td>5.130601</td>
+      <td>4.434944</td>
+      <td>3.836063</td>
+      <td>3.519187</td>
+      <td>3.523891</td>
+    </tr>
+    <tr>
+      <th>lA2</th>
+      <td>-5.220680</td>
+      <td>0.145685</td>
+      <td>4.694045</td>
+      <td>6.843039</td>
+      <td>6.646291</td>
+    </tr>
+    <tr>
+      <th>lAMYG</th>
+      <td>4.610563</td>
+      <td>4.218770</td>
+      <td>3.847215</td>
+      <td>3.659793</td>
+      <td>3.697028</td>
+    </tr>
+    <tr>
+      <th>lCCA</th>
+      <td>6.558027</td>
+      <td>4.639515</td>
+      <td>3.239050</td>
+      <td>2.658710</td>
+      <td>2.785391</td>
+    </tr>
+    <tr>
+      <th>lCCP</th>
+      <td>14.498668</td>
+      <td>7.990363</td>
+      <td>2.603489</td>
+      <td>0.173350</td>
+      <td>0.486498</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Correlation-matrices">Correlation matrices<a class="anchor-link" href="#Correlation-matrices">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In pandas we can compute correlations using the <code>.corr()</code> method.</p>
+<p>Again, because the correlations are computed column-wise, we'll do a transpose first;</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">dsf1</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">fecs</span><span class="p">]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">fers</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">())</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>label</th>
+      <th>lA1</th>
+      <th>lA2</th>
+      <th>lAMYG</th>
+      <th>lCCA</th>
+      <th>lCCP</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>speed</th>
+      <th>1</th>
+      <th>1</th>
+      <th>1</th>
+      <th>1</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>lincouple_a</th>
+      <th>0.012</th>
+      <th>0.012</th>
+      <th>0.012</th>
+      <th>0.012</th>
+      <th>0.012</th>
+    </tr>
+    <tr>
+      <th>label</th>
+      <th>speed</th>
+      <th>lincouple_a</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>lA1</th>
+      <th>1</th>
+      <th>0.012</th>
+      <td>1.000000</td>
+      <td>-0.999589</td>
+      <td>0.999331</td>
+      <td>0.996317</td>
+      <td>0.999074</td>
+    </tr>
+    <tr>
+      <th>lA2</th>
+      <th>1</th>
+      <th>0.012</th>
+      <td>-0.999589</td>
+      <td>1.000000</td>
+      <td>-0.999431</td>
+      <td>-0.998253</td>
+      <td>-0.999893</td>
+    </tr>
+    <tr>
+      <th>lAMYG</th>
+      <th>1</th>
+      <th>0.012</th>
+      <td>0.999331</td>
+      <td>-0.999431</td>
+      <td>1.000000</td>
+      <td>0.996442</td>
+      <td>0.999085</td>
+    </tr>
+    <tr>
+      <th>lCCA</th>
+      <th>1</th>
+      <th>0.012</th>
+      <td>0.996317</td>
+      <td>-0.998253</td>
+      <td>0.996442</td>
+      <td>1.000000</td>
+      <td>0.998989</td>
+    </tr>
+    <tr>
+      <th>lCCP</th>
+      <th>1</th>
+      <th>0.012</th>
+      <td>0.999074</td>
+      <td>-0.999893</td>
+      <td>0.999085</td>
+      <td>0.998989</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Show that this is now an N-region by N-region correlation matrix.</p>
+<p>(As we're not rendering a snippet of the dataframe we don't need to include the example row and column indices. This is what your code would normally look like! )</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">dsf1</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">(74, 74)</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We could plot this directly using matplotlib's 'imshow' method; but there are actually some better tools available from the <code>seaborn</code>, <code>statsmodels</code> and <code>nitime</code> libraries.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For present purposes we do want to remove the redundant multi-index levels, because the matrix entries will be indexed by the dataframe index labels, which will include values for speed and lincouple_a if we don't remove them.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">dsf1dl</span> <span class="o">=</span> <span class="n">dsf1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">dsf1dl</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">dsf1dl</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">droplevel</span><span class="p">([</span><span class="s">&#39;speed&#39;</span><span class="p">,</span> <span class="s">&#39;lincouple_a&#39;</span><span class="p">])</span>
+
+<span class="n">dse1dl</span> <span class="o">=</span> <span class="n">dse1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">dse1dl</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">dse1dl</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">droplevel</span><span class="p">([</span><span class="s">&#39;speed&#39;</span><span class="p">,</span> <span class="s">&#39;lincouple_a&#39;</span><span class="p">])</span>
+
+<span class="n">dst1dl</span> <span class="o">=</span> <span class="n">dst1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">dst1dl</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">dst1dl</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">droplevel</span><span class="p">([</span><span class="s">&#39;speed&#39;</span><span class="p">,</span> <span class="s">&#39;lincouple_a&#39;</span><span class="p">])</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Seaborn">Seaborn<a class="anchor-link" href="#Seaborn">&#182;</a></h4>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">corrplot</span><span class="p">(</span><span class="n">dst1dl</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">sig_stars</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">diag_names</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">&#39;coolwarm&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/seaborn_eeg_corrplot.png&#39;</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">corrplot</span><span class="p">(</span><span class="n">dse1dl</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">sig_stars</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">diag_names</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cap</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+<span class="n">label</span> <span class="o">=</span> <span class="s">&#39;Seaborn eeg correlation plot&#39;</span>
+<span class="n">fignum</span> <span class="o">=</span> <span class="s">&#39;2&#39;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">fignum</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">))</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://tvb_pandas_itertools.s3.amazonaws.com/seaborn_eeg_corrplot.png" alt="broken link"                   title="Figure 2. . Seaborn eeg correlation plot" height="800px" width="500px" />                  Figure 2. Seaborn eeg correlation plot.  </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/seaborn_fmri_corrplot.png&#39;</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">corrplot</span><span class="p">(</span><span class="n">dsf1dl</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">sig_stars</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">diag_names</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cap</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+<span class="n">label</span> <span class="o">=</span> <span class="s">&#39;Seaborn fmri correlation plot&#39;</span>
+<span class="n">fignum</span> <span class="o">=</span> <span class="s">&#39;3&#39;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">fignum</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">))</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://tvb_pandas_itertools.s3.amazonaws.com/seaborn_fmri_corrplot.png" alt="broken link"                   title="Figure 3. . Seaborn fmri correlation plot" height="800px" width="500px" />                  Figure 3. Seaborn fmri correlation plot.  </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Nitime">Nitime<a class="anchor-link" href="#Nitime">&#182;</a></h4>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/nitime_tavg_corrplot.png&#39;</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c">#reminder: these were the monitor_periods specified above: </span>
+<span class="c"># {&#39;tavg&#39;: 0.48828125,&#39;fmri&#39;: 500., &#39;eeg&#39;: 1e3/4096}</span>
+
+<span class="n">T_dst1dl</span> <span class="o">=</span> <span class="n">TimeSeries</span><span class="p">(</span><span class="n">dst1dl</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">corr</span><span class="p">(),</span> <span class="n">sampling_interval</span><span class="o">=</span><span class="mf">500.</span><span class="p">)</span>
+<span class="n">rnames</span> <span class="o">=</span> <span class="n">dst1dl</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">T_dst1dl</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s">&#39;roi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rnames</span>
+
+<span class="n">C_dst1dl</span> <span class="o">=</span> <span class="n">CorrelationAnalyzer</span><span class="p">(</span><span class="n">T_dst1dl</span><span class="p">)</span>
+
+<span class="c">#Display the correlation matrix</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">drawmatrix_channels</span><span class="p">(</span><span class="n">C_dst1dl</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">,</span> <span class="n">rnames</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mf">10.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">],</span> <span class="n">color_anchor</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cap</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+<span class="n">label</span> <span class="o">=</span> <span class="s">&#39;Nitime tavg correlation plot&#39;</span>
+<span class="n">fignum</span> <span class="o">=</span> <span class="s">&#39;4&#39;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">fignum</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">))</span><span class="c">#,upload_file=False)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://tvb_pandas_itertools.s3.amazonaws.com/nitime_tavg_corrplot.png" alt="broken link"                   title="Figure 4. . Nitime tavg correlation plot" height="800px" width="500px" />                  Figure 4. Nitime tavg correlation plot.  </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/nitime_eeg_corrplot.png&#39;</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c">#reminder: these were the monitor_periods specified above: </span>
+<span class="c"># {&#39;tavg&#39;: 0.48828125,&#39;fmri&#39;: 500., &#39;eeg&#39;: 1e3/4096}</span>
+
+<span class="n">T_dse1dl</span> <span class="o">=</span> <span class="n">TimeSeries</span><span class="p">(</span><span class="n">dse1dl</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">corr</span><span class="p">(),</span> <span class="n">sampling_interval</span><span class="o">=</span><span class="mf">500.</span><span class="p">)</span>
+<span class="n">rnames</span> <span class="o">=</span> <span class="n">dse1dl</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">T_dse1dl</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s">&#39;roi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rnames</span>
+
+<span class="n">C_dse1dl</span> <span class="o">=</span> <span class="n">CorrelationAnalyzer</span><span class="p">(</span><span class="n">T_dse1dl</span><span class="p">)</span>
+
+<span class="c">#Display the correlation matrix</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">drawmatrix_channels</span><span class="p">(</span><span class="n">C_dse1dl</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">,</span> <span class="n">rnames</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mf">10.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">],</span> <span class="n">color_anchor</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cap</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+<span class="n">label</span> <span class="o">=</span> <span class="s">&#39;Nitime eeg correlation plot&#39;</span>
+<span class="n">fignum</span> <span class="o">=</span> <span class="s">&#39;5&#39;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">fignum</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">))</span><span class="c">#,upload_file=False)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://tvb_pandas_itertools.s3.amazonaws.com/nitime_eeg_corrplot.png" alt="broken link"                   title="Figure 5. . Nitime eeg correlation plot" height="800px" width="500px" />                  Figure 5. Nitime eeg correlation plot.  </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/nitime_fmri_corrplot.png&#39;</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c">#reminder: these were the monitor_periods specified above: </span>
+<span class="c"># {&#39;tavg&#39;: 0.48828125,&#39;fmri&#39;: 500., &#39;eeg&#39;: 1e3/4096}</span>
+
+<span class="n">T_dsf1dl</span> <span class="o">=</span> <span class="n">TimeSeries</span><span class="p">(</span><span class="n">dsf1dl</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">corr</span><span class="p">(),</span> <span class="n">sampling_interval</span><span class="o">=</span><span class="mf">500.</span><span class="p">)</span>
+<span class="n">rnames</span> <span class="o">=</span> <span class="n">dsf1dl</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">T_dsf1dl</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s">&#39;roi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rnames</span>
+
+<span class="n">C_dsf1dl</span> <span class="o">=</span> <span class="n">CorrelationAnalyzer</span><span class="p">(</span><span class="n">T_dsf1dl</span><span class="p">)</span>
+
+<span class="c">#Display the correlation matrix</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">drawmatrix_channels</span><span class="p">(</span><span class="n">C_dsf1dl</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">,</span> <span class="n">rnames</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mf">10.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">],</span> <span class="n">color_anchor</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Split-the-df-into-a-list-of-individual-parameter-dfs">Split the df into a list of individual parameter dfs<a class="anchor-link" href="#Split-the-df-into-a-list-of-individual-parameter-dfs">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are a few ways this can be done. Here is a fairly dumb but straightforward one:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First get the param combos by removing the label level from the index</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">sl_combs</span> <span class="o">=</span> <span class="n">df_sim_fmri</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="s">&#39;label&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+<span class="n">d</span><span class="p">(</span><span class="n">sl_combs</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">array([(1, 0.012), (1, 0.032), (2, 0.022), (3, 0.012), (3, 0.032),
+       (4, 0.022), (5, 0.012), (5, 0.032), (6, 0.022), (7, 0.012),
+       (7, 0.032), (8, 0.022), (9, 0.012), (9, 0.032)], dtype=object)</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Combine into a dict</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">thesedfs</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sl_combs</span><span class="p">:</span>
+  <span class="n">thisdf</span> <span class="o">=</span> <span class="n">df_sim_fmri</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s">&#39;speed == </span><span class="si">%s</span><span class="s"> &amp; lincouple_a == </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span><span class="o">.</span><span class="n">T</span>
+  <span class="n">thesedfs</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">thisdf</span>
+    
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">thesedfs</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">[(7, 0.012), (1, 0.032), (6, 0.022), (4, 0.022), (2, 0.022)]</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Comparing-simulated-and-empirical-FC-matrices">Comparing simulated and empirical FC matrices<a class="anchor-link" href="#Comparing-simulated-and-empirical-FC-matrices">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Comparing a simulated FC matrix with an empirical FC matrix is simple a matter of correlating the values in one matrix with those in another;</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Using the dict produced in the previous section, we can do this as follows:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">mat1</span> <span class="o">=</span> <span class="n">thesedfs</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">mat2</span> <span class="o">=</span> <span class="n">thesedfs</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+
+<span class="n">acorr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">mat1</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">mat1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mat1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">mat2</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">mat2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mat2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">]))</span>
+
+
+<span class="n">d</span><span class="p">(</span><span class="n">acorr</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">array([[ 1.        ,  0.01196324],
+       [ 0.01196324,  1.        ]])</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Looking-at-tvb-analyzer-outputs">Looking at tvb analyzer outputs<a class="anchor-link" href="#Looking-at-tvb-analyzer-outputs">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Looking at analyzers:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_analyzers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">sim_df_outfile_base</span> <span class="o">+</span> <span class="s">&#39;_analyzers.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can turn a hierarchically-indexed dataframe into a matrix with one index on the row and one on the columns using 'unstack'.</p>
+<p>First filter the dataframe to include only the variance-node-variance metric for the tavg sim data:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">df_analyzers</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s">&#39;monitor == &quot;tavg&quot; &amp; metric == &quot;vnv&quot;&#39;</span><span class="p">))</span>          
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>val</th>
+    </tr>
+    <tr>
+      <th>sim_num</th>
+      <th>speed</th>
+      <th>lincouple_a</th>
+      <th>monitor</th>
+      <th>metric</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <th>1</th>
+      <th>0.012</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.001788</td>
+    </tr>
+    <tr>
+      <th>130</th>
+      <th>9</th>
+      <th>0.032</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.155218</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <th>7</th>
+      <th>0.032</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.146675</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <th>5</th>
+      <th>0.032</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.132532</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <th>3</th>
+      <th>0.032</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.318760</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <th>1</th>
+      <th>0.032</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.283644</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <th>8</th>
+      <th>0.022</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.094234</td>
+    </tr>
+    <tr>
+      <th>80</th>
+      <th>6</th>
+      <th>0.022</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.132028</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <th>4</th>
+      <th>0.022</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.113636</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <th>2</th>
+      <th>0.022</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.220607</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <th>9</th>
+      <th>0.012</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.001276</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <th>7</th>
+      <th>0.012</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.001255</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <th>5</th>
+      <th>0.012</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.001256</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <th>3</th>
+      <th>0.012</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.001562</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then 'unstack' to turn it into a matrix, with column variable 'lincouple_a'</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">df_analyzers</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s">&#39;monitor == &quot;tavg&quot; &amp; metric == &quot;vnv&quot;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="s">&#39;lincouple_a&#39;</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th colspan="3" halign="left">val</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lincouple_a</th>
+      <th>0.012</th>
+      <th>0.022</th>
+      <th>0.032</th>
+    </tr>
+    <tr>
+      <th>sim_num</th>
+      <th>speed</th>
+      <th>monitor</th>
+      <th>metric</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <th>1</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.001788</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <th>1</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.283644</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <th>2</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>NaN</td>
+      <td>0.220607</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <th>3</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.001562</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <th>3</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.318760</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <th>4</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>NaN</td>
+      <td>0.113636</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <th>5</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.001256</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <th>5</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.132532</td>
+    </tr>
+    <tr>
+      <th>80</th>
+      <th>6</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>NaN</td>
+      <td>0.132028</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <th>7</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.001255</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <th>7</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.146675</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <th>8</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>NaN</td>
+      <td>0.094234</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <th>9</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>0.001276</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>130</th>
+      <th>9</th>
+      <th>tavg</th>
+      <th>vnv</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.155218</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The NaNs here are simply because those entries aren't present yet, because we only carried out the simulation for a subset of the results of the <code>itertools.product</code> command;</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>(We can do the same without filtering; the result is the same type of data structure, but with sub-sections for each row)</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">df_analyzers</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="s">&#39;lincouple_a&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th colspan="3" halign="left">val</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lincouple_a</th>
+      <th>0.012</th>
+      <th>0.022</th>
+      <th>0.032</th>
+    </tr>
+    <tr>
+      <th>sim_num</th>
+      <th>speed</th>
+      <th>monitor</th>
+      <th>metric</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">0</th>
+      <th rowspan="5" valign="top">1</th>
+      <th rowspan="2" valign="top">eeg</th>
+      <th>vglob</th>
+      <td>10.381337</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>vnv</th>
+      <td>35.928272</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">fmri</th>
+      <th>vglob</th>
+      <td>0.237802</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>vnv</th>
+      <td>0.089762</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>tavg</th>
+      <th>vglob</th>
+      <td>0.137043</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>...but that won't look right for the 2D matrix we want to plot</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/tavg_vnv_imshow.png&#39;</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">df_analyzers</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s">&#39;monitor == &quot;tavg&quot; &amp; metric == &quot;vnv&quot;&#39;</span><span class="p">)</span><span class="o">.</span>\
+           <span class="n">unstack</span><span class="p">(</span><span class="s">&#39;lincouple_a&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">&#39;hot&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cap</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+<span class="n">label</span> <span class="o">=</span> <span class="s">&#39;Temporal average variance of node variances - imshow&#39;</span>
+<span class="n">fignum</span> <span class="o">=</span> <span class="s">&#39;7&#39;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">fignum</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">))</span><span class="c">#,upload_file=False)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://tvb_pandas_itertools.s3.amazonaws.com/tavg_vnv_imshow.png" alt="broken link"                   title="Figure 7. . Temporal average variance of node variances - imshow" height="800px" width="500px" />                  Figure 7. Temporal average variance of node variances - imshow.  </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>or with pcolor (setting nans to 0)</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/tavg_vnv_pcolor.png&#39;</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">df_analyzers</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s">&#39;monitor == &quot;tavg&quot; &amp; metric == &quot;vnv&quot;&#39;</span><span class="p">)</span><span class="o">.</span>\
+           <span class="n">unstack</span><span class="p">(</span><span class="s">&#39;lincouple_a&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s">&#39;hot&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cap</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+<span class="n">label</span> <span class="o">=</span> <span class="s">&#39;Temporal average variance of node variances - pcolor&#39;</span>
+<span class="n">fignum</span> <span class="o">=</span> <span class="s">&#39;8&#39;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">fignum</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">))</span><span class="c">#,upload_file=False)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://tvb_pandas_itertools.s3.amazonaws.com/tavg_vnv_pcolor.png" alt="broken link"                   title="Figure 8. . Temporal average variance of node variances - pcolor" height="800px" width="500px" />                  Figure 8. Temporal average variance of node variances - pcolor.  </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">adq</span> <span class="o">=</span> <span class="n">df_analyzers</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s">&#39;monitor == &quot;tavg&quot; &amp; metric == &quot;vnv&quot;&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the TVB GUI, parameter space explorations are often summarized with single scalara metrics such as the <em>variance of node variances</em>, which may be visualized as a table of circles of variable sizes.</p>
+<p>Do that for the following table:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">adq</span><span class="o">.</span><span class="n">reset_index</span><span class="p">())</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sim_num</th>
+      <th>speed</th>
+      <th>lincouple_a</th>
+      <th>monitor</th>
+      <th>metric</th>
+      <th>val</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0.012</td>
+      <td>tavg</td>
+      <td>vnv</td>
+      <td>0.001788</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>130</td>
+      <td>9</td>
+      <td>0.032</td>
+      <td>tavg</td>
+      <td>vnv</td>
+      <td>0.155218</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>100</td>
+      <td>7</td>
+      <td>0.032</td>
+      <td>tavg</td>
+      <td>vnv</td>
+      <td>0.146675</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>70</td>
+      <td>5</td>
+      <td>0.032</td>
+      <td>tavg</td>
+      <td>vnv</td>
+      <td>0.132532</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>40</td>
+      <td>3</td>
+      <td>0.032</td>
+      <td>tavg</td>
+      <td>vnv</td>
+      <td>0.318760</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>10</td>
+      <td>1</td>
+      <td>0.032</td>
+      <td>tavg</td>
+      <td>vnv</td>
+      <td>0.283644</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>110</td>
+      <td>8</td>
+      <td>0.022</td>
+      <td>tavg</td>
+      <td>vnv</td>
+      <td>0.094234</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>80</td>
+      <td>6</td>
+      <td>0.022</td>
+      <td>tavg</td>
+      <td>vnv</td>
+      <td>0.132028</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>50</td>
+      <td>4</td>
+      <td>0.022</td>
+      <td>tavg</td>
+      <td>vnv</td>
+      <td>0.113636</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>20</td>
+      <td>2</td>
+      <td>0.022</td>
+      <td>tavg</td>
+      <td>vnv</td>
+      <td>0.220607</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>120</td>
+      <td>9</td>
+      <td>0.012</td>
+      <td>tavg</td>
+      <td>vnv</td>
+      <td>0.001276</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>90</td>
+      <td>7</td>
+      <td>0.012</td>
+      <td>tavg</td>
+      <td>vnv</td>
+      <td>0.001255</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>60</td>
+      <td>5</td>
+      <td>0.012</td>
+      <td>tavg</td>
+      <td>vnv</td>
+      <td>0.001256</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>30</td>
+      <td>3</td>
+      <td>0.012</td>
+      <td>tavg</td>
+      <td>vnv</td>
+      <td>0.001562</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/tavg_vnv_scatter_circles.png&#39;</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">adq</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s">&#39;lincouple_a&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">&#39;speed&#39;</span><span class="p">,</span> 
+                       <span class="n">s</span><span class="o">=</span><span class="n">adq</span><span class="p">[</span><span class="s">&#39;val&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">1000</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">));</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cap</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+<span class="n">label</span> <span class="o">=</span> <span class="s">&#39;Temporal average variance of node variances - scatter circles plot&#39;</span>
+<span class="n">fignum</span> <span class="o">=</span> <span class="s">&#39;9&#39;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">fignum</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">))</span><span class="c">#,upload_file=False)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://tvb_pandas_itertools.s3.amazonaws.com/tavg_vnv_scatter_circles.png" alt="broken link"                   title="Figure 9. . Temporal average variance of node variances - scatter circles plot" height="800px" width="500px" />                  Figure 9. Temporal average variance of node variances - scatter circles plot.  </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I think that'll do for now.</p>
+</div>
+</div>
+</div></p>
+</div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">
+        John Grif
+    </span>
+  </span>
+<time datetime="2015-07-10T00:00:00-07:00" pubdate>Fri 10 July 2015</time>  <span class="categories">
+    <a class='category' href='https://johngriffiths.github.io/LabNotebook/category/misc.html'>misc</a>
+  </span>
+  <span class="categories">
+    <a class="category" href="https://johngriffiths.github.io/LabNotebook/tag/tvb.html">TVB</a>  </span>
+</p><div class="sharing">
+</div>    </footer>
+  </article>
+
 </div>
 <aside class="sidebar">
   <section>
