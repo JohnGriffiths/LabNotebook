@@ -5,7 +5,7 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Alternative versions: &lt;a href="https://johngriffiths.github.io/LabNotebook/mse-study-background.html"&gt;LabNotebook&lt;/a&gt;, &lt;a href="http://nbviewer.ipython.org/urls/mse_study_background.s3-website-us-east-1.amazonaws.com/mse_study_background__html_nb__2015-07-16.ipynb"&gt;nbviewer&lt;/a&gt;, &lt;a href="https://mse_study_background.s3.http://mse_study_background.s3-website-us-east-1/mse_study_background__pdf_nb__2015-07-16_tidied.pdf"&gt;pdf&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Alternative versions: &lt;a href="https://johngriffiths.github.io/LabNotebook/mse-study-background.html"&gt;LabNotebook&lt;/a&gt;, &lt;a href="http://nbviewer.ipython.org/urls/mse_study_background.s3-website-us-east-1.amazonaws.com/mse_study_background__html_nb__2015-07-16.ipynb"&gt;nbviewer&lt;/a&gt;, &lt;a href="https://s3.amazonaws.com/bb-slideshows/mse_study_background__slides__2015-07-16.slides.html"&gt;slides&lt;/a&gt;, &lt;a href="https://mse_study_background.s3.http://mse_study_background.s3-website-us-east-1/mse_study_background__pdf_nb__2015-07-16_tidied.pdf"&gt;pdf&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -49,6 +49,17 @@
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;The following are a collection of notes on the background literature and comments on what I consider to be the main considerations for a modelling study of this sort. The literature review is non-exhaustive and will likely be updated regularly as and when more studies come in, and/or I come across them, and/or have time to.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The next two sections contain summary points, comments, and some shameless verbatim reproductions of figures, figure captions, and a few passage quotations, from previous research in this area. These include several empirical studies by McIntosh and colleagues (&lt;a name="ref-1"/&gt;&lt;a href="#cite-McIntosh2014"&gt;(McIntosh et al., 2014)&lt;/a&gt;, &lt;a name="ref-2"/&gt;&lt;a href="#cite-McIntosh2008"&gt;(McIntosh, Kovacevic and Itier, 2008)&lt;/a&gt;), &lt;a name="ref-3"/&gt;&lt;a href="#cite-Heisz2015"&gt;(Heisz, Gould and McIntosh, 2015)&lt;/a&gt;, &lt;a name="ref-4"/&gt;&lt;a href="#cite-BertrandInPrep"&gt;(Bertrand et al., {in preparation})&lt;/a&gt;, several by other groups &lt;a name="ref-5"/&gt;&lt;a href="#cite-Sleimen-Malkoun2015"&gt;(Sleimen-Malkoun et al., 2015)&lt;/a&gt;, &lt;a name="ref-6"/&gt;&lt;a href="#cite-McDonough2014"&gt;(McDonough and Nashiro, 2014)&lt;/a&gt; &lt;a name="ref-7"/&gt;&lt;a href="#cite-Yang2013"&gt;(Yang et al., 2013)&lt;/a&gt;, and a handful of modelling studies (&lt;a name="ref-8"/&gt;&lt;a href="#cite-Nakagawa2013"&gt;(Nakagawa, Jirsa, Spiegler, McIntosh and Deco, 2013)&lt;/a&gt;, &lt;a name="ref-9"/&gt;&lt;a href="#cite-SanzLeon2014"&gt;(Sanz-Leon, 2014)&lt;/a&gt;, &lt;a name="ref-10"/&gt;&lt;a href="#cite-SanzLeon2013"&gt;(Sanz-Leon et al., 2013)&lt;/a&gt;, &lt;a name="ref-11"/&gt;&lt;a href="#cite-Vakorin2011a"&gt;(Vakorin, 2011)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Of chief interest are McIntosh et al 2014 and Nakagawa et al. 2013, which represent respectively the primary empirical data of interest and the most relevant modelling study to date.&lt;/p&gt;
+&lt;p&gt;After the two review sections, the third and final section offers some thoughts on the objectives and methodologies for the proposed modelling study, in light of the reviewed research.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -494,8 +505,7 @@
 
 &lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Bertrand et al. 2015, Figure 2&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -511,7 +521,7 @@
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Bertrand_2015_fig2.png" alt="broken link"                   title=" . Bertrand et al. 2015, Figure 2" height="800px" width="500px" /&gt;                   Bertrand et al. 2015, Figure 2.  &lt;/center&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Bertrand_2015_fig2.png" alt="broken link"                   title=" . Bertrand et al. 2015, Figure 2" height="300px" width="300px" /&gt;                   Bertrand et al. 2015, Figure 2.  &lt;/center&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -568,8 +578,7 @@
 
 &lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Sleimen-Malkoun et al. 2015 Figure 7&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -585,7 +594,7 @@
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Sleimen-Malkoun_2015_fig7.png" alt="broken link"                   title="Figure X. . Sleimen-Malkoun et al. 2015 Figure 7" height="800px" width="500px" /&gt;                  Figure X. Sleimen-Malkoun et al. 2015 Figure 7.  &lt;/center&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Sleimen-Malkoun_2015_fig7.png" alt="broken link"                   title=" . Sleimen-Malkoun et al. 2015 Figure 7" height="800px" width="500px" /&gt;                   Sleimen-Malkoun et al. 2015 Figure 7.  &lt;/center&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -617,8 +626,7 @@
 
 &lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Sleimen-Malkoun et al. 2015 Figure 3&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -634,7 +642,7 @@
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Sleimen-Malkoun_2015_fig3.png" alt="broken link"                   title="Figure X. . Sleimen-Malkoun et al. 2015 Figure 3" height="800px" width="500px" /&gt;                  Figure X. Sleimen-Malkoun et al. 2015 Figure 3.  &lt;/center&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Sleimen-Malkoun_2015_fig3.png" alt="broken link"                   title=" . Sleimen-Malkoun et al. 2015 Figure 3" height="800px" width="500px" /&gt;                   Sleimen-Malkoun et al. 2015 Figure 3.  &lt;/center&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -666,8 +674,7 @@
 
 &lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Sleimen-Malkoun et al. 2015 Figure 4&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -683,7 +690,7 @@
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Sleimen-Malkoun_2015_fig4.png" alt="broken link"                   title="Figure X. . Sleimen-Malkoun et al. 2015 Figure 4" height="800px" width="500px" /&gt;                  Figure X. Sleimen-Malkoun et al. 2015 Figure 4.  &lt;/center&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Sleimen-Malkoun_2015_fig4.png" alt="broken link"                   title=" . Sleimen-Malkoun et al. 2015 Figure 4" height="800px" width="500px" /&gt;                   Sleimen-Malkoun et al. 2015 Figure 4.  &lt;/center&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -733,7 +740,7 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;criticism: they talk about things like 'shifts from distributed to more local information processing', by which I think they are referring to sample entropy at fine timescales. But I don't think they explicitly study the spatial distribution here.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;criticism: they talk about things like 'shifts from distributed to more local information processing', by which I think they are referring to sample entropy at fine timescales. But I don't think they explicitly study the spatial distribution here.&lt;/em&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -749,8 +756,7 @@
 
 &lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Heisz et al. 2015 Figure 1&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -766,7 +772,7 @@
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Heisz_2015_fig1.png" alt="broken link"                   title="Figure X. . Heisz et al. 2015 Figure 1" height="800px" width="500px" /&gt;                  Figure X. Heisz et al. 2015 Figure 1.  &lt;/center&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Heisz_2015_fig1.png" alt="broken link"                   title=" . Heisz et al. 2015 Figure 1" height="800px" width="500px" /&gt;                   Heisz et al. 2015 Figure 1.  &lt;/center&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -884,8 +890,7 @@
 
 &lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Yang et al. 2012 Figure 1&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -901,7 +906,7 @@
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Yang_2012_fig1.png" alt="broken link"                   title="Figure X. . Yang et al. 2012 Figure 1" height="800px" width="500px" /&gt;                  Figure X. Yang et al. 2012 Figure 1.  &lt;/center&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Yang_2012_fig1.png" alt="broken link"                   title=" . Yang et al. 2012 Figure 1" height="800px" width="500px" /&gt;                   Yang et al. 2012 Figure 1.  &lt;/center&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -933,8 +938,7 @@
 
 &lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Yang et al. 2012 Figure 2&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -950,7 +954,7 @@
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Yang_2012_fig2.png" alt="broken link"                   title="Figure X. . Yang et al. 2012 Figure 2" height="800px" width="500px" /&gt;                  Figure X. Yang et al. 2012 Figure 2.  &lt;/center&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Yang_2012_fig2.png" alt="broken link"                   title=" . Yang et al. 2012 Figure 2" height="800px" width="500px" /&gt;                   Yang et al. 2012 Figure 2.  &lt;/center&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -982,8 +986,7 @@
 
 &lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Yang et al. 2012 Figure 3&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -999,7 +1002,7 @@
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Yang_2012_fig3.png" alt="broken link"                   title="Figure X. . Yang et al. 2012 Figure 3" height="800px" width="500px" /&gt;                  Figure X. Yang et al. 2012 Figure 3.  &lt;/center&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Yang_2012_fig3.png" alt="broken link"                   title=" . Yang et al. 2012 Figure 3" height="800px" width="500px" /&gt;                   Yang et al. 2012 Figure 3.  &lt;/center&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -1050,12 +1053,12 @@
 &lt;li&gt;includes nice short review of neural mass modelling and empirical ageing studies&lt;/li&gt;
 &lt;li&gt;construct connectivity matrices from combination of long-range connections and local surface vertex connections&lt;/li&gt;
 &lt;li&gt;apply pruning to long-range and short-range connections separately&lt;/li&gt;
-&lt;li&gt;get different patterns for MSE computed from BOLD and neuronal time series at same temporal scales; unclear why&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;get different patterns for MSE computed from BOLD and neuronal time series at same temporal scales; unclear why&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;reduced MSE at al time scales with increasing pruning for neuronal time series; reproduces well age fx seen in Yang et al. (2012)&lt;/li&gt;
 &lt;li&gt;...same for long-range and short-range pruning&lt;/li&gt;
 &lt;li&gt;BOLD MSE curves show inverted U curve with cross-over and greater entropy at highest temporal scales for non-pruned than pruned...&lt;/li&gt;
 &lt;li&gt;...which is presumably intended to be similar-ish to that seen in e.g. McIntosh et al. 2014&lt;/li&gt;
-&lt;li&gt;(...although that was done with M/EEG evoked responses at much finer time scales)&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;(...although that was done with M/EEG evoked responses at much finer time scales)&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1065,7 +1068,10 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&amp;quot;&lt;em&gt;The fact that the largest difference in entropy was caused by the first 16% of connectivity decline suggests that the resulting compliexitty of the model is most strnogay affected near the dynamical working point of the model. Once the system is not near its dynamics working point anymore, the spontaneous dynamics of the nodes will be largely dominated by their internal dynamics.&lt;/em&gt;:&amp;quot;&lt;/p&gt;
+&lt;p&gt;Interesting quote:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;quot;&lt;em&gt;The fact that the largest difference in entropy was caused by the first 16% of connectivity decline suggests that the resulting complexity of the model is most strongly affected near the dynamical working point of the model. Once the system is not near its dynamics working point anymore, the spontaneous dynamics of the nodes will be largely dominated by their internal dynamics.&lt;/em&gt;:&amp;quot;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1081,8 +1087,7 @@
 
 &lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Nakagawa et al. fig 3&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -1098,7 +1103,7 @@
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Nakagawa_2013_fig3.png" alt="broken link"                   title="Figure 1. . Nakagawa et al. fig 3" height="800px" width="500px" /&gt;                  Figure 1. Nakagawa et al. fig 3.  &lt;/center&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Nakagawa_2013_fig3.png" alt="broken link"                   title=" . Nakagawa et al. fig 3" height="800px" width="500px" /&gt;                   Nakagawa et al. fig 3.  &lt;/center&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -1128,8 +1133,7 @@
 
 &lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Nakagawa et al. fig 4&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -1145,7 +1149,7 @@
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Nakagawa_2013_fig4.png" alt="broken link"                   title="Figure 1. . Nakagawa et al. fig 4" height="800px" width="500px" /&gt;                  Figure 1. Nakagawa et al. fig 4.  &lt;/center&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Nakagawa_2013_fig4.png" alt="broken link"                   title=" . Nakagawa et al. fig 4" height="800px" width="500px" /&gt;                   Nakagawa et al. fig 4.  &lt;/center&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -1182,7 +1186,7 @@
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Key points&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;uses evoked responses with stimuli in sensory corticex; similar to the design we are after here&lt;/li&gt;
+&lt;li&gt;uses evoked responses with stimuli in sensory cortex;&lt;/li&gt;
 &lt;li&gt;the code that produces the figures from this paper is the only example of mse analyzer in the tvb code base&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -1244,7 +1248,7 @@
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Key points&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;modelling analyses using coupled Rossler oscillations&lt;/li&gt;
+&lt;li&gt;modelling analyses using coupled Rossler oscillators&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1278,7 +1282,8 @@
 &lt;ul&gt;
 &lt;li&gt;'generic' ageing MSE pattern = interaction of age &amp;amp; temporal scale;&lt;/li&gt;
 &lt;li&gt;plus also greater absolute sample entropy values in older subjects at lower temporal scales, and greater values in younger subjects at higher temporal scales&lt;/li&gt;
-&lt;li&gt;MSE is computed from evoked ERP waveforms&lt;/li&gt;
+&lt;li&gt;Start with 'resting state' type simulations; later consider evoked ERP waveforms also&lt;/li&gt;
+&lt;li&gt;(apparently) the MSE results tend to be present in both evoked and induced responses&lt;/li&gt;
 &lt;li&gt;Also examine local vs. distributed entropy patterns&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -1334,6 +1339,33 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Other-considerations:"&gt;Other considerations:&lt;a class="anchor-link" href="#Other-considerations:"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;ul&gt;
+&lt;li&gt;Start with default connectivity; explore fx of parameter variations and connectivity variations&lt;/li&gt;
+&lt;li&gt;Single node and then network level&lt;/li&gt;
+&lt;li&gt;Then, if some positive results, consider connectivity modulations related to pathologies&lt;/li&gt;
+&lt;li&gt;Nakagawa stuff is sophsticated in short-range connectivity&lt;/li&gt;
+&lt;li&gt;Could do long-range stuff differently: use FA, etc.&lt;/li&gt;
+&lt;li&gt;Want to also make sure general features of BOLD/EEG signals are reproduced&lt;/li&gt;
+&lt;li&gt;So in this sense this is another general TVB modelling study&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h3 id="Open-Questions"&gt;Open Questions&lt;a class="anchor-link" href="#Open-Questions"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1346,6 +1378,9 @@
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;ul&gt;
 &lt;li&gt;use same model as in nakagawa et al?&lt;/li&gt;
+&lt;li&gt;...although from discussions we are thinking SJ3D may be best...?&lt;/li&gt;
+&lt;li&gt;...and if we're thinking about complex cross-spectra, perhaps think about Zetterberg-Jansen; c.f. SPM/DCM&lt;/li&gt;
+&lt;li&gt;can the MSE patterns be reproduced solely from connectivity changes, or does it require other model parameters...&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
