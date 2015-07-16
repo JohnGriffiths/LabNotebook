@@ -1,5 +1,1431 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>JDG Lab Notebook</title><link href="https://johngriffiths.github.io/LabNotebook/" rel="alternate"></link><link href="https://johngriffiths.github.io/LabNotebook/feeds/john-grif.atom.xml" rel="self"></link><id>https://johngriffiths.github.io/LabNotebook/</id><updated>2015-07-11T00:00:00-07:00</updated><entry><title>UMCD NKI group tractography eigenmodes</title><link href="https://johngriffiths.github.io/LabNotebook/umcd-nki-group-eigenmodes.html" rel="alternate"></link><updated>2015-07-11T00:00:00-07:00</updated><author><name>John Grif</name></author><id>tag:johngriffiths.github.io,2015-07-11:LabNotebook/umcd-nki-group-eigenmodes.html</id><summary type="html">&lt;p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>JDG Lab Notebook</title><link href="https://johngriffiths.github.io/LabNotebook/" rel="alternate"></link><link href="https://johngriffiths.github.io/LabNotebook/feeds/john-grif.atom.xml" rel="self"></link><id>https://johngriffiths.github.io/LabNotebook/</id><updated>2015-07-16T00:00:00-07:00</updated><entry><title>MSE TVB Study - Background notes</title><link href="https://johngriffiths.github.io/LabNotebook/mse-study-background.html" rel="alternate"></link><updated>2015-07-16T00:00:00-07:00</updated><author><name>John Grif</name></author><id>tag:johngriffiths.github.io,2015-07-16:LabNotebook/mse-study-background.html</id><summary type="html">&lt;p&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Alternative versions: &lt;a href="https://johngriffiths.github.io/LabNotebook/mse-study-background.html"&gt;LabNotebook&lt;/a&gt;, &lt;a href="http://nbviewer.ipython.org/urls/mse_study_background.s3-website-us-east-1.amazonaws.com/mse_study_background__html_nb__2015-07-16.ipynb"&gt;nbviewer&lt;/a&gt;, &lt;a href="https://mse_study_background.s3.http://mse_study_background.s3-website-us-east-1/mse_study_background__pdf_nb__2015-07-16_tidied.pdf"&gt;pdf&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="contents"&gt;Contents&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#Overview"&gt;Overview&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Previous-empirical-studies"&gt;Previous empirical studies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Previous-simulation-studies"&gt;Previous simulation studies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Present-study"&gt;Present study&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Overview"&gt;Overview&lt;a class="anchor-link" href="#Overview"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;A number of empirical studies have now investigated brain signal variability in relation to cognition, development, ageing, senescence, and various clinical conditions. Multiscale entropy (MSE) has emerged as a metric of choice in this literature, particularly for EEG and MEG studies that sample brain patterns with high temporal precision. One general result that has now been replicated a number of times is an interaction of age and both the absolute value and the maximal inflection points of sample entropy as a function of temporal scale. This, together with other findings such as age effects in patterns of local vs. distributed entropy, suggest that the spatial and temporal scales are key properties of brain dynamics, and that these may be modulated in important ways by both cognitive processes and structural brain changes in age and disease.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The following are a collection of notes on the background literature and comments on what I consider to be the main considerations for a modelling study of this sort. The literature review is non-exhaustive and will likely be updated regularly as and when more studies come in, and/or I come across them, and/or have time to.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Previous-empirical-studies"&gt;Previous empirical studies&lt;a class="anchor-link" href="#Previous-empirical-studies"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="McIntosh-et-al.-2014"&gt;McIntosh et al. 2014&lt;a class="anchor-link" href="#McIntosh-et-al.-2014"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Key points:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Two different EEG and MEG datasets studied&lt;/li&gt;
+&lt;li&gt;'canonical pattern' ( higher entropy at fine timescales and lower at coarser timescales with increasing age ) observed in both datasets&lt;/li&gt;
+&lt;li&gt;Increased local entropy with age for most brain regions&lt;/li&gt;
+&lt;li&gt;Decreased distributed entropy with age for cross-hemispheric connections&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;McIntosh et al. 2014 on previous studies:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&amp;quot;Our empirical studies have noted developmental increases of brain signal variability that could be related to the idea that variability reflects the capacity for information processing. The first study (McIntosh et al. 2008) examined EEG signal variability using two measures; (1) principal components analysis (PCA) of single trial data, where a more variable brain would produce a greater number of principal components, and (2) multiscale entropy (MSE), a measure that is sensitive to linear and nonlinear variability and is able to differentiate variability of a complex system such as the brain, from a purely random system (Costa et al. 2002; Costa et al. 2005). Both PCA and MSE analyses indicated that EEG signal variance increased from ages 8 to 15 and was even higher in young adults. Furthermore, behavioral stability (measured by accuracy and intra-subject variability of reaction time) was greater with a more variable brain signal, suggesting that a more variable brain produces more stable behavior. Misic et al. (2010) replicated this finding across a slightly wider age range (6–16 years) and using magnetoencephalography (MEG). Finally, Lippe et al. (Lippe et al. 2009) extended these observations to infants, showing that EEG signal complexity increased from 1 month to 5 years in response to auditory and visual stimuli. Interestingly, the trajectories of the change were not the same for the auditory and visual responses, in that auditory responses were more complex than visual in infants and complexity in both modalities gradually merged to be indistinguishable in adults.&amp;quot;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/McIntosh_2014_fig1.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;McIntosh et al. 2014, Figure 1&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;#fignum = &amp;#39;X&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;#im = nb_fig(f,label,cap,fignum,cnb,size=(800,500))&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/McIntosh_2014_fig1.png" alt="broken link"                   title=" . McIntosh et al. 2014, Figure 1" height="800px" width="500px" /&gt;                   McIntosh et al. 2014, Figure 1.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;quot;&lt;em&gt;Figure 1. PLS result from the EEG data set for the comparison of age-related changes in MSE. (A) The bar graph depicts the data-driven contrast between age groups that was significantly expressed across the entire data set (source × timescales) as determined by permutation tests. (B) The statistical image plot represents the regional sources and timescale at which the contrast was most stable as determined by bootstrapping. Values represent the ratio of the parameter estimate for the source divided by the bootstrap-derived standard error (roughly z scores). Positive values indicate timescales and sources showing decreased MSE with age and negative values denote age-related increases. Text labels in bold font indicate regions where the bootstrap ratio is greater than 4.0. (C) Average MSE ( ±SE) curves for each group for the regional source in right precuneus for the simple (top) and delayed (bottom) matching tasks. Circle above the curves indicate the timepoints with reliable confidence intervals&amp;quot;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/McIntosh_2014_fig2.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;McIntosh et al. 2014, Figure 2&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/McIntosh_2014_fig2.png" alt="broken link"                   title=" . McIntosh et al. 2014, Figure 2" height="800px" width="500px" /&gt;                   McIntosh et al. 2014, Figure 2.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;quot;&lt;em&gt;Figure 2. PLS result from the MEG data set for the comparison of age-related changes in MSE. (A) The bar graph depicts the data-driven contrast between age groups that was significantly expressed across the entire data set (source×timescales) as determined by permutation tests. (B) The statistical image plot represents the regional sources and timescale at which the contrast was most stable as determined by bootstrapping. Values represent the ratio of the parameter estimate for the source divided by the bootstrap-derived standard error (roughly z scores). Positive values indicate timescales and sources showing decreased MSE with age and negative values denote age-related increases. Text labels in bold font indicate regions where the bootstrap ratio is greater than 4.0. (C) Average MSE (±SE) curves for each group for the regional source in right dorsolateral prefrontal cortex for auditory (top) and visual (bottom). Circle above the curves indicate the timepoints with reliable confidence intervals.&amp;quot;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="McIntosh-et-al.-2008"&gt;McIntosh et al. 2008&lt;a class="anchor-link" href="#McIntosh-et-al.-2008"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Key points:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;EEG ERPs in face memory task in children (8-15 y) and young adults (20-33 y)&lt;/li&gt;
+&lt;li&gt;Children's RTs slower, more variable, and less accurate than adults&lt;/li&gt;
+&lt;li&gt;Increased brain signal variability with age;&lt;/li&gt;
+&lt;li&gt;Brain signal variability -vely correlated with RT variability and +vely correlated with task accuracy&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/McIntosh_2008_fig1A.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;McIntosh et al. 2008, Figure 2 A&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;#fignum = &amp;#39;X&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/McIntosh_2008_fig1A.png" alt="broken link"                   title=" . McIntosh et al. 2008, Figure 2 A" height="800px" width="500px" /&gt;                   McIntosh et al. 2008, Figure 2 A.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/McIntosh_2008_fig1B.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;McIntosh et al. 2008, Figure 2 B&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;#fignum = &amp;#39;X&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/McIntosh_2008_fig1B.png" alt="broken link"                   title=" . McIntosh et al. 2008, Figure 2 B" height="800px" width="500px" /&gt;                   McIntosh et al. 2008, Figure 2 B.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;quot; &lt;em&gt;Figure 2. Within-subject brain variability measures across age groups. A) shows group mean results across the scalp for pre- and poststimulus PCA dimensionality estimate of trial-to-trial variability (top two rows) and MSE area under the curve (bottom row). Scalp maps of group means were obtained by interpolating values from single channel group mean values. Gradual increase in all three brain variability measures across age groups is evident. PLS statistical analysis of each measure detected a pattern of linear increase, which was significant (p,,0 for all three measures) and was stably expressed (absolute bootstrap ratio .3.5) for most channels. B) shows group means for MSE estimates across temporal scales for channel O2, together with corresponding standard errors. Similar entropy curves were obtained for all channels and showed maturationrelated increase in entropy at all scales. Given consistent age-related differences at all time scales, the area under the MSE curve was taken as a summary measure of maturational changes in entropy (e.g., (A), bottom row). doi:10.1371/journal.pcbi.1000106.g002 &lt;/em&gt;&amp;quot;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/McIntosh_2008_fig2.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;McIntosh et al. 2008, Figure 2&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;#fignum = &amp;#39;X&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/McIntosh_2008_fig2.png" alt="broken link"                   title=" . McIntosh et al. 2008, Figure 2" height="800px" width="500px" /&gt;                   McIntosh et al. 2008, Figure 2.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;quot; &lt;em&gt;Figure 3. Within-subject brain variability in relation to behavior and chronological age. A) Correlations are arranged in a table where rows represent three within-subject brain variability measures (pre- and post- stimulus PCA and MSE) and columns represent behavioral measures (cvRT, accuracy and meanRT) and age. Each entry in the table shows a scalp map resulting from interpolated values from single channel correlations between given brain variability measure and given behavior or age. Unstable correlations (where the 95% CI included 0) were set to 0. Colormap corresponds to [20.7 0.7] range of correlation values. Along with each scalp map of correlations, there is an inset showing a scatter plot representing subject measures for a single channel (electrode O2). Subjects are grouped by color according to age group membership. Estimated value of correlation ( r ) along with the associated 95% CI is given on top. B) Results of the statistical analysis of the observed correlations. For each brain measure, the partial least squares (PLS ) analysis detected one significant pattern of correlations (p = 0). The bar graph plots the global correlation of brain variability and each behavior measure or age (+/2 bootstrap estimated standard error). As can be seen, for all three brain measures PLS detected similar global patterns of simultaneous negative correlation with cvRT, positive correlation with accuracy and age, and no stable correlation with mean RT. For each of the three within-subject brain variability measures, the bootstrap analysis of PLS confirmed that the correlation patterns were robustly expressed across most channels (data not shown). doi:10.1371/journal.pcbi.1000106.g003&lt;/em&gt; &amp;quot;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/McIntosh_2008_fig3.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;McIntosh et al. 2008, Figure 3&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/McIntosh_2008_fig3.png" alt="broken link"                   title=" . McIntosh et al. 2008, Figure 3" height="800px" width="500px" /&gt;                   McIntosh et al. 2008, Figure 3.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;quot; &lt;em&gt;Figure 4. Relationship between within-subject brain variability and behavior after adjusting for age differences across individuals (age was regressed out from all measures). Color scale and legends are the same as for Figure 3. A) Correlations are arranged in a table where rows represent three within-subject brain variability measures (pre- and post- stimulus PCA and MSE) and columns represent three behavioral measures (cvRT, accuracy and mean RT). Each entry in the table shows a scalp map resulting from interpolated values from single channel correlations between given brain variability measure and given behavior or age. Unstable correlations (where the 95% CI included 0) were set to 0. Colormap corresponds to [20.7 0.7] range of correlation values. Along with each scalp map of correlations, there is an inset showing a scatter plot representing subject measures for a single channel (electrode O2). Subjects are grouped by color according to age group membership. Estimated value of correlation (r) along with the associated 95% CI is given on top. B) Statistical analysis of brain-behavior correlations adjusted for age. PLS detected one significant pattern of correlations for pre- and post-stimulus PCA dimensionality estimation (p = 0.003, and p = 0.011), and one pattern for MSE that did not exceed conventional statistical thresholds (p = 0.131). Bootstrap analysis of the two significant patterns for PCA showed, however, that the patterns were unstable for most channels (data not shown). doi:10.1371/journal.pcbi.1000106.g004&lt;/em&gt; &amp;quot;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Bertrand-et-al.-2015"&gt;Bertrand et al. 2015&lt;a class="anchor-link" href="#Bertrand-et-al.-2015"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Key points:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Following dementia-free PD patients to find brain biomarkers of dementia&lt;/li&gt;
+&lt;li&gt;Higher baseline resting EEG (?) in dmenetia than non-dementia patients or healthy controls&lt;/li&gt;
+&lt;li&gt;MSE and phase locking values (PLVs)&lt;/li&gt;
+&lt;li&gt;Lower signal variability and higher PLVs at high frequencies in PD patients than controls; stronger for PD dementia patients&lt;/li&gt;
+&lt;li&gt;Higher signal complexity and lower PLVs at low frequencies in PD dementia patients&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Bertrand_2015_fig1.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Bertrand et al. 2015, Figure 1&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;#fignum = &amp;#39;X&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Bertrand_2015_fig1.png" alt="broken link"                   title=" . Bertrand et al. 2015, Figure 1" height="800px" width="500px" /&gt;                   Bertrand et al. 2015, Figure 1.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&amp;quot;Fig. 1. Multiscale entropy analysis. (A) Average multiscale entropy curves at F3 (left) and O1 (right) for controls, PD-no dementia and PD-dementia patients. (B) Bootstrap ratio images of partial least squares analyses showing significant group differences for each timescale and electrode, at minimal and maximal bootstrap thresholds of -2.3877 and 2.3877. Blue squares represent values lower than the minimal threshold and red squares represent values higher than the maximal threshold. Green squares represent no significant difference. PD-dementia: patients with Parkinson’s disease who converted to dementia at follow-up; PD-no dementia: patients with Parkinson’s disease who did not convert to dementia at follow-up. &lt;/em&gt;&amp;quot;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Bertrand_2015_fig2.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Bertrand et al. 2015, Figure 2&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Bertrand_2015_fig2.png" alt="broken link"                   title=" . Bertrand et al. 2015, Figure 2" height="800px" width="500px" /&gt;                   Bertrand et al. 2015, Figure 2.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&amp;quot;Fig. 2. Phase coherence analysis. Significant PLS phase-locked electrode pairs for each frequency band. On the left: significant pairs at a minimal and maximal bootstrap thresholds of -2.3877 and 2.3877. On the right: significant pairs at more restrictive minimal and maximal thresholds of -4 and 4. In delta frequency, patients with Parkinson’s disease who converted to dementia at follow-up (PD-dementia) showed lower phase locking values (blue arrows) than patients with Parkinson’s disease who did not convert to dementia at follow-up (PD-no dementia) and controls, predominantly between posterior electrode pairs (delta frequency right panel). This pattern shifted as frequency increased, with a tendency towards a higher phase locking value (pink and red arrows) for PD-dementia patients than PD-no dementia patients and controls (gamma frequency panels). This shift involved more strongly anterior-posterior electrode pairs (gamma frequency right panel). &lt;/em&gt;&amp;quot;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Sleimen-Malkoun-et-al.-2015"&gt;Sleimen-Malkoun et al. 2015&lt;a class="anchor-link" href="#Sleimen-Malkoun-et-al.-2015"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Key points:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;resting and auditory oddball EEG&lt;/li&gt;
+&lt;li&gt;several metrics studied&lt;/li&gt;
+&lt;li&gt;brain dynamics more complex in older subjects at shorter time scales, but less complex at longer scales&lt;/li&gt;
+&lt;li&gt;evidence of age-related de-differentiation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Sleimen-Malkoun_2015_fig7.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Sleimen-Malkoun et al. 2015 Figure 7&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Sleimen-Malkoun_2015_fig7.png" alt="broken link"                   title="Figure X. . Sleimen-Malkoun et al. 2015 Figure 7" height="800px" width="500px" /&gt;                  Figure X. Sleimen-Malkoun et al. 2015 Figure 7.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;quot;&lt;em&gt;Figure 7 Brain latent variables for groups’ main effect for DoF and H. The two panels depict the bootstrap ratios of the group main effect for DoF and H (left and right, respectively) across a whole brain with the nose at the top. Interpretations are the same as in Figure 4. The old participants showed reliably more DoF and lower H for (almost) all channels than the young participants.&amp;quot;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Sleimen-Malkoun_2015_fig3.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Sleimen-Malkoun et al. 2015 Figure 3&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Sleimen-Malkoun_2015_fig3.png" alt="broken link"                   title="Figure X. . Sleimen-Malkoun et al. 2015 Figure 3" height="800px" width="500px" /&gt;                  Figure X. Sleimen-Malkoun et al. 2015 Figure 3.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;quot;&lt;em&gt;Figure 3 Group means and SE intervals of the metrics of the variability magnitude across conditions. From top to bottom: P, ln(V), SD, and ln(F) are shown for channel Cz, for all conditions (R, bluish colors; OnC, greenish colors; OC, reddish colors, from left to right columns), with darker colors for old participants (lighter for young). Thick lines and areas of faded colors represent the means and the SE intervals, respectively. Horizontal axes depict frequency for P, and time scale logarithmically for ln(F) and ln(V), and linearly for SD. Please note the group differences, which are similar (but not identical) among conditions. The magnitude of variability is generally higher for young participants than old participants across scales, particularly so for longer time scales and lower frequencies (except for a small interval 8 Hz).&amp;quot;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Sleimen-Malkoun_2015_fig4.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Sleimen-Malkoun et al. 2015 Figure 4&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Sleimen-Malkoun_2015_fig4.png" alt="broken link"                   title="Figure X. . Sleimen-Malkoun et al. 2015 Figure 4" height="800px" width="500px" /&gt;                  Figure X. Sleimen-Malkoun et al. 2015 Figure 4.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;quot;&lt;em&gt;Figure 4 Group means and SE intervals of the metrics of the of variability structure across conditions. From top to bottom: DoF, generalized H, MSE, MSEn, MLZ, and MLZn for all conditions. The arrangement of columns, as well as the color and line conventions, are similar to Figure 1, except for DoF and H, where error bars are used to depict the standard error intervals. For DoF and H, all channels are shown along the horizontal axis (from frontal to occipital and left to right hemisphere ones), whereas channel Cz is shown for the rest of the metrics. Thus, the horizontal axes for those metrics depict time scale in a linear scale. Please note the group differences, which are similar (but not identical) among conditions. In particular, DoF are more and H is lower for the old participants than the young participants across all channels, MSE and MLZ are higher for old participants for short time scales, 24 and 20 ms, respectively, and the inverse for longer scales. MSEn and MLZn are also higher for old participants for scales 32 ms, but the effect for longer time scales is weaker.&lt;/em&gt;&amp;quot;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Heisz-et-al.-2015"&gt;Heisz et al. 2015&lt;a class="anchor-link" href="#Heisz-et-al.-2015"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Key points:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;'Standard' age x MSE timescale interaction&lt;/li&gt;
+&lt;li&gt;More physically active older adults engage in more local neural information processing.&lt;/li&gt;
+&lt;li&gt;Shift toward local information processing associated with improved executive function performance in older adults&lt;/li&gt;
+&lt;li&gt;Mediation of effect of physical activity on task performance, via coarse and fine time scale MSE serial (but not for either MSE alone). Odd result.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;criticism: they talk about things like 'shifts from distributed to more local information processing', by which I think they are referring to sample entropy at fine timescales. But I don't think they explicitly study the spatial distribution here.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Heisz_2015_fig1.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Heisz et al. 2015 Figure 1&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Heisz_2015_fig1.png" alt="broken link"                   title="Figure X. . Heisz et al. 2015 Figure 1" height="800px" width="500px" /&gt;                  Figure X. Heisz et al. 2015 Figure 1.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;quot;&lt;em&gt;Figure 1. Compared with younger adults, older adults had greater sample entropy at fine timescales but not at coarse timescales. (A) PLS results for LV1 that captured the condition contrast between younger versus older adults. (B) PLS results for LV1 depicting the spatiotemporal distribution across electrodes and timescales that expressed the condition contrast (i.e., age differences) in sample entropy. (C) Grand mean sample entropy across timescales 1–20 for younger and older adults collapsed across WM load. Error bars represent SEM.&lt;/em&gt;&amp;quot;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="McDonough-&amp;amp;-Nashiro-2014"&gt;McDonough &amp;amp; Nashiro 2014&lt;a class="anchor-link" href="#McDonough-&amp;amp;-Nashiro-2014"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Key points:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Analyses of HCP data&lt;/li&gt;
+&lt;li&gt;compared neural complexity, as measured by MSE, against random noise&lt;/li&gt;
+&lt;li&gt;compared MSE in four major resting-state networks previously associated with higher cognition (default mode, cingulo-opercular, left and right frontoparietal networks)&lt;/li&gt;
+&lt;li&gt;looked at correlations between MSE and functional connectivity&lt;/li&gt;
+&lt;li&gt;MSE associated with functional connectivity negatively at fine scales, but positively at coarse scales.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Vakorin-et-al.-2011a"&gt;Vakorin et al. 2011a&lt;a class="anchor-link" href="#Vakorin-et-al.-2011a"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Key points:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;development is associated with decrease in amount of information processed locally, peaking at alpha frequency&lt;/li&gt;
+&lt;li&gt;developmental increase in amount of distrbuted information processing&lt;/li&gt;
+&lt;li&gt;Increased phase locking with age up to alpha frequency&lt;/li&gt;
+&lt;li&gt;Decrease in synchronization with age in higher beta to lower gamma range.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Yang-et-al.-2012"&gt;Yang et al. 2012&lt;a class="anchor-link" href="#Yang-et-al.-2012"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Key points:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Principal empirical data considered by the modelling study of Nakagawa et al. 2013&lt;/li&gt;
+&lt;li&gt;Compared with the younger group, older subjects had the most significant reductions in MSE of BOLD signals in posterior cingulate gyrus and hippocampal cortex.&lt;/li&gt;
+&lt;li&gt;Found differential correlations of BOLD MSE in different regions with major cognitive functions;&lt;/li&gt;
+&lt;li&gt;Cognitive function assessed using Cognitive Abilities Screening Instrumentand Wechsler Digit Span Task.&lt;/li&gt;
+&lt;li&gt;MSE calculation from relatively short BOLD signals.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;(Q: is figure 2 double-dipping??)&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Yang_2012_fig1.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Yang et al. 2012 Figure 1&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Yang_2012_fig1.png" alt="broken link"                   title="Figure X. . Yang et al. 2012 Figure 1" height="800px" width="500px" /&gt;                  Figure X. Yang et al. 2012 Figure 1.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Fig. 1. Number of automated anatomical labeling (AAL) brain regions with significant difference in sample entropy between groups of older subjects with low and high cognitive score (n ϭ 10 each). The test was performed for all combinations of parameters of pattern length m ϭ 1 (hollow circle), m ϭ 2 (black circle), similarity factor r ϭ 0.05 to 0.50, and scale factor 1 to 5. For all scales (right lower panel), the sample entropy across scale 1 to 5 was averaged to test the difference between 2 groups. The significance level for the difference of sample entropy between groups was p Ͻ 0.05 (2-tailed).&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Yang_2012_fig2.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Yang et al. 2012 Figure 2&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Yang_2012_fig2.png" alt="broken link"                   title="Figure X. . Yang et al. 2012 Figure 2" height="800px" width="500px" /&gt;                  Figure X. Yang et al. 2012 Figure 2.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Fig. 2. Multiscale entropy (MSE) curve across scale factor 1 to 5 in right posterior cingulate gyrus for (a) older subjects of low and high cognitive score, and (b) younger and older subjects. Sample entropy was calculated using pattern length m ϭ 1 and similarity factor r ϭ 0.35. The error bar represents the standard error of MSE within the group. &lt;/em&gt; Significant group difference at p Ͻ 0.05, 2-tailed.*&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Yang_2012_fig3.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Yang et al. 2012 Figure 3&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Yang_2012_fig3.png" alt="broken link"                   title="Figure X. . Yang et al. 2012 Figure 3" height="800px" width="500px" /&gt;                  Figure X. Yang et al. 2012 Figure 3.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Fig. 3. Scatter plots between cognitive scores and multiscale entropy (MSE) of blood oxygen level-dependent (BOLD) signals in the older group: (a) cognitive ability screening instrument (CASI) versus MSE in right posterior cingulate gyrus, (b) short-term memory versus MSE in left parahippocampal gyrus, (c) attention versus MSE in left hippocampus, and (d) orientation versus MSE in right anterior cingulate gyrus, (e) long-term memory versus MSE in left superior temporal pole, (f) abstract thinking versus MSE in left amygdala (controlled for age), (g) mental manipulation versus MSE in right posterior cingulate gyrus, (h) language versus MSE in right posterior cingulate gyrus&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Previous-simulation-studies"&gt;Previous simulation studies&lt;a class="anchor-link" href="#Previous-simulation-studies"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Nakagawa-et-al.-2013"&gt;Nakagawa et al. 2013&lt;a class="anchor-link" href="#Nakagawa-et-al.-2013"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Key points:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;models BOLD resting state, not evoked responses as in the main MSE empirical studies&lt;/li&gt;
+&lt;li&gt;includes nice short review of neural mass modelling and empirical ageing studies&lt;/li&gt;
+&lt;li&gt;construct connectivity matrices from combination of long-range connections and local surface vertex connections&lt;/li&gt;
+&lt;li&gt;apply pruning to long-range and short-range connections separately&lt;/li&gt;
+&lt;li&gt;get different patterns for MSE computed from BOLD and neuronal time series at same temporal scales; unclear why&lt;/li&gt;
+&lt;li&gt;reduced MSE at al time scales with increasing pruning for neuronal time series; reproduces well age fx seen in Yang et al. (2012)&lt;/li&gt;
+&lt;li&gt;...same for long-range and short-range pruning&lt;/li&gt;
+&lt;li&gt;BOLD MSE curves show inverted U curve with cross-over and greater entropy at highest temporal scales for non-pruned than pruned...&lt;/li&gt;
+&lt;li&gt;...which is presumably intended to be similar-ish to that seen in e.g. McIntosh et al. 2014&lt;/li&gt;
+&lt;li&gt;(...although that was done with M/EEG evoked responses at much finer time scales)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;&amp;quot;&lt;em&gt;The fact that the largest difference in entropy was caused by the first 16% of connectivity decline suggests that the resulting compliexitty of the model is most strnogay affected near the dynamical working point of the model. Once the system is not near its dynamics working point anymore, the spontaneous dynamics of the nodes will be largely dominated by their internal dynamics.&lt;/em&gt;:&amp;quot;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Nakagawa_2013_fig3.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Nakagawa et al. fig 3&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Nakagawa_2013_fig3.png" alt="broken link"                   title="Figure 1. . Nakagawa et al. fig 3" height="800px" width="500px" /&gt;                  Figure 1. Nakagawa et al. fig 3.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;&amp;quot;&lt;em&gt;Fig. 3. Rate MSE: MSE curves calculated from the down-sampled time series of the dynamic mean field model for time scales from 2.5 s to 12.5 s. &lt;/em&gt;&amp;quot;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Nakagawa_2013_fig4.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Nakagawa et al. fig 4&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Nakagawa_2013_fig4.png" alt="broken link"                   title="Figure 1. . Nakagawa et al. fig 4" height="800px" width="500px" /&gt;                  Figure 1. Nakagawa et al. fig 4.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;quot;&lt;em&gt;Fig. 4. BOLD MSE: MSE curves calculated from the simulated BOLD time series of the model. Top row: BOLD scales 2.5 s–12.5 s, bottom row: closeup of top row at the slowest scales. Error bars in lower panels depict standard deviations.&lt;/em&gt;&amp;quot;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Sanz-Leon-et-al.-2013"&gt;Sanz-Leon et al. 2013&lt;a class="anchor-link" href="#Sanz-Leon-et-al.-2013"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Key points&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;uses evoked responses with stimuli in sensory corticex; similar to the design we are after here&lt;/li&gt;
+&lt;li&gt;the code that produces the figures from this paper is the only example of mse analyzer in the tvb code base&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Sanz-Leon_2013_fig12.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Sanz-Leon et al. 2013, Figure 12&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;#fignum = &amp;#39;X&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;#im = nb_fig(f,label,cap,fignum,cnb,size=(800,500))&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Sanz-Leon_2013_fig12.png" alt="broken link"                   title=" . Sanz-Leon et al. 2013, Figure 12" height="800px" width="500px" /&gt;                   Sanz-Leon et al. 2013, Figure 12.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Vakorin-et-al.-2011b"&gt;Vakorin et al. 2011b&lt;a class="anchor-link" href="#Vakorin-et-al.-2011b"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Key points&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;modelling analyses using coupled Rossler oscillations&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Present-study"&gt;Present study&lt;a class="anchor-link" href="#Present-study"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Core-agenda"&gt;Core agenda&lt;a class="anchor-link" href="#Core-agenda"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Key points:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;'generic' ageing MSE pattern = interaction of age &amp;amp; temporal scale;&lt;/li&gt;
+&lt;li&gt;plus also greater absolute sample entropy values in older subjects at lower temporal scales, and greater values in younger subjects at higher temporal scales&lt;/li&gt;
+&lt;li&gt;MSE is computed from evoked ERP waveforms&lt;/li&gt;
+&lt;li&gt;Also examine local vs. distributed entropy patterns&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Generic ageing MSE pattern:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Generic MSE pattern&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;#fignum = &amp;#39;1&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/general_MSE_vs_age_pattern_xkcd.png" alt="broken link"                   title=" . Generic MSE pattern" height="800px" width="500px" /&gt;                   Generic MSE pattern.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Open-Questions"&gt;Open Questions&lt;a class="anchor-link" href="#Open-Questions"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;ul&gt;
+&lt;li&gt;use same model as in nakagawa et al?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Further-thoughts-on-modelling-ageing"&gt;Further thoughts on modelling ageing&lt;a class="anchor-link" href="#Further-thoughts-on-modelling-ageing"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h4 id="White-matter-degeneration"&gt;White matter degeneration&lt;a class="anchor-link" href="#White-matter-degeneration"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;ul&gt;
+&lt;li&gt;Using FA&lt;/li&gt;
+&lt;li&gt;Develop / use an atlas&lt;/li&gt;
+&lt;li&gt;Axonal loss; spatial disitribution of?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h4 id="Other-phenomena-of-interest"&gt;Other phenomena of interest&lt;a class="anchor-link" href="#Other-phenomena-of-interest"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;ul&gt;
+&lt;li&gt;neural processing speed (e.g. delayed ERPs)&lt;/li&gt;
+&lt;li&gt;cognitive processing speed&lt;/li&gt;
+&lt;li&gt;other aspects of cognitive decline (generic ageing factor; memory factor)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;&lt;a name="cite-McIntosh2014"/&gt;&lt;sup&gt;[^](#ref-1) &lt;/sup&gt;McIntosh, a. R. and Vakorin, V. and Kovacevic, N. and Wang, H. and Diaconescu, a. and Protzner, a. B.. 2014. &lt;em&gt;Spatiotemporal dependency of age-related changes in brain signal variability&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-McIntosh2008"/&gt;&lt;sup&gt;[^](#ref-2) &lt;/sup&gt;McIntosh, Anthony Randal and Kovacevic, Natasa and Itier, Roxane J.. 2008. &lt;em&gt;Increased brain signal variability accompanies lower behavioral variability in development&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-Heisz2015"/&gt;&lt;sup&gt;[^](#ref-3) &lt;/sup&gt;Heisz, J.J. and Gould, M. and McIntosh, A.R.. 2015. &lt;em&gt;Age-related shift in neural complexity related to task performance and shift in physical activity&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-BertrandInPrep"/&gt;&lt;sup&gt;[^](#ref-4) &lt;/sup&gt;Bertrand, J.A. and Mcintosh, A.R and Postuma, R.B. and Kovacevic, N and Latreille, V and Panisset, M and Chouinard, S and Gagnon, JF. {in preparation}. &lt;em&gt;Brain connectivity alterations may predict dementia in Parkinson ’ s disease&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-Sleimen-Malkoun2015"/&gt;&lt;sup&gt;[^](#ref-5) &lt;/sup&gt;Sleimen-Malkoun, Rita and Perdikis, Dionysios and M&amp;quot;{uller, Viktor and Blanc, Jean-luc and Huys, Raoul and Temprado, Jean-jacques and Jirsa, Viktor K and Universit'{e, Aix-marseille and Neurosciences, Institut De. 2015. &lt;em&gt;Brain Dynamics of Aging : Multiscale Variability of EEG Signals at Rest and during an Auditory&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-McDonough2014"/&gt;&lt;sup&gt;[^](#ref-6) &lt;/sup&gt;McDonough, Ian M and Nashiro, Kaoru. 2014. &lt;em&gt;Network complexity as a measure of information processing across resting-state networks: evidence from the Human Connectome Project.&lt;/em&gt;. &lt;a href="http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=4051265&amp;amp;tool=pmcentrez&amp;amp;rendertype=abstract"&gt;URL&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-Yang2013"/&gt;&lt;sup&gt;[^](#ref-7) &lt;/sup&gt;Yang, Albert C. and Huang, Chu Chung and Yeh, Heng Liang and Liu, Mu En and Hong, Chen Jee and Tu, Pei Chi and Chen, Jin Fan and Huang, Norden E. and Peng, Chung Kang and Lin, Ching Po and Tsai, Shih Jen. 2013. &lt;em&gt;Complexity of spontaneous BOLD activity in default mode network is correlated with cognitive function in normal male elderly: A multiscale entropy analysis&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-Nakagawa2013"/&gt;&lt;sup&gt;[^](#ref-8) [^](#ref-12) &lt;/sup&gt;Nakagawa, Tristan T and Jirsa, Viktor K and Spiegler, Andreas and McIntosh, Anthony R and Deco, Gustavo. 2013. &lt;em&gt;Bottom up modeling of the connectome: linking structure and function in the resting brain and their changes in aging.&lt;/em&gt;. &lt;a href="http://www.sciencedirect.com/science/article/pii/S1053811913004023"&gt;URL&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-SanzLeon2014"/&gt;&lt;sup&gt;[^](#ref-9) &lt;/sup&gt;Sanz-Leon, Paula. 2014. &lt;em&gt;Development of a Computational and Neuroinformatics Framework for Large-scale Brain Modelling&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-SanzLeon2013"/&gt;&lt;sup&gt;[^](#ref-10) &lt;/sup&gt;Sanz-Leon, Paula and Knock, Stuart a and Woodman, M Marmaduke and Domide, Lia and Mersmann, Jochen and McIntosh, Anthony R and Jirsa, Viktor. 2013. &lt;em&gt;The Virtual Brain: a simulator of primate brain network dynamics.&lt;/em&gt;. &lt;a href="http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=3678125&amp;amp;tool=pmcentrez&amp;amp;rendertype=abstract"&gt;URL&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-Vakorin2011a"/&gt;&lt;sup&gt;[^](#ref-11) &lt;/sup&gt;Vakorin, Vasily a.. 2011. &lt;em&gt;Empirical and theoretical aspects of generation and transfer of information in a neuromagnetic source network&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;</summary><category term="McIntosh"></category><category term="MSE"></category><category term="TVB"></category></entry><entry><title>UMCD NKI group tractography eigenmodes</title><link href="https://johngriffiths.github.io/LabNotebook/umcd-nki-group-eigenmodes.html" rel="alternate"></link><updated>2015-07-11T00:00:00-07:00</updated><author><name>John Grif</name></author><id>tag:johngriffiths.github.io,2015-07-11:LabNotebook/umcd-nki-group-eigenmodes.html</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -2393,1307 +3819,7 @@ making bihemi scatter plots...
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/p&gt;</summary><category term="Robinson"></category><category term="eigenmodes"></category><category term="tractography"></category></entry><entry><title>MSE TVB Study - Background notes</title><link href="https://johngriffiths.github.io/LabNotebook/mse-study-background.html" rel="alternate"></link><updated>2015-07-10T00:00:00-07:00</updated><author><name>John Grif</name></author><id>tag:johngriffiths.github.io,2015-07-10:LabNotebook/mse-study-background.html</id><summary type="html">&lt;p&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Alternative versions: &lt;a href="https://johngriffiths.github.io/LabNotebook/mse-study-background.html"&gt;LabNotebook&lt;/a&gt;, &lt;a href="http://nbviewer.ipython.org/urls/mse_study_background.s3-website-us-east-1.amazonaws.com/mse_study_background__html_nb__2015-07-09.ipynb"&gt;nbviewer&lt;/a&gt;, &lt;a href="https://mse_study_background.s3.http://mse_study_background.s3-website-us-east-1/mse_study_background__pdf_nb__2015-07-09_tidied.pdf"&gt;pdf&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="contents"&gt;Contents&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#Overview"&gt;Overview&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#Previous-empirical-studies"&gt;Previous empirical studies&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#Previous-simulation-studies"&gt;Previous simulation studies&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#Present-study"&gt;Present study&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Overview"&gt;Overview&lt;a class="anchor-link" href="#Overview"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;A number of empirical studies have now investigated brain signal variability in relation to cognition, development, ageing, senescence, and various clinical conditions. Multiscale entropy (MSE) has emerged as a metric of choice in this literature, particularly for EEG and MEG studies that sample brain patterns with high temporal precision. One general result that has now been replicated a number of times is an interaction of age and both the absolute value and the maximal inflection points of sample entropy as a function of temporal scale. This, together with other findings such as age effects in patterns of local vs. distributed entropy, suggest that the spatial and temporal scales are key properties of brain dynamics, and that these may be modulated in important ways by both cognitive processes and structural brain changes in age and disease.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;To understand these phenomena better, we would like to reproduce them in a neurophysiological model using TVB.&lt;/p&gt;
-&lt;p&gt;The following are a collection of notes on the background literature and comments on what I consider to be the main considerations for a modelling study of this sort. The literature review is non-exhaustive and will likely be updated regularly as and when more studies come in, and/or I come across them, and/or have time to.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Previous-empirical-studies"&gt;Previous empirical studies&lt;a class="anchor-link" href="#Previous-empirical-studies"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="McIntosh-et-al.-2014"&gt;McIntosh et al. 2014&lt;a class="anchor-link" href="#McIntosh-et-al.-2014"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Key points:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Two different EEG and MEG datasets studied&lt;/li&gt;
-&lt;li&gt;'canonical pattern' ( higher entropy at fine timescales and lower at coarser timescales with increasing age ) observed in both datasets&lt;/li&gt;
-&lt;li&gt;Increased local entropy with age for most brain regions&lt;/li&gt;
-&lt;li&gt;Decreased distributed entropy with age for cross-hemispheric connections&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;McIntosh et al. 2014 on previous studies:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&amp;quot;Our empirical studies have noted developmental increases of brain signal variability that could be related to the idea that variability reflects the capacity for information processing. The first study (McIntosh et al. 2008) examined EEG signal variability using two measures; (1) principal components analysis (PCA) of single trial data, where a more variable brain would produce a greater number of principal components, and (2) multiscale entropy (MSE), a measure that is sensitive to linear and nonlinear variability and is able to differentiate variability of a complex system such as the brain, from a purely random system (Costa et al. 2002; Costa et al. 2005). Both PCA and MSE analyses indicated that EEG signal variance increased from ages 8 to 15 and was even higher in young adults. Furthermore, behavioral stability (measured by accuracy and intra-subject variability of reaction time) was greater with a more variable brain signal, suggesting that a more variable brain produces more stable behavior. Misic et al. (2010) replicated this finding across a slightly wider age range (6–16 years) and using magnetoencephalography (MEG). Finally, Lippe et al. (Lippe et al. 2009) extended these observations to infants, showing that EEG signal complexity increased from 1 month to 5 years in response to auditory and visual stimuli. Interestingly, the trajectories of the change were not the same for the auditory and visual responses, in that auditory responses were more complex than visual in infants and complexity in both modalities gradually merged to be indistinguishable in adults.&amp;quot;&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/McIntosh_2014_fig1.png&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;McIntosh et al. 2014, Figure 1&amp;#39;&lt;/span&gt;
-&lt;span class="c"&gt;#fignum = &amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="c"&gt;#im = nb_fig(f,label,cap,fignum,cnb,size=(800,500))&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/McIntosh_2014_fig1.png" alt="broken link"                   title=" . McIntosh et al. 2014, Figure 1" height="800px" width="500px" /&gt;                   McIntosh et al. 2014, Figure 1.  &lt;/center&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;quot;&lt;em&gt;Figure 1. PLS result from the EEG data set for the comparison of age-related changes in MSE. (A) The bar graph depicts the data-driven contrast between age groups that was significantly expressed across the entire data set (source × timescales) as determined by permutation tests. (B) The statistical image plot represents the regional sources and timescale at which the contrast was most stable as determined by bootstrapping. Values represent the ratio of the parameter estimate for the source divided by the bootstrap-derived standard error (roughly z scores). Positive values indicate timescales and sources showing decreased MSE with age and negative values denote age-related increases. Text labels in bold font indicate regions where the bootstrap ratio is greater than 4.0. (C) Average MSE ( ±SE) curves for each group for the regional source in right precuneus for the simple (top) and delayed (bottom) matching tasks. Circle above the curves indicate the timepoints with reliable confidence intervals&amp;quot;&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/McIntosh_2014_fig2.png&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;McIntosh et al. 2014, Figure 2&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/McIntosh_2014_fig2.png" alt="broken link"                   title=" . McIntosh et al. 2014, Figure 2" height="800px" width="500px" /&gt;                   McIntosh et al. 2014, Figure 2.  &lt;/center&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;quot;&lt;em&gt;Figure 2. PLS result from the MEG data set for the comparison of age-related changes in MSE. (A) The bar graph depicts the data-driven contrast between age groups that was significantly expressed across the entire data set (source×timescales) as determined by permutation tests. (B) The statistical image plot represents the regional sources and timescale at which the contrast was most stable as determined by bootstrapping. Values represent the ratio of the parameter estimate for the source divided by the bootstrap-derived standard error (roughly z scores). Positive values indicate timescales and sources showing decreased MSE with age and negative values denote age-related increases. Text labels in bold font indicate regions where the bootstrap ratio is greater than 4.0. (C) Average MSE (±SE) curves for each group for the regional source in right dorsolateral prefrontal cortex for auditory (top) and visual (bottom). Circle above the curves indicate the timepoints with reliable confidence intervals.&amp;quot;&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="McIntosh-et-al.-2008"&gt;McIntosh et al. 2008&lt;a class="anchor-link" href="#McIntosh-et-al.-2008"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Key points:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;EEG ERPs in face memory task in children (8-15 y) and young adults (20-33 y)&lt;/li&gt;
-&lt;li&gt;Children's RTs slower, more variable, and less accurate than adults&lt;/li&gt;
-&lt;li&gt;Increased brain signal variability with age;&lt;/li&gt;
-&lt;li&gt;Brain signal variability -vely correlated with RT variability and +vely correlated with task accuracy&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/McIntosh_2008_fig1A.png&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;McIntosh et al. 2008, Figure 2 A&amp;#39;&lt;/span&gt;
-&lt;span class="c"&gt;#fignum = &amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/McIntosh_2008_fig1A.png" alt="broken link"                   title=" . McIntosh et al. 2008, Figure 2 A" height="800px" width="500px" /&gt;                   McIntosh et al. 2008, Figure 2 A.  &lt;/center&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/McIntosh_2008_fig1B.png&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;McIntosh et al. 2008, Figure 2 B&amp;#39;&lt;/span&gt;
-&lt;span class="c"&gt;#fignum = &amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/McIntosh_2008_fig1B.png" alt="broken link"                   title=" . McIntosh et al. 2008, Figure 2 B" height="800px" width="500px" /&gt;                   McIntosh et al. 2008, Figure 2 B.  &lt;/center&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;quot; &lt;em&gt;Figure 2. Within-subject brain variability measures across age groups. A) shows group mean results across the scalp for pre- and poststimulus PCA dimensionality estimate of trial-to-trial variability (top two rows) and MSE area under the curve (bottom row). Scalp maps of group means were obtained by interpolating values from single channel group mean values. Gradual increase in all three brain variability measures across age groups is evident. PLS statistical analysis of each measure detected a pattern of linear increase, which was significant (p,,0 for all three measures) and was stably expressed (absolute bootstrap ratio .3.5) for most channels. B) shows group means for MSE estimates across temporal scales for channel O2, together with corresponding standard errors. Similar entropy curves were obtained for all channels and showed maturationrelated increase in entropy at all scales. Given consistent age-related differences at all time scales, the area under the MSE curve was taken as a summary measure of maturational changes in entropy (e.g., (A), bottom row). doi:10.1371/journal.pcbi.1000106.g002 &lt;/em&gt;&amp;quot;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/McIntosh_2008_fig2.png&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;McIntosh et al. 2008, Figure 2&amp;#39;&lt;/span&gt;
-&lt;span class="c"&gt;#fignum = &amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/McIntosh_2008_fig2.png" alt="broken link"                   title=" . McIntosh et al. 2008, Figure 2" height="800px" width="500px" /&gt;                   McIntosh et al. 2008, Figure 2.  &lt;/center&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;quot; &lt;em&gt;Figure 3. Within-subject brain variability in relation to behavior and chronological age. A) Correlations are arranged in a table where rows represent three within-subject brain variability measures (pre- and post- stimulus PCA and MSE) and columns represent behavioral measures (cvRT, accuracy and meanRT) and age. Each entry in the table shows a scalp map resulting from interpolated values from single channel correlations between given brain variability measure and given behavior or age. Unstable correlations (where the 95% CI included 0) were set to 0. Colormap corresponds to [20.7 0.7] range of correlation values. Along with each scalp map of correlations, there is an inset showing a scatter plot representing subject measures for a single channel (electrode O2). Subjects are grouped by color according to age group membership. Estimated value of correlation ( r ) along with the associated 95% CI is given on top. B) Results of the statistical analysis of the observed correlations. For each brain measure, the partial least squares (PLS ) analysis detected one significant pattern of correlations (p = 0). The bar graph plots the global correlation of brain variability and each behavior measure or age (+/2 bootstrap estimated standard error). As can be seen, for all three brain measures PLS detected similar global patterns of simultaneous negative correlation with cvRT, positive correlation with accuracy and age, and no stable correlation with mean RT. For each of the three within-subject brain variability measures, the bootstrap analysis of PLS confirmed that the correlation patterns were robustly expressed across most channels (data not shown). doi:10.1371/journal.pcbi.1000106.g003&lt;/em&gt; &amp;quot;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/McIntosh_2008_fig3.png&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;McIntosh et al. 2008, Figure 3&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/McIntosh_2008_fig3.png" alt="broken link"                   title=" . McIntosh et al. 2008, Figure 3" height="800px" width="500px" /&gt;                   McIntosh et al. 2008, Figure 3.  &lt;/center&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;quot; &lt;em&gt;Figure 4. Relationship between within-subject brain variability and behavior after adjusting for age differences across individuals (age was regressed out from all measures). Color scale and legends are the same as for Figure 3. A) Correlations are arranged in a table where rows represent three within-subject brain variability measures (pre- and post- stimulus PCA and MSE) and columns represent three behavioral measures (cvRT, accuracy and mean RT). Each entry in the table shows a scalp map resulting from interpolated values from single channel correlations between given brain variability measure and given behavior or age. Unstable correlations (where the 95% CI included 0) were set to 0. Colormap corresponds to [20.7 0.7] range of correlation values. Along with each scalp map of correlations, there is an inset showing a scatter plot representing subject measures for a single channel (electrode O2). Subjects are grouped by color according to age group membership. Estimated value of correlation (r) along with the associated 95% CI is given on top. B) Statistical analysis of brain-behavior correlations adjusted for age. PLS detected one significant pattern of correlations for pre- and post-stimulus PCA dimensionality estimation (p = 0.003, and p = 0.011), and one pattern for MSE that did not exceed conventional statistical thresholds (p = 0.131). Bootstrap analysis of the two significant patterns for PCA showed, however, that the patterns were unstable for most channels (data not shown). doi:10.1371/journal.pcbi.1000106.g004&lt;/em&gt; &amp;quot;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Bertrand-et-al.-2015"&gt;Bertrand et al. 2015&lt;a class="anchor-link" href="#Bertrand-et-al.-2015"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Key points:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Following dementia-free PD patients to find brain biomarkers of dementia&lt;/li&gt;
-&lt;li&gt;Higher baseline resting EEG (?) in dmenetia than non-dementia patients or healthy controls&lt;/li&gt;
-&lt;li&gt;MSE and phase locking values (PLVs)&lt;/li&gt;
-&lt;li&gt;Lower signal variability and higher PLVs at high frequencies in PD patients than controls; stronger for PD dementia patients&lt;/li&gt;
-&lt;li&gt;Higher signal complexity and lower PLVs at low frequencies in PD dementia patients&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Bertrand_2015_fig1.png&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Bertrand et al. 2015, Figure 1&amp;#39;&lt;/span&gt;
-&lt;span class="c"&gt;#fignum = &amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Bertrand_2015_fig1.png" alt="broken link"                   title=" . Bertrand et al. 2015, Figure 1" height="800px" width="500px" /&gt;                   Bertrand et al. 2015, Figure 1.  &lt;/center&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&amp;quot;Fig. 1. Multiscale entropy analysis. (A) Average multiscale entropy curves at F3 (left) and O1 (right) for controls, PD-no dementia and PD-dementia patients. (B) Bootstrap ratio images of partial least squares analyses showing significant group differences for each timescale and electrode, at minimal and maximal bootstrap thresholds of -2.3877 and 2.3877. Blue squares represent values lower than the minimal threshold and red squares represent values higher than the maximal threshold. Green squares represent no significant difference. PD-dementia: patients with Parkinson’s disease who converted to dementia at follow-up; PD-no dementia: patients with Parkinson’s disease who did not convert to dementia at follow-up. &lt;/em&gt;&amp;quot;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Bertrand_2015_fig2.png&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Bertrand et al. 2015, Figure 2&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Bertrand_2015_fig2.png" alt="broken link"                   title=" . Bertrand et al. 2015, Figure 2" height="800px" width="500px" /&gt;                   Bertrand et al. 2015, Figure 2.  &lt;/center&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&amp;quot;Fig. 2. Phase coherence analysis. Significant PLS phase-locked electrode pairs for each frequency band. On the left: significant pairs at a minimal and maximal bootstrap thresholds of -2.3877 and 2.3877. On the right: significant pairs at more restrictive minimal and maximal thresholds of -4 and 4. In delta frequency, patients with Parkinson’s disease who converted to dementia at follow-up (PD-dementia) showed lower phase locking values (blue arrows) than patients with Parkinson’s disease who did not convert to dementia at follow-up (PD-no dementia) and controls, predominantly between posterior electrode pairs (delta frequency right panel). This pattern shifted as frequency increased, with a tendency towards a higher phase locking value (pink and red arrows) for PD-dementia patients than PD-no dementia patients and controls (gamma frequency panels). This shift involved more strongly anterior-posterior electrode pairs (gamma frequency right panel). &lt;/em&gt;&amp;quot;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Sleimen-Malkoun-et-al.-2015"&gt;Sleimen-Malkoun et al. 2015&lt;a class="anchor-link" href="#Sleimen-Malkoun-et-al.-2015"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Key points:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;resting and auditory oddball EEG&lt;/li&gt;
-&lt;li&gt;several metrics studied&lt;/li&gt;
-&lt;li&gt;brain dynamics more complex in older subjects at shorter time scales, but less complex at longer scales&lt;/li&gt;
-&lt;li&gt;evidence of age-related de-differentiation&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Sleimen-Malkoun_2015_fig7.png&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Sleimen-Malkoun et al. 2015 Figure 7&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Sleimen-Malkoun_2015_fig7.png" alt="broken link"                   title="Figure X. . Sleimen-Malkoun et al. 2015 Figure 7" height="800px" width="500px" /&gt;                  Figure X. Sleimen-Malkoun et al. 2015 Figure 7.  &lt;/center&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;quot;&lt;em&gt;Figure 7 Brain latent variables for groups’ main effect for DoF and H. The two panels depict the bootstrap ratios of the group main effect for DoF and H (left and right, respectively) across a whole brain with the nose at the top. Interpretations are the same as in Figure 4. The old participants showed reliably more DoF and lower H for (almost) all channels than the young participants.&amp;quot;&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Sleimen-Malkoun_2015_fig3.png&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Sleimen-Malkoun et al. 2015 Figure 3&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Sleimen-Malkoun_2015_fig3.png" alt="broken link"                   title="Figure X. . Sleimen-Malkoun et al. 2015 Figure 3" height="800px" width="500px" /&gt;                  Figure X. Sleimen-Malkoun et al. 2015 Figure 3.  &lt;/center&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;quot;&lt;em&gt;Figure 3 Group means and SE intervals of the metrics of the variability magnitude across conditions. From top to bottom: P, ln(V), SD, and ln(F) are shown for channel Cz, for all conditions (R, bluish colors; OnC, greenish colors; OC, reddish colors, from left to right columns), with darker colors for old participants (lighter for young). Thick lines and areas of faded colors represent the means and the SE intervals, respectively. Horizontal axes depict frequency for P, and time scale logarithmically for ln(F) and ln(V), and linearly for SD. Please note the group differences, which are similar (but not identical) among conditions. The magnitude of variability is generally higher for young participants than old participants across scales, particularly so for longer time scales and lower frequencies (except for a small interval 8 Hz).&amp;quot;&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Sleimen-Malkoun_2015_fig4.png&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Sleimen-Malkoun et al. 2015 Figure 4&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Sleimen-Malkoun_2015_fig4.png" alt="broken link"                   title="Figure X. . Sleimen-Malkoun et al. 2015 Figure 4" height="800px" width="500px" /&gt;                  Figure X. Sleimen-Malkoun et al. 2015 Figure 4.  &lt;/center&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;quot;&lt;em&gt;Figure 4 Group means and SE intervals of the metrics of the of variability structure across conditions. From top to bottom: DoF, generalized H, MSE, MSEn, MLZ, and MLZn for all conditions. The arrangement of columns, as well as the color and line conventions, are similar to Figure 1, except for DoF and H, where error bars are used to depict the standard error intervals. For DoF and H, all channels are shown along the horizontal axis (from frontal to occipital and left to right hemisphere ones), whereas channel Cz is shown for the rest of the metrics. Thus, the horizontal axes for those metrics depict time scale in a linear scale. Please note the group differences, which are similar (but not identical) among conditions. In particular, DoF are more and H is lower for the old participants than the young participants across all channels, MSE and MLZ are higher for old participants for short time scales, 24 and 20 ms, respectively, and the inverse for longer scales. MSEn and MLZn are also higher for old participants for scales 32 ms, but the effect for longer time scales is weaker.&lt;/em&gt;&amp;quot;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Heisz-et-al.-2015"&gt;Heisz et al. 2015&lt;a class="anchor-link" href="#Heisz-et-al.-2015"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Key points:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;'Standard' age x MSE timescale interaction&lt;/li&gt;
-&lt;li&gt;More physically active older adults engage in more local neural information processing.&lt;/li&gt;
-&lt;li&gt;Shift toward local information processing associated with improved executive function performance in older adults&lt;/li&gt;
-&lt;li&gt;Mediation of effect of physical activity on task performance, via coarse and fine time scale MSE serial (but not for either MSE alone). Odd result.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;criticism: they talk about things like 'shifts from distributed to more local information processing', by which I think they are referring to sample entropy at fine timescales. But I don't think they explicitly study the spatial distribution here.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Heisz_2015_fig1.png&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Heisz et al. 2015 Figure 1&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Heisz_2015_fig1.png" alt="broken link"                   title="Figure X. . Heisz et al. 2015 Figure 1" height="800px" width="500px" /&gt;                  Figure X. Heisz et al. 2015 Figure 1.  &lt;/center&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;quot;&lt;em&gt;Figure 1. Compared with younger adults, older adults had greater sample entropy at fine timescales but not at coarse timescales. (A) PLS results for LV1 that captured the condition contrast between younger versus older adults. (B) PLS results for LV1 depicting the spatiotemporal distribution across electrodes and timescales that expressed the condition contrast (i.e., age differences) in sample entropy. (C) Grand mean sample entropy across timescales 1–20 for younger and older adults collapsed across WM load. Error bars represent SEM.&lt;/em&gt;&amp;quot;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="McDonough-&amp;amp;-Nashiro-2014"&gt;McDonough &amp;amp; Nashiro 2014&lt;a class="anchor-link" href="#McDonough-&amp;amp;-Nashiro-2014"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Key points:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Analyses of HCP data&lt;/li&gt;
-&lt;li&gt;compared neural complexity, as measured by MSE, against random noise&lt;/li&gt;
-&lt;li&gt;compared MSE in four major resting-state networks previously associated with higher cognition (default mode, cingulo-opercular, left and right frontoparietal networks)&lt;/li&gt;
-&lt;li&gt;looked at correlations between MSE and functional connectivity&lt;/li&gt;
-&lt;li&gt;MSE associated with functional connectivity negatively at fine scales, but positively at coarse scales.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Vakorin-et-al.-2011"&gt;Vakorin et al. 2011&lt;a class="anchor-link" href="#Vakorin-et-al.-2011"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Key points:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;development is associated with decrease in amount of information processed locally, peaking at alpha frequency&lt;/li&gt;
-&lt;li&gt;developmental increase in amount of distrbuted information processing&lt;/li&gt;
-&lt;li&gt;Increased phase locking with age up to alpha frequency&lt;/li&gt;
-&lt;li&gt;Decrease in synchronization with age in higher beta to lower gamma range.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Yang-et-al.-2012"&gt;Yang et al. 2012&lt;a class="anchor-link" href="#Yang-et-al.-2012"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Key points:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Principal empirical data considered by the modelling study of Nakagawa et al. 2013&lt;/li&gt;
-&lt;li&gt;Compared with the younger group, older subjects had the most significant reductions in MSE of BOLD signals in posterior cingulate gyrus and hippocampal cortex.&lt;/li&gt;
-&lt;li&gt;Found differential correlations of BOLD MSE in different regions with major cognitive functions;&lt;/li&gt;
-&lt;li&gt;Cognitive function assessed using Cognitive Abilities Screening Instrumentand Wechsler Digit Span Task.&lt;/li&gt;
-&lt;li&gt;MSE calculation from relatively short BOLD signals.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;(Q: is figure 2 double-dipping??)&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Yang_2012_fig1.png&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Yang et al. 2012 Figure 1&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Yang_2012_fig1.png" alt="broken link"                   title="Figure X. . Yang et al. 2012 Figure 1" height="800px" width="500px" /&gt;                  Figure X. Yang et al. 2012 Figure 1.  &lt;/center&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Fig. 1. Number of automated anatomical labeling (AAL) brain regions with significant difference in sample entropy between groups of older subjects with low and high cognitive score (n ϭ 10 each). The test was performed for all combinations of parameters of pattern length m ϭ 1 (hollow circle), m ϭ 2 (black circle), similarity factor r ϭ 0.05 to 0.50, and scale factor 1 to 5. For all scales (right lower panel), the sample entropy across scale 1 to 5 was averaged to test the difference between 2 groups. The significance level for the difference of sample entropy between groups was p Ͻ 0.05 (2-tailed).&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Yang_2012_fig2.png&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Yang et al. 2012 Figure 2&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Yang_2012_fig2.png" alt="broken link"                   title="Figure X. . Yang et al. 2012 Figure 2" height="800px" width="500px" /&gt;                  Figure X. Yang et al. 2012 Figure 2.  &lt;/center&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Fig. 2. Multiscale entropy (MSE) curve across scale factor 1 to 5 in right posterior cingulate gyrus for (a) older subjects of low and high cognitive score, and (b) younger and older subjects. Sample entropy was calculated using pattern length m ϭ 1 and similarity factor r ϭ 0.35. The error bar represents the standard error of MSE within the group. &lt;/em&gt; Significant group difference at p Ͻ 0.05, 2-tailed.*&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Yang_2012_fig3.png&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Yang et al. 2012 Figure 3&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Yang_2012_fig3.png" alt="broken link"                   title="Figure X. . Yang et al. 2012 Figure 3" height="800px" width="500px" /&gt;                  Figure X. Yang et al. 2012 Figure 3.  &lt;/center&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Fig. 3. Scatter plots between cognitive scores and multiscale entropy (MSE) of blood oxygen level-dependent (BOLD) signals in the older group: (a) cognitive ability screening instrument (CASI) versus MSE in right posterior cingulate gyrus, (b) short-term memory versus MSE in left parahippocampal gyrus, (c) attention versus MSE in left hippocampus, and (d) orientation versus MSE in right anterior cingulate gyrus, (e) long-term memory versus MSE in left superior temporal pole, (f) abstract thinking versus MSE in left amygdala (controlled for age), (g) mental manipulation versus MSE in right posterior cingulate gyrus, (h) language versus MSE in right posterior cingulate gyrus&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Previous-simulation-studies"&gt;Previous simulation studies&lt;a class="anchor-link" href="#Previous-simulation-studies"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Nakagawa-et-al.-2013"&gt;Nakagawa et al. 2013&lt;a class="anchor-link" href="#Nakagawa-et-al.-2013"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Key points:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;models BOLD resting state, not evoked responses as in the main MSE empirical studies&lt;/li&gt;
-&lt;li&gt;includes nice short review of neural mass modelling and empirical ageing studies&lt;/li&gt;
-&lt;li&gt;construct connectivity matrices from combination of long-range connections and local surface vertex connections&lt;/li&gt;
-&lt;li&gt;apply pruning to long-range and short-range connections separately&lt;/li&gt;
-&lt;li&gt;get different patterns for MSE computed from BOLD and neuronal time series at same temporal scales; unclear why&lt;/li&gt;
-&lt;li&gt;reduced MSE at al time scales with increasing pruning for neuronal time series; reproduces well age fx seen in Yang et al. (2012)&lt;/li&gt;
-&lt;li&gt;...same for long-range and short-range pruning&lt;/li&gt;
-&lt;li&gt;BOLD MSE curves show inverted U curve with cross-over and greater entropy at highest temporal scales for non-pruned than pruned...&lt;/li&gt;
-&lt;li&gt;...which is presumably intended to be similar-ish to that seen in e.g. McIntosh et al. 2014&lt;/li&gt;
-&lt;li&gt;(...although that was done with M/EEG evoked responses at much finer time scales)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&amp;quot;&lt;em&gt;The fact that the largest difference in entropy was caused by the first 16% of connectivity decline suggests that the resulting compliexitty of the model is most strnogay affected near the dynamical working point of the model. Once the system is not near its dynamics working point anymore, the spontaneous dynamics of the nodes will be largely dominated by their internal dynamics.&lt;/em&gt;:&amp;quot;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Nakagawa_2013_fig3.png&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Nakagawa et al. fig 3&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Nakagawa_2013_fig3.png" alt="broken link"                   title="Figure 1. . Nakagawa et al. fig 3" height="800px" width="500px" /&gt;                  Figure 1. Nakagawa et al. fig 3.  &lt;/center&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&amp;quot;&lt;em&gt;Fig. 3. Rate MSE: MSE curves calculated from the down-sampled time series of the dynamic mean field model for time scales from 2.5 s to 12.5 s. &lt;/em&gt;&amp;quot;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Nakagawa_2013_fig4.png&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Nakagawa et al. fig 4&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;fignum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fignum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Nakagawa_2013_fig4.png" alt="broken link"                   title="Figure 1. . Nakagawa et al. fig 4" height="800px" width="500px" /&gt;                  Figure 1. Nakagawa et al. fig 4.  &lt;/center&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;quot;&lt;em&gt;Fig. 4. BOLD MSE: MSE curves calculated from the simulated BOLD time series of the model. Top row: BOLD scales 2.5 s–12.5 s, bottom row: closeup of top row at the slowest scales. Error bars in lower panels depict standard deviations.&lt;/em&gt;&amp;quot;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Present-study"&gt;Present study&lt;a class="anchor-link" href="#Present-study"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Core-agenda"&gt;Core agenda&lt;a class="anchor-link" href="#Core-agenda"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Key points:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;'generic' ageing MSE pattern = interaction of age &amp;amp; temporal scale;&lt;/li&gt;
-&lt;li&gt;plus also greater absolute sample entropy values in older subjects at lower temporal scales, and greater values in younger subjects at higher temporal scales&lt;/li&gt;
-&lt;li&gt;MSE is computed from evoked ERP waveforms&lt;/li&gt;
-&lt;li&gt;Also examine local vs. distributed entropy patterns&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Generic ageing MSE pattern:&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Open-Questions"&gt;Open Questions&lt;a class="anchor-link" href="#Open-Questions"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;ul&gt;
-&lt;li&gt;use same model as in nakagawa et al?&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Further-thoughts-on-modelling-ageing"&gt;Further thoughts on modelling ageing&lt;a class="anchor-link" href="#Further-thoughts-on-modelling-ageing"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="White-matter-degeneration"&gt;White matter degeneration&lt;a class="anchor-link" href="#White-matter-degeneration"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;ul&gt;
-&lt;li&gt;Using FA&lt;/li&gt;
-&lt;li&gt;Develop / use an atlas&lt;/li&gt;
-&lt;li&gt;Axonal loss; spatial disitribution of?&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="Other-phenomena-of-interest"&gt;Other phenomena of interest&lt;a class="anchor-link" href="#Other-phenomena-of-interest"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;ul&gt;
-&lt;li&gt;neural processing speed (e.g. delayed ERPs)&lt;/li&gt;
-&lt;li&gt;cognitive processing speed&lt;/li&gt;
-&lt;li&gt;other aspects of cognitive decline (generic ageing factor; memory factor)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="references"&gt;References&lt;/h2&gt;
-&lt;p&gt;&lt;a name="cite-McIntosh2014"/&gt;&lt;sup&gt;[^](#ref-1) &lt;/sup&gt;McIntosh, a. R. and Vakorin, V. and Kovacevic, N. and Wang, H. and Diaconescu, a. and Protzner, a. B.. 2014. &lt;em&gt;Spatiotemporal dependency of age-related changes in brain signal variability&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a name="cite-McIntosh2008"/&gt;&lt;sup&gt;[^](#ref-2) &lt;/sup&gt;McIntosh, Anthony Randal and Kovacevic, Natasa and Itier, Roxane J.. 2008. &lt;em&gt;Increased brain signal variability accompanies lower behavioral variability in development&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a name="cite-Sleimen-Malkoun2015"/&gt;&lt;sup&gt;[^](#ref-3) &lt;/sup&gt;Sleimen-Malkoun, Rita and Perdikis, Dionysios and M&amp;quot;{uller, Viktor and Blanc, Jean-luc and Huys, Raoul and Temprado, Jean-jacques and Jirsa, Viktor K and Universit'{e, Aix-marseille and Neurosciences, Institut De. 2015. &lt;em&gt;Brain Dynamics of Aging : Multiscale Variability of EEG Signals at Rest and during an Auditory&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a name="cite-Nakagawa2013"/&gt;&lt;sup&gt;[^](#ref-4) &lt;/sup&gt;Nakagawa, Tristan T and Jirsa, Viktor K and Spiegler, Andreas and McIntosh, Anthony R and Deco, Gustavo. 2013. &lt;em&gt;Bottom up modeling of the connectome: linking structure and function in the resting brain and their changes in aging.&lt;/em&gt;. &lt;a href="http://www.sciencedirect.com/science/article/pii/S1053811913004023"&gt;URL&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/p&gt;</summary><category term="McIntosh"></category><category term="MSE"></category><category term="TVB"></category></entry><entry><title>Using pandas and itertools to manage and run tvb simulations</title><link href="https://johngriffiths.github.io/LabNotebook/tvb-pandas-itertools.html" rel="alternate"></link><updated>2015-07-10T00:00:00-07:00</updated><author><name>John Grif</name></author><id>tag:johngriffiths.github.io,2015-07-10:LabNotebook/tvb-pandas-itertools.html</id><summary type="html">&lt;p&gt;
+&lt;/p&gt;</summary><category term="Robinson"></category><category term="eigenmodes"></category><category term="tractography"></category></entry><entry><title>Using pandas and itertools to manage and run tvb simulations</title><link href="https://johngriffiths.github.io/LabNotebook/tvb-pandas-itertools.html" rel="alternate"></link><updated>2015-07-10T00:00:00-07:00</updated><author><name>John Grif</name></author><id>tag:johngriffiths.github.io,2015-07-10:LabNotebook/tvb-pandas-itertools.html</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;

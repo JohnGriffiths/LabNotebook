@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>JDG Lab Notebook</title><link href="https://johngriffiths.github.io/LabNotebook/" rel="alternate"></link><link href="https://johngriffiths.github.io/LabNotebook/feeds/tag_mse.atom.xml" rel="self"></link><id>https://johngriffiths.github.io/LabNotebook/</id><updated>2015-07-10T00:00:00-07:00</updated><entry><title>MSE TVB Study - Background notes</title><link href="https://johngriffiths.github.io/LabNotebook/mse-study-background.html" rel="alternate"></link><updated>2015-07-10T00:00:00-07:00</updated><author><name>John Grif</name></author><id>tag:johngriffiths.github.io,2015-07-10:LabNotebook/mse-study-background.html</id><summary type="html">&lt;p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>JDG Lab Notebook</title><link href="https://johngriffiths.github.io/LabNotebook/" rel="alternate"></link><link href="https://johngriffiths.github.io/LabNotebook/feeds/tag_mse.atom.xml" rel="self"></link><id>https://johngriffiths.github.io/LabNotebook/</id><updated>2015-07-16T00:00:00-07:00</updated><entry><title>MSE TVB Study - Background notes</title><link href="https://johngriffiths.github.io/LabNotebook/mse-study-background.html" rel="alternate"></link><updated>2015-07-16T00:00:00-07:00</updated><author><name>John Grif</name></author><id>tag:johngriffiths.github.io,2015-07-16:LabNotebook/mse-study-background.html</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Alternative versions: &lt;a href="https://johngriffiths.github.io/LabNotebook/mse-study-background.html"&gt;LabNotebook&lt;/a&gt;, &lt;a href="http://nbviewer.ipython.org/urls/mse_study_background.s3-website-us-east-1.amazonaws.com/mse_study_background__html_nb__2015-07-09.ipynb"&gt;nbviewer&lt;/a&gt;, &lt;a href="https://mse_study_background.s3.http://mse_study_background.s3-website-us-east-1/mse_study_background__pdf_nb__2015-07-09_tidied.pdf"&gt;pdf&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Alternative versions: &lt;a href="https://johngriffiths.github.io/LabNotebook/mse-study-background.html"&gt;LabNotebook&lt;/a&gt;, &lt;a href="http://nbviewer.ipython.org/urls/mse_study_background.s3-website-us-east-1.amazonaws.com/mse_study_background__html_nb__2015-07-16.ipynb"&gt;nbviewer&lt;/a&gt;, &lt;a href="https://mse_study_background.s3.http://mse_study_background.s3-website-us-east-1/mse_study_background__pdf_nb__2015-07-16_tidied.pdf"&gt;pdf&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -48,7 +48,6 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;To understand these phenomena better, we would like to reproduce them in a neurophysiological model using TVB.&lt;/p&gt;
 &lt;p&gt;The following are a collection of notes on the background literature and comments on what I consider to be the main considerations for a modelling study of this sort. The literature review is non-exhaustive and will likely be updated regularly as and when more studies come in, and/or I come across them, and/or have time to.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -818,7 +817,7 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Vakorin-et-al.-2011"&gt;Vakorin et al. 2011&lt;a class="anchor-link" href="#Vakorin-et-al.-2011"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="Vakorin-et-al.-2011a"&gt;Vakorin et al. 2011a&lt;a class="anchor-link" href="#Vakorin-et-al.-2011a"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1171,6 +1170,90 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Sanz-Leon-et-al.-2013"&gt;Sanz-Leon et al. 2013&lt;a class="anchor-link" href="#Sanz-Leon-et-al.-2013"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Key points&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;uses evoked responses with stimuli in sensory corticex; similar to the design we are after here&lt;/li&gt;
+&lt;li&gt;the code that produces the figures from this paper is the only example of mse analyzer in the tvb code base&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/Sanz-Leon_2013_fig12.png&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Sanz-Leon et al. 2013, Figure 12&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;#fignum = &amp;#39;X&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;#im = nb_fig(f,label,cap,fignum,cnb,size=(800,500))&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/Sanz-Leon_2013_fig12.png" alt="broken link"                   title=" . Sanz-Leon et al. 2013, Figure 12" height="800px" width="500px" /&gt;                   Sanz-Leon et al. 2013, Figure 12.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Vakorin-et-al.-2011b"&gt;Vakorin et al. 2011b&lt;a class="anchor-link" href="#Vakorin-et-al.-2011b"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Key points&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;modelling analyses using coupled Rossler oscillations&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Present-study"&gt;Present study&lt;a class="anchor-link" href="#Present-study"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1209,6 +1292,42 @@
 &lt;p&gt;Generic ageing MSE pattern:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;\n&lt;/span&gt;
+
+&lt;span class="n"&gt;cap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Generic MSE pattern&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;#fignum = &amp;#39;1&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nb_fig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cnb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;show_fignum&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;center&gt;&lt;img src="https://mse_study_background.s3.amazonaws.com/general_MSE_vs_age_pattern_xkcd.png" alt="broken link"                   title=" . Generic MSE pattern" height="800px" width="500px" /&gt;                   Generic MSE pattern.  &lt;/center&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
@@ -1295,8 +1414,15 @@
 &lt;h2 id="references"&gt;References&lt;/h2&gt;
 &lt;p&gt;&lt;a name="cite-McIntosh2014"/&gt;&lt;sup&gt;[^](#ref-1) &lt;/sup&gt;McIntosh, a. R. and Vakorin, V. and Kovacevic, N. and Wang, H. and Diaconescu, a. and Protzner, a. B.. 2014. &lt;em&gt;Spatiotemporal dependency of age-related changes in brain signal variability&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a name="cite-McIntosh2008"/&gt;&lt;sup&gt;[^](#ref-2) &lt;/sup&gt;McIntosh, Anthony Randal and Kovacevic, Natasa and Itier, Roxane J.. 2008. &lt;em&gt;Increased brain signal variability accompanies lower behavioral variability in development&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a name="cite-Sleimen-Malkoun2015"/&gt;&lt;sup&gt;[^](#ref-3) &lt;/sup&gt;Sleimen-Malkoun, Rita and Perdikis, Dionysios and M&amp;quot;{uller, Viktor and Blanc, Jean-luc and Huys, Raoul and Temprado, Jean-jacques and Jirsa, Viktor K and Universit'{e, Aix-marseille and Neurosciences, Institut De. 2015. &lt;em&gt;Brain Dynamics of Aging : Multiscale Variability of EEG Signals at Rest and during an Auditory&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a name="cite-Nakagawa2013"/&gt;&lt;sup&gt;[^](#ref-4) &lt;/sup&gt;Nakagawa, Tristan T and Jirsa, Viktor K and Spiegler, Andreas and McIntosh, Anthony R and Deco, Gustavo. 2013. &lt;em&gt;Bottom up modeling of the connectome: linking structure and function in the resting brain and their changes in aging.&lt;/em&gt;. &lt;a href="http://www.sciencedirect.com/science/article/pii/S1053811913004023"&gt;URL&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-Heisz2015"/&gt;&lt;sup&gt;[^](#ref-3) &lt;/sup&gt;Heisz, J.J. and Gould, M. and McIntosh, A.R.. 2015. &lt;em&gt;Age-related shift in neural complexity related to task performance and shift in physical activity&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-BertrandInPrep"/&gt;&lt;sup&gt;[^](#ref-4) &lt;/sup&gt;Bertrand, J.A. and Mcintosh, A.R and Postuma, R.B. and Kovacevic, N and Latreille, V and Panisset, M and Chouinard, S and Gagnon, JF. {in preparation}. &lt;em&gt;Brain connectivity alterations may predict dementia in Parkinson ’ s disease&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-Sleimen-Malkoun2015"/&gt;&lt;sup&gt;[^](#ref-5) &lt;/sup&gt;Sleimen-Malkoun, Rita and Perdikis, Dionysios and M&amp;quot;{uller, Viktor and Blanc, Jean-luc and Huys, Raoul and Temprado, Jean-jacques and Jirsa, Viktor K and Universit'{e, Aix-marseille and Neurosciences, Institut De. 2015. &lt;em&gt;Brain Dynamics of Aging : Multiscale Variability of EEG Signals at Rest and during an Auditory&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-McDonough2014"/&gt;&lt;sup&gt;[^](#ref-6) &lt;/sup&gt;McDonough, Ian M and Nashiro, Kaoru. 2014. &lt;em&gt;Network complexity as a measure of information processing across resting-state networks: evidence from the Human Connectome Project.&lt;/em&gt;. &lt;a href="http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=4051265&amp;amp;tool=pmcentrez&amp;amp;rendertype=abstract"&gt;URL&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-Yang2013"/&gt;&lt;sup&gt;[^](#ref-7) &lt;/sup&gt;Yang, Albert C. and Huang, Chu Chung and Yeh, Heng Liang and Liu, Mu En and Hong, Chen Jee and Tu, Pei Chi and Chen, Jin Fan and Huang, Norden E. and Peng, Chung Kang and Lin, Ching Po and Tsai, Shih Jen. 2013. &lt;em&gt;Complexity of spontaneous BOLD activity in default mode network is correlated with cognitive function in normal male elderly: A multiscale entropy analysis&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-Nakagawa2013"/&gt;&lt;sup&gt;[^](#ref-8) [^](#ref-12) &lt;/sup&gt;Nakagawa, Tristan T and Jirsa, Viktor K and Spiegler, Andreas and McIntosh, Anthony R and Deco, Gustavo. 2013. &lt;em&gt;Bottom up modeling of the connectome: linking structure and function in the resting brain and their changes in aging.&lt;/em&gt;. &lt;a href="http://www.sciencedirect.com/science/article/pii/S1053811913004023"&gt;URL&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-SanzLeon2014"/&gt;&lt;sup&gt;[^](#ref-9) &lt;/sup&gt;Sanz-Leon, Paula. 2014. &lt;em&gt;Development of a Computational and Neuroinformatics Framework for Large-scale Brain Modelling&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-SanzLeon2013"/&gt;&lt;sup&gt;[^](#ref-10) &lt;/sup&gt;Sanz-Leon, Paula and Knock, Stuart a and Woodman, M Marmaduke and Domide, Lia and Mersmann, Jochen and McIntosh, Anthony R and Jirsa, Viktor. 2013. &lt;em&gt;The Virtual Brain: a simulator of primate brain network dynamics.&lt;/em&gt;. &lt;a href="http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=3678125&amp;amp;tool=pmcentrez&amp;amp;rendertype=abstract"&gt;URL&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name="cite-Vakorin2011a"/&gt;&lt;sup&gt;[^](#ref-11) &lt;/sup&gt;Vakorin, Vasily a.. 2011. &lt;em&gt;Empirical and theoretical aspects of generation and transfer of information in a neuromagnetic source network&lt;/em&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/p&gt;</summary><category term="McIntosh"></category><category term="MSE"></category><category term="TVB"></category></entry></feed>
