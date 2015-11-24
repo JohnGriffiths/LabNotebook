@@ -1348,7 +1348,7 @@ input.engine_num_input{width:60px}
 .ansiblack{color:#000}
 .ansired{color:#8b0000}
 .ansigreen{color:#006400}
-.ansiyellow{color:#c4a000}
+.ansiyellow{color:#a52a2a}
 .ansiblue{color:#00008b}
 .ansipurple{color:#9400d3}
 .ansicyan{color:#4682b4}
@@ -1770,7 +1770,8 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong><em>Alternative versions: <a href="https://johngriffiths.github.io/LabNotebook/about-workdocs-cloudfiles.html">LabNotebook</a>, <a href="http://nbviewer.ipython.org/urls/about_workdocs-cloudfiles.s3.amazonaws.com/about_workdocs-cloudfiles__html_nb__2015-07-09.ipynb">nbviewer</a>, <a href="https://slideviewer.herokuapp.com/urls/about_workdocs-cloudfiles.s3.amazonaws.com/about_workdocs-cloudfiles__html_nb__2015-07-09.ipynb">slideviewer</a>, <a href="https://about_workdocs-cloudfiles.s3.amazonaws.com/about_workdocs-cloudfiles__pdf_nb__2015-07-09_tidied.pdf">pdf</a></em></strong></p>
+<p><strong><em>Alternative versions: <a href="https://johngriffiths.github.io/LabNotebook/about-workdocs-cloudfiles.html">LabNotebook</a>, <a href="http://nbviewer.ipython.org/urls/about_workdocs-cloudfiles.s3.amazonaws.com/about_workdocs-cloudfiles__html_nb__2015-07-09.ipynb">nbviewer</a>, <a href="https://slideviewer.herokuapp.com/urls/about_workdocs-cloudfiles.s3.amazonaws.com/about_workdocs-cloudfiles__html_nb__2015-07-09.ipynb">slideviewer</a>, 
+<a href="https://about_workdocs-cloudfiles.s3.amazonaws.com/about_workdocs-cloudfiles__pdf_nb__2015-07-09_tidied.pdf">pdf</a></em></strong></p>
 </div>
 </div>
 </div>
@@ -1783,11 +1784,11 @@ jQuery(document).ready(function($) {
 <ul>
 <li><a href="#Overview">Overview</a></li>
 <li><a href="#Notebook-Setup">Notebook Setup</a></li>
-<li><a href="#API-Classes">API Classes</a>
-<ul>
+<li><a href="#API-Classes">API Classes</a><ul>
 <li><a href="#AWS-S3">AWS S3</a></li>
 <li><a href="#Dropbox">Dropbox</a></li>
-</ul></li>
+</ul>
+</li>
 <li><a href="#Custom-figure-class">Custom figure class</a></li>
 <li><a href="#Movies">Movies</a></li>
 <li><a href="#Using-with-nbconvert">Using with nbconvert</a></li>
@@ -1810,8 +1811,8 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>A very nice feature of IPython/Jupyter notebooks is they allow embedded images, without the need for potentially breakable references to external image files. However, the flip-side of this is that notebooks with lots of images in become very large, and unwieldy in various ways - particularly in combination with git and github repositories. Github is not designed to be passing large binary file objects such as .png files (or notebooks with embedded .png files) as they do not diff well, and can clog up repositories causing all kinds of problems, such as obscenely slow git command line calls, warnings or downright refusals from github to accept pushes containing large files. Also, nbviewer does not work well with very large notebooks, and we very much want things to be working with nbviewer.</p>
-<p>Now that I'm ramping up use of the LabNotebook, it is therefore becoming apparent that a different approach to images is needed.</p>
+<p>A very nice feature of IPython/Jupyter notebooks is they allow embedded images, without the need for potentially breakable references to external image files. However, the flip-side of this is that notebooks with lots of images in become very large, and unwieldy in various ways - particularly in combination with git and github repositories. Github is not designed to be passing large binary file objects such as .png files (or notebooks with embedded .png files) as they do not diff well, and can clog up repositories causing all kinds of problems, such as obscenely slow git command line calls, warnings or downright refusals from github to accept pushes containing large files. Also, nbviewer does not work well with very large notebooks, and we very much want things to be working with nbviewer. </p>
+<p>Now that I&#39;m ramping up use of the LabNotebook, it is therefore becoming apparent that a different approach to images is needed. </p>
 </div>
 </div>
 </div>
@@ -1820,7 +1821,7 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Carl Boettiger's <a href="http://www.carlboettiger.info/2012/03/21/knitr-github-and-a-new-phase-for-the-lab-notebook.html">solution to this kind of problem</a> is to store all images on flickr, and simply link to them. He has a very streamlined solution, which involves knitr and hash-based file indexing. I want a similar solution to this, but with the following differences:</p>
+<p>Carl Boettiger&#39;s <a href="http://www.carlboettiger.info/2012/03/21/knitr-github-and-a-new-phase-for-the-lab-notebook.html">solution to this kind of problem</a> is to store all images on flickr, and simply link to them. He has a very streamlined solution,  which involves knitr and hash-based file indexing. I want a similar solution to this, but with the following differences: </p>
 <ul>
 <li>I am working with python + ipython/jupyter + nbconvert, rather than R + knitr</li>
 <li>I am using the ipynb-workdocs system, which involves having a master notebook that spawns into pdf files, html/nbviewer files, and reveal slideshows, with variable contents according to a per-cell tag</li>
@@ -1833,8 +1834,8 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The solution I have come up with has two components.</p>
-<p>The first is a mechanism for pushing figures to a cloud storage as soon as they are added, so that they can be linked to in html and derivative nbviewer notebook, labnotebook webpages, and web-hosted reveal slideshows. The second component is a custom figure class that uses IPython's custom display logic to expose two a different command call for nbconverted latex (and subsequently compile PDFs), which links to local files rather than cloud-hosted files.</p>
+<p>The solution I have come up with has two components. </p>
+<p>The first is a mechanism for pushing figures to a cloud storage as soon as they are added, so that they can be linked to in html and derivative nbviewer notebook, labnotebook webpages, and web-hosted reveal slideshows. The second component is a custom figure class that uses IPython&#39;s custom display logic to expose two a different command call for nbconverted latex (and subsequently compile PDFs), which links to local files rather than cloud-hosted files. </p>
 </div>
 </div>
 </div>
@@ -1843,8 +1844,8 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For the cloud-hosting, I played around with the flickr python api a bit, but kept getting errors. I then turned to dropbox, and was able to get down a nicely functioning high-level wrapper that achieved the above nicely (c.f. the dropbox python api documentation <a href="https://www.dropbox.com/developers/core/docs/python">here</a> and <a href="https://www.dropbox.com/developers/core/start/python">here</a>). However, it subsequently came to my attention that <strong><em>dropbox api urls expire after 30 days, unless you are a pro or business user</em></strong>. As I am neither of those, my nice dropbox solution doesn't do the job for me, although it could well do for others who do pay dropbox money. So I hunted around again, and am now currently favouring amazon S3, via a nice api called <code>boto</code>. This is still not entirely free, but certainly better value for money. And, it turns out, a lot smoother to use, plus providing some additional features like website hosting.</p>
-<p>The code below describes the aws/boto implementation, and for good measure also the dropbox one, although as noted the latter will have only have non-broken links for up to 30 days after the time writing.</p>
+<p>For the cloud-hosting, I played around with the flickr python api a bit, but kept getting errors. I then turned to dropbox, and was able to get down a nicely functioning high-level wrapper that achieved the above nicely (c.f. the dropbox python api documentation <a href="https://www.dropbox.com/developers/core/docs/python">here</a> and <a href="https://www.dropbox.com/developers/core/start/python">here</a>). However, it subsequently came to my attention that  <strong><em>dropbox api urls expire after 30 days, unless you are a pro or business user</em></strong>. As I am neither of those, my nice dropbox solution doesn&#39;t do the job for me, although it could well do for others who do pay dropbox money. So I hunted around again, and am now currently favouring amazon S3, via a nice api called <code>boto</code>. This is still not entirely free, but certainly better value for money. And, it turns out, a lot smoother to use, plus providing some additional features like website hosting. </p>
+<p>The code below describes the aws/boto implementation, and for good measure also the dropbox one, although as noted the latter will have only have non-broken links for up to 30 days after the time writing. </p>
 </div>
 </div>
 </div>
@@ -1854,7 +1855,7 @@ jQuery(document).ready(function($) {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In addition to figures, we can also use upload other useful content to the cloud-hosted folders, such as data files, nbconverted pdfs (preferable to e-mailing if these are large files), etc.</p>
-<p>The end result that notebooks (and various nbconverted derivatives) sans all embedded images are slimmed down enormously, and things such as a github-hosted LabNotebook repository become scalable in the medium-term.</p>
+<p>The end result that notebooks (and various nbconverted derivatives) sans all embedded images are slimmed down enormously, and things such as a github-hosted LabNotebook repository become scalable in the medium-term. </p>
 </div>
 </div>
 </div>
@@ -1863,7 +1864,7 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ok, let's get cracking:</p>
+<p>Ok, let&#39;s get cracking:</p>
 </div>
 </div>
 </div>
@@ -2021,7 +2022,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The cloudfiles api classes take care of uploading and getting links for new images. For the most part we will not be using them directly, but rather calling them via the wrappers for embedding figures, shown below.</p>
+<p>The cloudfiles api classes take care of uploading and getting links for new images. For the most part we will not be using them directly, but rather calling them via the wrappers for embedding figures, shown below. </p>
 </div>
 </div>
 </div>
@@ -2030,7 +2031,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Here's how they look anyway:</p>
+<p>Here&#39;s how they look anyway:</p>
 </div>
 </div>
 </div>
@@ -2221,7 +2222,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools','calico-ce
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Just to demonstrate how to use the api, let's upload one of the image files:</p>
+<p>Just to demonstrate how to use the api, let&#39;s upload one of the image files:</p>
 </div>
 </div>
 </div>
@@ -6345,7 +6346,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In general, however, we will use the custom figure class defined below for inserting figures, which uses html <code>img</code> tags rather than IPython's <code>display.Image</code> class.</p>
+<p>In general, however, we will use the custom figure class defined below for inserting figures, which uses html <code>img</code> tags rather than IPython&#39;s <code>display.Image</code> class.</p>
 </div>
 </div>
 </div>
@@ -6354,7 +6355,8 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The wide variety of other methods provided by <code>boto</code> for interacting with aws can be accessed via the <code>cnb.bucket</code> attribute.</p>
+<p>The wide variety of other methods provided by <code>boto</code> for interacting with aws can be accessed
+via the <code>cnb.bucket</code> attribute. </p>
 </div>
 </div>
 </div>
@@ -6400,9 +6402,9 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Initializing the dropbox api is a little more involved than with aws.</p>
-<p>It requires running the following cell to get the access token, which is obtained by following a link provided, and copy-pasting the provided text string into an input box.</p>
-<p>The output of the dropbox 'flow' commands will print access token info to the cell output, so I've added a <code>clear_output()</code> call so that this sensitive info doesn't get kept in the notebook.</p>
+<p>Initializing the dropbox api is a little more involved than with aws. </p>
+<p>It requires running the following cell to get the access token, which is obtained by following a link provided, and copy-pasting the provided text string into an input box. </p>
+<p>The output of the dropbox &#39;flow&#39; commands will print access token info to the cell output, so I&#39;ve added a <code>clear_output()</code> call so that this sensitive info doesn&#39;t get kept in the notebook. </p>
 </div>
 </div>
 </div>
@@ -6478,7 +6480,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>When we initialize the folder for the first time using <code>initialize_folder</code>, the dropbox api will report that it has created a new folder; after that it will simply note that the folder already exists. I've run the above cell a few times in the process of writing this notebook, so we get the latter.</p>
+<p>When we initialize the folder for the first time using <code>initialize_folder</code>, the dropbox api will report that it has created a new folder; after that it will simply note that the folder already exists. I&#39;ve run the above cell a few times in the process of writing this notebook, so we get the latter. </p>
 </div>
 </div>
 </div>
@@ -6487,7 +6489,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The way the class has been written, everything goes inside a folder in my dropbox root called 'workdocs-cloudfiles'. Under that, we will have separate folders on a per-notebook basis, with the folders having the same names as the notebook files.</p>
+<p>The way the class has been written, everything goes inside a folder in my dropbox root called &#39;workdocs-cloudfiles&#39;. Under that, we will have separate folders on a per-notebook basis, with the folders having the same names as the notebook files. </p>
 </div>
 </div>
 </div>
@@ -6728,7 +6730,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now let's incorporate this cloud storage mechanism into a custom figure class:</p>
+<p>Now let&#39;s incorporate this cloud storage mechanism into a custom figure class:</p>
 </div>
 </div>
 </div>
@@ -6747,8 +6749,8 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This class uses the <code>_repr_html_</code> and <code>_repr_latex_</code> to essentially put different text strings into html-related and pdf-related nbconvert outputs, which refer to the uploaded cloud figures and to the original local image files, respectively.</p>
-<p>It will accept either the dropbox or aws cloudfiles object, and usage is now independent of which of those is being used.</p>
+<p>This class uses the <code>_repr_html_</code> and <code>_repr_latex_</code> to essentially put different text strings into html-related and pdf-related nbconvert outputs, which refer to the uploaded cloud figures and to the original local image files, respectively. </p>
+<p>It will accept either the dropbox or aws cloudfiles object, and usage is now independent of which of those is being used. </p>
 </div>
 </div>
 </div>
@@ -6861,7 +6863,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The usage is fairly straightforward: when adding a figure, we provide it with the local image file, a figure label, a figure number, a figure caption, and the dropbox api object instance defined above.</p>
+<p>The usage is fairly straightforward: when adding a figure, we provide it with the local image file, a figure label, a figure number, a figure caption, and the dropbox api object instance defined above. </p>
 </div>
 </div>
 </div>
@@ -6870,7 +6872,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's start with the BB figure:</p>
+<p>Let&#39;s start with the BB figure:</p>
 </div>
 </div>
 </div>
@@ -6911,7 +6913,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Note a nice feature of using the html <code>img</code> tag the way we are doing is that if you hover your cursor over the image, you will see the full image title and caption flash up. Just an added tidbit :)</p>
+<p>Note a nice feature of using the html <code>img</code> tag the way we are doing is that if you hover your cursor over the image, you will see the full image title and caption flash up. Just an added tidbit :) </p>
 </div>
 </div>
 </div>
@@ -6920,7 +6922,7 @@ iy222MB6iy222GKLLTaw3mKLLbbYYostfqfi/wCUZv4NMbV/PQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now let's generate the second figure and insert:</p>
+<p>Now let&#39;s generate the second figure and insert:</p>
 </div>
 </div>
 </div>
@@ -7099,7 +7101,8 @@ Animation with MoviePy : 4.17 seconds
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>(<em>I have had trouble with getting movies embedded in PDFs to play properly. Seems to require some very specific software versions and codecs. So am not expecting to use these movies in PDFs for at least a little while yet. This is therefore something of a 'watch this space' feature. </em>)))</p>
+<p>(<em>I have had trouble with getting movies embedded in PDFs to play properly. Seems to require some very specific software versions and codecs. 
+So am not expecting to use these movies in PDFs for at least a little while yet. This is therefore something of a &#39;watch this space&#39; feature. </em>)))</p>
 </div>
 </div>
 </div>
@@ -7118,9 +7121,9 @@ Animation with MoviePy : 4.17 seconds
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The next thing to do after setting up the cloud storage api and creating the figures is run nbconvert.</p>
-<p>A key point here is that the way I do this is to use ipynb-workdocs to tag cells for inclusion in html, pdf, and slides outputs. In general, the pdf-tagged cells are a small subset of the html-tagged cells, as I generally want to use html for more complete code documentation, and pdfs for summaries of key results. Rough notes, personal reminders, and anything else not intended for either html, pdf, or slideshows, is simply not tagged, and remains in the master notebook for only my eyes to see.</p>
-<p>In this notebook I have tagged a few of the main documentation paragraphs, section headings, and the figures for inclusion in the pdf. In general I use pdfs as distilled versions of notebooks and notebook-derived html files, removing all analysis code and only leaving in discussions of results and figures. The current notebook isn't the best example of this kind of documentation approach, as there aren't any 'results' per se, indepedent of the technical run-through of the usage procedure, but it suffices to show how to use the tools nonetheless.</p>
+<p>The next thing to do after setting up the cloud storage api and creating the figures is run nbconvert. </p>
+<p>A key point here is that the way I do this is to use ipynb-workdocs to tag cells for inclusion in html, pdf, and slides outputs. In general, the pdf-tagged cells are a small subset of the html-tagged cells, as I generally want to use html for more complete code documentation, and pdfs for summaries of key results. Rough notes, personal reminders, and anything else not intended for either html, pdf, or slideshows, is simply not tagged, and remains in the master notebook for only my eyes to see. </p>
+<p>In this notebook I have tagged a few of the main documentation paragraphs, section headings, and the figures for inclusion in the pdf. In general I use pdfs as distilled versions of notebooks and notebook-derived html files, removing all analysis code and only leaving in discussions of results and figures. The current notebook isn&#39;t the best example of this kind of documentation approach, as there aren&#39;t any &#39;results&#39; per se, indepedent of the technical run-through of the usage procedure, but it suffices to show how to use the tools nonetheless.</p>
 </div>
 </div>
 </div>
@@ -7129,7 +7132,7 @@ Animation with MoviePy : 4.17 seconds
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The nbconvert command is run separately to the cells in this notebook, but allowing that the flow has been interrupted briefly while I have run that command, let's now use the cloud api tool to upload the resulting PDF to the notebook cloud folder:</p>
+<p>The nbconvert command is run separately to the cells in this notebook, but allowing that the flow has been interrupted briefly while I have run that command, let&#39;s now use the cloud api tool to upload the resulting PDF to the notebook cloud folder:</p>
 </div>
 </div>
 </div>
@@ -7167,7 +7170,7 @@ Animation with MoviePy : 4.17 seconds
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can grab the download link for the PDF:</p>
+<p>We can grab the download link for the PDF: </p>
 </div>
 </div>
 </div>
@@ -7204,7 +7207,7 @@ Animation with MoviePy : 4.17 seconds
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As the PDF is only short, we'll also, for completeness, insert it into the notebook (but not the pdf itself; i.e. the following cell is tagged 'html' but not 'pdf'):</p>
+<p>As the PDF is only short, we&#39;ll also, for completeness, insert it into the notebook (but not the pdf itself; i.e. the following cell is tagged &#39;html&#39; but not &#39;pdf&#39;):</p>
 </div>
 </div>
 </div>
@@ -11999,8 +12002,10 @@ LTEuNSAFXAs5AAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>And voila, that link gives a pleasantly styled html render of the notebook. Whilst the content is mostly the same as the LabNotebook webpage, this format can be more useful for some purposes, and can be downloaded and run and/or modified directly. rather than copy-pasting code, For the purposes of reproducibility and open science (which is what the LabNotebook is all about, really), this would be the relevant link to share <a href="#fn:links" rel="footnote">[1]</a>.</p>
-<p>(Note: unfortunately, weirdly, it appears that the dropbox api will not accept files for upload with the extension '.ipynb', or even '.json'. It will accept '.txt' files, however, and nbviewer will still render those files properly. So to do the above with dropbox, one first needs to rename the .ipynb files to e.g. .txt. The above calls will then work fine, although bear in mind that if downloading the file from the link, the extension should be changed back to .ipynb for the files to work properly)</p>
+<p>And voila, that link gives a pleasantly styled html render of the notebook. Whilst the content is mostly the same as the LabNotebook webpage, this format can be more useful for some purposes, and can be downloaded and run and/or modified directly. rather than copy-pasting code, For the purposes of reproducibility and open science (which is what the LabNotebook is all about, really), this would be the relevant link to share <a href="#fn:links" rel="footnote">[1]</a>. </p>
+<p>(Note:  unfortunately, weirdly, it appears that the dropbox api will not accept files for 
+  upload with the extension &#39;.ipynb&#39;, or even &#39;.json&#39;. It will accept &#39;.txt&#39; files, 
+ however, and nbviewer will still render those files properly. So to do the above with dropbox, one first needs to rename the .ipynb files to e.g. .txt. The above calls will then work fine, although bear in mind that if downloading the file from the link, the extension should be changed back to .ipynb for the files to work properly)</p>
 </div>
 </div>
 </div>
@@ -12046,7 +12051,7 @@ LTEuNSAFXAs5AAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Obviously, this entry isn't particularly intended for slideshow purposes, and I haven't made any particular effort to optimize the contents to fit slideshow dimensions etc; so the slideshow link is just a toy example of how a presentation would be constructed from a multi-section notebook <a href="#fn:slides" rel="footnote">[2]</a>.</p>
+<p>Obviously, this entry isn&#39;t particularly intended for slideshow purposes, and I haven&#39;t made any particular effort to optimize the contents to fit slideshow dimensions etc; so the slideshow link is just a toy example of how a presentation would be constructed from a multi-section notebook <a href="#fn:slides" rel="footnote">[2]</a>. </p>
 </div>
 </div>
 </div>
@@ -12064,7 +12069,7 @@ LTEuNSAFXAs5AAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ok, that's a wrap!</p>
+<p>Ok, that&#39;s a wrap!</p>
 </div>
 </div>
 </div>
@@ -12073,7 +12078,7 @@ LTEuNSAFXAs5AAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<hr />
+<hr>
 </div>
 </div>
 </div>
@@ -12096,7 +12101,7 @@ LTEuNSAFXAs5AAAAAElFTkSuQmCC
 </script>
 
 
-<p><link href="http://themodernscientist.com/static/css/bigfoot-number.css" rel="stylesheet" type="text/css"></p>
+<link href="http://themodernscientist.com/static/css/bigfoot-number.css" rel="stylesheet" type="text/css">
 </div>
 </div>
 </div>
@@ -12105,13 +12110,9 @@ LTEuNSAFXAs5AAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<li id="fn:links">
-[1] A simpler alternative for notebook sharing with nbviewer and slideviewer is to use the ruby command-line program 'jist', which can be called from a terminal or notebook cell in one line: 'jist -p filename'. This will create an anonymous github gist, upload the file to it, and return the url. I favour this approach over the dropbox api (which, let's be honest, is a bit of a faff) for sharing quick-idea and intermediate-stage notes.
-</li>
+<li id="fn:links">[1] A simpler alternative for notebook sharing with nbviewer and slideviewer is to use the ruby command-line program &#39;jist&#39;, which can be called from a terminal or notebook cell in one line: &#39;jist -p filename&#39;. This will create an anonymous github gist, upload the file to it, and return the url. I favour this approach over the dropbox api (which, let&#39;s be honest, is a bit of a faff) for sharing quick-idea and intermediate-stage notes. </li>
 
-<li id="fn:slides">
-[2] I also use a different option to slideviewer for generic and/or non-technical talks that I don't want plastered with code, that simply involves a few additional arguments to nbconvert to tell it to hide code cells by default in reveal.js slides. These work well rendered on github repo gh-pages (note that you need to include a reveal.js library copy in the repo; see e.g. https://github.com/damianavila/scipy2013_talks. You may want to use the reveal.js folder directly from that repo, as I have found that newer versions often don't render nbconverted slides properly). A more flexible option that I am currently favouring is to have a separate aws S3 bucket for slideshow, and upload programatically using the tools described above.
-</li>
+<li id="fn:slides">[2] I also use a different option to slideviewer for generic and/or non-technical talks that I don&#39;t want plastered with code, that simply involves a few additional arguments to nbconvert to tell it to hide code cells by default in reveal.js slides. These work well rendered on github repo gh-pages (note that you need to include a reveal.js library copy in the repo; see e.g. <a href="https://github.com/damianavila/scipy2013_talks">https://github.com/damianavila/scipy2013_talks</a>. You may want to use the reveal.js folder directly from that repo, as I have found that newer versions often don&#39;t render nbconverted slides properly). A more flexible option that I am currently favouring is to have a separate aws S3 bucket for slideshow, and upload programatically using the tools described above. </li>
 </div>
 </div>
 </div></p>
@@ -12138,6 +12139,9 @@ LTEuNSAFXAs5AAAAAElFTkSuQmCC
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="https://johngriffiths.github.io/LabNotebook/tvb-sims-on-the-grid.html">Running TVB simulations on the grid</a>
+      </li>
+      <li class="post">
           <a href="https://johngriffiths.github.io/LabNotebook/tvb-granger.html">Granger causality analyses of TVB simulated data</a>
       </li>
       <li class="post">
@@ -12148,9 +12152,6 @@ LTEuNSAFXAs5AAAAAElFTkSuQmCC
       </li>
       <li class="post">
           <a href="https://johngriffiths.github.io/LabNotebook/exploring-the-g2do-model.html">Exploring the generic 2D oscillator model</a>
-      </li>
-      <li class="post">
-          <a href="https://johngriffiths.github.io/LabNotebook/tvb-simulation-framework.html">The TVB Simulation Framework</a>
       </li>
     </ul>
   </section>

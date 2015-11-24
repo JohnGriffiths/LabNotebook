@@ -1348,7 +1348,7 @@ input.engine_num_input{width:60px}
 .ansiblack{color:#000}
 .ansired{color:#8b0000}
 .ansigreen{color:#006400}
-.ansiyellow{color:#c4a000}
+.ansiyellow{color:#a52a2a}
 .ansiblue{color:#00008b}
 .ansipurple{color:#9400d3}
 .ansicyan{color:#4682b4}
@@ -1770,8 +1770,8 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><em>Pandas</em> and <em>itertools</em> are two very handy python libraries that will make your life easier and make you a happier person.</p>
-<p>The following are some notes on how to wield these tools in managing and analyzing tvb simulations.</p>
+<p><em>Pandas</em> and <em>itertools</em> are two very handy python libraries that will make your life easier and make you a happier person. </p>
+<p>The following are some notes on how to wield these tools in managing and analyzing tvb simulations. </p>
 </div>
 </div>
 </div>
@@ -1784,25 +1784,25 @@ jQuery(document).ready(function($) {
 <ul>
 <li><a href="#Notebook-setup">Notebook setup</a></li>
 <li><a href="#Background---pandas">Background - pandas</a></li>
-<li><a href="#Run-TVB-Simulations">Run TVB Simulations</a>
-<ul>
+<li><a href="#Run-TVB-Simulations">Run TVB Simulations</a><ul>
 <li><a href="#Run-simulation-function">Run simulation function</a></li>
 <li><a href="#Parameter-iteration">Parameter iteration</a></li>
 <li><a href="#Do-it">Do it</a></li>
-</ul></li>
-<li><a href="#Looking-at-simulation-results">Looking at simulation results</a>
-<ul>
-<li><a href="#Concatenate-sim-results-and-write-to-file.">Concatenate sim results and write to file.</a></li>
+</ul>
+</li>
+<li><a href="#Looking-at-simulation-results">Looking at simulation results</a><ul>
+<li><a href="#Concatenate-sim-results-and-write-to-file.">Concatenate sim results and write to file. </a></li>
 <li><a href="#Manipulating-the-sim-dataframe">Manipulating the sim dataframe</a></li>
-<li><a href="#Correlation-matrices">Correlation matrices</a>
-<ul>
+<li><a href="#Correlation-matrices">Correlation matrices</a><ul>
 <li><a href="#Seaborn">Seaborn</a></li>
 <li><a href="#Nitime">Nitime</a></li>
-</ul></li>
+</ul>
+</li>
 <li><a href="#Split-the-df-into-a-list-of-individual-parameter-dfs">Split the df into a list of individual parameter dfs</a></li>
 <li><a href="#Comparing-simulated-and-empirical-FC-matrices">Comparing simulated and empirical FC matrices</a></li>
 <li><a href="#Looking-at-tvb-analyzer-outputs">Looking at tvb analyzer outputs</a></li>
-</ul></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -1857,7 +1857,7 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><em>(Note: once you have worked through the simulation section and saved the results to file using the above filename, you can open this notebook from fresh later on in another session and continue from the subsequent section onwards - </em>as long as* you also execute the setup cells here. If you have the ipython 'init cell' extension installed, you can simply click the init button (all the code cells in this section are tagged as initialization cells))*</p>
+<p><em>(Note: once you have worked through the simulation section and saved the results to file using the above filename, you can open this notebook from fresh later on in another session and continue from the subsequent section onwards - </em>as long as<em> you also execute the setup cells here. If you have the ipython &#39;init cell&#39; extension installed, you can simply click the init button (all the code cells in this section are tagged as initialization cells))</em></p>
 </div>
 </div>
 </div>
@@ -2032,7 +2032,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<hr />
+<hr>
 </div>
 </div>
 </div>
@@ -2041,7 +2041,8 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>First some brief comments on the whats and the whys. <strong>These are not tutorials</strong>. Newbies are strongly encouraged to <strong>read the bloody documentation</strong> and google promiscuously when troubleshooting or trying to understand stuff.</p>
+<p>First some brief comments on the whats and the whys. 
+<strong>These are not tutorials</strong>. Newbies are strongly encouraged to <strong>read the bloody documentation</strong> and google promiscuously when troubleshooting or trying to understand stuff. </p>
 </div>
 </div>
 </div>
@@ -2050,7 +2051,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><em>[Handy tip when researching python type things: including 'nbviewer' in your search terms. This often brings up <a href="www.nbviewer.ipython.org">nbviewer</a> renders of notebooks. The quality of the hits are often variable, but in my experience this strategy frequently brings up excellent tutorials and useful snippets, which tend to be readable and usable without be excessively technical (unlike e.g. most <a href="https://docs.python.org/2/library/itertools.html">python documentation pages</a> ). ]</em></p>
+<p><em>[Handy tip when researching python type things: including &#39;nbviewer&#39; in your search terms. This often brings up <a href="www.nbviewer.ipython.org">nbviewer</a> renders of notebooks. The quality of the hits are often variable, but in my experience this strategy frequently brings up excellent tutorials and useful snippets, which tend to be readable and usable without be excessively technical (unlike e.g. most <a href="https://docs.python.org/2/library/itertools.html">python documentation pages</a> ). ]</em></p>
 </div>
 </div>
 </div>
@@ -2078,11 +2079,14 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Tutorials:</p>
+<p>Tutorials: </p>
 <ul>
-<li><p>Julia Evans' <em>pandas-cookbook</em> (<a href="https://github.com/jvns/pandas-cookbook">github</a>, <a href="http://nbviewer.ipython.org/github/jvns/pandas-cookbook/tree/master/cookbook/">nbviewer</a> )</p></li>
-<li><p>Chris Fonnesbeck's <em>statistical analysis in python</em> tutorial (<a href="https://github.com/fonnesbeck/statistical-analysis-python-tutorial">github</a>; follow the links for nbviewer gists).</p></li>
-<li><p>Marcel Caraciolo's <em>big-data</em> tutorial (<a href="https://github.com/marcelcaraciolo/bigdata-tutorial-2014">github</a>, <a href="http://nbviewer.ipython.org/github/marcelcaraciolo/big-data-tutorial/tree/master/tutorial/">nbviewer</a> )</p></li>
+<li><p>Julia Evans&#39; <em>pandas-cookbook</em> (<a href="https://github.com/jvns/pandas-cookbook">github</a>,  <a href="http://nbviewer.ipython.org/github/jvns/pandas-cookbook/tree/master/cookbook/">nbviewer</a> )</p>
+</li>
+<li><p>Chris Fonnesbeck&#39;s <em>statistical analysis in python</em> tutorial (<a href="https://github.com/fonnesbeck/statistical-analysis-python-tutorial">github</a>; follow the links for nbviewer gists). </p>
+</li>
+<li><p>Marcel Caraciolo&#39;s <em>big-data</em> tutorial (<a href="https://github.com/marcelcaraciolo/bigdata-tutorial-2014">github</a>, <a href="http://nbviewer.ipython.org/github/marcelcaraciolo/big-data-tutorial/tree/master/tutorial/">nbviewer</a> )</p>
+</li>
 </ul>
 </div>
 </div>
@@ -2092,18 +2096,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div align="center">
-<sub>~</sub>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Manipulating sets of numbers is a central task in many walks of life. In computational research science it is your bread and butter. You generate blocks of numbers, place them in some data structure, and then will want to be able to flexible access that data structure, access that data structure, write to file, read in again, etc. etc. Over and over again, day after day after day. When working in python the three basic types of data structures you might use for this are lists, dictionaries, and numpy arrays. But I put it to to you: if you're building a wall, why use a wheel-barrow and mud when there's a fork-lift truck and cement mixer available to you at no extra cost?</p>
+<div align='center'> ~~~ </div>
 </div>
 </div>
 </div>
@@ -2112,7 +2105,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><em>Pandas</em> is a library that provides some simple but powerful data structures for reading, writing, storing, indexing, manipulating, and visualizing blocks of numbers. At its core is the the <em>DataFrame</em> structure, which are essentially 2D arrays of numbers with many special powers. However their multi-indexing capabilities, which we shall be making use of, make them more like a hybrid between a spreadsheet and a hierarchically nested python dictionary or matlab structure. Very similar to Microsoft Excel pivot tables in that respect (which are actually very neat), but as we all know Excel should be avoided like the plague whenever large amounts of data, and/or anything more than trivial numerical operations are involved.</p>
+<p>Manipulating sets of numbers is a central task in many walks of life. In computational research science it is your bread and butter. You generate blocks of numbers, place them in some data structure, and then will want to be able to flexible access that data structure, access that data structure, write to file, read in again, etc. etc. Over and over again, day  after day after day. When working in python the three basic types of data structures you might use for this are lists, dictionaries, and numpy arrays. But I put it to to you: if  you&#39;re building a wall, why use a wheel-barrow and mud when there&#39;s a fork-lift truck and cement mixer available to you at no extra cost?</p>
 </div>
 </div>
 </div>
@@ -2121,7 +2114,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Pandas dataframes are explicitly based on the dataframe objects in <em>R</em>, which deserve a large amount of the credit for the (still unmatched) power and popularity of the R language for data analysis. An added bonus is therefore that pandas dataframes are highly compatible with R (via the Ipython R magics and rpy2 library), and are a must-have for any dual python/R practioners.</p>
+<p><em>Pandas</em> is a library that provides some simple but powerful data structures for reading, writing, storing, indexing, manipulating, and visualizing blocks of numbers. At its core is the the <em>DataFrame</em> structure, which are essentially 2D arrays of numbers with many special powers. However their multi-indexing capabilities, which we shall be making use of, make them more like a hybrid between a spreadsheet and a hierarchically nested python dictionary or matlab structure. Very similar to Microsoft Excel pivot tables in that respect (which are actually very neat), but as we all know Excel should be avoided like the plague whenever large amounts of data, and/or anything more than trivial numerical operations are involved.  </p>
 </div>
 </div>
 </div>
@@ -2130,7 +2123,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The <em>most</em> useful aspects of pandas Datframes are the ability to easily read from and write to a wide variety of file formats (c.f. documentation), and the tight integration with the plotting capabilities of matplotlib. However here we shall be focusing more on how to exploit multi-indexing when doing simulations or data analyses that are repeated across multiple parameter combinations.</p>
+<p>Pandas dataframes are explicitly based on the dataframe objects in <em>R</em>, which deserve a large amount of the credit for the (still unmatched) power and popularity of the R language for data analysis. An added bonus is therefore that pandas dataframes are highly compatible with R (via the Ipython R magics and rpy2 library), and are a must-have for any dual python/R practioners. </p>
 </div>
 </div>
 </div>
@@ -2139,7 +2132,16 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<hr />
+<p>The <em>most</em> useful aspects of pandas Datframes are the ability to easily read from and write to a wide variety of file formats (c.f. documentation), and the tight integration with the plotting capabilities of matplotlib. However here we shall be focusing more on how to exploit multi-indexing when doing simulations or data analyses that are repeated across multiple parameter combinations. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
 </div>
 </div>
 </div>
@@ -2158,7 +2160,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For demonstration purposes, we shall use a very basic example from the tvb demos folder, the <code>generate_region_demo_data.py</code> demo, with a few minor modifications.</p>
+<p>For demonstration purposes, we shall use a very basic example from the tvb demos folder, the <code>generate_region_demo_data.py</code> demo, with a few minor modifications. </p>
 </div>
 </div>
 </div>
@@ -2176,8 +2178,9 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<pre class="sourceCode python"><code class="sourceCode python">tvb_folder = <span class="st">&#39;/media/sf_SharedFolder/Code/git_repos_of_mine/tvb-pack/tvb-library&#39;</span>
-%load $tvb_folder/tvb/simulator/demos/generate_region_demo_data.py</code></pre>
+<pre><code class="language-python">tvb_folder = <span class="string">'/media/sf_SharedFolder/Code/git_repos_of_mine/tvb-pack/tvb-library'</span>
+%load $tvb_folder/tvb/simulator/demos/generate_region_demo_data.py
+</code></pre>
 </div>
 </div>
 </div>
@@ -2186,7 +2189,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>(if I didn't have it locally, I could also have loaded it directly from the interweb with the same command):</p>
+<p>(if I didn&#39;t have it locally, I could also have loaded it directly from the interweb with the same command):</p>
 </div>
 </div>
 </div>
@@ -2195,8 +2198,9 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<pre class="sourceCode python"><code class="sourceCode python">fileincloud  = <span class="st">&#39;https://raw.githubusercontent.com/the-virtual-brain/tvb-library/trunk/tvb/simulator/demos/generate_region_demo_data.py&#39;</span>
-%load $fileincloud</code></pre>
+<pre><code class="language-python">fileincloud  = <span class="string">'https://raw.githubusercontent.com/the-virtual-brain/tvb-library/trunk/tvb/simulator/demos/generate_region_demo_data.py'</span>
+%load $fileincloud
+</code></pre>
 </div>
 </div>
 </div>
@@ -2205,7 +2209,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>After loading came a bit of hacking, and the result is the below. This is a very useful and (for me, at least) common procedure for modifying and re-using code snippets.</p>
+<p>After loading came a bit of hacking, and the result is the  below. This is a very useful and (for me, at least) common procedure for modifying and re-using code snippets. </p>
 </div>
 </div>
 </div>
@@ -2214,7 +2218,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><em>Caveat: as this is primarily intended as a demonstration, the emphasis in this example has primarily been on explicitness and simplicity, over elegance and generality. For more general (if not more elegant) alternatives, see e.g. the the classes in the 'runner.py' function in <a href="https://github.com/JohnGriffiths/tvb-scripting">tvb-scripting</a>.</em></p>
+<p><em>Caveat: as this is primarily intended as a demonstration, the emphasis in this example has primarily been on explicitness and simplicity, over elegance and generality. For more general (if not more elegant) alternatives, see e.g. the the classes in the &#39;runner.py&#39; function in <a href="https://github.com/JohnGriffiths/tvb-scripting">tvb-scripting</a>.</em></p>
 </div>
 </div>
 </div>
@@ -2352,7 +2356,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this demonstration we shall vary two simulation parameters: conduction velocity ('speed'), the magnitude of linear coupling function 'a';</p>
+<p>In this demonstration we shall vary two simulation parameters: conduction velocity (&#39;speed&#39;), the magnitude of linear coupling function &#39;a&#39;; </p>
 </div>
 </div>
 </div>
@@ -2404,7 +2408,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Use the 'product' function from the 'itertools' library to create a list of all possible permutations of these two parameters</p>
+<p>Use the &#39;product&#39; function from the &#39;itertools&#39; library to create a list of all possible permutations of these two parameters</p>
 </div>
 </div>
 </div>
@@ -2594,7 +2598,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Because this is an example notebook, I will only run sims for a subset of the full parameter ranges identified above. The subset is defined as follows:</p>
+<p>Because this is an example notebook, I will only run sims for a subset of the full parameter ranges identified above. The subset is defined as follows: </p>
 </div>
 </div>
 </div>
@@ -2724,7 +2728,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now run the simulations: iterate through the parameters, and store in a dataframe:</p>
+<p>Now run the simulations: iterate through the parameters, and store in a dataframe: </p>
 </div>
 </div>
 </div>
@@ -2733,7 +2737,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Note: depending on the number of parameters and the duration of the simulations, this could take several minutes or several hours, or more.</p>
+<p>Note: depending on the number of parameters and the duration of the simulations, this could take several minutes or several hours, or more.   </p>
 </div>
 </div>
 </div>
@@ -2828,7 +2832,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Side note: the following will suppress warning messages in the notebook. Normally warnings should most definitely eb paid attention to, but once one has done that and is then trying to make clean documentation, they rather cramp one's style.</p>
+<p>Side note: the following will suppress warning messages in the notebook. Normally warnings should most definitely eb paid attention to, but once one has done that and is then trying to make clean documentation, they rather cramp one&#39;s style. </p>
 </div>
 </div>
 </div>
@@ -2863,9 +2867,9 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Final step in assembling the simulation data is to concatenate the dataframes that we've been appending to the list <code>all_dfs</code> on each iteration of the loop.</p>
-<p>There are several options when writing to file. <code>.pkl</code> is the easiest for intermediate work. For finished products <code>.csv</code> is a useful option, as is <code>.hdf5</code>.</p>
-<p>We will take a look at these data structures after we have saved them to file and re-loaded them.</p>
+<p>Final step in assembling the simulation data is to concatenate the dataframes that we&#39;ve been appending to the list <code>all_dfs</code> on each iteration of the loop.</p>
+<p>There are several options when writing to file. <code>.pkl</code> is the easiest for intermediate work. For finished products <code>.csv</code> is a useful option, as is <code>.hdf5</code>. </p>
+<p>We will take a look at these data structures after we have saved them to file and re-loaded them. </p>
 </div>
 </div>
 </div>
@@ -2952,7 +2956,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Note: depending on your system and the duration of your simulation / size of parameter space, you may not be allowed to do this concatenation step, and get 'Memory Errors'. This is most likely to be a problem for simulated EEG data. The only real solution to this if it occurs is to chop your data into chunks.</p>
+<p>Note: depending on your system and the duration of your simulation / size of parameter space, you may not be allowed to do this concatenation step, and get &#39;Memory Errors&#39;. This is most likely to be a problem for simulated EEG data. The only real solution to this if it occurs is to chop your data into chunks. </p>
 </div>
 </div>
 </div>
@@ -2961,7 +2965,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We only need to run all of the above once. Once written to file, we can take a break and pick up where we left off in a different session by loading the saved files back in.</p>
+<p>We only need to run all of the above once. Once written to file, we can take a break and pick up where we left off in a different session by loading the saved files back in. </p>
 </div>
 </div>
 </div>
@@ -2995,7 +2999,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In a lot of the following I want to show snippets of dataframes. Normally the <code>.head()</code> method is adequate for that, but right now it's a little more effective to specify some indices for showing small snippets of dataframes.</p>
+<p>In a lot of the following I want to show snippets of dataframes. Normally the <code>.head()</code> method is adequate for that, but right now it&#39;s a little more effective to specify some indices for showing small snippets of dataframes. </p>
 </div>
 </div>
 </div>
@@ -3024,7 +3028,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>So let's take a quick peek now at these dataframes</p>
+<p>So let&#39;s take a quick peek now at these dataframes</p>
 </div>
 </div>
 </div>
@@ -3435,7 +3439,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For the simulated data, one of the things we are primarily interested in is correlation matrices.</p>
+<p>For the simulated data, one of the things we are primarily interested in is correlation matrices. </p>
 </div>
 </div>
 </div>
@@ -3444,7 +3448,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Pandas has some convenient in-built functions for computing correlations. But first we need isolate the simulation results for individual parameter sets, as the 'df_sim' dataframes each contain sim results from all combinations of the 'speed' and 'lincouple_a' parameters.</p>
+<p>Pandas has some convenient in-built functions for computing correlations. But first we need isolate the simulation results for individual parameter sets, as the &#39;df_sim&#39; dataframes each contain sim results from all combinations of the &#39;speed&#39; and &#39;lincouple_a&#39; parameters. </p>
 </div>
 </div>
 </div>
@@ -3453,7 +3457,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>There are a few ways to do this, but the most convenient is the 'query' method:</p>
+<p>There are a few ways to do this, but the most convenient is the &#39;query&#39; method:</p>
 </div>
 </div>
 </div>
@@ -3477,7 +3481,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>(Note the transpose (<code>.T</code>) means I need to switch around the example rows and example columns)</p>
+<p>(Note the transpose (<code>.T</code>) means I need to switch around the example rows and example columns) </p>
 </div>
 </div>
 </div>
@@ -3591,7 +3595,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Don't worry about the transpose; it's just the case that some pandas operations are more conveniently done on indices and some on columns, so it can be convenient to transpose the dataframe accordingly.</p>
+<p>Don&#39;t worry about the transpose; it&#39;s just the case that some pandas operations are more conveniently done on indices and some on columns, so it can be convenient to transpose the dataframe accordingly. </p>
 </div>
 </div>
 </div>
@@ -3600,7 +3604,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>To prove that what we've done here is pick out N rois by N data points time series, take a look at the shape</p>
+<p>To prove that what we&#39;ve done here is pick out N rois by N data points time series, take a look at the shape</p>
 </div>
 </div>
 </div>
@@ -3672,7 +3676,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can also easily remove the now-redundant multi-index from these single-parameter-set dataframes;</p>
+<p>We can also easily remove the now-redundant multi-index from these single-parameter-set dataframes; </p>
 </div>
 </div>
 </div>
@@ -3821,8 +3825,8 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In pandas we can compute correlations using the <code>.corr()</code> method.</p>
-<p>Again, because the correlations are computed column-wise, we'll do a transpose first;</p>
+<p>In pandas we can compute correlations using the <code>.corr()</code> method. </p>
+<p>Again, because the correlations are computed column-wise, we&#39;ll do a transpose first; </p>
 </div>
 </div>
 </div>
@@ -3956,8 +3960,8 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Show that this is now an N-region by N-region correlation matrix.</p>
-<p>(As we're not rendering a snippet of the dataframe we don't need to include the example row and column indices. This is what your code would normally look like! )</p>
+<p>Show that this is now an N-region by N-region correlation matrix. </p>
+<p>(As we&#39;re not rendering a snippet of the dataframe we don&#39;t need to include the example row and column indices. This is what your code would normally look like! )</p>
 </div>
 </div>
 </div>
@@ -3993,7 +3997,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We could plot this directly using matplotlib's 'imshow' method; but there are actually some better tools available from the <code>seaborn</code>, <code>statsmodels</code> and <code>nitime</code> libraries.</p>
+<p>We could plot this directly using matplotlib&#39;s &#39;imshow&#39; method; but there are actually some better tools available from the <code>seaborn</code>, <code>statsmodels</code> and <code>nitime</code> libraries. </p>
 </div>
 </div>
 </div>
@@ -4002,7 +4006,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For present purposes we do want to remove the redundant multi-index levels, because the matrix entries will be indexed by the dataframe index labels, which will include values for speed and lincouple_a if we don't remove them.</p>
+<p>For present purposes we do want to remove the redundant multi-index levels, because the matrix entries will be indexed by the dataframe index labels, which will include values for speed and lincouple_a if we don&#39;t remove them. </p>
 </div>
 </div>
 </div>
@@ -4396,7 +4400,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>There are a few ways this can be done. Here is a fairly dumb but straightforward one:</p>
+<p>There are a few ways this can be done. Here is a fairly dumb but straightforward one:  </p>
 </div>
 </div>
 </div>
@@ -4516,7 +4520,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Using the dict produced in the previous section, we can do this as follows:</p>
+<p>Using the dict produced in the previous section, we can do this as follows: </p>
 </div>
 </div>
 </div>
@@ -4560,7 +4564,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<hr />
+<hr>
 </div>
 </div>
 </div>
@@ -4601,7 +4605,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can turn a hierarchically-indexed dataframe into a matrix with one index on the row and one on the columns using 'unstack'.</p>
+<p>We can turn a hierarchically-indexed dataframe into a matrix with one index on the row and one on the columns using &#39;unstack&#39;. </p>
 <p>First filter the dataframe to include only the variance-node-variance metric for the tavg sim data:</p>
 </div>
 </div>
@@ -4774,7 +4778,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Then 'unstack' to turn it into a matrix, with column variable 'lincouple_a'</p>
+<p>Then &#39;unstack&#39; to turn it into a matrix, with column variable &#39;lincouple_a&#39;</p>
 </div>
 </div>
 </div>
@@ -4969,7 +4973,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The NaNs here are simply because those entries aren't present yet, because we only carried out the simulation for a subset of the results of the <code>itertools.product</code> command;</p>
+<p>The NaNs here are simply because those entries aren&#39;t present yet, because we only carried out the simulation for a subset of the results of the <code>itertools.product</code> command; </p>
 </div>
 </div>
 </div>
@@ -5082,7 +5086,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>...but that won't look right for the 2D matrix we want to plot</p>
+<p>...but that won&#39;t look right for the 2D matrix we want to plot</p>
 </div>
 </div>
 </div>
@@ -5241,7 +5245,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In the TVB GUI, parameter space explorations are often summarized with single scalara metrics such as the <em>variance of node variances</em>, which may be visualized as a table of circles of variable sizes.</p>
+<p>In the TVB GUI, parameter space explorations are often summarized with single scalara metrics such as the <em>variance of node variances</em>,  which may be visualized as a table of circles of variable sizes. </p>
 <p>Do that for the following table:</p>
 </div>
 </div>
@@ -5484,7 +5488,7 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I think that'll do for now.</p>
+<p>I think that&#39;ll do for now. </p>
 </div>
 </div>
 </div></p>
@@ -5511,6 +5515,9 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="https://johngriffiths.github.io/LabNotebook/tvb-sims-on-the-grid.html">Running TVB simulations on the grid</a>
+      </li>
+      <li class="post">
           <a href="https://johngriffiths.github.io/LabNotebook/tvb-granger.html">Granger causality analyses of TVB simulated data</a>
       </li>
       <li class="post">
@@ -5521,9 +5528,6 @@ IPython.load_extensions('calico-spell-check','calico-document-tools','calico-cel
       </li>
       <li class="post">
           <a href="https://johngriffiths.github.io/LabNotebook/exploring-the-g2do-model.html">Exploring the generic 2D oscillator model</a>
-      </li>
-      <li class="post">
-          <a href="https://johngriffiths.github.io/LabNotebook/tvb-simulation-framework.html">The TVB Simulation Framework</a>
       </li>
     </ul>
   </section>
