@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Tags &mdash; JDG Lab Notebook</title>
+  <title>Downloading ABIDE PCP data &mdash; JDG Lab Notebook</title>
   <meta name="author" content="John D. Griffiths">
 
 
@@ -1712,6 +1712,8 @@ jQuery(document).ready(function($) {
 
 
 
+
+
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
@@ -1748,32 +1750,1003 @@ jQuery(document).ready(function($) {
     <li><a href="https://johngriffiths.github.io/LabNotebook/archives.html">Archives</a></li>
     <li><a href="https://github.com/JohnGriffiths/LabNotebook.html">Github repo</a></li>
     <li><a href="http://en.wikipedia.org/wiki/Open_notebook_science">Open Notebook Science</a></li>
-      <li >
+      <li class="active">
         <a href="https://johngriffiths.github.io/LabNotebook/category/misc.html">Misc</a>
       </li>
 </ul></nav>
   <div id="main">
     <div id="content">
 <div>
-	<article role="article">
-    	<header>
-    		<h1 class="entry-title">Blog Tags</h1>
-    	</header>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Downloading ABIDE PCP data</h1>
+    <p class="meta">
+<time datetime="2015-11-24T00:00:00-08:00" pubdate>Tue 24 November 2015</time>    </p>
+</header>
 
-	<p>
-		<a href="https://johngriffiths.github.io/LabNotebook/tag/eigenmodes.html">eigenmodes</a> (1)<br>
-		<a href="https://johngriffiths.github.io/LabNotebook/tag/granger.html">Granger</a> (1)<br>
-		<a href="https://johngriffiths.github.io/LabNotebook/tag/ipython.html">IPython</a> (1)<br>
-		<a href="https://johngriffiths.github.io/LabNotebook/tag/labnotebook.html">LabNotebook</a> (2)<br>
-		<a href="https://johngriffiths.github.io/LabNotebook/tag/mcintosh.html">McIntosh</a> (6)<br>
-		<a href="https://johngriffiths.github.io/LabNotebook/tag/mse.html">MSE</a> (2)<br>
-		<a href="https://johngriffiths.github.io/LabNotebook/tag/pcp.html">PCP</a> (1)<br>
-		<a href="https://johngriffiths.github.io/LabNotebook/tag/robinson.html">Robinson</a> (1)<br>
-		<a href="https://johngriffiths.github.io/LabNotebook/tag/theorygroup.html">TheoryGroup</a> (1)<br>
-		<a href="https://johngriffiths.github.io/LabNotebook/tag/tractography.html">tractography</a> (1)<br>
-		<a href="https://johngriffiths.github.io/LabNotebook/tag/tvb.html">TVB</a> (8)<br>
-	</p>
-	</article>
+  <div class="entry-content"><p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong><em>Alternative versions: <a href="https://johngriffiths.github.io/LabNotebook/downloading-abide-pcp-data.html">LabNotebook</a>, <a href="http://nbviewer.ipython.org/urls/s3.amazonaws.com/downloading_abide_pcp_data/downloading_abide_pcp_data__html_nb.ipynb">nbviewer</a></em></strong></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="contents">Contents</h3>
+<ul>
+<li><a href="#Overview">Overview</a></li>
+<li><a href="#Notebook-Setup">Notebook Setup</a></li>
+<li><a href="#Get-metadata-file">Get metadata file</a></li>
+<li><a href="#Download-example-with-one-subject">Download example with one subject</a><ul>
+<li><a href="#Get-CPAC-pipeline-output">Get CPAC pipeline output</a></li>
+<li><a href="#Get-freesurfer-output">Get freesurfer output</a></li>
+</ul>
+</li>
+<li><a href="#Several-subjects-and-folders">Several subjects and folders</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Overview">Overview<a class="anchor-link" href="#Overview">&#182;</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The ABIDE preprocessed connectome project (PCP) data can be downloaded programatically with a little hackery. This helps to keep storage space to a minimum as we can indicate with complete specificity which files we want, and download and keep (or not keep; just use temporarily) those only. Whilst there are some scripts and apis already out there that greatly finesse the process of grabbing data from the database, there are a few specific functionalities lacking in these that made them insufficient for my own needs. The following notes are therefore a simple set of recipes for grabbing ABIDE PCP data in a way that matched my requirements. I believe it should also generalize to the other non-abide PCP databases also. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Notebook-Setup">Notebook Setup<a class="anchor-link" href="#Notebook-Setup">&#182;</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Define some variables</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># define system-specific filepaths etc</span>
+<span class="o">%</span><span class="k">run</span> <span class="o">~/</span><span class="n">set_localenv_vars</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c"># output dir</span>
+<span class="n">outdir</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s">&#39;data_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/notebooks/downloading_abide_pcp_data&#39;</span>
+<span class="o">!</span>mkdir -p <span class="nv">$outdir</span>
+
+
+<span class="n">nb_name</span> <span class="o">=</span> <span class="s">&#39;downloading_abide_pcp_data&#39;</span>
+
+
+<span class="c"># stuff for analyses</span>
+
+<span class="n">s3_prefix</span> <span class="o">=</span> <span class="s">&#39;https://s3.amazonaws.com/fcp-indi/data/Projects/&#39;</span>\
+            <span class="s">&#39;ABIDE_Initiative&#39;</span>
+    
+<span class="n">abide_dir</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s">&#39;data_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/PCP/ABIDE/downloaded&#39;</span>
+
+
+<span class="c"># stuff for workdocs-cloudfiles</span>
+
+<span class="n">aws_key</span> <span class="o">=</span> <span class="s">&#39;drowssaperucesyreva&#39;</span>
+<span class="n">aws_secret</span> <span class="o">=</span> <span class="s">&#39;?teytidettopsuoyevah&#39;</span>  
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Importage</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Generic imports</span>
+
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span><span class="n">display</span> <span class="k">as</span> <span class="n">d</span>
+
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">glob</span><span class="o">,</span><span class="nn">sys</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">urllib</span>
+
+
+<span class="c"># workdocs-cloudfiles stuff</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">le</span><span class="p">[</span><span class="s">&#39;ipynb_workdocs_dir&#39;</span><span class="p">])</span>
+<span class="kn">from</span> <span class="nn">new_utils</span> <span class="kn">import</span> <span class="n">nb_fig</span><span class="p">,</span><span class="n">cloudfiles_nb</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Initialize workdocs-cloudfiles folder</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cnb</span> <span class="o">=</span> <span class="n">cloudfiles_nb</span><span class="p">(</span><span class="s">&#39;aws&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">aws_key</span><span class="p">,</span><span class="n">aws_secret</span><span class="p">])</span>
+<span class="n">cnb</span><span class="o">.</span><span class="n">initialize_folder</span><span class="p">(</span><span class="n">nb_name</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Load calico document extensions</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">javascript</span>
+<span class="n">IPython</span><span class="o">.</span><span class="n">load_extensions</span><span class="p">(</span><span class="s">&#39;calico-spell-check&#39;</span><span class="p">,</span> <span class="s">&#39;calico-document-tools&#39;</span><span class="p">,</span> 
+                        <span class="s">&#39;calico-cell-tools&#39;</span><span class="p">);</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+IPython.load_extensions('calico-spell-check', 'calico-document-tools', 
+                        'calico-cell-tools');
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Go to output folder</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ok, let&#39;s get cracking...</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Get-metadata-file">Get metadata file<a class="anchor-link" href="#Get-metadata-file">&#182;</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">md_file</span> <span class="o">=</span> <span class="s">&#39;Phenotypic_V1_0b_preprocessed1.csv&#39;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">s3_prefix</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="n">md_file</span>
+<span class="n">out_file</span> <span class="o">=</span> <span class="n">abide_dir</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="n">md_file</span>
+<span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">out_file</span><span class="p">);</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Take a look at metadata file</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_md</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;subject&#39;</span><span class="p">,</span> <span class="s">&#39;SUB_ID&#39;</span><span class="p">,</span> <span class="s">&#39;FILE_ID&#39;</span><span class="p">,</span> <span class="s">&#39;AGE_AT_SCAN&#39;</span><span class="p">,</span><span class="s">&#39;SEX&#39;</span><span class="p">,</span> <span class="s">&#39;DX_GROUP&#39;</span><span class="p">]</span>
+<span class="n">d</span><span class="p">(</span><span class="n">df_md</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>subject</th>
+      <th>SUB_ID</th>
+      <th>FILE_ID</th>
+      <th>AGE_AT_SCAN</th>
+      <th>SEX</th>
+      <th>DX_GROUP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>50002</td>
+      <td>50002</td>
+      <td>no_filename</td>
+      <td>16.77</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>50003</td>
+      <td>50003</td>
+      <td>Pitt_0050003</td>
+      <td>24.45</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>50004</td>
+      <td>50004</td>
+      <td>Pitt_0050004</td>
+      <td>19.09</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>50005</td>
+      <td>50005</td>
+      <td>Pitt_0050005</td>
+      <td>13.73</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>50006</td>
+      <td>50006</td>
+      <td>Pitt_0050006</td>
+      <td>13.37</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>50007</td>
+      <td>50007</td>
+      <td>Pitt_0050007</td>
+      <td>17.78</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Download-example-with-one-subject">Download example with one subject<a class="anchor-link" href="#Download-example-with-one-subject">&#182;</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">site</span> <span class="o">=</span> <span class="s">&#39;Caltech&#39;</span>
+<span class="n">sub</span> <span class="o">=</span> <span class="s">&#39;0051456&#39;</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Get-CPAC-pipeline-output">Get CPAC pipeline output<a class="anchor-link" href="#Get-CPAC-pipeline-output">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">pipeline</span> <span class="o">=</span> <span class="s">&#39;cpac&#39;</span>
+<span class="n">strategy</span> <span class="o">=</span> <span class="s">&#39;filt_global&#39;</span>
+<span class="n">derivative</span> <span class="o">=</span> <span class="s">&#39;func_preproc&#39;</span>
+<span class="n">suffix</span> <span class="o">=</span> <span class="s">&#39;.nii.gz&#39;</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s">&#39;/Outputs/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span><span class="n">strategy</span><span class="p">,</span> <span class="n">derivative</span><span class="p">,</span>
+                                        <span class="n">site</span><span class="p">,</span><span class="n">sub</span><span class="p">,</span> <span class="n">derivative</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">&apos;/Outputs/cpac/filt_global/func_preproc/Caltech_0051456_func_preproc.nii.gz&apos;</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">out_file</span> <span class="o">=</span> <span class="n">abide_dir</span> <span class="o">+</span> <span class="n">path</span>
+<span class="n">out_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">out_folder</span><span class="p">):</span> <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_folder</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is where it&#39;s coming from</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">url</span> <span class="o">=</span> <span class="n">s3_prefix</span> <span class="o">+</span> <span class="n">path</span>
+<span class="n">d</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">&apos;https://s3.amazonaws.com/fcp-indi/data/Projects/ABIDE_Initiative/Outputs/cpac/filt_global/func_preproc/Caltech_0051456_func_preproc.nii.gz&apos;</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is where it&#39;s going</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">&apos;/alexandra/mcintosh_lab/john/Data/PCP/ABIDE/downloaded/Outputs/cpac/filt_global/func_preproc/Caltech_0051456_func_preproc.nii.gz&apos;</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now get it. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">out_file</span><span class="p">);</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Check that file has arrived</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">ls</span> <span class="err">$</span><span class="n">out_folder</span><span class="o">/</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb"><span class="ansibold ansired">Caltech_0051456_func_preproc.nii.gz</span>  <span class="ansibold ansired">Caltech_0051457_func_preproc.nii.gz</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Get-freesurfer-output">Get freesurfer output<a class="anchor-link" href="#Get-freesurfer-output">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">fs_folder</span> <span class="o">=</span> <span class="s">&#39;surf&#39;</span>
+<span class="n">fs_filename</span> <span class="o">=</span> <span class="s">&#39;lh.orig&#39;</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s">&#39;/Outputs/freesurfer/5.1/</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">site</span><span class="p">,</span><span class="n">sub</span><span class="p">,</span><span class="n">fs_folder</span><span class="p">,</span> <span class="n">fs_filename</span><span class="p">)</span> 
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">out_file</span> <span class="o">=</span> <span class="n">abide_dir</span> <span class="o">+</span> <span class="n">path</span>
+<span class="n">out_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">out_folder</span><span class="p">):</span> <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_folder</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is where it&#39;s coming from</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">url</span> <span class="o">=</span> <span class="n">s3_prefix</span> <span class="o">+</span> <span class="n">path</span>
+<span class="n">d</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">&apos;https://s3.amazonaws.com/fcp-indi/data/Projects/ABIDE_Initiative/Outputs/freesurfer/5.1/Caltech_0051456/surf/lh.orig&apos;</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is where it&#39;s going</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">&apos;/alexandra/mcintosh_lab/john/Data/PCP/ABIDE/downloaded/Outputs/freesurfer/5.1/Caltech_0051456/surf/lh.orig&apos;</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Do it</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">out_file</span><span class="p">);</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Check for outputs</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">ls</span> <span class="err">$</span><span class="n">out_folder</span><span class="o">/</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">lh.orig    lh.thickness  rh.orig    rh.thickness
+lh.sphere  lh.white      rh.sphere  rh.white
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now do the above for all the freesurfer files we need</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># surf folder</span>
+<span class="n">surf_files</span> <span class="o">=</span>  <span class="p">[</span><span class="s">&#39;lh.orig&#39;</span><span class="p">,</span> <span class="s">&#39;rh.orig&#39;</span><span class="p">,</span> <span class="s">&#39;lh.white&#39;</span><span class="p">,</span> <span class="s">&#39;rh.white&#39;</span><span class="p">,</span> <span class="s">&#39;lh.sphere&#39;</span> <span class="p">,</span><span class="s">&#39;rh.sphere&#39;</span><span class="p">,</span>
+               <span class="s">&#39;lh.thickness&#39;</span><span class="p">,</span> <span class="s">&#39;rh.thickness&#39;</span><span class="p">]</span>
+    
+<span class="c"># mri folder</span>
+<span class="n">mri_files</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;brain.mgz&#39;</span><span class="p">,</span><span class="s">&#39;brainmask.mgz&#39;</span><span class="p">,</span> <span class="s">&#39;orig.mgz&#39;</span><span class="p">]</span>
+    
+<span class="n">fs_paths</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">surf_files</span><span class="p">:</span> <span class="n">fs_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;surf/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="k">f</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">mri_files</span><span class="p">:</span> <span class="n">fs_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;mri/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="k">f</span><span class="p">)</span>
+    
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>These are the files</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">fs_paths</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<pre class="ipynb">[&apos;surf/lh.orig&apos;,
+ &apos;surf/rh.orig&apos;,
+ &apos;surf/lh.white&apos;,
+ &apos;surf/rh.white&apos;,
+ &apos;surf/lh.sphere&apos;,
+ &apos;surf/rh.sphere&apos;,
+ &apos;surf/lh.thickness&apos;,
+ &apos;surf/rh.thickness&apos;,
+ &apos;mri/brain.mgz&apos;,
+ &apos;mri/brainmask.mgz&apos;,
+ &apos;mri/orig.mgz&apos;]</pre>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Grab em</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fs_paths</span><span class="p">:</span> 
+  <span class="n">path</span> <span class="o">=</span> <span class="s">&#39;/Outputs/freesurfer/5.1/</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">site</span><span class="p">,</span><span class="n">sub</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>  
+  <span class="n">url</span> <span class="o">=</span> <span class="n">s3_prefix</span> <span class="o">+</span> <span class="n">path</span>
+  <span class="n">out_file</span> <span class="o">=</span> <span class="n">abide_dir</span> <span class="o">+</span> <span class="n">path</span>
+  <span class="n">out_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">out_folder</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_folder</span><span class="p">)</span>    
+  <span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">out_file</span><span class="p">);</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Several-subjects-and-folders">Several subjects and folders<a class="anchor-link" href="#Several-subjects-and-folders">&#182;</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ok, this should be clear enough now. </p>
+<p>In practice, in general, we will probably want to be pulling entire groups in one go. This would be done with something like the following:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">pipeline</span> <span class="o">=</span> <span class="s">&#39;cpac&#39;</span>
+<span class="n">derivative</span> <span class="o">=</span> <span class="s">&#39;func_preproc&#39;</span>
+<span class="n">suffix</span> <span class="o">=</span> <span class="s">&#39;.nii.gz&#39;</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">subs</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;0051456&#39;</span><span class="p">,</span> <span class="s">&#39;0051457&#39;</span><span class="p">]</span>
+<span class="n">strategies</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;filt_global&#39;</span><span class="p">,</span> <span class="s">&#39;filt_noglobal&#39;</span><span class="p">,</span> <span class="s">&#39;nofilt_global&#39;</span><span class="p">,</span> <span class="s">&#39;nofilt_noglobal&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">subs</span><span class="p">:</span>
+    
+  <span class="c"># Get functional data</span>
+    
+  <span class="k">for</span> <span class="n">strategy</span> <span class="ow">in</span> <span class="n">strategies</span><span class="p">:</span> 
+    <span class="n">path</span> <span class="o">=</span> <span class="s">&#39;/Outputs/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span><span class="n">strategy</span><span class="p">,</span> <span class="n">derivative</span><span class="p">,</span>
+                                            <span class="n">site</span><span class="p">,</span><span class="n">sub</span><span class="p">,</span> <span class="n">derivative</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span>
+    
+    <span class="n">url</span> <span class="o">=</span> <span class="n">s3_prefix</span> <span class="o">+</span> <span class="n">path</span>
+    <span class="n">out_file</span> <span class="o">=</span> <span class="n">abide_dir</span> <span class="o">+</span> <span class="n">path</span>
+    <span class="n">out_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">out_folder</span><span class="p">):</span>
+      <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_folder</span><span class="p">)</span>    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">out_file</span><span class="p">):</span>
+      <span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">out_file</span><span class="p">);</span>
+      <span class="c">#!wget $url -O $out_file # (alternative to urllib command)</span>
+
+  <span class="c"># Get freesurfer data</span>
+
+  <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fs_paths</span><span class="p">:</span> 
+    <span class="n">path</span> <span class="o">=</span> <span class="s">&#39;/Outputs/freesurfer/5.1/</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">site</span><span class="p">,</span><span class="n">sub</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>  
+    <span class="n">url</span> <span class="o">=</span> <span class="n">s3_prefix</span> <span class="o">+</span> <span class="n">path</span>
+    <span class="n">out_file</span> <span class="o">=</span> <span class="n">abide_dir</span> <span class="o">+</span> <span class="n">path</span>
+    <span class="n">out_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">out_folder</span><span class="p">):</span>
+      <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_folder</span><span class="p">)</span>    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">out_file</span><span class="p">):</span>
+      <span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">out_file</span><span class="p">);</span>
+      <span class="c">#!wget $url -O $out_file # (alternative to urllib command)                    </span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ok, that&#39;s a wrap.</p>
+</div>
+</div>
+</div></p>
+</div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">
+        John Grif
+    </span>
+  </span>
+<time datetime="2015-11-24T00:00:00-08:00" pubdate>Tue 24 November 2015</time>  <span class="categories">
+    <a class='category' href='https://johngriffiths.github.io/LabNotebook/category/misc.html'>misc</a>
+  </span>
+  <span class="categories">
+    <a class="category" href="https://johngriffiths.github.io/LabNotebook/tag/pcp.html">PCP</a>  </span>
+</p><div class="sharing">
+</div>    </footer>
+  </article>
+
 </div>
 <aside class="sidebar">
   <section>
