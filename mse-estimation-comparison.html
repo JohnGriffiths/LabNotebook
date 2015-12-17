@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>JDG Lab Notebook</title>
+  <title>MSE Estimation Comparison &mdash; JDG Lab Notebook</title>
   <meta name="author" content="John D. Griffiths">
 
 
@@ -1712,6 +1712,8 @@ jQuery(document).ready(function($) {
 
 
 
+
+
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
@@ -1748,34 +1750,2592 @@ jQuery(document).ready(function($) {
     <li><a href="https://johngriffiths.github.io/LabNotebook/archives.html">Archives</a></li>
     <li><a href="https://github.com/JohnGriffiths/LabNotebook.html">Github repo</a></li>
     <li><a href="http://en.wikipedia.org/wiki/Open_notebook_science">Open Notebook Science</a></li>
-      <li >
+      <li class="active">
         <a href="https://johngriffiths.github.io/LabNotebook/category/misc.html">Misc</a>
       </li>
 </ul></nav>
   <div id="main">
     <div id="content">
-<div class="blog-index">
-  		<article>
+<div>
+  <article class="hentry" role="article">
 <header>
-      <h1 class="entry-title">
-        <a href="https://johngriffiths.github.io/LabNotebook/evoked-reponses-in-the-tvb-jansen-models.html">Evoked responses in the TVB Jansen models</a>
-      </h1>
+      <h1 class="entry-title">MSE Estimation Comparison</h1>
     <p class="meta">
-<time datetime="2015-09-24T00:00:00-07:00" pubdate>Thu 24 September 2015</time>    </p>
+<time datetime="2015-12-08T00:00:00-08:00" pubdate>Tue 08 December 2015</time>    </p>
 </header>
 
-<div class="entry-content">
+  <div class="entry-content"><p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-  <footer>
-    <a rel="full-article" href="https://johngriffiths.github.io/LabNotebook/evoked-reponses-in-the-tvb-jansen-models.html">Read On &crarr;</a>
-  </footer>
-  		</article>
-<div class="pagination">
-    <a class="prev" href="https://johngriffiths.github.io/LabNotebook/index8.html">&larr; Older</a>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong><em>Alternative versions: <a href="https://johngriffiths.github.io/LabNotebook/mse_estimation_comparison.html">LabNotebook</a>, <a href="http://nbviewer.ipython.org/urls/mse-estimation-comparison.s3-website-us-east-1.amazonaws.com/mse_estimation_comparison__html_nb.ipynb">nbviewer</a>, <a href="https://s3.amazonaws.com/nb-slideshows/mse_estimation_comparison__slides.slides.html">slideviewer</a>, <a href="https://mse_estimation_comparison.s3.http//mse-estimation-comparison.s3-website-us-east-1/mse_estimation_comparison__pdf_tidied.pdf">pdf</a></em></strong></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="contents">Contents</h3>
+<ul>
+<li><a href="#Summary-of-Results">Summary of Results</a><ul>
+<li><a href="#Overview">Overview</a></li>
+<li><a href="#Test-Data">Test Data</a></li>
+<li><a href="#MSE-Curves">MSE Curves</a></li>
+<li><a href="#Performance">Performance</a></li>
+<li><a href="#Conclusions">Conclusions</a></li>
+</ul>
+</li>
+<li><a href="#Analysis-Documentation-+-Code">Analysis Documentation + Code</a><ul>
+<li><a href="#Notebook-Setup">Notebook Setup</a></li>
+<li><a href="#Define-some-functions">Define some functions</a></li>
+<li><a href="#Test-1:-Random-sample">Test 1: Random sample</a></li>
+<li><a href="#Test-2:-Empirical-EEG-Data">Test 2: Empirical EEG Data</a></li>
+<li><a href="#Test-3:-Simulated-data">Test 3: Simulated data</a></li>
+<li><a href="#Benchmarking">Benchmarking</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Summary-of-Results">Summary of Results<a class="anchor-link" href="#Summary-of-Results">&#182;</a></h2>
+</div>
+</div>
+</div>
 
-    <a class="next" href="https://johngriffiths.github.io/LabNotebook/index6.html">Newer &rarr;</a>
-  <br />
-</div></div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Overview">Overview<a class="anchor-link" href="#Overview">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The following notes address a practical issue that arose in my research, namely that I had variously been using two different in-house tools for estimating MSE, inherited from two different individuals (i.e. I did not code them), and they were giving divergent results. One of these functions was written in matlab and one in python, and I needed a python option, as the MSE computation formed part of a suite of jobs intended for use with a large compute cluster, and these jobs were already using python to run tvb simulations. However, I also needed the results to be directly comparable to previous results with empirical data that had used the matlab code. So, I have ported the matlab code to python. The following sections present the new implementation, and some tests and comparisons. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Test-Data">Test Data<a class="anchor-link" href="#Test-Data">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We&#39;ll look at three test datasets: </p>
+<ol>
+<li>Random noise</li>
+<li>EEG data</li>
+<li>Synthetic neural data </li>
+</ol>
+<p>Here&#39;s what the time series look like:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/td1_10k_data.png&#39;</span>
+
+<span class="n">cap</span> <span class="o">=</span> \
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;Test Dataset 1 - time series&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">upload_file</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="c">#d(Image(f), width=&#39;100%&#39;)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://mse_estimation_comparison.s3.amazonaws.com/td1_10k_data.png" alt="broken link"                   title=" 
+. Test Dataset 1 - time series" height="800px" width="500px" />                   Test Dataset 1 - time series. 
+ </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/td2_avtr_data.png&#39;</span>
+
+<span class="n">cap</span> <span class="o">=</span> \
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;Test Dataset 2 - gran mean time series&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">upload_file</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="c">#d(Image(f), width=&#39;100%&#39;)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://mse_estimation_comparison.s3.amazonaws.com/td2_avtr_data.png" alt="broken link"                   title=" 
+. Test Dataset 2 - gran mean time series" height="800px" width="500px" />                   Test Dataset 2 - gran mean time series. 
+ </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/td3_avr_data.png&#39;</span>
+
+<span class="n">cap</span> <span class="o">=</span> \
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;Test Dataset 3 - grand mean time series&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">upload_file</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="c">#d(Image(f), width=&#39;100%&#39;)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://mse_estimation_comparison.s3.amazonaws.com/td3_avr_data.png" alt="broken link"                   title=" 
+. Test Dataset 3 - grand mean time series" height="800px" width="500px" />                   Test Dataset 3 - grand mean time series. 
+ </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="MSE-Curves">MSE Curves<a class="anchor-link" href="#MSE-Curves">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Random noise:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/td1_1k_mses.png&#39;</span>
+
+<span class="n">cap</span> <span class="o">=</span> \
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;Test Dataset 1 - mses&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">upload_file</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="c">#d(Image(f), width=&#39;100%&#39;)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://mse_estimation_comparison.s3.amazonaws.com/td1_1k_mses.png" alt="broken link"                   title=" 
+. Test Dataset 1 - mses" height="800px" width="500px" />                   Test Dataset 1 - mses. 
+ </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>EEG data:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/td2_avtr_mses.png&#39;</span>
+
+<span class="n">cap</span> <span class="o">=</span> \
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;Test Dataset 2 avtr - mses&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">upload_file</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="c">#d(Image(f), width=&#39;100%&#39;)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://mse_estimation_comparison.s3.amazonaws.com/td2_avtr_mses.png" alt="broken link"                   title=" 
+. Test Dataset 2 avtr - mses" height="800px" width="500px" />                   Test Dataset 2 avtr - mses. 
+ </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Synthetic data:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/td3_avr_mses.png&#39;</span>
+
+<span class="n">cap</span> <span class="o">=</span> \
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;Test Dataset 3 avr - mses&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">upload_file</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="c">#d(Image(f), width=&#39;100%&#39;)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://mse_estimation_comparison.s3.amazonaws.com/td3_avr_mses.png" alt="broken link"                   title=" 
+. Test Dataset 3 avr - mses" height="800px" width="500px" />                   Test Dataset 3 avr - mses. 
+ </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Performance">Performance<a class="anchor-link" href="#Performance">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Matlab and the TVB sample entropy function seem to be comparable, but at the moment my implementation of natasa&#39;s code is really slow.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">all_durs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">({</span><span class="s">&#39;td1&#39;</span><span class="p">:</span> <span class="n">df_td1_1k_durs</span><span class="p">,</span>
+                      <span class="s">&#39;td2 avtr&#39;</span><span class="p">:</span> <span class="n">df_td2_avtr_durs</span><span class="p">,</span> 
+                      <span class="s">&#39;td3 avt&#39;</span><span class="p">:</span> <span class="n">df_td3_avr_durs</span><span class="p">})</span>
+
+<span class="n">d</span><span class="p">(</span><span class="n">all_durs</span><span class="o">.</span><span class="n">unstack</span><span class="p">())</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="3" halign="left">duration</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>nkml</th>
+      <th>nkpy</th>
+      <th>tvb</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>td1</th>
+      <td>00:1.32</td>
+      <td>02:27</td>
+      <td>00:02</td>
+    </tr>
+    <tr>
+      <th>td2 avtr</th>
+      <td>00:0.31</td>
+      <td>00:21</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <th>td3 avt</th>
+      <td>00:0.13</td>
+      <td>00:05</td>
+      <td>00:00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Conclusions">Conclusions<a class="anchor-link" href="#Conclusions">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>(to add...)</em></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Analysis-Documentation-+-Code">Analysis Documentation + Code<a class="anchor-link" href="#Analysis-Documentation-+-Code">&#182;</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Notebook-Setup">Notebook Setup<a class="anchor-link" href="#Notebook-Setup">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Enable matlab in the notebook</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">load_ext</span> <span class="n">pymatbridge</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">Starting MATLAB on ZMQ socket ipc:///tmp/pymatbridge-f50fe9f8-965e-461c-a580-9bf758ce4e4b
+Send &apos;exit&apos; command to kill the server
+...................MATLAB started and connected!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Define some variables</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># put some system-specific variables in the namespace (&#39;le&#39; dict)</span>
+<span class="o">%</span><span class="k">run</span> <span class="o">~/</span><span class="n">set_localenv_vars</span><span class="o">.</span><span class="n">py</span>
+
+<span class="n">nb_name</span> <span class="o">=</span> <span class="s">&#39;mse_estimation_comparison&#39;</span>
+
+<span class="n">outdir</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">/notebooks/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">le</span><span class="p">[</span><span class="s">&#39;data_dir&#39;</span><span class="p">],</span> <span class="n">nb_name</span><span class="p">)</span>
+<span class="o">!</span>mkdir -p <span class="nv">$outdir</span>
+
+
+<span class="c"># Analysis stuff</span>
+
+<span class="n">tvb_dir</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s">&#39;code_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/libraries_of_others/github/tvb-pack&#39;</span>
+
+<span class="n">wfdb_dir</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s">&#39;code_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/libraries_of_others/misc&#39;</span>\
+                             <span class="s">&#39;/WFDB/wfdb-app-toolbox-0-9-9/mcode&#39;</span>
+
+<span class="n">eeglab_dir</span> <span class="o">=</span> <span class="s">&#39;/usr/share/matlab/site/m/eeglab11&#39;</span>
+
+<span class="n">empdat_dir</span> <span class="o">=</span>  <span class="n">le</span><span class="p">[</span><span class="s">&#39;data_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/copied_from_pales_jheisz_eeg_jen_Sternberg&#39;</span>\
+                              <span class="s">&#39;/Artifact_removal_results&#39;</span>
+
+<span class="n">empdat_file_orig</span> <span class="o">=</span> <span class="n">empdat_dir</span>  <span class="o">+</span> <span class="s">&#39;/st_01_exp10ym/del1.set&#39;</span>
+<span class="n">empdat_file</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span>  <span class="s">&#39;/st_01_exp10ym_del1.mat&#39;</span>
+
+<span class="n">simdat_dir</span> <span class="o">=</span>  <span class="n">le</span><span class="p">[</span><span class="s">&#39;data_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/notebooks/mse_brute_force_exploration/g2do_sims&#39;</span>
+<span class="n">simdat_file</span> <span class="o">=</span> <span class="n">simdat_dir</span> <span class="o">+</span> <span class="s">&#39;/mbfe_#182_ad6d923b-13c8-4aac-abe3-59b91645bb7d_res.h5&#39;</span>
+
+<span class="n">m2u</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">r2u</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">s2u</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">51</span><span class="p">)</span>
+
+<span class="n">mse_tools_file</span>  <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/mse_tools.py&#39;</span>
+
+<span class="c"># stuff for workdocs-cloudfiles</span>
+
+<span class="n">aws_key</span> <span class="o">=</span> <span class="s">&#39;drowssaperucesyreva&#39;</span>
+<span class="n">aws_secret</span> <span class="o">=</span> <span class="s">&#39;?teytidettopsuoyevah&#39;</span>  
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Importage</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># generic imports</span>
+
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">glob</span><span class="o">,</span><span class="nn">h5py</span><span class="o">,</span><span class="nn">inspect</span><span class="o">,</span><span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span><span class="o">,</span><span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">scipy.io</span> <span class="kn">import</span> <span class="n">savemat</span><span class="p">,</span><span class="n">loadmat</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">zscore</span>
+
+
+<span class="c"># visualization stuff</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span><span class="n">HTML</span><span class="p">,</span><span class="n">IFrame</span><span class="p">,</span><span class="n">clear_output</span><span class="p">,</span><span class="n">display</span> <span class="k">as</span> <span class="n">d</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+
+<span class="c"># tvb stuff</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span> <span class="o">+=</span> <span class="p">[</span><span class="n">tvb_dir</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;tvb-library&#39;</span><span class="p">,</span> <span class="s">&#39;tvb-data&#39;</span><span class="p">,</span> <span class="s">&#39;tvb-framework&#39;</span><span class="p">,</span>
+                                         <span class="s">&#39;matlab&#39;</span><span class="p">,</span> <span class="s">&#39;external-geodesic&#39;</span><span class="p">]]</span>
+<span class="kn">from</span> <span class="nn">tvb.analyzers.info</span> <span class="kn">import</span> <span class="n">sampen</span>
+
+
+
+<span class="c"># aws api and workdocs-cloudfiles stuff</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">le</span><span class="p">[</span><span class="s">&#39;ipynb_workdocs_dir&#39;</span><span class="p">])</span>
+<span class="kn">from</span> <span class="nn">new_utils</span> <span class="kn">import</span> <span class="n">nb_fig</span><span class="p">,</span><span class="n">cloudfiles_nb</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Grab Natasa&#39;s matlab function and put a copy in this notebook&#39;s output folder</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">nkmatfuncdir</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s">&#39;data_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/notebooks/reproducing_Heisz2015&#39;</span>
+<span class="o">!</span>cp <span class="nv">$nkmatfuncdir</span>/get_multiple_mse_curves_matlab.m <span class="nv">$outdir</span>/
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Add eeglab and wfdb toolboxes, plus outdir with some custom .m files, to matlab path</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">matlab</span> <span class="o">-</span><span class="n">i</span> <span class="n">wfdb_dir</span><span class="p">,</span><span class="n">eeglab_dir</span><span class="p">,</span><span class="n">outdir</span>
+<span class="n">addpath</span><span class="p">(</span><span class="n">wfdb_dir</span><span class="p">)</span>
+<span class="n">addpath</span><span class="p">(</span><span class="n">genpath</span><span class="p">(</span><span class="n">eeglab_dir</span><span class="p">))</span>
+<span class="n">addpath</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Initialize aws api and workdocs-cloudfiles folder</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cnb</span> <span class="o">=</span> <span class="n">cloudfiles_nb</span><span class="p">(</span><span class="s">&#39;aws&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">aws_key</span><span class="p">,</span><span class="n">aws_secret</span><span class="p">])</span>
+<span class="n">cnb</span><span class="o">.</span><span class="n">initialize_folder</span><span class="p">(</span><span class="n">nb_name</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Calico document tools</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">javascript</span>
+<span class="n">IPython</span><span class="o">.</span><span class="n">load_extensions</span><span class="p">(</span><span class="s">&#39;calico-spell-check&#39;</span><span class="p">,</span> <span class="s">&#39;calico-document-tools&#39;</span><span class="p">,</span>
+                        <span class="s">&#39;calico-cell-tools&#39;</span><span class="p">);</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+IPython.load_extensions('calico-spell-check', 'calico-document-tools',
+                        'calico-cell-tools');
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Go to output folder</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">matlab</span>
+<span class="n">cd</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ok, let&#39;s get cracking...</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Define-some-functions">Define some functions<a class="anchor-link" href="#Define-some-functions">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here is my python port of Natasa&#39;s <code>get_multiple_mse_curves_matlab.m</code> function. 
+For reference, the original matlab code is also given below. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">get_multiple_mse_curves_py</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">scales</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">override</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    
+  <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<span class="sd">  Port of get_multiple_mse_curves_matlab.m by Natasa Kovacevic. </span>
+<span class="sd">  </span>
+<span class="sd">  With additional annotations from JG explaining what&#39;s going on. </span>
+<span class="sd">  </span>
+<span class="sd">  Usage:   mse, scales = get_multiple_mse_curves_py(data,m,r,scales) </span>
+<span class="sd">  </span>
+<span class="sd">  Inputs:</span>
+<span class="sd">  </span>
+<span class="sd">     data     = time series data in (time variable) format, </span>
+<span class="sd">                e.g (time trial) or (time voxel)</span>
+<span class="sd">     m        = pattern length (default 2)</span>
+<span class="sd">     r        = similarity criterion (defualt 0.5)</span>
+<span class="sd">     scales   = vector of scales (default [1:(floor(size(data,1)/50))])</span>
+<span class="sd">     override = 0 or 1 (default is 0) - in some rare cases we want</span>
+<span class="sd">                to override this min50-rule</span>
+
+<span class="sd">  Outputs:</span>
+<span class="sd">  </span>
+<span class="sd">     mse      = entropy in (scale variable) format</span>
+<span class="sd">     scales   = return vector of scales actually used by the program</span>
+<span class="sd">     </span>
+<span class="sd">     </span>
+<span class="sd">  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<span class="sd">     </span>
+<span class="sd">     </span>
+<span class="sd">  JG Notes: </span>
+<span class="sd">  ---------</span>
+<span class="sd">  </span>
+<span class="sd">    ***Unfinished!***: not yet giving *exactly* the same outputs as the matlab code. </span>
+<span class="sd">                       The error in my port is in the construction of the &#39;cont&#39; array. </span>
+<span class="sd">                       </span>
+<span class="sd">    Speed: currently the python function runs incredibly slow compared to the</span>
+<span class="sd">           matlab function. I don&#39;t see any reason why this should be the case; </span>
+<span class="sd">           so need to identify where the slow parts are and improve. </span>
+<span class="sd">           </span>
+<span class="sd">    Redesign: once this function is working satisfactorily, I will probably move to a </span>
+<span class="sd">              modified version that separate the estimation of sample entropy from </span>
+<span class="sd">              the loops over scales and input variables. </span>
+<span class="sd">    </span>
+<span class="sd">  &quot;&quot;&quot;</span>
+    
+    
+  <span class="c"># Import numpy functions all individually so that the function calls</span>
+  <span class="c"># are as similar to the original matlab code as possible</span>
+  <span class="c"># (...so be warned this port is going to me more &#39;matlabic&#39; than &#39;pythonic&#39;...)</span>
+    
+  <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="p">(</span><span class="n">unique</span><span class="p">,</span><span class="n">floor</span><span class="p">,</span><span class="n">size</span><span class="p">,</span><span class="n">intersect1d</span><span class="p">,</span><span class="n">sort</span><span class="p">,</span>
+                     <span class="n">r_</span><span class="p">,</span><span class="n">std</span><span class="p">,</span><span class="n">mean</span><span class="p">,</span><span class="n">zeros</span><span class="p">,</span><span class="n">log</span><span class="p">,</span><span class="n">linspace</span><span class="p">,</span><span class="n">arange</span><span class="p">,</span><span class="nb">round</span><span class="p">)</span>
+    
+  <span class="n">num_tpts</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+  <span class="n">num_vars</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+  <span class="k">if</span> <span class="n">scales</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> 
+    <span class="n">scales</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">floor</span><span class="p">(</span><span class="n">num_tpts</span><span class="o">/</span><span class="mi">50</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  
+    
+  <span class="c"># make sure that scales are positive integers </span>
+  <span class="n">scales</span> <span class="o">=</span> <span class="n">sort</span><span class="p">(</span><span class="n">unique</span><span class="p">(</span><span class="n">scales</span><span class="p">));</span> <span class="c"># % sort scales in increasing order</span>
+      
+  <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">scales</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="n">scales</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">scales</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;error: scales vector must contain positive integers&#39;</span><span class="p">)</span> 
+    
+  <span class="k">if</span> <span class="n">override</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span> 
+     <span class="c"># make sure that scales are  &lt; (num_tpts/50)</span>
+     <span class="n">scales</span> <span class="o">=</span> <span class="n">sort</span><span class="p">(</span><span class="n">intersect1d</span><span class="p">(</span><span class="n">scales</span><span class="p">,</span><span class="n">r_</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">floor</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">50</span><span class="p">)]))</span>
+            
+  <span class="c"># normalize data and r</span>
+  <span class="n">sd</span> <span class="o">=</span> <span class="n">std</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+  <span class="n">r_new</span> <span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">sd</span>    
+
+  <span class="n">mse</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">scales</span><span class="p">),</span> <span class="n">num_vars</span><span class="p">])</span>
+            
+  <span class="c"># Note: </span>
+  <span class="c"># The matlab code uses the pattern length variable &#39;m&#39; </span>
+  <span class="c"># in two different ways: one related to array sizes, </span>
+  <span class="c"># and one related to array indexes. For the former, </span>
+  <span class="c"># the usage in python and matlab will be identicaly, </span>
+  <span class="c"># but for the latter python will use &#39;m-1&#39; (because </span>
+  <span class="c"># like most proper programming langauges, python </span>
+  <span class="c"># uses 0-based indexing). </span>
+  <span class="c"># This looks a little unusal in the indexing of the </span>
+  <span class="c"># &#39;cont&#39; array constructed at each scale, which has </span>
+  <span class="c"># size m+1, giving python array indices (but not </span>
+  <span class="c"># sizes) &#39;m-1+1&#39;. I has this rather than simplifying </span>
+  <span class="c"># it to &#39;m&#39; for the sake of clarity when comparing the </span>
+  <span class="c"># matlab and python code versions. </span>
+            
+  <span class="k">for</span> <span class="n">s</span><span class="p">,</span><span class="n">sc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">scales</span><span class="p">):</span>
+    
+    <span class="c"># coarse-grain time series at this scale</span>
+    <span class="n">num_cg_tpts</span> <span class="o">=</span> <span class="n">floor</span><span class="p">(</span><span class="n">num_tpts</span><span class="o">/</span><span class="n">sc</span><span class="p">)</span>   
+    <span class="n">y</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">([</span><span class="n">num_cg_tpts</span><span class="p">,</span> <span class="n">num_vars</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">r_</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">num_cg_tpts</span><span class="p">]:</span>
+      <span class="n">y</span><span class="p">[</span><span class="n">t</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">[(</span><span class="n">t</span><span class="o">*</span><span class="n">sc</span> <span class="o">+</span> <span class="n">r_</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">sc</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),:],</span><span class="mi">0</span><span class="p">)</span>
+        
+    <span class="c"># calculate sample entropy of coarse grained time series y</span>
+    <span class="n">nlin_sc</span> <span class="o">=</span> <span class="n">num_cg_tpts</span> <span class="o">-</span> <span class="n">m</span>       
+    <span class="n">cont</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">([</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">num_vars</span><span class="p">]);</span>  
+    
+    <span class="c"># The i and l loops define shifting pairs of points with incrementally increasing </span>
+    <span class="c"># starting points and gaps between </span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">r_</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">num_vars</span><span class="p">]:</span>
+      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r_</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">nlin_sc</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">r_</span><span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span><span class="n">nlin_sc</span><span class="p">]:</span> <span class="c"># self-matches are not counted</span>
+        
+          <span class="c">#% calculate sample entropy of coarse grained time series y</span>
+          <span class="n">k</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+          <span class="k">while</span> <span class="p">((</span><span class="n">k</span> <span class="o">&lt;=</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">k</span><span class="p">,</span><span class="n">var</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">l</span><span class="o">+</span><span class="n">k</span><span class="p">,</span><span class="n">var</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">r_new</span><span class="p">[</span><span class="n">var</span><span class="p">])):</span>
+            <span class="c"># c1,c2,targ = 0,0,0</span>
+            <span class="c">#  while c1 &amp; c2 &lt;= targ:</span>
+            <span class="c">#  targ = r_new[var]</span>
+            <span class="c">#  c1 = (k &lt;= m-1)</span>
+            <span class="c">#  c2 = abs(y[i+k,var] - y[l+k,var])</span>
+            <span class="c">#  #while ((k &lt;= m-1) &amp; (abs(y[i+k,var] - y[l+k,var]) &lt;= r_new[var])):</span>
+            <span class="n">k</span><span class="o">+=</span><span class="mi">1</span> 
+            <span class="n">cont</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">var</span><span class="p">]</span> <span class="o">+=</span><span class="mi">1</span>
+            
+    <span class="c"># calculate mse at this scale</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">r_</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">num_vars</span><span class="p">]:</span>
+      <span class="k">if</span> <span class="n">cont</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">var</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">cont</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">var</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">mse</span><span class="p">[</span><span class="n">s</span><span class="p">,</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">((</span><span class="n">nlin_sc</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">nlin_sc</span> <span class="o">-</span><span class="mi">1</span><span class="p">)));</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="n">mse</span><span class="p">[</span><span class="n">s</span><span class="p">,</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">log</span><span class="p">(</span><span class="n">cont</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">var</span><span class="p">]</span><span class="o">/</span><span class="n">cont</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">var</span><span class="p">])</span>
+      
+  <span class="k">return</span> <span class="n">mse</span><span class="p">,</span><span class="n">scales</span>
+    
+    
+    
+    
+<span class="k">def</span> <span class="nf">gmmcs_nkpy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">scales</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">override</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    
+  <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+  <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">r_</span>
+    
+  <span class="k">if</span> <span class="n">scales</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> <span class="n">scales</span> <span class="o">=</span> <span class="n">r_</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>    
+    
+  <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+
+  <span class="n">mse</span><span class="p">,</span><span class="n">scales</span> <span class="o">=</span> <span class="n">get_multiple_mse_curves_py</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span><span class="n">scales</span><span class="o">=</span><span class="n">scales</span><span class="p">,</span><span class="n">override</span><span class="o">=</span><span class="n">override</span><span class="p">)</span>
+
+  <span class="n">finish</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+  <span class="n">dur</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">finish</span><span class="o">-</span><span class="n">start</span><span class="p">)</span>      
+        
+  <span class="k">return</span> <span class="n">mse</span><span class="p">,</span><span class="n">scales</span><span class="p">,</span><span class="n">dur</span>
+    
+    
+    
+    
+<span class="k">def</span> <span class="nf">gmmcs_tvb</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">scales</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">qse</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>    
+  
+  <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+  <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">r_</span><span class="p">,</span><span class="n">newaxis</span><span class="p">,</span><span class="n">ndim</span>
+
+  <span class="k">if</span> <span class="n">scales</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> <span class="n">scales</span> <span class="o">=</span> <span class="n">r_</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>    
+    
+  <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+
+  <span class="k">if</span> <span class="n">ndim</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="n">data</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">data</span><span class="p">)[:,</span><span class="n">newaxis</span><span class="p">]</span>    
+        
+  <span class="n">mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sampen</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="n">roi</span><span class="p">],</span> <span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span><span class="n">taus</span><span class="o">=</span><span class="n">scales</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span><span class="n">qse</span><span class="o">=</span><span class="n">qse</span><span class="p">)</span>
+                  <span class="k">for</span> <span class="n">roi</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span><span class="c">#,qse=False,m=2.)    </span>
+  
+  <span class="n">finish</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+  <span class="n">dur</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">finish</span><span class="o">-</span><span class="n">start</span><span class="p">)</span>      
+        
+  <span class="k">return</span> <span class="n">mse</span><span class="p">,</span><span class="n">scales</span><span class="p">,</span><span class="n">dur</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<pre><code class="language-matlab"><span class="function"><span class="keyword">function</span> <span class="params">[mse, scales]</span>= <span class="title">get_multiple_mse_curves_matlab</span><span class="params">(data,m,r,scales,override)</span> </span>
+
+<span class="comment">% $$$ Written by Natasha Kovacevic - based on M. Costa's C code - simplified - skipped all sorts of command line options  - here we simultaneously get mse curves across trials or voxels
+% $$$ Usage:   [mse, scales]= get_multiple_mse_curves_matlab(data,m,r,scales) 
+% $$$ Inputs:</span>
+<span class="comment">% $$$   data = time sereis data in (time variable) format, e.g (time trial) or (time voxel)
+% $$$   m = pattern length (default 2)
+% $$$   r = similarity criterion (defualt 0.5)</span>
+<span class="comment">% $$$   scales = vector of scales (default [1:(floor(size(data,1)/50))])
+% $$$   override = 0 or 1 (default is 0) - in some rare cases we want to oveeride this min50-rule
+% $$$ Outputs:</span>
+<span class="comment">% $$$   mse = entropy in (scale variable) format
+% $$$   scales = return vector of scales actually used by the program</span>
+
+
+    num_tpts = <span class="built_in">size</span>(data,<span class="number">1</span>);
+    num_vars = <span class="built_in">size</span>(data,<span class="number">2</span>);
+    <span class="keyword">if</span> ~exist(<span class="string">'m'</span>,<span class="string">'var'</span>), m=<span class="number">2</span>; <span class="keyword">end</span>
+    <span class="keyword">if</span> ~exist(<span class="string">'r'</span>,<span class="string">'var'</span>), r=<span class="number">0.5</span>; <span class="keyword">end</span>
+    <span class="keyword">if</span> ~exist(<span class="string">'scales'</span>,<span class="string">'var'</span>), scales = <span class="matrix">[<span class="number">1</span>:(floor(num_tpts/<span class="number">50</span>))]</span> ; <span class="keyword">end</span>
+
+    <span class="comment">% make sure that scales are positive integers </span>
+    scales = sort(unique(scales)); <span class="comment">% sort scales in increasing order</span>
+    <span class="keyword">if</span> sum(scales == <span class="built_in">round</span>(scales)) ~= <span class="built_in">numel</span>(scales)
+      error(<span class="string">'scales vector must contain positive integers'</span>);
+    <span class="keyword">end</span>
+
+    <span class="keyword">if</span> exist(<span class="string">'override'</span>,<span class="string">'var'</span>) 
+      <span class="keyword">if</span> ~override      
+        <span class="comment">% make sure that scales are  &lt; (num_tpts/50)</span>
+        scales = sort(intersect(scales,<span class="matrix">[<span class="number">1</span>:(floor(size(data,<span class="number">1</span>)/<span class="number">50</span>))]</span>));
+      <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+
+    <span class="comment">% mormalize data and r</span>
+    sd = std(data,<span class="matrix">[]</span>,<span class="number">1</span>);
+    r_new = r * sd;
+
+    mse = <span class="built_in">zeros</span>(<span class="built_in">numel</span>(scales),num_vars); <span class="comment">%(scale var)</span>
+    <span class="keyword">for</span> s=<span class="number">1</span>:<span class="built_in">numel</span>(scales)
+      sc = scales(s);
+
+      <span class="comment">% coarse grind time series at this scale</span>
+      num_cg_tpts = <span class="built_in">floor</span>(num_tpts/sc);
+      y = <span class="built_in">zeros</span>(num_cg_tpts, num_vars);
+      <span class="keyword">for</span> t = <span class="number">1</span>:num_cg_tpts
+        y(t,:) = mean(data((t-<span class="number">1</span>)*sc + <span class="matrix">[<span class="number">1</span>:sc]</span>,:),<span class="number">1</span>);
+      <span class="keyword">end</span> 
+
+      <span class="comment">% calculate sample entropy of coarse ground time series y</span>
+      nlin_sc = num_cg_tpts - m;
+      cont = <span class="built_in">zeros</span>(m+<span class="number">1</span>,num_vars);
+      <span class="keyword">for</span> var = <span class="number">1</span>:num_vars
+        <span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:nlin_sc
+          <span class="keyword">for</span> l = (<span class="built_in">i</span>+<span class="number">1</span>):nlin_sc <span class="comment">% self-matches are not counted</span>
+            k = <span class="number">0</span>;
+            <span class="keyword">while</span> ((k &lt; m) &amp; (<span class="built_in">abs</span>(y(<span class="built_in">i</span>+k,var) - y(l+k,var)) &lt;= r_new(var)))
+              k = k + <span class="number">1</span>;
+              cont(k,var) = cont(k,var) + <span class="number">1</span>; 
+            <span class="keyword">end</span>
+            <span class="keyword">if</span> ((k == m) &amp; (<span class="built_in">abs</span>(y(<span class="built_in">i</span>+m,var) - y(l+m,var)) &lt;= r_new(var)))
+              cont(m+<span class="number">1</span>,var) = cont(m+<span class="number">1</span>,var) + <span class="number">1</span>;
+            <span class="keyword">end</span>
+          <span class="keyword">end</span>
+        <span class="keyword">end</span>          
+      <span class="keyword">end</span>
+
+      <span class="comment">% calculate mse at this scale</span>
+      <span class="keyword">for</span> var = <span class="number">1</span>:num_vars
+        <span class="keyword">if</span> (cont(m+<span class="number">1</span>,var) == <span class="number">0</span> | cont(m,var) == <span class="number">0</span>)
+          mse(s,var) = -<span class="built_in">log</span>(<span class="number">1</span>/((nlin_sc)*(nlin_sc -<span class="number">1</span>)));
+        <span class="keyword">else</span>
+          mse(s,var) = -<span class="built_in">log</span>(cont(m+<span class="number">1</span>,var)/cont(m,var));
+        <span class="keyword">end</span>
+      <span class="keyword">end</span> 
+
+    <span class="keyword">end</span> <span class="comment">% for s=1:numel(scales)</span>
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Test-1:-Random-sample">Test 1: Random sample<a class="anchor-link" href="#Test-1:-Random-sample">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Define the data</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">td1_10k_dat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">10000</span><span class="p">)[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">df_td1_10k_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">td1_10k_dat</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">td1_1k_dat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">1000</span><span class="p">)[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">df_td1_1k_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">td1_1k_dat</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Plot the data</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/td1_10k_data.png&#39;</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="n">df_td1_10k_dat</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="mi">500</span><span class="p">:</span><span class="mi">1500</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> 
+                             <span class="n">legend</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&#39;Random Time Series&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+
+<span class="n">cap</span> <span class="o">=</span> \
+<span class="sd">&quot;&quot;&quot;1000 data points from the 30000 random data </span>
+<span class="sd">test dataset.&quot;&quot;&quot;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;Test Dataset 1 time series&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://mse_estimation_comparison.s3.amazonaws.com/td1_10k_data.png" alt="broken link"                   title=" 1000 data points from the 1`0000 random data 
+test dataset.. Test Dataset 1 time series" height="800px" width="500px" />                   Test Dataset 1 time series. 1000 data points from the 1`0000 random data 
+test dataset. </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Compute MSE in matlab with original NK function</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">td1_1k_nkml_matfile</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/td1_1k_nkml_test.mat&#39;</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">matlab</span> <span class="o">-</span><span class="n">i</span> <span class="n">td1_1k_dat</span><span class="p">,</span><span class="n">td1_1k_nkml_matfile</span><span class="p">,</span><span class="n">m2u</span><span class="p">,</span><span class="n">r2u</span><span class="p">,</span><span class="n">s2u</span> <span class="o">-</span><span class="n">o</span> <span class="n">td1_1k_nkml_mse</span><span class="p">,</span><span class="n">td1_1k_nkml_scales</span><span class="p">,</span><span class="n">td1_1k_nkml_dur</span>
+
+<span class="n">tic</span>
+<span class="p">[</span><span class="n">td1_1k_nkml_mse</span><span class="p">,</span><span class="n">td1_1k_nkml_scales</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_multiple_mse_curves_matlab</span><span class="p">(</span><span class="n">td1_1k_dat</span><span class="p">,</span><span class="n">m2u</span><span class="p">,</span><span class="n">r2u</span><span class="p">,</span><span class="n">s2u</span><span class="p">);</span>
+<span class="n">td1_1k_nkml_dur</span><span class="o">=</span><span class="n">toc</span><span class="p">;</span>
+
+<span class="n">save</span><span class="p">(</span><span class="n">td1_1k_nkml_matfile</span><span class="p">,</span><span class="s">&#39;td1_1k_dat&#39;</span><span class="p">,</span> <span class="s">&#39;td1_1k_nkml_mse&#39;</span><span class="p">,</span> <span class="s">&#39;td1_1k_nkml_scales&#39;</span><span class="p">,</span> <span class="s">&#39;td1_1k_nkml_dur&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_td1_1k_nkml_mse</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">td1_1k_nkml_mse</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                                  <span class="n">index</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">td1_1k_nkml_scales</span><span class="o">.</span><span class="n">copy</span><span class="p">()))</span><span class="o">.</span><span class="n">T</span>
+<span class="n">df_td1_1k_nkml_mse</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;scale&#39;</span><span class="p">]</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Compute MSE in python with ported NK function</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">td1_1k_nkpy_mse</span><span class="p">,</span><span class="n">td1_1k_nkpy_sc</span><span class="p">,</span><span class="n">td1_1k_nkpy_dur</span> <span class="o">=</span> <span class="n">gmmcs_nkpy</span><span class="p">(</span><span class="n">td1_1k_dat</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="n">m2u</span><span class="p">,</span>
+                                                            <span class="n">r</span><span class="o">=</span><span class="n">r2u</span><span class="p">,</span><span class="n">scales</span><span class="o">=</span><span class="n">s2u</span><span class="p">)</span>
+
+
+<span class="n">df_td1_1k_nkpy_mse</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">td1_1k_nkpy_mse</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">td1_1k_nkpy_sc</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">df_td1_1k_nkpy_mse</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;scale&#39;</span><span class="p">]</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Compute MSE in python using TVB <code>sampen</code> function</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">td1_1k_tvb_mse</span><span class="p">,</span><span class="n">td1_1k_tvb_sc</span><span class="p">,</span><span class="n">td1_1k_tvb_dur</span> <span class="o">=</span> <span class="n">gmmcs_tvb</span><span class="p">(</span><span class="n">td1_1k_dat</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="n">m2u</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="n">r2u</span><span class="p">,</span><span class="n">scales</span><span class="o">=</span><span class="n">s2u</span><span class="p">)</span>
+<span class="n">df_td1_1k_tvb_mse</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">td1_1k_tvb_mse</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">td1_1k_tvb_sc</span><span class="p">)</span>
+<span class="n">df_td1_1k_tvb_mse</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;scale&#39;</span><span class="p">]</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Plot the three MSE curves together</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/td1_1k_mses.png&#39;</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">df_td1_1k_tvb_mse</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span> <span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">df_td1_1k_nkml_mse</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">df_td1_1k_nkpy_mse</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;cyan&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">&#39;Test Dataset 1 MSE curves&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+
+<span class="n">cap</span> <span class="o">=</span> \
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;Test Dataset 1 - All MSEs&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="c">#d(Image(f), width=&#39;100%&#39;)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://mse_estimation_comparison.s3.amazonaws.com/td1_1k_mses.png" alt="broken link"                   title=" 
+. Test Dataset 1 - All MSEs" height="800px" width="500px" />                   Test Dataset 1 - All MSEs. 
+ </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Durations:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Something like this</span>
+<span class="n">tmp1</span> <span class="o">=</span> <span class="s">&#39;00:</span><span class="si">%.2f</span><span class="s">&#39;</span> <span class="o">%</span><span class="k">td1_1k_nkml_dur</span>
+<span class="n">tmp2</span> <span class="o">=</span> <span class="s">&#39;:&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">td1_1k_nkpy_dur</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">tmp3</span> <span class="o">=</span> <span class="s">&#39;:&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">td1_1k_tvb_dur</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">df_td1_1k_durs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">tmp1</span><span class="p">,</span><span class="n">tmp2</span><span class="p">,</span><span class="n">tmp3</span><span class="p">]),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;nkml&#39;</span><span class="p">,</span> <span class="s">&#39;nkpy&#39;</span><span class="p">,</span> <span class="s">&#39;tvb&#39;</span><span class="p">])</span>
+<span class="n">df_td1_1k_durs</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;duration&#39;</span><span class="p">]</span>
+<span class="n">d</span><span class="p">(</span><span class="n">df_td1_1k_durs</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>nkml</th>
+      <td>00:1.32</td>
+    </tr>
+    <tr>
+      <th>nkpy</th>
+      <td>02:27</td>
+    </tr>
+    <tr>
+      <th>tvb</th>
+      <td>00:02</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Save to file</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_td1_1k_dat</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/df_td1_1k_dat.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_td1_1k_nkml_mse</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/df_td1_1k_nkml_mse.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_td1_1k_nkpy_mse</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/df_td1_1k_nkpy_mse.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_td1_1k_tvb_mse</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/df_td1_1k_tvb_mse.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_td1_1k_durs</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/df_td1_1k_durs.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Test-2:-Empirical-EEG-Data">Test 2: Empirical EEG Data<a class="anchor-link" href="#Test-2:-Empirical-EEG-Data">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Grab the data, convert from original eeglab format, and save as a standard matlab array. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">fdir</span><span class="p">,</span><span class="n">fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">empdat_file_orig</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">matlab</span> <span class="o">-</span><span class="n">i</span> <span class="n">eeglab_dir</span><span class="p">,</span><span class="n">fdir</span><span class="p">,</span><span class="n">fname</span><span class="p">,</span><span class="n">empdat_file</span>
+
+<span class="n">addpath</span><span class="p">(</span><span class="n">genpath</span><span class="p">(</span><span class="n">eeglab_dir</span><span class="p">))</span>
+
+<span class="n">eeg</span> <span class="o">=</span> <span class="n">pop_loadset</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="n">fdir</span><span class="p">);</span>
+<span class="n">eeg</span> <span class="o">=</span> <span class="n">eeg_checkset</span><span class="p">(</span><span class="n">eeg</span><span class="p">);</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">double</span><span class="p">(</span><span class="n">eeg</span><span class="o">.</span><span class="n">data</span><span class="p">);</span>
+
+<span class="n">save</span><span class="p">(</span><span class="n">empdat_file</span><span class="p">,</span> <span class="s">&#39;data&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">td2_dat</span> <span class="o">=</span> <span class="n">loadmat</span><span class="p">(</span><span class="n">empdat_file</span><span class="p">,</span> <span class="n">struct_as_record</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                 <span class="n">squeeze_me</span><span class="o">=</span><span class="bp">True</span><span class="p">)[</span><span class="s">&#39;data&#39;</span><span class="p">]</span>
+
+<span class="n">td2_avt_dat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">td2_dat</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">td2_avtr_dat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">td2_avt_dat</span><span class="p">,</span><span class="mi">1</span><span class="p">)[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+<span class="n">df_td2_avt_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">td2_avt_dat</span><span class="p">)</span>
+<span class="n">df_td2_avtr_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">td2_avtr_dat</span><span class="p">)</span>
+<span class="n">df_td2_avtch1_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">td2_avt_dat</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Z-scored ones; not sure if using...</span>
+
+<span class="n">Z_td2_dat</span> <span class="o">=</span> <span class="n">zscore</span><span class="p">(</span><span class="n">td2_dat</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Z_td2_avt_dat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Z_td2_dat</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">Z_td2_avtr_dat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Z_td2_avt_dat</span><span class="p">,</span><span class="mi">1</span><span class="p">)[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+<span class="n">df_Z_td2_avt_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Z_td2_avt_dat</span><span class="p">)</span>
+<span class="n">df_Z_td2_avtr_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Z_td2_avtr_dat</span><span class="p">)</span>
+<span class="n">df_Z_td2_avtch1_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Z_td2_avt_dat</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/td2_avtr_data.png&#39;</span>
+
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="n">df_td2_avtr_dat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">&#39;EEG grand mean time series&#39;</span><span class="p">,</span> 
+                     <span class="n">legend</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">cap</span> <span class="o">=</span> \
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;EEG grand mean time series&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="c">#d(Image(f), width=&#39;100%&#39;)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://mse_estimation_comparison.s3.amazonaws.com/td2_avtr_data.png" alt="broken link"                   title=" 
+. EEG grand mean time series" height="800px" width="500px" />                   EEG grand mean time series. 
+ </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Compute MSE with matlab</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">td2_avtr_nkml_matfile</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/td2_avtr_nkml_test.mat&#39;</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">matlab</span> <span class="o">-</span><span class="n">i</span> <span class="n">td2_avtr_dat</span><span class="p">,</span><span class="n">td2_avtr_nkml_matfile</span><span class="p">,</span><span class="n">m2u</span><span class="p">,</span><span class="n">r2u</span><span class="p">,</span><span class="n">s2u</span> <span class="o">-</span><span class="n">o</span> <span class="n">td2_avtr_nkml_mse</span><span class="p">,</span><span class="n">td2_avtr_nkml_scales</span><span class="p">,</span><span class="n">td2_avtr_nkml_dur</span>
+
+<span class="n">tic</span>
+<span class="p">[</span><span class="n">td2_avtr_nkml_mse</span><span class="p">,</span><span class="n">td2_avtr_nkml_scales</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_multiple_mse_curves_matlab</span><span class="p">(</span><span class="n">td2_avtr_dat</span><span class="p">,</span><span class="n">m2u</span><span class="p">,</span><span class="n">r2u</span><span class="p">,</span><span class="n">s2u</span><span class="p">);</span>
+<span class="n">td2_avtr_nkml_dur</span><span class="o">=</span><span class="n">toc</span><span class="p">;</span>
+
+<span class="n">save</span><span class="p">(</span><span class="n">td2_avtr_nkml_matfile</span><span class="p">,</span><span class="s">&#39;td2_avtr_dat&#39;</span><span class="p">,</span> <span class="s">&#39;td2_avtr_nkml_mse&#39;</span><span class="p">,</span> <span class="s">&#39;td2_avtr_nkml_scales&#39;</span><span class="p">,</span> <span class="s">&#39;td2_avtr_nkml_dur&#39;</span><span class="p">,</span> <span class="s">&#39;m2u&#39;</span><span class="p">,</span> <span class="s">&#39;r2u&#39;</span><span class="p">,</span> <span class="s">&#39;s2u&#39;</span><span class="p">);</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_td2_avtr_nkml_mse</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">td2_avtr_nkml_mse</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span><span class="n">index</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">td2_avtr_nkml_scales</span><span class="o">.</span><span class="n">copy</span><span class="p">()))</span><span class="o">.</span><span class="n">T</span>
+<span class="n">df_td2_avtr_nkml_mse</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;scale&#39;</span><span class="p">]</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Compute MSE with ported python function</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">td2_avtr_nkpy_mse</span><span class="p">,</span><span class="n">td2_avtr_nkpy_sc</span><span class="p">,</span><span class="n">td2_avtr_nkpy_dur</span> <span class="o">=</span> <span class="n">gmmcs_nkpy</span><span class="p">(</span><span class="n">td2_avtr_dat</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="n">m2u</span><span class="p">,</span>
+                                                            <span class="n">r</span><span class="o">=</span><span class="n">r2u</span><span class="p">,</span><span class="n">scales</span><span class="o">=</span><span class="n">s2u</span><span class="p">)</span>
+
+<span class="n">df_td2_avtr_nkpy_mse</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">td2_avtr_nkpy_mse</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">td2_avtr_nkpy_sc</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">df_td2_avtr_nkpy_mse</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;scale&#39;</span><span class="p">]</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Compute MSE with TVB</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">td2_avtr_tvb_mse</span><span class="p">,</span><span class="n">td2_avtr_tvb_sc</span><span class="p">,</span><span class="n">td2_avtr_tvb_dur</span> <span class="o">=</span> <span class="n">gmmcs_tvb</span><span class="p">(</span><span class="n">td2_avtr_dat</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="n">m2u</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="n">r2u</span><span class="p">,</span><span class="n">scales</span><span class="o">=</span><span class="n">s2u</span><span class="p">)</span>
+<span class="n">df_td2_avtr_tvb_mse</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">td2_avtr_tvb_mse</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">td2_avtr_tvb_sc</span><span class="p">)</span>
+<span class="n">df_td2_avtr_tvb_mse</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;scale&#39;</span><span class="p">]</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Plot the three sets of MSE curves</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/td2_avtr_mses.png&#39;</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">df_td2_avtr_tvb_mse</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span> <span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">df_td2_avtr_nkml_mse</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">df_td2_avtr_nkpy_mse</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;cyan&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="c">#ax.set_xlim([0,50])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="n">cap</span> <span class="o">=</span> \
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;Test Dataset 2 grand mean MSEs&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="c">#d(Image(f), width=&#39;100%&#39;)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://mse_estimation_comparison.s3.amazonaws.com/td2_avtr_mses.png" alt="broken link"                   title=" 
+. Test Dataset 2 grand mean MSEs" height="800px" width="500px" />                   Test Dataset 2 grand mean MSEs. 
+ </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Durations</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Something like this</span>
+<span class="n">tmp1</span> <span class="o">=</span> <span class="s">&#39;00:</span><span class="si">%.2f</span><span class="s">&#39;</span> <span class="o">%</span><span class="k">td2_avtr_nkml_dur</span>
+<span class="n">tmp2</span> <span class="o">=</span> <span class="s">&#39;:&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">td2_avtr_nkpy_dur</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">tmp3</span> <span class="o">=</span> <span class="s">&#39;:&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">td2_avtr_tvb_dur</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">df_td2_avtr_durs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">tmp1</span><span class="p">,</span><span class="n">tmp2</span><span class="p">,</span><span class="n">tmp3</span><span class="p">]),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;nkml&#39;</span><span class="p">,</span> <span class="s">&#39;nkpy&#39;</span><span class="p">,</span> <span class="s">&#39;tvb&#39;</span><span class="p">])</span>
+<span class="n">df_td2_avtr_durs</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;duration&#39;</span><span class="p">]</span>
+<span class="n">d</span><span class="p">(</span><span class="n">df_td2_avtr_durs</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>nkml</th>
+      <td>00:0.31</td>
+    </tr>
+    <tr>
+      <th>nkpy</th>
+      <td>00:21</td>
+    </tr>
+    <tr>
+      <th>tvb</th>
+      <td>00:00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Save to file</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_td2_avtr_dat</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/df_td2_avtr_dat.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_td2_avtr_nkml_mse</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/df_td2_avtr_nkml_mse.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_td2_avtr_nkpy_mse</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/df_td2_avtr_nkpy_mse.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_td2_avtr_tvb_mse</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/df_td2_avtr_tvb_mse.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_td2_avtr_durs</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/df_td2_avtr_durs.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Test-3:-Simulated-data">Test 3: Simulated data<a class="anchor-link" href="#Test-3:-Simulated-data">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Load in the data</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">simdat_file</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+
+<span class="n">td3_dat</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s">&#39;tavg_dat&#39;</span><span class="p">][:]</span>
+<span class="n">td3_ts</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s">&#39;tavg_ts&#39;</span><span class="p">][:]</span>
+
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="n">td3_avr_dat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">td3_dat</span><span class="p">,</span><span class="mi">1</span><span class="p">)[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+<span class="n">df_td3_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">td3_dat</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="n">td3_ts</span><span class="p">)</span>
+<span class="n">df_td3_avr_dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">td3_avr_dat</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="n">td3_ts</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/td3_avr_data.png&#39;</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">df_td3_avr_dat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">cap</span> <span class="o">=</span> \
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;Test Dataset 3 time series&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="c">#d(Image(f), width=&#39;100%&#39;)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://mse_estimation_comparison.s3.amazonaws.com/td3_avr_data.png" alt="broken link"                   title=" 
+. Test Dataset 3 time series" height="800px" width="500px" />                   Test Dataset 3 time series. 
+ </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Compute MSE with matlab</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">td3_avr_nkml_matfile</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/td3_avr_nkml_test.mat&#39;</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">matlab</span> <span class="o">-</span><span class="n">i</span> <span class="n">td3_avr_dat</span><span class="p">,</span><span class="n">td3_avr_nkml_matfile</span><span class="p">,</span><span class="n">m2u</span><span class="p">,</span><span class="n">r2u</span><span class="p">,</span><span class="n">s2u</span> <span class="o">-</span><span class="n">o</span> <span class="n">td3_avr_nkml_mse</span><span class="p">,</span><span class="n">td3_avr_nkml_scales</span><span class="p">,</span><span class="n">td3_avr_nkml_dur</span>
+
+<span class="n">tic</span>
+<span class="p">[</span><span class="n">td3_avr_nkml_mse</span><span class="p">,</span><span class="n">td3_avr_nkml_scales</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_multiple_mse_curves_matlab</span><span class="p">(</span><span class="n">td3_avr_dat</span><span class="p">,</span><span class="n">m2u</span><span class="p">,</span><span class="n">r2u</span><span class="p">,</span><span class="n">s2u</span><span class="p">);</span>
+<span class="n">td3_avr_nkml_dur</span><span class="o">=</span><span class="n">toc</span><span class="p">;</span>
+
+<span class="n">save</span><span class="p">(</span><span class="n">td3_avr_nkml_matfile</span><span class="p">,</span><span class="s">&#39;td3_avr_dat&#39;</span><span class="p">,</span> <span class="s">&#39;td3_avr_nkml_mse&#39;</span><span class="p">,</span> <span class="s">&#39;td3_avr_nkml_scales&#39;</span><span class="p">,</span> <span class="s">&#39;td3_avr_nkml_dur&#39;</span><span class="p">,</span> <span class="s">&#39;m2u&#39;</span><span class="p">,</span> <span class="s">&#39;r2u&#39;</span><span class="p">,</span> <span class="s">&#39;s2u&#39;</span><span class="p">);</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_td3_avr_nkml_mse</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">td3_avr_nkml_mse</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span><span class="n">index</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">td3_avr_nkml_scales</span><span class="o">.</span><span class="n">copy</span><span class="p">()))</span><span class="o">.</span><span class="n">T</span>
+<span class="n">df_td3_avr_nkml_mse</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;scale&#39;</span><span class="p">]</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Compute MSE with python-ported function</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">td3_avr_nkpy_mse</span><span class="p">,</span><span class="n">td3_avr_nkpy_sc</span><span class="p">,</span><span class="n">td3_avr_nkpy_dur</span> <span class="o">=</span> <span class="n">gmmcs_nkpy</span><span class="p">(</span><span class="n">td3_avr_dat</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="n">m2u</span><span class="p">,</span>
+                                                            <span class="n">r</span><span class="o">=</span><span class="n">r2u</span><span class="p">,</span><span class="n">scales</span><span class="o">=</span><span class="n">s2u</span><span class="p">)</span>
+
+<span class="n">df_td3_avr_nkpy_mse</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">td3_avr_nkpy_mse</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">td3_avr_nkpy_sc</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">df_td3_avr_nkpy_mse</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;scale&#39;</span><span class="p">]</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Compute MSE with TVB function</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">td3_avr_tvb_mse</span><span class="p">,</span><span class="n">td3_avr_tvb_sc</span><span class="p">,</span><span class="n">td3_avr_tvb_dur</span> <span class="o">=</span> <span class="n">gmmcs_tvb</span><span class="p">(</span><span class="n">td3_avr_dat</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="n">m2u</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="n">r2u</span><span class="p">,</span><span class="n">scales</span><span class="o">=</span><span class="n">s2u</span><span class="p">)</span>
+<span class="n">df_td3_avr_tvb_mse</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">td3_avr_tvb_mse</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">td3_avr_tvb_sc</span><span class="p">)</span>
+<span class="n">df_td3_avr_tvb_mse</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;scale&#39;</span><span class="p">]</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Plot the three sets of curves together</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/td3_avr_mses.png&#39;</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">df_td3_avr_tvb_mse</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span> <span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">df_td3_avr_nkml_mse</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">df_td3_avr_nkpy_mse</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;cyan&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="c">#ax.set_xlim([0,50])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+
+<span class="n">cap</span> <span class="o">=</span> \
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;Test Dataset 3 - All MSEs&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="c">#d(Image(f), width=&#39;100%&#39;)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://mse_estimation_comparison.s3.amazonaws.com/td3_avr_mses.png" alt="broken link"                   title=" 
+. Test Dataset 3 - All MSEs" height="800px" width="500px" />                   Test Dataset 3 - All MSEs. 
+ </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Durations</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Something like this</span>
+<span class="n">tmp1</span> <span class="o">=</span> <span class="s">&#39;00:</span><span class="si">%.2f</span><span class="s">&#39;</span> <span class="o">%</span><span class="k">td3_avr_nkml_dur</span>
+<span class="n">tmp2</span> <span class="o">=</span> <span class="s">&#39;:&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">td3_avr_nkpy_dur</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">tmp3</span> <span class="o">=</span> <span class="s">&#39;:&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">td3_avr_tvb_dur</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">df_td3_avr_durs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">tmp1</span><span class="p">,</span><span class="n">tmp2</span><span class="p">,</span><span class="n">tmp3</span><span class="p">]),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;nkml&#39;</span><span class="p">,</span> <span class="s">&#39;nkpy&#39;</span><span class="p">,</span> <span class="s">&#39;tvb&#39;</span><span class="p">])</span>
+<span class="n">df_td3_avr_durs</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;duration&#39;</span><span class="p">]</span>
+<span class="n">d</span><span class="p">(</span><span class="n">df_td3_avr_durs</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>nkml</th>
+      <td>00:0.13</td>
+    </tr>
+    <tr>
+      <th>nkpy</th>
+      <td>00:05</td>
+    </tr>
+    <tr>
+      <th>tvb</th>
+      <td>00:00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Save to file</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_td3_avr_dat</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/df_td3_avr_dat.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_td3_avr_nkml_mse</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/df_td3_avr_nkml_mse.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_td3_avr_nkpy_mse</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/df_td3_avr_nkpy_mse.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_td3_avr_tvb_mse</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/df_td3_avr_tvb_mse.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_td3_avr_durs</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/df_td3_avr_durs.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Benchmarking">Benchmarking<a class="anchor-link" href="#Benchmarking">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">load_ext</span> <span class="n">line_profiler</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>At the moment <code>get_multiple_mse_curves_py</code> is taking an obscenely long amount of time to run. </p>
+<p>To figure out where the problems are we can use the <code>line_profile</code> module (and corresponding notebook extension), which will spit out a report of how many times each liner was visited, how long they took to execute each time, and what percentage of the overall run time was spent on each line. </p>
+<p>This requires the source code to be defined in a text file, rather than from the command prompt as we have done above. </p>
+<p>So first let&#39;s use the <code>inspect</code> modoule to collect the source from our main functions of interest above and write them to file. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">_txt</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s"># mse tools</span>
+<span class="s"># =========</span>
+<span class="s">#</span>
+<span class="s"># (see mse_estimation_comparison notebook entry for </span>
+<span class="s">#  further details on these functions )</span>
+<span class="s">#</span>
+<span class="s">#</span>
+
+
+<span class="s"># Imports</span>
+
+<span class="s">import numpy as np</span>
+<span class="s">import sys</span>
+
+<span class="s">tvb_dir = &#39;/alexandra/mcintosh_lab/john/Code/libraries_of_mine/github/tvb-pack&#39;</span>
+<span class="s">sys.path.append(tvb_dir)</span>
+<span class="s">from tvb.analyzers.info import sampen</span>
+
+
+
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="n">_txt</span> <span class="o">+=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getsource</span><span class="p">(</span><span class="n">get_multiple_mse_curves_py</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n\n\n\n</span><span class="s">&#39;</span>
+<span class="n">_txt</span> <span class="o">+=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getsource</span><span class="p">(</span><span class="n">gmmcs_nkpy</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n\n\n\n</span><span class="s">&#39;</span>
+<span class="n">_txt</span> <span class="o">+=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getsource</span><span class="p">(</span><span class="n">gmmcs_tvb</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n\n\n\n</span><span class="s">&#39;</span>
+
+<span class="k">with</span> <span class="nb">open</span> <span class="p">(</span><span class="n">mse_tools_file</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span> <span class="p">(</span><span class="n">_txt</span><span class="p">)</span>    
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now import the functions from the new source files, but give them different names (<code>_lp</code> suffix) to the original ones. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">mse_tools</span>
+<span class="nb">reload</span><span class="p">(</span><span class="n">mse_tools</span><span class="p">)</span>
+<span class="n">gmmcs_tvb_lp</span> <span class="o">=</span> <span class="n">mse_tools</span><span class="o">.</span><span class="n">gmmcs_tvb</span>
+<span class="n">gmmcs_nkpy_lp</span> <span class="o">=</span> <span class="n">mse_tools</span><span class="o">.</span><span class="n">gmmcs_nkpy</span>
+<span class="n">get_multiple_mse_curves_py_lp</span> <span class="o">=</span> <span class="n">mse_tools</span><span class="o">.</span><span class="n">get_multiple_mse_curves_py</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">gmmcs_nkpy_avtr_lpreport</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/gmmcs_nkpy_avtr_lpreport.txt&#39;</span>
+<span class="o">%</span><span class="k">lprun</span> <span class="o">-</span><span class="n">f</span> <span class="n">get_multiple_mse_curves_py_lp</span> <span class="o">-</span><span class="n">T</span> <span class="err">$</span><span class="n">gmmcs_nkpy_avtr_lpreport</span> <span class="n">td2_avtr_nkpy_mse</span><span class="p">,</span><span class="n">td2_avtr_nkpy_sc</span><span class="p">,</span><span class="n">td2_avtr_nkpy_dur</span> <span class="o">=</span> <span class="n">gmmcs_nkpy_lp</span><span class="p">(</span><span class="n">td2_avtr_dat</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="n">m2u</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="n">r2u</span><span class="p">,</span><span class="n">scales</span><span class="o">=</span><span class="n">s2u</span><span class="p">)</span> 
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">
+*** Profile printout saved to text file u&apos;/alexandra/mcintosh_lab/john/Data/notebooks/mse_estimation_comparison/gmmcs_nkpy_avtr_lpreport.txt&apos;. 
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cat</span> <span class="err">$</span><span class="n">gmmcs_nkpy_avtr_lpreport</span> 
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">Timer unit: 1e-06 s
+
+Total time: 39.6435 s
+File: mse_tools.py
+Function: get_multiple_mse_curves_py at line 21
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    21                                           def get_multiple_mse_curves_py(data,m=2,r=0.5,scales=None,override=True):
+    22                                               
+    23                                             &quot;&quot;&quot;
+    24                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    25                                             Port of get_multiple_mse_curves_matlab.m by Natasa Kovacevic. 
+    26                                             
+    27                                             With additional annotations from JG explaining what&apos;s going on. 
+    28                                             
+    29                                             Usage:   mse, scales = get_multiple_mse_curves_py(data,m,r,scales) 
+    30                                             
+    31                                             Inputs:
+    32                                             
+    33                                                data     = time series data in (time variable) format, 
+    34                                                           e.g (time trial) or (time voxel)
+    35                                                m        = pattern length (default 2)
+    36                                                r        = similarity criterion (defualt 0.5)
+    37                                                scales   = vector of scales (default [1:(floor(size(data,1)/50))])
+    38                                                override = 0 or 1 (default is 0) - in some rare cases we want
+    39                                                           to override this min50-rule
+    40                                           
+    41                                             Outputs:
+    42                                             
+    43                                                mse      = entropy in (scale variable) format
+    44                                                scales   = return vector of scales actually used by the program
+    45                                                
+    46                                                
+    47                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    48                                                
+    49                                                
+    50                                             JG Notes: 
+    51                                             ---------
+    52                                             
+    53                                               ***Unfinished!***: not yet giving *exactly* the same outputs as the matlab code. 
+    54                                                                  The error in my port is in the construction of the &apos;cont&apos; array. 
+    55                                                                  
+    56                                               Speed: currently the python function runs incredibly slow compared to the
+    57                                                      matlab function. I don&apos;t see any reason why this should be the case; 
+    58                                                      so need to identify where the slow parts are and improve. 
+    59                                                      
+    60                                               Redesign: once this function is working satisfactorily, I will probably move to a 
+    61                                                         modified version that separate the estimation of sample entropy from 
+    62                                                         the loops over scales and input variables. 
+    63                                               
+    64                                             &quot;&quot;&quot;
+    65                                               
+    66                                               
+    67                                             # Import numpy functions all individually so that the function calls
+    68                                             # are as similar to the original matlab code as possible
+    69                                             # (...so be warned this port is going to me more &apos;matlabic&apos; than &apos;pythonic&apos;...)
+    70                                               
+    71         1           35     35.0      0.0    from numpy import (unique,floor,size,intersect1d,sort,
+    72                                                                r_,std,mean,zeros,log,linspace,arange,round)
+    73                                               
+    74         1           21     21.0      0.0    num_tpts = size(data,0)
+    75         1            4      4.0      0.0    num_vars = size(data,1)
+    76                                           
+    77         1            2      2.0      0.0    if scales is None: 
+    78                                               scales = arange(1,floor(num_tpts/50)+1)  
+    79                                               
+    80                                             # make sure that scales are positive integers 
+    81         1          216    216.0      0.0    scales = sort(unique(scales)); # % sort scales in increasing order
+    82                                                 
+    83         1          231    231.0      0.0    if sum(scales == round(scales)) != len(scales):
+    84                                               raise ValueError(&apos;error: scales vector must contain positive integers&apos;) 
+    85                                               
+    86         1            4      4.0      0.0    if override is False: 
+    87                                                # make sure that scales are  &lt; (num_tpts/50)
+    88                                                scales = sort(intersect1d(scales,r_[0:floor(size(data,0)/50)]))
+    89                                                       
+    90                                             # normalize data and r
+    91         1          220    220.0      0.0    sd = std(data,axis=0)
+    92         1           13     13.0      0.0    r_new = r*sd    
+    93                                           
+    94         1            8      8.0      0.0    mse = zeros([len(scales), num_vars])
+    95                                                       
+    96                                             # Note: 
+    97                                             # The matlab code uses the pattern length variable &apos;m&apos; 
+    98                                             # in two different ways: one related to array sizes, 
+    99                                             # and one related to array indexes. For the former, 
+   100                                             # the usage in python and matlab will be identicaly, 
+   101                                             # but for the latter python will use &apos;m-1&apos; (because 
+   102                                             # like most proper programming langauges, python 
+   103                                             # uses 0-based indexing). 
+   104                                             # This looks a little unusal in the indexing of the 
+   105                                             # &apos;cont&apos; array constructed at each scale, which has 
+   106                                             # size m+1, giving python array indices (but not 
+   107                                             # sizes) &apos;m-1+1&apos;. I has this rather than simplifying 
+   108                                             # it to &apos;m&apos; for the sake of clarity when comparing the 
+   109                                             # matlab and python code versions. 
+   110                                                       
+   111        51          192      3.8      0.0    for s,sc in enumerate(scales):
+   112                                               
+   113                                               # coarse-grain time series at this scale
+   114        50          629     12.6      0.0      num_cg_tpts = floor(num_tpts/sc)   
+   115        50          715     14.3      0.0      y = zeros([num_cg_tpts, num_vars])
+   116      5094        26937      5.3      0.1      for t in r_[0:num_cg_tpts]:
+   117      5044       450524     89.3      1.1        y[t,:] = mean(data[(t*sc + r_[0:sc]).astype(int),:],0)
+   118                                                   
+   119                                               # calculate sample entropy of coarse grained time series y
+   120        50          254      5.1      0.0      nlin_sc = num_cg_tpts - m       
+   121        50          400      8.0      0.0      cont = zeros([m+1,num_vars]);  
+   122                                               
+   123                                               # The i and l loops define shifting pairs of points with incrementally increasing 
+   124                                               # starting points and gaps between 
+   125       100         1058     10.6      0.0      for var in r_[0:num_vars]:
+   126      4994        20588      4.1      0.1        for i in r_[0:nlin_sc]:
+   127   1021172      3781098      3.7      9.5          for l in r_[(i+1):nlin_sc]: # self-matches are not counted
+   128                                                   
+   129                                                     #% calculate sample entropy of coarse grained time series y
+   130   1016228      2759305      2.7      7.0            k = -1;
+   131   1664096     27532032     16.5     69.4            while ((k &lt;= m-1) &amp; (abs(y[i+k,var] - y[l+k,var]) &lt;= r_new[var])):
+   132                                                       # c1,c2,targ = 0,0,0
+   133                                                       #  while c1 &amp; c2 &lt;= targ:
+   134                                                       #  targ = r_new[var]
+   135                                                       #  c1 = (k &lt;= m-1)
+   136                                                       #  c2 = abs(y[i+k,var] - y[l+k,var])
+   137                                                       #  #while ((k &lt;= m-1) &amp; (abs(y[i+k,var] - y[l+k,var]) &lt;= r_new[var])):
+   138    647868      2012283      3.1      5.1              k+=1 
+   139    647868      3054493      4.7      7.7              cont[k,var] +=1
+   140                                                       
+   141                                               # calculate mse at this scale
+   142       100         1178     11.8      0.0      for var in r_[0:num_vars]:
+   143        50          369      7.4      0.0        if cont[m-1+1,var] == 0 or cont[m-1,var] == 0:
+   144                                                   mse[s,var] = -log(1/((nlin_sc)*(nlin_sc -1)));
+   145                                                 else:
+   146        50          702     14.0      0.0          mse[s,var] = -log(cont[m-1+1,var]/cont[m-1,var])
+   147                                                 
+   148         1            3      3.0      0.0    return mse,scales</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So, the vast majority (69%) of time is being spent on on the line </p>
+<pre><code class="language-python"><span class="keyword">while</span> ((k &lt;= m-<span class="number">1</span>) &amp; (abs(y[i+k,var] - y[l+k,var]) &lt;= r_new[var])):
+</code></pre>
+<p>which is run 1664096 times, at 27532032 ms (?)  per hit.  </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<script type="text/javascript" src="http://themodernscientist.com/static/js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="http://themodernscientist.com/static/js/bigfoot.js"></script>
+<script type="text/javascript">
+    var bigfoot = $.bigfoot(
+        {
+            activateOnHover: true,
+            deleteOnUnhover: true,
+            preventPageScroll: false,
+            hoverDelay: 500
+        }
+    );
+</script>
+
+
+<link href="http://themodernscientist.com/static/css/bigfoot-number.css" rel="stylesheet" type="text/css">
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<li id="fn:replicating">[1] Reproducing, not replicating; a replication would be if the study were repeated and the analysis was on different data. I am analyzing the same data and simply attempting to repeat some key analysis steps. </li>
+
+<li id="fn:ghostbusters">[2] Ghostbusters reference. Did you have to ask? </li>
+</div>
+</div>
+</div></p>
+</div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">
+        John Grif
+    </span>
+  </span>
+<time datetime="2015-12-08T00:00:00-08:00" pubdate>Tue 08 December 2015</time>  <span class="categories">
+    <a class='category' href='https://johngriffiths.github.io/LabNotebook/category/misc.html'>misc</a>
+  </span>
+  <span class="categories">
+    <a class="category" href="https://johngriffiths.github.io/LabNotebook/tag/mse.html">MSE</a>  </span>
+</p><div class="sharing">
+</div>    </footer>
+  </article>
+
+</div>
 <aside class="sidebar">
   <section>
     <h1>Recent Posts</h1>
