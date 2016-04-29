@@ -1560,8 +1560,10 @@ span#checkpoint_status,span#autosave_status{font-size:small}
 .highlight .err { border: 1px solid #FF0000 } /* Error */
 .highlight .k { color: #008000; font-weight: bold } /* Keyword */
 .highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
 .highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
 .highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
 .highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
 .highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
 .highlight .gd { color: #A00000 } /* Generic.Deleted */
@@ -1837,29 +1839,29 @@ jQuery(document).ready(function($) {
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># define system-specific filepaths etc</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># define system-specific filepaths etc</span>
 <span class="o">%</span><span class="k">run</span> <span class="o">~/</span><span class="n">set_localenv_vars</span><span class="o">.</span><span class="n">py</span>
 
-<span class="c"># output dir</span>
-<span class="n">outdir</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s">&#39;data_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/notebooks/downloading_abide_pcp_data&#39;</span>
+<span class="c1"># output dir</span>
+<span class="n">outdir</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/notebooks/downloading_abide_pcp_data&#39;</span>
 <span class="o">!</span>mkdir -p <span class="nv">$outdir</span>
 
 
-<span class="n">nb_name</span> <span class="o">=</span> <span class="s">&#39;downloading_abide_pcp_data&#39;</span>
+<span class="n">nb_name</span> <span class="o">=</span> <span class="s1">&#39;downloading_abide_pcp_data&#39;</span>
 
 
-<span class="c"># stuff for analyses</span>
+<span class="c1"># stuff for analyses</span>
 
-<span class="n">s3_prefix</span> <span class="o">=</span> <span class="s">&#39;https://s3.amazonaws.com/fcp-indi/data/Projects/&#39;</span>\
-            <span class="s">&#39;ABIDE_Initiative&#39;</span>
+<span class="n">s3_prefix</span> <span class="o">=</span> <span class="s1">&#39;https://s3.amazonaws.com/fcp-indi/data/Projects/&#39;</span>\
+            <span class="s1">&#39;ABIDE_Initiative&#39;</span>
     
-<span class="n">abide_dir</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s">&#39;data_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/PCP/ABIDE/downloaded&#39;</span>
+<span class="n">abide_dir</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/PCP/ABIDE/downloaded&#39;</span>
 
 
-<span class="c"># stuff for workdocs-cloudfiles</span>
+<span class="c1"># stuff for workdocs-cloudfiles</span>
 
-<span class="n">aws_key</span> <span class="o">=</span> <span class="s">&#39;drowssaperucesyreva&#39;</span>
-<span class="n">aws_secret</span> <span class="o">=</span> <span class="s">&#39;?teytidettopsuoyevah&#39;</span>  
+<span class="n">aws_key</span> <span class="o">=</span> <span class="s1">&#39;drowssaperucesyreva&#39;</span>
+<span class="n">aws_secret</span> <span class="o">=</span> <span class="s1">&#39;?teytidettopsuoyevah&#39;</span>  
 </pre></div>
 
 </div>
@@ -1881,7 +1883,7 @@ jQuery(document).ready(function($) {
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Generic imports</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># Generic imports</span>
 
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span><span class="n">display</span> <span class="k">as</span> <span class="n">d</span>
 
@@ -1895,9 +1897,9 @@ jQuery(document).ready(function($) {
 <span class="kn">import</span> <span class="nn">urllib</span>
 
 
-<span class="c"># workdocs-cloudfiles stuff</span>
+<span class="c1"># workdocs-cloudfiles stuff</span>
 
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">le</span><span class="p">[</span><span class="s">&#39;ipynb_workdocs_dir&#39;</span><span class="p">])</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">le</span><span class="p">[</span><span class="s1">&#39;ipynb_workdocs_dir&#39;</span><span class="p">])</span>
 <span class="kn">from</span> <span class="nn">new_utils</span> <span class="kn">import</span> <span class="n">nb_fig</span><span class="p">,</span><span class="n">cloudfiles_nb</span>
 </pre></div>
 
@@ -1920,7 +1922,7 @@ jQuery(document).ready(function($) {
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cnb</span> <span class="o">=</span> <span class="n">cloudfiles_nb</span><span class="p">(</span><span class="s">&#39;aws&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">aws_key</span><span class="p">,</span><span class="n">aws_secret</span><span class="p">])</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">cnb</span> <span class="o">=</span> <span class="n">cloudfiles_nb</span><span class="p">(</span><span class="s1">&#39;aws&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">aws_key</span><span class="p">,</span><span class="n">aws_secret</span><span class="p">])</span>
 <span class="n">cnb</span><span class="o">.</span><span class="n">initialize_folder</span><span class="p">(</span><span class="n">nb_name</span><span class="p">)</span>
 </pre></div>
 
@@ -1943,9 +1945,9 @@ jQuery(document).ready(function($) {
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">javascript</span>
-<span class="n">IPython</span><span class="o">.</span><span class="n">load_extensions</span><span class="p">(</span><span class="s">&#39;calico-spell-check&#39;</span><span class="p">,</span> <span class="s">&#39;calico-document-tools&#39;</span><span class="p">,</span> 
-                        <span class="s">&#39;calico-cell-tools&#39;</span><span class="p">);</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="o">%%</span><span class="k">javascript</span>
+<span class="n">IPython</span><span class="o">.</span><span class="n">load_extensions</span><span class="p">(</span><span class="s1">&#39;calico-spell-check&#39;</span><span class="p">,</span> <span class="s1">&#39;calico-document-tools&#39;</span><span class="p">,</span> 
+                        <span class="s1">&#39;calico-cell-tools&#39;</span><span class="p">);</span>
 </pre></div>
 
 </div>
@@ -1986,7 +1988,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools',
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2018,9 +2020,9 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools',
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">md_file</span> <span class="o">=</span> <span class="s">&#39;Phenotypic_V1_0b_preprocessed1.csv&#39;</span>
-<span class="n">url</span> <span class="o">=</span> <span class="n">s3_prefix</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="n">md_file</span>
-<span class="n">out_file</span> <span class="o">=</span> <span class="n">abide_dir</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="n">md_file</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">md_file</span> <span class="o">=</span> <span class="s1">&#39;Phenotypic_V1_0b_preprocessed1.csv&#39;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">s3_prefix</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">md_file</span>
+<span class="n">out_file</span> <span class="o">=</span> <span class="n">abide_dir</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">md_file</span>
 <span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">out_file</span><span class="p">);</span>
 </pre></div>
 
@@ -2043,7 +2045,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools',
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_md</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">df_md</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2056,7 +2058,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools',
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;subject&#39;</span><span class="p">,</span> <span class="s">&#39;SUB_ID&#39;</span><span class="p">,</span> <span class="s">&#39;FILE_ID&#39;</span><span class="p">,</span> <span class="s">&#39;AGE_AT_SCAN&#39;</span><span class="p">,</span><span class="s">&#39;SEX&#39;</span><span class="p">,</span> <span class="s">&#39;DX_GROUP&#39;</span><span class="p">]</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;subject&#39;</span><span class="p">,</span> <span class="s1">&#39;SUB_ID&#39;</span><span class="p">,</span> <span class="s1">&#39;FILE_ID&#39;</span><span class="p">,</span> <span class="s1">&#39;AGE_AT_SCAN&#39;</span><span class="p">,</span><span class="s1">&#39;SEX&#39;</span><span class="p">,</span> <span class="s1">&#39;DX_GROUP&#39;</span><span class="p">]</span>
 <span class="n">d</span><span class="p">(</span><span class="n">df_md</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
 
@@ -2165,8 +2167,8 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools',
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">site</span> <span class="o">=</span> <span class="s">&#39;Caltech&#39;</span>
-<span class="n">sub</span> <span class="o">=</span> <span class="s">&#39;0051456&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">site</span> <span class="o">=</span> <span class="s1">&#39;Caltech&#39;</span>
+<span class="n">sub</span> <span class="o">=</span> <span class="s1">&#39;0051456&#39;</span>
 </pre></div>
 
 </div>
@@ -2189,11 +2191,11 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools',
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">pipeline</span> <span class="o">=</span> <span class="s">&#39;cpac&#39;</span>
-<span class="n">strategy</span> <span class="o">=</span> <span class="s">&#39;filt_global&#39;</span>
-<span class="n">derivative</span> <span class="o">=</span> <span class="s">&#39;func_preproc&#39;</span>
-<span class="n">suffix</span> <span class="o">=</span> <span class="s">&#39;.nii.gz&#39;</span>
-<span class="n">path</span> <span class="o">=</span> <span class="s">&#39;/Outputs/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span><span class="n">strategy</span><span class="p">,</span> <span class="n">derivative</span><span class="p">,</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="s1">&#39;cpac&#39;</span>
+<span class="n">strategy</span> <span class="o">=</span> <span class="s1">&#39;filt_global&#39;</span>
+<span class="n">derivative</span> <span class="o">=</span> <span class="s1">&#39;func_preproc&#39;</span>
+<span class="n">suffix</span> <span class="o">=</span> <span class="s1">&#39;.nii.gz&#39;</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/Outputs/</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span><span class="n">strategy</span><span class="p">,</span> <span class="n">derivative</span><span class="p">,</span>
                                         <span class="n">site</span><span class="p">,</span><span class="n">sub</span><span class="p">,</span> <span class="n">derivative</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span>
 <span class="n">d</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </pre></div>
@@ -2222,7 +2224,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools',
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">out_file</span> <span class="o">=</span> <span class="n">abide_dir</span> <span class="o">+</span> <span class="n">path</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">out_file</span> <span class="o">=</span> <span class="n">abide_dir</span> <span class="o">+</span> <span class="n">path</span>
 <span class="n">out_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">out_folder</span><span class="p">):</span> <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_folder</span><span class="p">)</span>
 </pre></div>
@@ -2246,7 +2248,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools',
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">url</span> <span class="o">=</span> <span class="n">s3_prefix</span> <span class="o">+</span> <span class="n">path</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">url</span> <span class="o">=</span> <span class="n">s3_prefix</span> <span class="o">+</span> <span class="n">path</span>
 <span class="n">d</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </pre></div>
 
@@ -2283,7 +2285,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools',
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">d</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2319,7 +2321,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools',
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">out_file</span><span class="p">);</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">out_file</span><span class="p">);</span>
 </pre></div>
 
 </div>
@@ -2341,7 +2343,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools',
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">ls</span> <span class="err">$</span><span class="n">out_folder</span><span class="o">/</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">ls</span> <span class="err">$</span><span class="n">out_folder</span><span class="o">/</span>
 </pre></div>
 
 </div>
@@ -2378,9 +2380,9 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools',
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">fs_folder</span> <span class="o">=</span> <span class="s">&#39;surf&#39;</span>
-<span class="n">fs_filename</span> <span class="o">=</span> <span class="s">&#39;lh.orig&#39;</span>
-<span class="n">path</span> <span class="o">=</span> <span class="s">&#39;/Outputs/freesurfer/5.1/</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">site</span><span class="p">,</span><span class="n">sub</span><span class="p">,</span><span class="n">fs_folder</span><span class="p">,</span> <span class="n">fs_filename</span><span class="p">)</span> 
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">fs_folder</span> <span class="o">=</span> <span class="s1">&#39;surf&#39;</span>
+<span class="n">fs_filename</span> <span class="o">=</span> <span class="s1">&#39;lh.orig&#39;</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/Outputs/freesurfer/5.1/</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">site</span><span class="p">,</span><span class="n">sub</span><span class="p">,</span><span class="n">fs_folder</span><span class="p">,</span> <span class="n">fs_filename</span><span class="p">)</span> 
 </pre></div>
 
 </div>
@@ -2393,7 +2395,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools',
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">out_file</span> <span class="o">=</span> <span class="n">abide_dir</span> <span class="o">+</span> <span class="n">path</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">out_file</span> <span class="o">=</span> <span class="n">abide_dir</span> <span class="o">+</span> <span class="n">path</span>
 <span class="n">out_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">out_folder</span><span class="p">):</span> <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_folder</span><span class="p">)</span>
 </pre></div>
@@ -2417,7 +2419,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools',
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">url</span> <span class="o">=</span> <span class="n">s3_prefix</span> <span class="o">+</span> <span class="n">path</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">url</span> <span class="o">=</span> <span class="n">s3_prefix</span> <span class="o">+</span> <span class="n">path</span>
 <span class="n">d</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </pre></div>
 
@@ -2454,7 +2456,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools',
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">d</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2490,7 +2492,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools',
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">out_file</span><span class="p">);</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">out_file</span><span class="p">);</span>
 </pre></div>
 
 </div>
@@ -2512,7 +2514,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools',
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">ls</span> <span class="err">$</span><span class="n">out_folder</span><span class="o">/</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">ls</span> <span class="err">$</span><span class="n">out_folder</span><span class="o">/</span>
 </pre></div>
 
 </div>
@@ -2549,16 +2551,16 @@ lh.sphere  lh.white      rh.sphere  rh.white
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># surf folder</span>
-<span class="n">surf_files</span> <span class="o">=</span>  <span class="p">[</span><span class="s">&#39;lh.orig&#39;</span><span class="p">,</span> <span class="s">&#39;rh.orig&#39;</span><span class="p">,</span> <span class="s">&#39;lh.white&#39;</span><span class="p">,</span> <span class="s">&#39;rh.white&#39;</span><span class="p">,</span> <span class="s">&#39;lh.sphere&#39;</span> <span class="p">,</span><span class="s">&#39;rh.sphere&#39;</span><span class="p">,</span>
-               <span class="s">&#39;lh.thickness&#39;</span><span class="p">,</span> <span class="s">&#39;rh.thickness&#39;</span><span class="p">]</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># surf folder</span>
+<span class="n">surf_files</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;lh.orig&#39;</span><span class="p">,</span> <span class="s1">&#39;rh.orig&#39;</span><span class="p">,</span> <span class="s1">&#39;lh.white&#39;</span><span class="p">,</span> <span class="s1">&#39;rh.white&#39;</span><span class="p">,</span> <span class="s1">&#39;lh.sphere&#39;</span> <span class="p">,</span><span class="s1">&#39;rh.sphere&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;lh.thickness&#39;</span><span class="p">,</span> <span class="s1">&#39;rh.thickness&#39;</span><span class="p">]</span>
     
-<span class="c"># mri folder</span>
-<span class="n">mri_files</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;brain.mgz&#39;</span><span class="p">,</span><span class="s">&#39;brainmask.mgz&#39;</span><span class="p">,</span> <span class="s">&#39;orig.mgz&#39;</span><span class="p">]</span>
+<span class="c1"># mri folder</span>
+<span class="n">mri_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;brain.mgz&#39;</span><span class="p">,</span><span class="s1">&#39;brainmask.mgz&#39;</span><span class="p">,</span> <span class="s1">&#39;orig.mgz&#39;</span><span class="p">]</span>
     
 <span class="n">fs_paths</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">surf_files</span><span class="p">:</span> <span class="n">fs_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;surf/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="k">f</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">mri_files</span><span class="p">:</span> <span class="n">fs_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;mri/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="k">f</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">surf_files</span><span class="p">:</span> <span class="n">fs_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;surf/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="k">f</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">mri_files</span><span class="p">:</span> <span class="n">fs_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;mri/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="k">f</span><span class="p">)</span>
     
 </pre></div>
 
@@ -2581,7 +2583,7 @@ lh.sphere  lh.white      rh.sphere  rh.white
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="p">(</span><span class="n">fs_paths</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">d</span><span class="p">(</span><span class="n">fs_paths</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2627,8 +2629,8 @@ lh.sphere  lh.white      rh.sphere  rh.white
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fs_paths</span><span class="p">:</span> 
-  <span class="n">path</span> <span class="o">=</span> <span class="s">&#39;/Outputs/freesurfer/5.1/</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">site</span><span class="p">,</span><span class="n">sub</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>  
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fs_paths</span><span class="p">:</span> 
+  <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/Outputs/freesurfer/5.1/</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">site</span><span class="p">,</span><span class="n">sub</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>  
   <span class="n">url</span> <span class="o">=</span> <span class="n">s3_prefix</span> <span class="o">+</span> <span class="n">path</span>
   <span class="n">out_file</span> <span class="o">=</span> <span class="n">abide_dir</span> <span class="o">+</span> <span class="n">path</span>
   <span class="n">out_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
@@ -2667,9 +2669,9 @@ lh.sphere  lh.white      rh.sphere  rh.white
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">pipeline</span> <span class="o">=</span> <span class="s">&#39;cpac&#39;</span>
-<span class="n">derivative</span> <span class="o">=</span> <span class="s">&#39;func_preproc&#39;</span>
-<span class="n">suffix</span> <span class="o">=</span> <span class="s">&#39;.nii.gz&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="s1">&#39;cpac&#39;</span>
+<span class="n">derivative</span> <span class="o">=</span> <span class="s1">&#39;func_preproc&#39;</span>
+<span class="n">suffix</span> <span class="o">=</span> <span class="s1">&#39;.nii.gz&#39;</span>
 </pre></div>
 
 </div>
@@ -2682,15 +2684,15 @@ lh.sphere  lh.white      rh.sphere  rh.white
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">subs</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;0051456&#39;</span><span class="p">,</span> <span class="s">&#39;0051457&#39;</span><span class="p">]</span>
-<span class="n">strategies</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;filt_global&#39;</span><span class="p">,</span> <span class="s">&#39;filt_noglobal&#39;</span><span class="p">,</span> <span class="s">&#39;nofilt_global&#39;</span><span class="p">,</span> <span class="s">&#39;nofilt_noglobal&#39;</span><span class="p">]</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">subs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0051456&#39;</span><span class="p">,</span> <span class="s1">&#39;0051457&#39;</span><span class="p">]</span>
+<span class="n">strategies</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;filt_global&#39;</span><span class="p">,</span> <span class="s1">&#39;filt_noglobal&#39;</span><span class="p">,</span> <span class="s1">&#39;nofilt_global&#39;</span><span class="p">,</span> <span class="s1">&#39;nofilt_noglobal&#39;</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">subs</span><span class="p">:</span>
     
-  <span class="c"># Get functional data</span>
+  <span class="c1"># Get functional data</span>
     
   <span class="k">for</span> <span class="n">strategy</span> <span class="ow">in</span> <span class="n">strategies</span><span class="p">:</span> 
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&#39;/Outputs/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span><span class="n">strategy</span><span class="p">,</span> <span class="n">derivative</span><span class="p">,</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/Outputs/</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span><span class="n">strategy</span><span class="p">,</span> <span class="n">derivative</span><span class="p">,</span>
                                             <span class="n">site</span><span class="p">,</span><span class="n">sub</span><span class="p">,</span> <span class="n">derivative</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span>
     
     <span class="n">url</span> <span class="o">=</span> <span class="n">s3_prefix</span> <span class="o">+</span> <span class="n">path</span>
@@ -2700,12 +2702,12 @@ lh.sphere  lh.white      rh.sphere  rh.white
       <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_folder</span><span class="p">)</span>    
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">out_file</span><span class="p">):</span>
       <span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">out_file</span><span class="p">);</span>
-      <span class="c">#!wget $url -O $out_file # (alternative to urllib command)</span>
+      <span class="c1">#!wget $url -O $out_file # (alternative to urllib command)</span>
 
-  <span class="c"># Get freesurfer data</span>
+  <span class="c1"># Get freesurfer data</span>
 
   <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fs_paths</span><span class="p">:</span> 
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&#39;/Outputs/freesurfer/5.1/</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">site</span><span class="p">,</span><span class="n">sub</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>  
+    <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/Outputs/freesurfer/5.1/</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">site</span><span class="p">,</span><span class="n">sub</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>  
     <span class="n">url</span> <span class="o">=</span> <span class="n">s3_prefix</span> <span class="o">+</span> <span class="n">path</span>
     <span class="n">out_file</span> <span class="o">=</span> <span class="n">abide_dir</span> <span class="o">+</span> <span class="n">path</span>
     <span class="n">out_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
@@ -2713,7 +2715,7 @@ lh.sphere  lh.white      rh.sphere  rh.white
       <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_folder</span><span class="p">)</span>    
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">out_file</span><span class="p">):</span>
       <span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">out_file</span><span class="p">);</span>
-      <span class="c">#!wget $url -O $out_file # (alternative to urllib command)                    </span>
+      <span class="c1">#!wget $url -O $out_file # (alternative to urllib command)                    </span>
 </pre></div>
 
 </div>
@@ -2753,19 +2755,19 @@ lh.sphere  lh.white      rh.sphere  rh.white
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="https://johngriffiths.github.io/LabNotebook/mpl-surface-viz.html">TVB Surface Vizualizations with Matplotlib</a>
+      </li>
+      <li class="post">
+          <a href="https://johngriffiths.github.io/LabNotebook/tvb-sc-fc-model-optimization.html">TVB SC-FC Model Optimization</a>
+      </li>
+      <li class="post">
+          <a href="https://johngriffiths.github.io/LabNotebook/making-a-region-mapping-for-aal.html">Making a region mapping for AAL</a>
+      </li>
+      <li class="post">
           <a href="https://johngriffiths.github.io/LabNotebook/mse-brute-force-exploration-continued.html">MSE brute force exploration continued...</a>
       </li>
       <li class="post">
           <a href="https://johngriffiths.github.io/LabNotebook/notes-on-friston2014-nodesandmodes.html">Notes on Friston et al. 2014 'On nodes and modes in resting state fMRI'</a>
-      </li>
-      <li class="post">
-          <a href="https://johngriffiths.github.io/LabNotebook/mse-brute-force-exploration.html">MSE brute force exploration</a>
-      </li>
-      <li class="post">
-          <a href="https://johngriffiths.github.io/LabNotebook/adni-pilot-analysis-notes.html">ADNI Pilot Analysis Notes</a>
-      </li>
-      <li class="post">
-          <a href="https://johngriffiths.github.io/LabNotebook/exploring-the-zj-model.html">Exploring the Zetterberg-Jansen model</a>
       </li>
     </ul>
   </section>
