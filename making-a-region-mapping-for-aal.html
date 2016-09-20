@@ -1560,8 +1560,10 @@ span#checkpoint_status,span#autosave_status{font-size:small}
 .highlight .err { border: 1px solid #FF0000 } /* Error */
 .highlight .k { color: #008000; font-weight: bold } /* Keyword */
 .highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
 .highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
 .highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
 .highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
 .highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
 .highlight .gd { color: #A00000 } /* Generic.Deleted */
@@ -1798,7 +1800,7 @@ jQuery(document).ready(function($) {
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">load_ext</span> <span class="n">pymatbridge</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="o">%</span><span class="k">load_ext</span> <span class="n">pymatbridge</span>
 </pre></div>
 
 </div>
@@ -1836,31 +1838,31 @@ Send &apos;exit&apos; command to kill the server
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># put some system-specific variables in the namespace (&#39;le&#39; dict)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># put some system-specific variables in the namespace (&#39;le&#39; dict)</span>
 <span class="o">%</span><span class="k">run</span> <span class="o">~/</span><span class="n">set_localenv_vars</span><span class="o">.</span><span class="n">py</span>
 
-<span class="n">nb_name</span> <span class="o">=</span> <span class="s">&#39;making_a_region_mapping_for_aal&#39;</span>
+<span class="n">nb_name</span> <span class="o">=</span> <span class="s1">&#39;making_a_region_mapping_for_aal&#39;</span>
 
-<span class="c"># this is where I look for stuf</span>
-<span class="n">outdir</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">/notebooks/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">le</span><span class="p">[</span><span class="s">&#39;data_dir&#39;</span><span class="p">],</span><span class="n">nb_name</span><span class="p">)</span>
+<span class="c1"># this is where I look for stuf</span>
+<span class="n">outdir</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/notebooks/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">le</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">],</span><span class="n">nb_name</span><span class="p">)</span>
 
-<span class="c"># this is where stuff actually lives</span>
-<span class="n">outdir_loc</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="s">&#39;/mnt/titania-hecuba/mcintosh_lab/john/Data/notebooks&#39;</span><span class="p">,</span> <span class="n">nb_name</span><span class="p">)</span>
+<span class="c1"># this is where stuff actually lives</span>
+<span class="n">outdir_loc</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="s1">&#39;/mnt/titania-hecuba/mcintosh_lab/john/Data/notebooks&#39;</span><span class="p">,</span> <span class="n">nb_name</span><span class="p">)</span>
 
-<span class="c"># symlink the two</span>
+<span class="c1"># symlink the two</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">outdir_loc</span><span class="p">):</span> <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">outdir_loc</span><span class="p">)</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">outdir</span><span class="p">):</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">&#39;ln -s </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">outdir_loc</span><span class="p">,</span><span class="n">outdir</span><span class="p">))</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">outdir</span><span class="p">):</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;ln -s </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">outdir_loc</span><span class="p">,</span><span class="n">outdir</span><span class="p">))</span>
                                         
 
-<span class="c"># root path to tvb-library, tvb-data, etc. libraries. </span>
-<span class="n">tvb_folder</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s">&#39;code_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/libraries_of_mine/github&#39;</span>
+<span class="c1"># root path to tvb-library, tvb-data, etc. libraries. </span>
+<span class="n">tvb_folder</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s1">&#39;code_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/libraries_of_mine/github&#39;</span>
 
 
-<span class="c"># stuff for workdocs-cloudfiles</span>
+<span class="c1"># stuff for workdocs-cloudfiles</span>
 
-<span class="n">aws_key</span> <span class="o">=</span> <span class="s">&#39;drowssaperucesyreva&#39;</span>
-<span class="n">aws_secret</span> <span class="o">=</span> <span class="s">&#39;?teytidettopsuoyevah&#39;</span>  
+<span class="n">aws_key</span> <span class="o">=</span> <span class="s1">&#39;drowssaperucesyreva&#39;</span>
+<span class="n">aws_secret</span> <span class="o">=</span> <span class="s1">&#39;?teytidettopsuoyevah&#39;</span>  
 </pre></div>
 
 </div>
@@ -1882,7 +1884,7 @@ Send &apos;exit&apos; command to kill the server
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Generic imports</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># Generic imports</span>
 
 <span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">glob</span><span class="o">,</span><span class="nn">h5py</span><span class="o">,</span><span class="nn">itertools</span><span class="o">,</span><span class="nn">multiprocessing</span><span class="o">,</span>\
        <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span><span class="o">,</span><span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
@@ -1891,7 +1893,7 @@ Send &apos;exit&apos; command to kill the server
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span>
 <span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="kn">import</span> <span class="n">cKDTree</span>
 
-<span class="c"># Visualization stuff</span>
+<span class="c1"># Visualization stuff</span>
 
 <span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
@@ -1900,29 +1902,29 @@ Send &apos;exit&apos; command to kill the server
 
 
 
-<span class="c"># Neuroimaging stuff</span>
+<span class="c1"># Neuroimaging stuff</span>
 
 <span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
 <span class="kn">from</span> <span class="nn">nilearn.plotting</span> <span class="kn">import</span> <span class="n">plot_roi</span>
 <span class="kn">from</span> <span class="nn">dipy.tracking.utils</span> <span class="kn">import</span> <span class="n">apply_affine</span>
 
-<span class="c"># TVB stuff</span>
+<span class="c1"># TVB stuff</span>
 
-<span class="n">nbso</span><span class="p">,</span><span class="n">nbse</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="c"># hack part 1/2 to keep output printing properly</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tvb_folder</span> <span class="o">+</span><span class="s">&#39;/tvb-library&#39;</span><span class="p">)</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tvb_folder</span> <span class="o">+</span> <span class="s">&#39;/tvb-data&#39;</span><span class="p">)</span>
+<span class="n">nbso</span><span class="p">,</span><span class="n">nbse</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="c1"># hack part 1/2 to keep output printing properly</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tvb_folder</span> <span class="o">+</span><span class="s1">&#39;/tvb-library&#39;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tvb_folder</span> <span class="o">+</span> <span class="s1">&#39;/tvb-data&#39;</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">tvb.simulator.lab</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">nbso</span><span class="p">,</span><span class="n">nbse</span>  <span class="c"># ...hack part 2/2</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">nbso</span><span class="p">,</span><span class="n">nbse</span>  <span class="c1"># ...hack part 2/2</span>
 <span class="kn">from</span> <span class="nn">tvb.simulator.plot.tools</span> <span class="kn">import</span> <span class="n">plot_surface_mpl</span><span class="p">,</span><span class="n">plot_surface_mpl_mv</span>
 
 
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span> <span class="c"># seems that this needs to be done last otherwise it gets </span>
-                      <span class="c"># replaced with numpy copy function</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span> <span class="c1"># seems that this needs to be done last otherwise it gets </span>
+                      <span class="c1"># replaced with numpy copy function</span>
     
     
-<span class="c"># aws api and workdocs-cloudfiles stuff</span>
+<span class="c1"># aws api and workdocs-cloudfiles stuff</span>
 
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">le</span><span class="p">[</span><span class="s">&#39;ipynb_workdocs_dir&#39;</span><span class="p">])</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">le</span><span class="p">[</span><span class="s1">&#39;ipynb_workdocs_dir&#39;</span><span class="p">])</span>
 <span class="kn">from</span> <span class="nn">new_utils</span> <span class="kn">import</span> <span class="n">nb_fig</span><span class="p">,</span><span class="n">cloudfiles_nb</span>
 </pre></div>
 
@@ -1945,7 +1947,7 @@ Send &apos;exit&apos; command to kill the server
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">get_roi_xyzs</span><span class="p">(</span><span class="n">roi_file</span><span class="p">,</span><span class="n">match_type</span><span class="o">=</span><span class="s">&#39;com&#39;</span><span class="p">):</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="k">def</span> <span class="nf">get_roi_xyzs</span><span class="p">(</span><span class="n">roi_file</span><span class="p">,</span><span class="n">match_type</span><span class="o">=</span><span class="s1">&#39;com&#39;</span><span class="p">):</span>
   <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">  Get xyz centroids for a nifti image volume with labelled voxels</span>
 <span class="sd">  &quot;&quot;&quot;</span>
@@ -1955,12 +1957,12 @@ Send &apos;exit&apos; command to kill the server
   <span class="n">roi_aff</span> <span class="o">=</span> <span class="n">roi_img</span><span class="o">.</span><span class="n">get_affine</span><span class="p">()</span>
     
   <span class="n">roi_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">roi_dat</span><span class="p">)</span>
-  <span class="k">if</span> <span class="n">match_type</span> <span class="o">==</span> <span class="s">&#39;com&#39;</span><span class="p">:</span>
+  <span class="k">if</span> <span class="n">match_type</span> <span class="o">==</span> <span class="s1">&#39;com&#39;</span><span class="p">:</span>
     <span class="n">roi_all_inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">indices</span><span class="p">(</span><span class="n">roi_img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
     <span class="n">roi_coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">apply_affine</span><span class="p">(</span><span class="n">roi_aff</span><span class="p">,</span> <span class="n">roi_all_inds</span><span class="p">[:,</span><span class="n">roi_dat</span><span class="o">==</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">roi_list</span><span class="p">]</span>
     <span class="n">roi_xyzs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rc</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">rc</span> <span class="ow">in</span> <span class="n">roi_coords</span><span class="p">])</span>
         
-  <span class="k">elif</span> <span class="n">match_type</span> <span class="o">==</span> <span class="s">&#39;xyzcuts&#39;</span><span class="p">:</span> 
+  <span class="k">elif</span> <span class="n">match_type</span> <span class="o">==</span> <span class="s1">&#39;xyzcuts&#39;</span><span class="p">:</span> 
             
     <span class="n">roi_xyzs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">find_xyz_cut_coords</span><span class="p">(</span><span class="n">roi_img</span><span class="p">,</span><span class="n">roi_dat</span><span class="o">==</span><span class="n">r</span><span class="p">,</span>
                                              <span class="n">activation_threshold</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">roi_list</span><span class="p">])</span>
@@ -1974,12 +1976,12 @@ Send &apos;exit&apos; command to kill the server
 <span class="sd">  Find nearest surface vertex and faces for a set of xyz locations</span>
 <span class="sd">  &quot;&quot;&quot;</span>
     
-  <span class="c"># average across the coords for each vertex comprising the face</span>
+  <span class="c1"># average across the coords for each vertex comprising the face</span>
   <span class="n">faces_xyz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">vtx_xyzs</span><span class="p">[</span><span class="n">faces</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-  <span class="c"># same as  fac_xyzs2 = np.array([np.mean(xyz[f],axis=0) for f in fac])    </span>
+  <span class="c1"># same as  fac_xyzs2 = np.array([np.mean(xyz[f],axis=0) for f in fac])    </span>
     
   <span class="n">face_nearestroi_inds</span> <span class="o">=</span> <span class="n">cKDTree</span><span class="p">(</span><span class="n">roi_xyzs</span><span class="p">)</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">faces_xyz</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-  <span class="c">#(gives the closest index in A for each point in B)</span>
+  <span class="c1">#(gives the closest index in A for each point in B)</span>
     
   <span class="n">vtx_nearestroi_inds</span> <span class="o">=</span> <span class="n">cKDTree</span><span class="p">(</span><span class="n">roi_xyzs</span><span class="p">)</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">vtx_xyzs</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
     
@@ -2018,7 +2020,7 @@ Send &apos;exit&apos; command to kill the server
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cnb</span> <span class="o">=</span> <span class="n">cloudfiles_nb</span><span class="p">(</span><span class="s">&#39;aws&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">aws_key</span><span class="p">,</span><span class="n">aws_secret</span><span class="p">])</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">cnb</span> <span class="o">=</span> <span class="n">cloudfiles_nb</span><span class="p">(</span><span class="s1">&#39;aws&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">aws_key</span><span class="p">,</span><span class="n">aws_secret</span><span class="p">])</span>
 <span class="n">cnb</span><span class="o">.</span><span class="n">initialize_folder</span><span class="p">(</span><span class="n">nb_name</span><span class="p">)</span>
 </pre></div>
 
@@ -2041,7 +2043,7 @@ Send &apos;exit&apos; command to kill the server
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2082,12 +2084,12 @@ Send &apos;exit&apos; command to kill the server
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Define some variables</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># Define some variables</span>
 
 
-<span class="n">tpl_dir</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s">&#39;code_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/libraries_of_others/misc/WFU_PickAtlas_3.0.5b/wfu_pickatlas/MNI_atlas_templates&#39;</span>
-<span class="n">aal_txt_file</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">/aal_MNI_V4.txt&#39;</span> <span class="o">%</span><span class="k">tpl_dir</span>
-<span class="n">aal_nii_file</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">/aal_MNI_V4.nii&#39;</span> <span class="o">%</span><span class="k">tpl_dir</span>
+<span class="n">tpl_dir</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s1">&#39;code_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/libraries_of_others/misc/WFU_PickAtlas_3.0.5b/wfu_pickatlas/MNI_atlas_templates&#39;</span>
+<span class="n">aal_txt_file</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/aal_MNI_V4.txt&#39;</span> <span class="o">%</span><span class="k">tpl_dir</span>
+<span class="n">aal_nii_file</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/aal_MNI_V4.nii&#39;</span> <span class="o">%</span><span class="k">tpl_dir</span>
 </pre></div>
 
 </div>
@@ -2109,39 +2111,39 @@ Send &apos;exit&apos; command to kill the server
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_aal_txt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">aal_txt_file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&#39;</span><span class="se">\t</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">])</span>
-<span class="n">df_aal_txt</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span>
-<span class="n">_tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="s">&#39;None&#39;</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">]);</span> <span class="n">_tmp</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">df_aal_txt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">aal_txt_file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">])</span>
+<span class="n">df_aal_txt</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+<span class="n">_tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="s1">&#39;None&#39;</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">]);</span> <span class="n">_tmp</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
 <span class="n">df_aal_txt</span> <span class="o">=</span> <span class="n">df_aal_txt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_tmp</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
 
 
 <span class="n">roi_xyzs</span><span class="p">,</span><span class="n">roi_list</span> <span class="o">=</span> <span class="n">get_roi_xyzs</span><span class="p">(</span><span class="n">aal_nii_file</span><span class="p">)</span>
 
-<span class="n">df_roi_xyz</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">roi_xyz</span><span class="o">.</span><span class="n">T</span><span class="p">,[</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">],</span>
+<span class="n">df_roi_xyz</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">roi_xyz</span><span class="o">.</span><span class="n">T</span><span class="p">,[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">],</span>
                           <span class="n">columns</span><span class="o">=</span><span class="n">df_aal_txt</span><span class="p">)</span>
 
 <span class="n">df_aal_txt_xyz</span> <span class="o">=</span> <span class="n">df_aal_txt</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">roi_xyz</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">roi_xyz</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">roi_xyz</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">roi_xyz</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">roi_xyz</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">roi_xyz</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
 
 
 <span class="n">hemis</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">df_aal_txt</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">]:</span> 
-  <span class="k">if</span> <span class="s">&#39;_R&#39;</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span> <span class="n">hemis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;R&#39;</span><span class="p">)</span>
-  <span class="k">elif</span> <span class="s">&#39;_L&#39;</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span> <span class="n">hemis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;L&#39;</span><span class="p">)</span>
-  <span class="k">else</span><span class="p">:</span> <span class="n">hemis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;N&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">df_aal_txt</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">]:</span> 
+  <span class="k">if</span> <span class="s1">&#39;_R&#39;</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span> <span class="n">hemis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;R&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="s1">&#39;_L&#39;</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span> <span class="n">hemis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span> <span class="n">hemis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">)</span>
                 
 <span class="n">hemis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">hemis</span><span class="p">)</span>
 
-<span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;hemi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hemis</span>
+<span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;hemi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hemis</span>
 
-<span class="c"># Sort by hemisphere and y axis value</span>
-<span class="n">sortreg</span> <span class="o">=</span> <span class="n">df_aal_txt_xyz</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s">&#39;hemi&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">])[</span><span class="s">&#39;region&#39;</span><span class="p">]</span>
+<span class="c1"># Sort by hemisphere and y axis value</span>
+<span class="n">sortreg</span> <span class="o">=</span> <span class="n">df_aal_txt_xyz</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;hemi&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">])[</span><span class="s1">&#39;region&#39;</span><span class="p">]</span>
 
-<span class="c"># (probably a simpler way of doing this...)</span>
-<span class="n">df_aal_txt_xyz</span> <span class="o">=</span> <span class="n">df_aal_txt_xyz</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s">&#39;region&#39;</span><span class="p">)</span>\
-                 <span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">sortreg</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">&#39;id&#39;</span><span class="p">,</span> <span class="s">&#39;hemi&#39;</span><span class="p">])</span>
+<span class="c1"># (probably a simpler way of doing this...)</span>
+<span class="n">df_aal_txt_xyz</span> <span class="o">=</span> <span class="n">df_aal_txt_xyz</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;region&#39;</span><span class="p">)</span>\
+                 <span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">sortreg</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;hemi&#39;</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -2164,18 +2166,18 @@ Send &apos;exit&apos; command to kill the server
 
 <div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
 <div class="input_area box-flex1" style="display:none; background-color:transparent; ">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/aal_atlas_rois.png&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/aal_atlas_rois.png&#39;</span>
 
-<span class="c"># Make figure</span>
+<span class="c1"># Make figure</span>
 <span class="n">aal_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">aal_nii_file</span><span class="p">)</span>
 <span class="n">plot_roi</span><span class="p">(</span><span class="n">aal_img</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
-<span class="c"># Upload to cloud</span>
-<span class="n">cap</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;AAL Atlas regions.&quot;</span>
+<span class="c1"># Upload to cloud</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;AAL Atlas regions.&quot;</span>
 <span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
             <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
@@ -2217,23 +2219,23 @@ Send &apos;exit&apos; command to kill the server
 
 <div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
 <div class="input_area box-flex1" style="display:none; background-color:transparent; ">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/aal_atlas_rois_centroid_xyzs.png&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/aal_atlas_rois_centroid_xyzs.png&#39;</span>
 
-<span class="c"># Make figure</span>
+<span class="c1"># Make figure</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">],</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">])</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">],</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;z&#39;</span><span class="p">])</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">],</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;z&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">])</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
-<span class="c"># Upload to cloud</span>
-<span class="n">cap</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;AAL Atlas ROI centroid xys&quot;</span>
+<span class="c1"># Upload to cloud</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;AAL Atlas ROI centroid xys&quot;</span>
 <span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
             <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
@@ -2274,14 +2276,14 @@ Send &apos;exit&apos; command to kill the server
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">_rxyz</span> <span class="o">=</span> <span class="n">df_aal_txt_xyz</span><span class="p">[[</span><span class="s">&#39;x&#39;</span><span class="p">,</span><span class="s">&#39;y&#39;</span><span class="p">,</span><span class="s">&#39;z&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">_rxyz</span> <span class="o">=</span> <span class="n">df_aal_txt_xyz</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
 
 <span class="n">nr</span><span class="p">,</span><span class="n">nc</span> <span class="o">=</span> <span class="n">_rxyz</span><span class="o">.</span><span class="n">shape</span>
 
 <span class="n">eucldists</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">_rxyz</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">r</span><span class="p">,[</span><span class="n">nr</span><span class="p">,</span><span class="mi">1</span><span class="p">])))</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">_rxyz</span><span class="p">])</span>
 
-<span class="n">df_eucldists</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">eucldists</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">],</span>
-                            <span class="n">index</span><span class="o">=</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">])</span>
+<span class="n">df_eucldists</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">eucldists</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">],</span>
+                            <span class="n">index</span><span class="o">=</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -2295,20 +2297,20 @@ Send &apos;exit&apos; command to kill the server
 
 <div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
 <div class="input_area box-flex1" style="display:none; background-color:transparent; ">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/aal_atlas_roi_euclidean_distances.png&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/aal_atlas_roi_euclidean_distances.png&#39;</span>
 
 
-<span class="c"># Make figure</span>
+<span class="c1"># Make figure</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df_eucldists</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s">&#39;hot&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">square</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df_eucldists</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;hot&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">square</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
-<span class="c"># Upload to cloud</span>
-<span class="n">cap</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;AAL Atlas ROI euclidean distrances&quot;</span>
+<span class="c1"># Upload to cloud</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;AAL Atlas ROI euclidean distrances&quot;</span>
 <span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
             <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
@@ -2350,11 +2352,11 @@ Send &apos;exit&apos; command to kill the server
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_aal_txt_xyz_lh</span> <span class="o">=</span> <span class="n">df_aal_txt_xyz</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s">&quot;hemi==&#39;L&#39;&quot;</span><span class="p">)</span>
-<span class="n">df_aal_txt_xyz_rh</span> <span class="o">=</span> <span class="n">df_aal_txt_xyz</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s">&quot;hemi==&#39;R&#39;&quot;</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">df_aal_txt_xyz_lh</span> <span class="o">=</span> <span class="n">df_aal_txt_xyz</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;hemi==&#39;L&#39;&quot;</span><span class="p">)</span>
+<span class="n">df_aal_txt_xyz_rh</span> <span class="o">=</span> <span class="n">df_aal_txt_xyz</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;hemi==&#39;R&#39;&quot;</span><span class="p">)</span>
 
-<span class="n">data_lh</span> <span class="o">=</span> <span class="n">df_eucldists</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">df_aal_txt_xyz_lh</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">]]</span>
-<span class="n">data_rh</span> <span class="o">=</span> <span class="n">df_eucldists</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">df_aal_txt_xyz_rh</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">]]</span>
+<span class="n">data_lh</span> <span class="o">=</span> <span class="n">df_eucldists</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">df_aal_txt_xyz_lh</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">]]</span>
+<span class="n">data_rh</span> <span class="o">=</span> <span class="n">df_eucldists</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">df_aal_txt_xyz_rh</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">]]</span>
 </pre></div>
 
 </div>
@@ -2386,10 +2388,10 @@ Send &apos;exit&apos; command to kill the server
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">lhp_file</span> <span class="o">=</span> <span class="s">&#39;/software/freesurfer/subjects/fsaverage/surf/lh.pial&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">lhp_file</span> <span class="o">=</span> <span class="s1">&#39;/software/freesurfer/subjects/fsaverage/surf/lh.pial&#39;</span>
 <span class="n">lhp_vtx</span><span class="p">,</span><span class="n">lhp_tri</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">freesurfer</span><span class="o">.</span><span class="n">read_geometry</span><span class="p">(</span><span class="n">lhp_file</span><span class="p">)</span>
 
-<span class="n">rhp_file</span> <span class="o">=</span> <span class="s">&#39;/software/freesurfer/subjects/fsaverage/surf/rh.pial&#39;</span>
+<span class="n">rhp_file</span> <span class="o">=</span> <span class="s1">&#39;/software/freesurfer/subjects/fsaverage/surf/rh.pial&#39;</span>
 <span class="n">rhp_vtx</span><span class="p">,</span><span class="n">rhp_tri</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">freesurfer</span><span class="o">.</span><span class="n">read_geometry</span><span class="p">(</span><span class="n">rhp_file</span><span class="p">)</span>
 </pre></div>
 
@@ -2413,10 +2415,10 @@ Send &apos;exit&apos; command to kill the server
 
 <div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
 <div class="input_area box-flex1" style="display:none; background-color:transparent; ">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/aal_atlas_roi_xyzs_vs_fsaverage_vtx_xyzs.png&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/aal_atlas_roi_xyzs_vs_fsaverage_vtx_xyzs.png&#39;</span>
 
 
-<span class="c"># Make figure</span>
+<span class="c1"># Make figure</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 
@@ -2424,26 +2426,26 @@ Send &apos;exit&apos; command to kill the server
 
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">lhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">lhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">rhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">rhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">],</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
                               
 
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">lhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">lhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">rhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">rhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">],</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;z&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">lhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">lhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">rhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">rhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">],</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;z&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">():</span> <span class="n">a</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;off&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">():</span> <span class="n">a</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
-<span class="c"># Upload to cloud</span>
-<span class="n">cap</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;AAL Atlas ROI xyzs vs. fsaverage vertex xyzs.&quot;</span>
+<span class="c1"># Upload to cloud</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;AAL Atlas ROI xyzs vs. fsaverage vertex xyzs.&quot;</span>
 <span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
             <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
@@ -2494,17 +2496,17 @@ Send &apos;exit&apos; command to kill the server
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">rlh</span> <span class="o">=</span> <span class="n">df_aal_txt_xyz_lh</span><span class="p">[[</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
-<span class="n">rrh</span> <span class="o">=</span> <span class="n">df_aal_txt_xyz_rh</span><span class="p">[[</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">rlh</span> <span class="o">=</span> <span class="n">df_aal_txt_xyz_lh</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">rrh</span> <span class="o">=</span> <span class="n">df_aal_txt_xyz_rh</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
 
 <span class="n">vtx_nrst_lh</span><span class="p">,</span><span class="n">tri_nrst_lh</span> <span class="o">=</span> <span class="n">roi_to_surface</span><span class="p">(</span><span class="n">rlh</span><span class="p">,</span><span class="n">lhp_vtx</span><span class="p">,</span><span class="n">lhp_tri</span><span class="p">)</span>
 <span class="n">vtx_nrst_rh</span><span class="p">,</span><span class="n">tri_nrst_rh</span> <span class="o">=</span> <span class="n">roi_to_surface</span><span class="p">(</span><span class="n">rrh</span><span class="p">,</span><span class="n">rhp_vtx</span><span class="p">,</span><span class="n">rhp_tri</span><span class="p">)</span>
 
-<span class="c"># that gave us correspondences in order of the roi coordinates list entered. </span>
-<span class="c"># now get the corresponding id values</span>
+<span class="c1"># that gave us correspondences in order of the roi coordinates list entered. </span>
+<span class="c1"># now get the corresponding id values</span>
 
-<span class="n">vtx_nrst_lh_id</span> <span class="o">=</span> <span class="n">roi_xyz_lh</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">)[</span><span class="n">vtx_nrst_lh</span><span class="p">]</span>
-<span class="n">vtx_nrst_rh_id</span> <span class="o">=</span> <span class="n">roi_xyz_rh</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">)[</span><span class="n">vtx_nrst_rh</span><span class="p">]</span>
+<span class="n">vtx_nrst_lh_id</span> <span class="o">=</span> <span class="n">roi_xyz_lh</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)[</span><span class="n">vtx_nrst_lh</span><span class="p">]</span>
+<span class="n">vtx_nrst_rh_id</span> <span class="o">=</span> <span class="n">roi_xyz_rh</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)[</span><span class="n">vtx_nrst_rh</span><span class="p">]</span>
 </pre></div>
 
 </div>
@@ -2527,13 +2529,13 @@ Send &apos;exit&apos; command to kill the server
 
 <div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
 <div class="input_area box-flex1" style="display:none; background-color:transparent; ">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/aal_atlas_roi_xyzs_vs_fsaverage_vtx_xyzs_selected_regions.png&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/aal_atlas_roi_xyzs_vs_fsaverage_vtx_xyzs_selected_regions.png&#39;</span>
 
 
-<span class="c"># Make figure</span>
+<span class="c1"># Make figure</span>
 
-<span class="n">roisel</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Occipital_Sup_L&#39;</span><span class="p">,</span>  <span class="s">&#39;Angular_L&#39;</span><span class="p">,</span>  <span class="s">&#39;Temporal_Inf_L&#39;</span><span class="p">,</span>
-          <span class="s">&#39;Frontal_Sup_Orb_L&#39;</span><span class="p">,</span> <span class="s">&#39;Cuneus_R&#39;</span><span class="p">,</span> <span class="s">&#39;Thalamus_R&#39;</span><span class="p">]</span>
+<span class="n">roisel</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Occipital_Sup_L&#39;</span><span class="p">,</span>  <span class="s1">&#39;Angular_L&#39;</span><span class="p">,</span>  <span class="s1">&#39;Temporal_Inf_L&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;Frontal_Sup_Orb_L&#39;</span><span class="p">,</span> <span class="s1">&#39;Cuneus_R&#39;</span><span class="p">,</span> <span class="s1">&#39;Thalamus_R&#39;</span><span class="p">]</span>
 
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
@@ -2542,51 +2544,51 @@ Send &apos;exit&apos; command to kill the server
 
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">lhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">lhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">rhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">rhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">],</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
                               
 
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">lhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">lhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">rhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">rhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">],</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;z&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">lhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">lhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">rhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">rhp_vtx</span><span class="p">[</span><span class="n">_ds</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">],</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;z&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 
 
 <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">roisel</span><span class="p">:</span>
     
-  <span class="n">_sel</span> <span class="o">=</span> <span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">r</span><span class="p">]</span>    
+  <span class="n">_sel</span> <span class="o">=</span> <span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="n">df_aal_txt_xyz</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">r</span><span class="p">]</span>    
   <span class="n">_id</span> <span class="o">=</span> <span class="n">_sel</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
     
-  <span class="k">if</span> <span class="s">&#39;_L&#39;</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span> 
+  <span class="k">if</span> <span class="s1">&#39;_L&#39;</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span> 
     <span class="n">_vtx</span> <span class="o">=</span> <span class="n">lhp_vtx</span>
     <span class="n">_inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">vtx_nrst_lh_id</span><span class="o">==</span><span class="n">_id</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     
-  <span class="k">elif</span> <span class="s">&#39;_R&#39;</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
+  <span class="k">elif</span> <span class="s1">&#39;_R&#39;</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
     <span class="n">_vtx</span> <span class="o">=</span> <span class="n">rhp_vtx</span>
     <span class="n">_inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">vtx_nrst_rh_id</span><span class="o">==</span><span class="n">_id</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
-  <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">_vtx</span><span class="p">[</span><span class="n">_inds</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">_vtx</span><span class="p">[</span><span class="n">_inds</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s">&#39;g&#39;</span><span class="p">)</span>
-  <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">_sel</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">],</span><span class="n">_sel</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="c">#,alpha=0.5)</span>
+  <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">_vtx</span><span class="p">[</span><span class="n">_inds</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">_vtx</span><span class="p">[</span><span class="n">_inds</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+  <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">_sel</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">_sel</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="c1">#,alpha=0.5)</span>
     
-  <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">_vtx</span><span class="p">[</span><span class="n">_inds</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">_vtx</span><span class="p">[</span><span class="n">_inds</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s">&#39;g&#39;</span><span class="p">)</span>
-  <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">_sel</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">],</span><span class="n">_sel</span><span class="p">[</span><span class="s">&#39;z&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="c">#,alpha=0.5)</span>
+  <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">_vtx</span><span class="p">[</span><span class="n">_inds</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">_vtx</span><span class="p">[</span><span class="n">_inds</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+  <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">_sel</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">_sel</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="c1">#,alpha=0.5)</span>
 
-  <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">_vtx</span><span class="p">[</span><span class="n">_inds</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">_vtx</span><span class="p">[</span><span class="n">_inds</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s">&#39;g&#39;</span><span class="p">)</span>
-  <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">_sel</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">],</span><span class="n">_sel</span><span class="p">[</span><span class="s">&#39;z&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="c">#,alpha=0.5)</span>
+  <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">_vtx</span><span class="p">[</span><span class="n">_inds</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">_vtx</span><span class="p">[</span><span class="n">_inds</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+  <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">_sel</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span><span class="n">_sel</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="c1">#,alpha=0.5)</span>
   
 
-<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">():</span> <span class="n">a</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;off&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">():</span> <span class="n">a</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
     
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
-<span class="c"># Upload to cloud</span>
-<span class="n">cap</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;AAL Atlas ROI xyzs vs. fsaverage vertex xyzs - selected regions&quot;</span>
+<span class="c1"># Upload to cloud</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;AAL Atlas ROI xyzs vs. fsaverage vertex xyzs - selected regions&quot;</span>
 <span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
             <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
@@ -2638,23 +2640,23 @@ Send &apos;exit&apos; command to kill the server
 
 <div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
 <div class="input_area box-flex1" style="display:none; background-color:transparent; ">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/aal_euclidean_distances_mpl_surf.png&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/aal_euclidean_distances_mpl_surf.png&#39;</span>
 
 
-<span class="c"># Make figure</span>
+<span class="c1"># Make figure</span>
 
 <span class="n">plot_surface_mpl_mv</span><span class="p">(</span><span class="n">vtx_lh</span><span class="o">=</span><span class="n">lhp_vtx</span><span class="p">,</span><span class="n">tri_lh</span><span class="o">=</span><span class="n">lhp_tri</span><span class="p">,</span><span class="n">rm_lh</span><span class="o">=</span><span class="n">vtx_nrst_lh</span><span class="p">,</span><span class="n">data_lh</span><span class="o">=</span><span class="n">data_lh</span><span class="p">,</span>
                     <span class="n">vtx_rh</span><span class="o">=</span><span class="n">rhp_vtx</span><span class="p">,</span><span class="n">tri_rh</span><span class="o">=</span><span class="n">rhp_tri</span><span class="p">,</span><span class="n">rm_rh</span><span class="o">=</span><span class="n">vtx_nrst_rh</span><span class="p">,</span><span class="n">data_rh</span><span class="o">=</span><span class="n">data_rh</span><span class="p">,</span>
-                    <span class="n">reorient</span><span class="o">=</span><span class="s">&#39;fs&#39;</span><span class="p">)</span>
+                    <span class="n">reorient</span><span class="o">=</span><span class="s1">&#39;fs&#39;</span><span class="p">)</span>
 
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
-<span class="c"># Upload to cloud</span>
-<span class="n">cap</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;AAL Euclidean distances - matplotlib surface viz&quot;</span>
+<span class="c1"># Upload to cloud</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;AAL Euclidean distances - matplotlib surface viz&quot;</span>
 <span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
             <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
@@ -2697,24 +2699,24 @@ Send &apos;exit&apos; command to kill the server
 
 <div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
 <div class="input_area box-flex1" style="display:none; background-color:transparent; ">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/aal_euclidean_distances_mpl_surf_gouraud.png&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/aal_euclidean_distances_mpl_surf_gouraud.png&#39;</span>
 
 
-<span class="c"># Make figure</span>
+<span class="c1"># Make figure</span>
 
 <span class="n">plot_surface_mpl_mv</span><span class="p">(</span><span class="n">vtx_lh</span><span class="o">=</span><span class="n">lhp_vtx</span><span class="p">,</span><span class="n">tri_lh</span><span class="o">=</span><span class="n">lhp_tri</span><span class="p">,</span><span class="n">rm_lh</span><span class="o">=</span><span class="n">vtx_nrst_lh</span><span class="p">,</span><span class="n">data_lh</span><span class="o">=</span><span class="n">data_lh</span><span class="p">,</span>
                     <span class="n">vtx_rh</span><span class="o">=</span><span class="n">rhp_vtx</span><span class="p">,</span><span class="n">tri_rh</span><span class="o">=</span><span class="n">rhp_tri</span><span class="p">,</span><span class="n">rm_rh</span><span class="o">=</span><span class="n">vtx_nrst_rh</span><span class="p">,</span><span class="n">data_rh</span><span class="o">=</span><span class="n">data_rh</span><span class="p">,</span>
-                    <span class="n">reorient</span><span class="o">=</span><span class="s">&#39;fs&#39;</span><span class="p">,</span> <span class="n">shade_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;shading&#39;</span><span class="p">:</span> <span class="s">&#39;gouraud&#39;</span><span class="p">,</span>
-                                                 <span class="s">&#39;cmap&#39;</span><span class="p">:</span> <span class="s">&#39;coolwarm&#39;</span><span class="p">})</span>
+                    <span class="n">reorient</span><span class="o">=</span><span class="s1">&#39;fs&#39;</span><span class="p">,</span> <span class="n">shade_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;shading&#39;</span><span class="p">:</span> <span class="s1">&#39;gouraud&#39;</span><span class="p">,</span>
+                                                 <span class="s1">&#39;cmap&#39;</span><span class="p">:</span> <span class="s1">&#39;coolwarm&#39;</span><span class="p">})</span>
 
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
-<span class="c"># Upload to cloud</span>
-<span class="n">cap</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;AAL Euclidean distances - matplotlib surface viz, gouraud shading&quot;</span>
+<span class="c1"># Upload to cloud</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;AAL Euclidean distances - matplotlib surface viz, gouraud shading&quot;</span>
 <span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
             <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
@@ -2756,7 +2758,7 @@ Send &apos;exit&apos; command to kill the server
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">data_lh_vtx</span><span class="p">,</span><span class="n">data_lh_tri</span> <span class="o">=</span> <span class="n">project_to_cs</span><span class="p">(</span><span class="n">data_lh</span><span class="p">,</span><span class="n">vtx_nrst_lh</span><span class="p">,</span><span class="n">tri_nrst_lh</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">data_lh_vtx</span><span class="p">,</span><span class="n">data_lh_tri</span> <span class="o">=</span> <span class="n">project_to_cs</span><span class="p">(</span><span class="n">data_lh</span><span class="p">,</span><span class="n">vtx_nrst_lh</span><span class="p">,</span><span class="n">tri_nrst_lh</span><span class="p">)</span>
 <span class="n">data_rh_vtx</span><span class="p">,</span><span class="n">data_rh_tri</span> <span class="o">=</span> <span class="n">project_to_cs</span><span class="p">(</span><span class="n">data_rh</span><span class="p">,</span><span class="n">vtx_nrst_rh</span><span class="p">,</span><span class="n">tri_nrst_rh</span><span class="p">)</span>
 </pre></div>
 
@@ -2780,23 +2782,23 @@ Send &apos;exit&apos; command to kill the server
 
 <div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
 <div class="input_area box-flex1" style="display:none; background-color:transparent; ">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/aal_euclidean_distances_mpl_surf_gouraud_datavec.png&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/aal_euclidean_distances_mpl_surf_gouraud_datavec.png&#39;</span>
 
 
-<span class="c"># Make figure</span>
+<span class="c1"># Make figure</span>
 
 <span class="n">plot_surface_mpl_mv</span><span class="p">(</span><span class="n">vtx_lh</span><span class="o">=</span><span class="n">lhp_vtx</span><span class="p">,</span><span class="n">tri_lh</span><span class="o">=</span><span class="n">lhp_tri</span><span class="p">,</span><span class="n">data_lh</span><span class="o">=</span><span class="n">data_lh_vtx</span><span class="p">,</span>
                     <span class="n">vtx_rh</span><span class="o">=</span><span class="n">rhp_vtx</span><span class="p">,</span><span class="n">tri_rh</span><span class="o">=</span><span class="n">rhp_tri</span><span class="p">,</span><span class="n">data_rh</span><span class="o">=</span><span class="n">data_rh_vtx</span><span class="p">,</span>
-                    <span class="n">reorient</span><span class="o">=</span><span class="s">&#39;fs&#39;</span><span class="p">,</span> <span class="n">shade_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;shading&#39;</span><span class="p">:</span> <span class="s">&#39;gouraud&#39;</span><span class="p">,</span>
-                                                 <span class="s">&#39;cmap&#39;</span><span class="p">:</span> <span class="s">&#39;coolwarm&#39;</span><span class="p">})</span>
+                    <span class="n">reorient</span><span class="o">=</span><span class="s1">&#39;fs&#39;</span><span class="p">,</span> <span class="n">shade_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;shading&#39;</span><span class="p">:</span> <span class="s1">&#39;gouraud&#39;</span><span class="p">,</span>
+                                                 <span class="s1">&#39;cmap&#39;</span><span class="p">:</span> <span class="s1">&#39;coolwarm&#39;</span><span class="p">})</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
-<span class="c"># Upload to cloud</span>
-<span class="n">cap</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;AAL Euclidean distances - matplotlib surface viz, gouraud shading; data vector&quot;</span>
+<span class="c1"># Upload to cloud</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;AAL Euclidean distances - matplotlib surface viz, gouraud shading; data vector&quot;</span>
 <span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
             <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
@@ -2847,7 +2849,7 @@ Send &apos;exit&apos; command to kill the server
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">matlab</span> <span class="o">-</span><span class="n">i</span> <span class="n">outdir</span><span class="p">,</span><span class="n">lhp_file</span><span class="p">,</span><span class="n">rhp_file</span><span class="p">,</span><span class="n">data_lh_vtx</span><span class="p">,</span><span class="n">data_rh_vtx</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="o">%%</span><span class="k">matlab</span> <span class="o">-</span><span class="n">i</span> <span class="n">outdir</span><span class="p">,</span><span class="n">lhp_file</span><span class="p">,</span><span class="n">rhp_file</span><span class="p">,</span><span class="n">data_lh_vtx</span><span class="p">,</span><span class="n">data_rh_vtx</span>
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">figure</span><span class="p">;</span> 
 
@@ -2860,34 +2862,34 @@ Send &apos;exit&apos; command to kill the server
 <span class="n">viewfrombottom</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">90</span><span class="p">];</span>
 
 <span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">patch</span><span class="p">(</span><span class="s">&#39;Vertices&#39;</span><span class="p">,</span><span class="n">lhp_vtx_ml</span><span class="p">,</span><span class="s">&#39;Faces&#39;</span><span class="p">,</span><span class="n">lhp_tri_ml</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="s">&#39;CData&#39;</span><span class="p">,</span><span class="n">data_lh_vtx</span><span class="p">,</span><span class="o">...</span>
-      <span class="s">&#39;FaceColor&#39;</span><span class="p">,</span><span class="s">&#39;interp&#39;</span><span class="p">,</span><span class="s">&#39;EdgeColor&#39;</span><span class="p">,</span><span class="s">&#39;none&#39;</span><span class="p">);</span>
+<span class="n">patch</span><span class="p">(</span><span class="s1">&#39;Vertices&#39;</span><span class="p">,</span><span class="n">lhp_vtx_ml</span><span class="p">,</span><span class="s1">&#39;Faces&#39;</span><span class="p">,</span><span class="n">lhp_tri_ml</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;CData&#39;</span><span class="p">,</span><span class="n">data_lh_vtx</span><span class="p">,</span><span class="o">...</span>
+      <span class="s1">&#39;FaceColor&#39;</span><span class="p">,</span><span class="s1">&#39;interp&#39;</span><span class="p">,</span><span class="s1">&#39;EdgeColor&#39;</span><span class="p">,</span><span class="s1">&#39;none&#39;</span><span class="p">);</span>
 <span class="n">view</span><span class="p">(</span><span class="n">viewfromleft</span><span class="p">);</span>
 <span class="n">axis</span> <span class="n">image</span><span class="p">;</span> <span class="n">axis</span> <span class="n">off</span><span class="p">;</span> <span class="n">camlight</span><span class="p">;</span> <span class="n">lighting</span> <span class="n">gouraud</span><span class="p">;</span> 
-<span class="n">colormap</span><span class="p">(</span><span class="s">&#39;jet&#39;</span><span class="p">);</span> <span class="n">caxis</span> <span class="n">auto</span><span class="p">;</span>
+<span class="n">colormap</span><span class="p">(</span><span class="s1">&#39;jet&#39;</span><span class="p">);</span> <span class="n">caxis</span> <span class="n">auto</span><span class="p">;</span>
 
 <span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">patch</span><span class="p">(</span><span class="s">&#39;Vertices&#39;</span><span class="p">,</span><span class="n">rhp_vtx_ml</span><span class="p">,</span><span class="s">&#39;Faces&#39;</span><span class="p">,</span><span class="n">rhp_tri_ml</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="s">&#39;CData&#39;</span><span class="p">,</span><span class="n">data_rh_vtx</span><span class="p">,</span><span class="o">...</span>
-      <span class="s">&#39;FaceColor&#39;</span><span class="p">,</span><span class="s">&#39;interp&#39;</span><span class="p">,</span><span class="s">&#39;EdgeColor&#39;</span><span class="p">,</span><span class="s">&#39;none&#39;</span><span class="p">);</span>
+<span class="n">patch</span><span class="p">(</span><span class="s1">&#39;Vertices&#39;</span><span class="p">,</span><span class="n">rhp_vtx_ml</span><span class="p">,</span><span class="s1">&#39;Faces&#39;</span><span class="p">,</span><span class="n">rhp_tri_ml</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;CData&#39;</span><span class="p">,</span><span class="n">data_rh_vtx</span><span class="p">,</span><span class="o">...</span>
+      <span class="s1">&#39;FaceColor&#39;</span><span class="p">,</span><span class="s1">&#39;interp&#39;</span><span class="p">,</span><span class="s1">&#39;EdgeColor&#39;</span><span class="p">,</span><span class="s1">&#39;none&#39;</span><span class="p">);</span>
 <span class="n">view</span><span class="p">(</span><span class="n">viewfromright</span><span class="p">);</span>
 <span class="n">axis</span> <span class="n">image</span><span class="p">;</span> <span class="n">axis</span> <span class="n">off</span><span class="p">;</span> <span class="n">camlight</span><span class="p">;</span> <span class="n">lighting</span> <span class="n">gouraud</span><span class="p">;</span> 
-<span class="n">colormap</span><span class="p">(</span><span class="s">&#39;jet&#39;</span><span class="p">);</span> <span class="n">caxis</span> <span class="n">auto</span><span class="p">;</span>
+<span class="n">colormap</span><span class="p">(</span><span class="s1">&#39;jet&#39;</span><span class="p">);</span> <span class="n">caxis</span> <span class="n">auto</span><span class="p">;</span>
 
 <span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">patch</span><span class="p">(</span><span class="s">&#39;Vertices&#39;</span><span class="p">,</span><span class="n">lhp_vtx_ml</span><span class="p">,</span><span class="s">&#39;Faces&#39;</span><span class="p">,</span><span class="n">lhp_tri_ml</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="s">&#39;CData&#39;</span><span class="p">,</span><span class="n">data_lh_vtx</span><span class="p">,</span><span class="o">...</span>
-      <span class="s">&#39;FaceColor&#39;</span><span class="p">,</span><span class="s">&#39;interp&#39;</span><span class="p">,</span><span class="s">&#39;EdgeColor&#39;</span><span class="p">,</span><span class="s">&#39;none&#39;</span><span class="p">);</span>
+<span class="n">patch</span><span class="p">(</span><span class="s1">&#39;Vertices&#39;</span><span class="p">,</span><span class="n">lhp_vtx_ml</span><span class="p">,</span><span class="s1">&#39;Faces&#39;</span><span class="p">,</span><span class="n">lhp_tri_ml</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;CData&#39;</span><span class="p">,</span><span class="n">data_lh_vtx</span><span class="p">,</span><span class="o">...</span>
+      <span class="s1">&#39;FaceColor&#39;</span><span class="p">,</span><span class="s1">&#39;interp&#39;</span><span class="p">,</span><span class="s1">&#39;EdgeColor&#39;</span><span class="p">,</span><span class="s1">&#39;none&#39;</span><span class="p">);</span>
 <span class="n">view</span><span class="p">(</span><span class="n">viewfromright</span><span class="p">);</span>
 <span class="n">axis</span> <span class="n">image</span><span class="p">;</span> <span class="n">axis</span> <span class="n">off</span><span class="p">;</span> <span class="n">camlight</span><span class="p">;</span> <span class="n">lighting</span> <span class="n">gouraud</span><span class="p">;</span> 
-<span class="n">colormap</span><span class="p">(</span><span class="s">&#39;jet&#39;</span><span class="p">);</span> <span class="n">caxis</span> <span class="n">auto</span><span class="p">;</span>
+<span class="n">colormap</span><span class="p">(</span><span class="s1">&#39;jet&#39;</span><span class="p">);</span> <span class="n">caxis</span> <span class="n">auto</span><span class="p">;</span>
 
 <span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">patch</span><span class="p">(</span><span class="s">&#39;Vertices&#39;</span><span class="p">,</span><span class="n">rhp_vtx_ml</span><span class="p">,</span><span class="s">&#39;Faces&#39;</span><span class="p">,</span><span class="n">rhp_tri_ml</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="s">&#39;CData&#39;</span><span class="p">,</span><span class="n">data_rh_vtx</span><span class="p">,</span><span class="o">...</span>
-      <span class="s">&#39;FaceColor&#39;</span><span class="p">,</span><span class="s">&#39;interp&#39;</span><span class="p">,</span><span class="s">&#39;EdgeColor&#39;</span><span class="p">,</span><span class="s">&#39;none&#39;</span><span class="p">);</span>
+<span class="n">patch</span><span class="p">(</span><span class="s1">&#39;Vertices&#39;</span><span class="p">,</span><span class="n">rhp_vtx_ml</span><span class="p">,</span><span class="s1">&#39;Faces&#39;</span><span class="p">,</span><span class="n">rhp_tri_ml</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;CData&#39;</span><span class="p">,</span><span class="n">data_rh_vtx</span><span class="p">,</span><span class="o">...</span>
+      <span class="s1">&#39;FaceColor&#39;</span><span class="p">,</span><span class="s1">&#39;interp&#39;</span><span class="p">,</span><span class="s1">&#39;EdgeColor&#39;</span><span class="p">,</span><span class="s1">&#39;none&#39;</span><span class="p">);</span>
 <span class="n">view</span><span class="p">(</span><span class="n">viewfromleft</span><span class="p">);</span>
 <span class="n">axis</span> <span class="n">image</span><span class="p">;</span> <span class="n">axis</span> <span class="n">off</span><span class="p">;</span> <span class="n">camlight</span><span class="p">;</span> <span class="n">lighting</span> <span class="n">gouraud</span><span class="p">;</span> 
-<span class="n">colormap</span><span class="p">(</span><span class="s">&#39;jet&#39;</span><span class="p">);</span> <span class="n">caxis</span> <span class="n">auto</span><span class="p">;</span>
+<span class="n">colormap</span><span class="p">(</span><span class="s1">&#39;jet&#39;</span><span class="p">);</span> <span class="n">caxis</span> <span class="n">auto</span><span class="p">;</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s">&#39;-dpng&#39;</span><span class="p">,[</span><span class="n">outdir</span> <span class="s">&#39;/aal_euclidean_distances_patch.png&#39;</span><span class="p">]);</span>
+<span class="k">print</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s1">&#39;-dpng&#39;</span><span class="p">,[</span><span class="n">outdir</span> <span class="s1">&#39;/aal_euclidean_distances_patch.png&#39;</span><span class="p">]);</span>
                     
 <span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
 </pre></div>
@@ -2903,13 +2905,13 @@ Send &apos;exit&apos; command to kill the server
 
 <div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
 <div class="input_area box-flex1" style="display:none; background-color:transparent; ">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/aal_euclidean_distances_patch.png&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/aal_euclidean_distances_patch.png&#39;</span>
 
 
-<span class="c"># Upload to cloud</span>
+<span class="c1"># Upload to cloud</span>
 
-<span class="n">cap</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;AAL Euclidean distances - matplab patch viz&quot;</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;AAL Euclidean distances - matplab patch viz&quot;</span>
 <span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
             <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
@@ -2996,7 +2998,7 @@ Send &apos;exit&apos; command to kill the server
 
   <section>
   <h1>Tags</h1>
-    <a href="https://johngriffiths.github.io/LabNotebook/tag/ppmi.html">PPMI</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/viz.html">Viz</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/sem.html">SEM</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/dementia.html">Dementia</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/adni.html">ADNI</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/labnotebook.html">LabNotebook</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/tvb.html">TVB</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/hcp.html">HCP</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/robinson.html">Robinson</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/pcp.html">PCP</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/mse.html">MSE</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/dwi.html">DWI</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/dcm.html">DCM</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/mcintosh.html">McIntosh</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/connectivity.html">Connectivity</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/granger.html">Granger</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/ipython.html">IPython</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/theorygroup.html">TheoryGroup</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/rsfmri.html">rsfMRI</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/ageing.html">ageing</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/eigenmodes.html">eigenmodes</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/tractography.html">tractography</a>  </section>
+    <a href="https://johngriffiths.github.io/LabNotebook/tag/ppmi.html">PPMI</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/viz.html">Viz</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/sem.html">SEM</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/dementia.html">Dementia</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/adni.html">ADNI</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/labnotebook.html">LabNotebook</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/tvb.html">TVB</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/hcp.html">HCP</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/robinson.html">Robinson</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/pcp.html">PCP</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/mse.html">MSE</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/dwi.html">DWI</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/meg.html">MEG</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/dcm.html">DCM</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/mcintosh.html">McIntosh</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/connectivity.html">Connectivity</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/granger.html">Granger</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/ipython.html">IPython</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/theorygroup.html">TheoryGroup</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/rsfmri.html">rsfMRI</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/ageing.html">ageing</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/eigenmodes.html">eigenmodes</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/tractography.html">tractography</a>  </section>
 
 
 

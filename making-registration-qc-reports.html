@@ -1560,8 +1560,10 @@ span#checkpoint_status,span#autosave_status{font-size:small}
 .highlight .err { border: 1px solid #FF0000 } /* Error */
 .highlight .k { color: #008000; font-weight: bold } /* Keyword */
 .highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
 .highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
 .highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
 .highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
 .highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
 .highlight .gd { color: #A00000 } /* Generic.Deleted */
@@ -1843,26 +1845,26 @@ jQuery(document).ready(function($) {
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># define system-specific filepaths etc</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># define system-specific filepaths etc</span>
 <span class="o">%</span><span class="k">run</span> <span class="o">~/</span><span class="n">set_localenv_vars</span><span class="o">.</span><span class="n">py</span>
 
-<span class="n">nb_name</span> <span class="o">=</span> <span class="s">&#39;making_registration_qc_reports&#39;</span>
+<span class="n">nb_name</span> <span class="o">=</span> <span class="s1">&#39;making_registration_qc_reports&#39;</span>
 
-<span class="c"># this is where I look for things</span>
-<span class="n">outdir</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">/notebooks/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">le</span><span class="p">[</span><span class="s">&#39;data_dir&#39;</span><span class="p">],</span><span class="n">nb_name</span><span class="p">)</span>
+<span class="c1"># this is where I look for things</span>
+<span class="n">outdir</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/notebooks/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">le</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">],</span><span class="n">nb_name</span><span class="p">)</span>
 
-<span class="c"># this is where things actually live</span>
-<span class="n">outdir_loc</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="s">&#39;/mnt/titania-hecuba/mcintosh_lab/john/Data/notebooks&#39;</span><span class="p">,</span> <span class="n">nb_name</span><span class="p">)</span>
+<span class="c1"># this is where things actually live</span>
+<span class="n">outdir_loc</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="s1">&#39;/mnt/titania-hecuba/mcintosh_lab/john/Data/notebooks&#39;</span><span class="p">,</span> <span class="n">nb_name</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">os</span><span class="p">;</span> 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">outdir_loc</span><span class="p">):</span> <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">outdir_loc</span><span class="p">)</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">outdir</span><span class="p">):</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">&#39;ln -s </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">outdir_loc</span><span class="p">,</span><span class="n">outdir</span><span class="p">))</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">outdir</span><span class="p">):</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;ln -s </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">outdir_loc</span><span class="p">,</span><span class="n">outdir</span><span class="p">))</span>
 
-<span class="c"># folder on scinet where analyses are run from and written to</span>
+<span class="c1"># folder on scinet where analyses are run from and written to</span>
 
-<span class="c"># stuff for workdocs-cloudfiles</span>
+<span class="c1"># stuff for workdocs-cloudfiles</span>
 
-<span class="n">aws_key</span> <span class="o">=</span> <span class="s">&#39;drowssaperucesyreva&#39;</span>
-<span class="n">aws_secret</span> <span class="o">=</span> <span class="s">&#39;?teytidettopsuoyevah&#39;</span>  
+<span class="n">aws_key</span> <span class="o">=</span> <span class="s1">&#39;drowssaperucesyreva&#39;</span>
+<span class="n">aws_secret</span> <span class="o">=</span> <span class="s1">&#39;?teytidettopsuoyevah&#39;</span>  
 </pre></div>
 
 </div>
@@ -1884,12 +1886,12 @@ jQuery(document).ready(function($) {
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Generic Stuff</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># Generic Stuff</span>
 
 <span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span><span class="o">,</span><span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 
-<span class="c"># Visualization Stuff</span>
+<span class="c1"># Visualization Stuff</span>
 
 <span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
@@ -1902,16 +1904,16 @@ jQuery(document).ready(function($) {
 
 
 
-<span class="c"># Neuroimaging analysis stuff</span>
+<span class="c1"># Neuroimaging analysis stuff</span>
 
 <span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
 
 <span class="kn">from</span> <span class="nn">nipype.interfaces.fsl</span> <span class="kn">import</span> <span class="n">BET</span>
 <span class="kn">from</span> <span class="nn">nipype.interfaces.fsl</span> <span class="kn">import</span> <span class="n">FNIRT</span>
 
-<span class="c"># Workdocs-cloudfiles stuff</span>
+<span class="c1"># Workdocs-cloudfiles stuff</span>
 
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">le</span><span class="p">[</span><span class="s">&#39;ipynb_workdocs_dir&#39;</span><span class="p">])</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">le</span><span class="p">[</span><span class="s1">&#39;ipynb_workdocs_dir&#39;</span><span class="p">])</span>
 <span class="kn">from</span> <span class="nn">new_utils</span> <span class="kn">import</span> <span class="n">nb_fig</span><span class="p">,</span><span class="n">cloudfiles_nb</span><span class="p">,</span><span class="n">jg_df</span>
 </pre></div>
 
@@ -1934,7 +1936,7 @@ jQuery(document).ready(function($) {
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cnb</span> <span class="o">=</span> <span class="n">cloudfiles_nb</span><span class="p">(</span><span class="s">&#39;aws&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">aws_key</span><span class="p">,</span><span class="n">aws_secret</span><span class="p">])</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">cnb</span> <span class="o">=</span> <span class="n">cloudfiles_nb</span><span class="p">(</span><span class="s1">&#39;aws&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">aws_key</span><span class="p">,</span><span class="n">aws_secret</span><span class="p">])</span>
 <span class="n">cnb</span><span class="o">.</span><span class="n">initialize_folder</span><span class="p">(</span><span class="n">nb_name</span><span class="p">)</span>
 </pre></div>
 
@@ -1957,9 +1959,9 @@ jQuery(document).ready(function($) {
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">javascript</span>
-<span class="n">IPython</span><span class="o">.</span><span class="n">load_extensions</span><span class="p">(</span><span class="s">&#39;calico-spell-check&#39;</span><span class="p">,</span>
-                        <span class="s">&#39;calico-document-tools&#39;</span><span class="p">,</span> <span class="s">&#39;calico-cell-tools&#39;</span><span class="p">);</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="o">%%</span><span class="k">javascript</span>
+<span class="n">IPython</span><span class="o">.</span><span class="n">load_extensions</span><span class="p">(</span><span class="s1">&#39;calico-spell-check&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;calico-document-tools&#39;</span><span class="p">,</span> <span class="s1">&#39;calico-cell-tools&#39;</span><span class="p">);</span>
 </pre></div>
 
 </div>
@@ -1999,7 +2001,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools', 'calico-c
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2041,8 +2043,8 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools', 'calico-c
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">roi_file</span> <span class="o">=</span> <span class="s">&#39;/phocaea/mcintosh_lab/jwang/ADNI_tmp/warped_rmask_2_t1.nii&#39;</span>
-<span class="n">t1_file</span> <span class="o">=</span> <span class="s">&#39;/phocaea/mcintosh_lab/jwang/ADNI_tmp/T1.nii.gz&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">roi_file</span> <span class="o">=</span> <span class="s1">&#39;/phocaea/mcintosh_lab/jwang/ADNI_tmp/warped_rmask_2_t1.nii&#39;</span>
+<span class="n">t1_file</span> <span class="o">=</span> <span class="s1">&#39;/phocaea/mcintosh_lab/jwang/ADNI_tmp/T1.nii.gz&#39;</span>
 </pre></div>
 
 </div>
@@ -2055,7 +2057,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools', 'calico-c
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">roi_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">roi_file</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">roi_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">roi_file</span><span class="p">)</span>
 <span class="n">t1_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">t1_file</span><span class="p">)</span>
 </pre></div>
 
@@ -2079,22 +2081,22 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools', 'calico-c
 
 <div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
 <div class="input_area box-flex1" style="display:none; background-color:transparent; ">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/figs/plot_roi_1.png&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/figs/plot_roi_1.png&#39;</span>
 
 
-<span class="c"># Generate fig</span>
+<span class="c1"># Generate fig</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 
 <span class="n">plot_roi</span><span class="p">(</span><span class="n">roi_img</span><span class="p">,</span><span class="n">bg_img</span><span class="o">=</span><span class="n">t1_img</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-<span class="c"># Show in notebook</span>
+<span class="c1"># Show in notebook</span>
 
-<span class="n">cap</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
-<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
 <span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
             <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
@@ -2150,7 +2152,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools', 'calico-c
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">roibin_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">((</span><span class="n">roi_img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">roibin_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">((</span><span class="n">roi_img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
                              <span class="n">roi_img</span><span class="o">.</span><span class="n">affine</span><span class="p">)</span>
 </pre></div>
 
@@ -2165,25 +2167,25 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools', 'calico-c
 
 <div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
 <div class="input_area box-flex1" style="display:none; background-color:transparent; ">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/figs/plot_roi_2.png&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/figs/plot_roi_2.png&#39;</span>
 
 
-<span class="c"># Generate fig</span>
+<span class="c1"># Generate fig</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 
 <span class="n">plot_roi</span><span class="p">(</span><span class="n">roibin_img</span><span class="p">,</span><span class="n">bg_img</span><span class="o">=</span><span class="n">t1_img</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-         <span class="n">draw_cross</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s">&#39;hot&#39;</span><span class="p">,</span>
+         <span class="n">draw_cross</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;hot&#39;</span><span class="p">,</span>
          <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
-<span class="c"># Show in notebook</span>
+<span class="c1"># Show in notebook</span>
 
-<span class="n">cap</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
-<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
 <span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
             <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
@@ -2226,25 +2228,25 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools', 'calico-c
 
 <div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
 <div class="input_area box-flex1" style="display:none; background-color:transparent; ">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/figs/plot_roi_3.png&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/figs/plot_roi_3.png&#39;</span>
 
 
-<span class="c"># Generate fig</span>
+<span class="c1"># Generate fig</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 
 <span class="n">plot_roi</span><span class="p">(</span><span class="n">roibin_img</span><span class="p">,</span><span class="n">bg_img</span><span class="o">=</span><span class="n">t1_img</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-         <span class="n">draw_cross</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s">&#39;hot&#39;</span><span class="p">,</span>
-         <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">display_mode</span><span class="o">=</span><span class="s">&#39;x&#39;</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+         <span class="n">draw_cross</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;hot&#39;</span><span class="p">,</span>
+         <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">display_mode</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
-<span class="c"># Show in notebook</span>
+<span class="c1"># Show in notebook</span>
 
-<span class="n">cap</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
-<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
 <span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
             <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">900</span><span class="p">,</span><span class="mi">400</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
@@ -2278,25 +2280,25 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools', 'calico-c
 
 <div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
 <div class="input_area box-flex1" style="display:none; background-color:transparent; ">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/figs/plot_roi_4.png&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/figs/plot_roi_4.png&#39;</span>
 
 
-<span class="c"># Generate fig</span>
+<span class="c1"># Generate fig</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 
 <span class="n">plot_roi</span><span class="p">(</span><span class="n">roibin_img</span><span class="p">,</span><span class="n">bg_img</span><span class="o">=</span><span class="n">t1_img</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-         <span class="n">draw_cross</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s">&#39;hot&#39;</span><span class="p">,</span>
-         <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">display_mode</span><span class="o">=</span><span class="s">&#39;y&#39;</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+         <span class="n">draw_cross</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;hot&#39;</span><span class="p">,</span>
+         <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">display_mode</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
-<span class="c"># Show in notebook</span>
+<span class="c1"># Show in notebook</span>
 
-<span class="n">cap</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
-<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
 <span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
             <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">900</span><span class="p">,</span><span class="mi">400</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
@@ -2330,25 +2332,25 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools', 'calico-c
 
 <div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
 <div class="input_area box-flex1" style="display:none; background-color:transparent; ">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s">&#39;/figs/plot_roi_5.png&#39;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/figs/plot_roi_5.png&#39;</span>
 
 
-<span class="c"># Generate fig</span>
+<span class="c1"># Generate fig</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 
 <span class="n">plot_roi</span><span class="p">(</span><span class="n">roibin_img</span><span class="p">,</span><span class="n">bg_img</span><span class="o">=</span><span class="n">t1_img</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-         <span class="n">draw_cross</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s">&#39;hot&#39;</span><span class="p">,</span>
-         <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">display_mode</span><span class="o">=</span><span class="s">&#39;z&#39;</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+         <span class="n">draw_cross</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;hot&#39;</span><span class="p">,</span>
+         <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">display_mode</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
-<span class="c"># Show in notebook</span>
+<span class="c1"># Show in notebook</span>
 
-<span class="n">cap</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
-<span class="n">label</span>  <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
 <span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
             <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">900</span><span class="p">,</span><span class="mi">400</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
@@ -2400,7 +2402,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools', 'calico-c
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># to do...</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># to do...</span>
 </pre></div>
 
 </div>
@@ -2465,9 +2467,9 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools', 'calico-c
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">files</span> <span class="o">=</span> <span class="p">[[</span><span class="n">roi_file</span><span class="p">,</span><span class="n">t1_file</span><span class="p">]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)]</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">files</span> <span class="o">=</span> <span class="p">[[</span><span class="n">roi_file</span><span class="p">,</span><span class="n">t1_file</span><span class="p">]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)]</span>
 
-<span class="n">pdf</span><span class="o">=</span><span class="n">PdfPages</span><span class="p">(</span><span class="s">&#39;test_report2.pdf&#39;</span><span class="p">)</span>
+<span class="n">pdf</span><span class="o">=</span><span class="n">PdfPages</span><span class="p">(</span><span class="s1">&#39;test_report2.pdf&#39;</span><span class="p">)</span>
 
 <span class="n">nfigspp</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="n">fignum</span> <span class="o">=</span> <span class="mi">0</span>
@@ -2480,7 +2482,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools', 'calico-c
   <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
 
     
-  <span class="c"># Add subjects to page</span>
+  <span class="c1"># Add subjects to page</span>
     
   <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nfigspp</span><span class="p">):</span>
 
@@ -2491,15 +2493,15 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools', 'calico-c
         
     <span class="n">a</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">()[</span><span class="n">r</span><span class="p">]</span>
     
-    <span class="n">title</span> <span class="o">=</span> <span class="s">&#39;sub </span><span class="si">%s</span><span class="s">&#39;</span>  <span class="o">%</span><span class="p">(</span><span class="n">subnum</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;sub </span><span class="si">%s</span><span class="s1">&#39;</span>  <span class="o">%</span><span class="p">(</span><span class="n">subnum</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">plot_roi</span><span class="p">(</span><span class="n">roibin_img</span><span class="p">,</span><span class="n">bg_img</span><span class="o">=</span><span class="n">t1_img</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-             <span class="n">draw_cross</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s">&#39;hot&#39;</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>
-             <span class="n">display_mode</span><span class="o">=</span><span class="s">&#39;y&#39;</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="n">a</span><span class="p">)</span>
+             <span class="n">draw_cross</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;hot&#39;</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>
+             <span class="n">display_mode</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="n">a</span><span class="p">)</span>
 
     <span class="n">subnum</span><span class="o">+=</span><span class="mi">1</span>
 
 
-  <span class="c"># Add page to pdf</span>
+  <span class="c1"># Add page to pdf</span>
   <span class="n">pdf</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
     
   <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -2520,7 +2522,7 @@ IPython.load_extensions('calico-spell-check', 'calico-document-tools', 'calico-c
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c">#!evince test_report2.pdf</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="ch">#!evince test_report2.pdf</span>
 </pre></div>
 
 </div>
@@ -2558,7 +2560,7 @@ etc...
 
 
 <div class="input_area box-flex1 white">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># to do...</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># to do...</span>
 </pre></div>
 
 </div>
@@ -2616,7 +2618,7 @@ etc...
 
   <section>
   <h1>Tags</h1>
-    <a href="https://johngriffiths.github.io/LabNotebook/tag/ppmi.html">PPMI</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/viz.html">Viz</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/sem.html">SEM</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/dementia.html">Dementia</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/adni.html">ADNI</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/labnotebook.html">LabNotebook</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/tvb.html">TVB</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/hcp.html">HCP</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/robinson.html">Robinson</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/pcp.html">PCP</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/mse.html">MSE</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/dwi.html">DWI</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/dcm.html">DCM</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/mcintosh.html">McIntosh</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/connectivity.html">Connectivity</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/granger.html">Granger</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/ipython.html">IPython</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/theorygroup.html">TheoryGroup</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/rsfmri.html">rsfMRI</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/ageing.html">ageing</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/eigenmodes.html">eigenmodes</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/tractography.html">tractography</a>  </section>
+    <a href="https://johngriffiths.github.io/LabNotebook/tag/ppmi.html">PPMI</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/viz.html">Viz</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/sem.html">SEM</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/dementia.html">Dementia</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/adni.html">ADNI</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/labnotebook.html">LabNotebook</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/tvb.html">TVB</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/hcp.html">HCP</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/robinson.html">Robinson</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/pcp.html">PCP</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/mse.html">MSE</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/dwi.html">DWI</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/meg.html">MEG</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/dcm.html">DCM</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/mcintosh.html">McIntosh</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/connectivity.html">Connectivity</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/granger.html">Granger</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/ipython.html">IPython</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/theorygroup.html">TheoryGroup</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/rsfmri.html">rsfMRI</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/ageing.html">ageing</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/eigenmodes.html">eigenmodes</a>,    <a href="https://johngriffiths.github.io/LabNotebook/tag/tractography.html">tractography</a>  </section>
 
 
 
