@@ -497,7 +497,7 @@ IPython.load_extensions('calico-spell-check',
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!-- collapse=True--&amp;gt;&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!--collapse=True--&amp;gt;&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Plot and embed in LN&lt;/span&gt;
 &lt;span class="c1"&gt;# --------------------&lt;/span&gt;
@@ -612,7 +612,7 @@ IPython.load_extensions('calico-spell-check',
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!-- collapse=True--&amp;gt;&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!--collapse=True--&amp;gt;&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Plot and embed in LN&lt;/span&gt;
 &lt;span class="c1"&gt;# --------------------&lt;/span&gt;
@@ -727,7 +727,7 @@ IPython.load_extensions('calico-spell-check',
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!-- collapse=True--&amp;gt;&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!--collapse=True--&amp;gt;&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Plot and embed in LN&lt;/span&gt;
 &lt;span class="c1"&gt;# --------------------&lt;/span&gt;
@@ -888,7 +888,7 @@ IPython.load_extensions('calico-spell-check',
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!-- collapse=True--&amp;gt;&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!--collapse=True--&amp;gt;&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Plot and embed in LN&lt;/span&gt;
 &lt;span class="c1"&gt;# --------------------&lt;/span&gt;
@@ -1082,7 +1082,7 @@ IPython.load_extensions('calico-spell-check',
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!-- collapse=True--&amp;gt;&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!--collapse=True--&amp;gt;&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Plot and embed in LN&lt;/span&gt;
 &lt;span class="c1"&gt;# --------------------&lt;/span&gt;
@@ -1159,7 +1159,7 @@ IPython.load_extensions('calico-spell-check',
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!-- collapse=True--&amp;gt;&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!--collapse=True--&amp;gt;&lt;/span&gt;
 
 &lt;span class="n"&gt;figf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/pics/surface_sim_alphapeak_params_plfits.png&amp;#39;&lt;/span&gt;
 
@@ -1289,7 +1289,7 @@ IPython.load_extensions('calico-spell-check',
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!-- collapse=True--&amp;gt;&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!--collapse=True--&amp;gt;&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Plot and embed in LN&lt;/span&gt;
 &lt;span class="c1"&gt;# --------------------&lt;/span&gt;
@@ -1358,7 +1358,7 @@ IPython.load_extensions('calico-spell-check',
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!-- collapse=True--&amp;gt;&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!--collapse=True--&amp;gt;&lt;/span&gt;
 
 &lt;span class="n"&gt;figf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/pics/surface_sim_alphapeak_params_lch_plfits.png&amp;#39;&lt;/span&gt;
 
@@ -1487,7 +1487,7 @@ IPython.load_extensions('calico-spell-check',
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!-- collapse=True--&amp;gt;&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!--collapse=True--&amp;gt;&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Plot and embed in LN&lt;/span&gt;
 &lt;span class="c1"&gt;# --------------------&lt;/span&gt;
@@ -1556,7 +1556,7 @@ IPython.load_extensions('calico-spell-check',
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!-- collapse=True--&amp;gt;&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!--collapse=True--&amp;gt;&lt;/span&gt;
 
 &lt;span class="n"&gt;figf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/pics/surface_sim_alphapeak_params_lchh_plfits.png&amp;#39;&lt;/span&gt;
 
@@ -1682,7 +1682,7 @@ IPython.load_extensions('calico-spell-check',
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!-- collapse=True--&amp;gt;&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!--collapse=True--&amp;gt;&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Plot and embed in LN&lt;/span&gt;
 &lt;span class="c1"&gt;# --------------------&lt;/span&gt;
@@ -1752,7 +1752,7 @@ IPython.load_extensions('calico-spell-check',
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!-- collapse=True--&amp;gt;&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!--collapse=True--&amp;gt;&lt;/span&gt;
 
 &lt;span class="n"&gt;figf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/pics/surface_sim_alphapeak_params_lchhh_plfits.png&amp;#39;&lt;/span&gt;
 
@@ -1879,7 +1879,7 @@ IPython.load_extensions('calico-spell-check',
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!-- collapse=True--&amp;gt;&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!--collapse=True--&amp;gt;&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Plot and embed in LN&lt;/span&gt;
 &lt;span class="c1"&gt;# --------------------&lt;/span&gt;
@@ -3181,7 +3181,7 @@ ElBnWUREREQkAXWWRUREREQSUGdZRERERCQBdZZFRERERBL4fxWn+NAjwBC4AAAAAElFTkSuQmCC
 
 
 &lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!-- collapse=True--&amp;gt;&lt;/span&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# &amp;lt;!--collapse=True--&amp;gt;&lt;/span&gt;
 
 &lt;span class="n"&gt;figf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/pics/surface_sim_alphapeak_params_lcl_plfits.png&amp;#39;&lt;/span&gt;
 
