@@ -5,6 +5,21 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="contents"&gt;Contents&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#Notebook-Setup"&gt;Notebook Setup&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Load-data"&gt;Load data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Fix-inflated-surface-coordinates"&gt;Fix inflated surface coordinates&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Plotting-activity-from-a-region-mapping"&gt;Plotting activity from a region mapping&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;These are some vary parochial notes solving a particular problem that a colleague of mine had with making surface visualizations of some of their macaque brain data. In other words it may or may not be of general interest...&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -156,6 +171,49 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Calico document tools&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+
+
+&lt;div class="input_area box-flex1 white"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;javascript&lt;/span&gt;
+&lt;span class="n"&gt;IPython&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load_extensions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;calico-spell-check&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+                        &lt;span class="s1"&gt;&amp;#39;calico-document-tools&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;calico-cell-tools&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_subarea output_javascript "&gt;
+&lt;script type="text/javascript"&gt;
+IPython.load_extensions('calico-spell-check', 
+                        'calico-document-tools', 'calico-cell-tools');
+&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Go to output folder&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -269,8 +327,8 @@
 &lt;div class="input"&gt;
 
 
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; font-size: .7em;  background:transparent;"&gt; (-_-) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="background:transparent"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;figf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/pics/bihemi_noinfl_surf_struct.png&amp;#39;&lt;/span&gt;
 
 &lt;span class="n"&gt;plot_surface_mpl_mv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vtx&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;vtx_noinfl_lhrh&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;tri&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;tri_lhrh&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;hemi&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;hemi&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -314,8 +372,8 @@
 &lt;div class="input"&gt;
 
 
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; font-size: .7em;  background:transparent;"&gt; (-_-) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="background:transparent"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;figf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/pics/bihemi_infl_surf_struct.png&amp;#39;&lt;/span&gt;
 
 &lt;span class="n"&gt;plot_surface_mpl_mv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vtx&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;vtx_infl_lhrh&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;tri&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;tri_lhrh&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;hemi&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;hemi&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -397,8 +455,8 @@
 &lt;div class="input"&gt;
 
 
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; font-size: .7em;  background:transparent;"&gt; (-_-) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="background:transparent"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;figf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/pics/lhrh_infl_surf_scatter.png&amp;#39;&lt;/span&gt;
 
 &lt;span class="n"&gt;fig&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ax&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;subplots&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ncols&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;figsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
@@ -458,8 +516,8 @@
 &lt;div class="input"&gt;
 
 
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; font-size: .7em;  background:transparent;"&gt; (-_-) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="background:transparent"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;figf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/pics/lhrh_noinfl_surf_scatter.png&amp;#39;&lt;/span&gt;
 
 &lt;span class="n"&gt;fig&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ax&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;subplots&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ncols&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;figsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
@@ -541,8 +599,8 @@
 &lt;div class="input"&gt;
 
 
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; font-size: .7em;  background:transparent;"&gt; (-_-) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="background:transparent"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;figf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/pics/lhrh_infl_shift_surf_scatter.png&amp;#39;&lt;/span&gt;
 
 &lt;span class="n"&gt;fig&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ax&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;subplots&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ncols&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;figsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
@@ -602,18 +660,18 @@
 &lt;div class="input"&gt;
 
 
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;figf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/pics/bihemi_infl_shift_surf_scatter.png&amp;#39;&lt;/span&gt;
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; font-size: .7em;  background:transparent;"&gt; (-_-) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="background:transparent"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;figf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/pics/bihemi_infl_shift_surf_struct.png&amp;#39;&lt;/span&gt;
 
 &lt;span class="n"&gt;fig&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ax&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;subplots&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ncols&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;figsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
-&lt;span class="n"&gt;plot_surface_mpl_mv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vtx&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;vtx_infl_shift_lhrh&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;tri&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;tri_lhrh&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;hemi&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;hemi&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;reorient&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;fs&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;plot_surface_mpl_mv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vtx&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;vtx_infl_shift_lhrh&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;tri&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;tri_lhrh&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;hemi&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;hemi&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;reorient&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;fs&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                    &lt;span class="n"&gt;shade_kwargs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;edgecolors&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;k&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;linewidth&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
 
 &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;savefig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;figf&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;bboc_inches&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;tight&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-
 
 
 &lt;span class="c1"&gt;# Upload to cloud&lt;/span&gt;
@@ -636,7 +694,7 @@
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;center&gt;&lt;img src="https://macaque_brain_conmat_viz.s3.amazonaws.com/bihemi_infl_shift_surf_scatter.png" alt="broken link"                   title=" . " height="1000px" width="600px" /&gt;                   .  &lt;/center&gt;
+&lt;center&gt;&lt;img src="https://macaque_brain_conmat_viz.s3.amazonaws.com/bihemi_infl_shift_surf_struct.png" alt="broken link"                   title=" . " height="1000px" width="600px" /&gt;                   .  &lt;/center&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -740,8 +798,8 @@ We deal with this by appending a &amp;#39;dummy&amp;#39; entry to then end of ou
 &lt;div class="input"&gt;
 
 
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; font-size: .7em;  background:transparent;"&gt; (-_-) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="background:transparent"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;figf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/pics/weights_aug_bihemi.png&amp;#39;&lt;/span&gt;
 
 &lt;span class="n"&gt;fig&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ax&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;subplots&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ncols&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;figsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
@@ -808,8 +866,8 @@ We deal with this by appending a &amp;#39;dummy&amp;#39; entry to then end of ou
 &lt;div class="input"&gt;
 
 
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; font-size: .7em;  background:transparent;"&gt; (-_-) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="background:transparent"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;figf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/pics/bihemi_infl_surf_weightsauglhrh_roi1.png&amp;#39;&lt;/span&gt;
 
 &lt;span class="n"&gt;dat&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;weights_aug_lhrh&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt;&lt;span class="n"&gt;roi_ind&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
@@ -858,8 +916,8 @@ We deal with this by appending a &amp;#39;dummy&amp;#39; entry to then end of ou
 &lt;div class="input"&gt;
 
 
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; background:transparent; font-size: .7em; "&gt; (0_0) &lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none; background-color:transparent; "&gt;
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-style: italic; font-size: .7em;  background:transparent;"&gt; (-_-) &lt;/span&gt;
+&lt;div class="input_area box-flex1" style="background:transparent"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;figf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;outdir&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/pics/bihemi_infl_surf_lengthsauglhrh_roi1.png&amp;#39;&lt;/span&gt;
 
 &lt;span class="n"&gt;dat&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;lengths_aug_lhrh&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt;&lt;span class="n"&gt;roi_ind&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
@@ -910,7 +968,7 @@ We deal with this by appending a &amp;#39;dummy&amp;#39; entry to then end of ou
 &lt;p&gt;Looking good to me :)&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/p&gt;</summary><category term="TVB"></category><category term="Viz"></category><category term="OpenAccess"></category></entry><entry><title>Making registration QC reports</title><link href="https://johngriffiths.github.io/LabNotebook/making-registration-qc-reports.html" rel="alternate"></link><published>2016-07-13T00:00:00-07:00</published><author><name>John Grif</name></author><id>tag:johngriffiths.github.io,2016-07-13:LabNotebook/making-registration-qc-reports.html</id><summary type="html">&lt;p&gt;
+&lt;/div&gt;&lt;/p&gt;</summary><category term="Viz"></category><category term="OpenAccess"></category><category term="TVB"></category></entry><entry><title>Making registration QC reports</title><link href="https://johngriffiths.github.io/LabNotebook/making-registration-qc-reports.html" rel="alternate"></link><published>2016-07-13T00:00:00-07:00</published><author><name>John Grif</name></author><id>tag:johngriffiths.github.io,2016-07-13:LabNotebook/making-registration-qc-reports.html</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;

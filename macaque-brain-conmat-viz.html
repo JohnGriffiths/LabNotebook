@@ -1772,6 +1772,21 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="contents">Contents</h3>
+<ul>
+<li><a href="#Notebook-Setup">Notebook Setup</a></li>
+<li><a href="#Load-data">Load data</a></li>
+<li><a href="#Fix-inflated-surface-coordinates">Fix inflated surface coordinates</a></li>
+<li><a href="#Plotting-activity-from-a-region-mapping">Plotting activity from a region mapping</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>These are some vary parochial notes solving a particular problem that a colleague of mine had with making surface visualizations of some of their macaque brain data. In other words it may or may not be of general interest...</p>
 </div>
 </div>
@@ -1923,6 +1938,49 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>Calico document tools</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="o">%%</span><span class="k">javascript</span>
+<span class="n">IPython</span><span class="o">.</span><span class="n">load_extensions</span><span class="p">(</span><span class="s1">&#39;calico-spell-check&#39;</span><span class="p">,</span> 
+                        <span class="s1">&#39;calico-document-tools&#39;</span><span class="p">,</span> <span class="s1">&#39;calico-cell-tools&#39;</span><span class="p">);</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+IPython.load_extensions('calico-spell-check', 
+                        'calico-document-tools', 'calico-cell-tools');
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>Go to output folder</p>
 </div>
 </div>
@@ -2036,8 +2094,8 @@ jQuery(document).ready(function($) {
 <div class="input">
 
 
-<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
-<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="collapseheader box-flex1"><span style="font-style: italic; font-size: .7em;  background:transparent;"> (-_-) </span>
+<div class="input_area box-flex1" style="background:transparent">
 <div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/bihemi_noinfl_surf_struct.png&#39;</span>
 
 <span class="n">plot_surface_mpl_mv</span><span class="p">(</span><span class="n">vtx</span><span class="o">=</span><span class="n">vtx_noinfl_lhrh</span><span class="p">,</span><span class="n">tri</span><span class="o">=</span><span class="n">tri_lhrh</span><span class="p">,</span><span class="n">hemi</span><span class="o">=</span><span class="n">hemi</span><span class="p">,</span>
@@ -2081,8 +2139,8 @@ jQuery(document).ready(function($) {
 <div class="input">
 
 
-<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
-<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="collapseheader box-flex1"><span style="font-style: italic; font-size: .7em;  background:transparent;"> (-_-) </span>
+<div class="input_area box-flex1" style="background:transparent">
 <div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/bihemi_infl_surf_struct.png&#39;</span>
 
 <span class="n">plot_surface_mpl_mv</span><span class="p">(</span><span class="n">vtx</span><span class="o">=</span><span class="n">vtx_infl_lhrh</span><span class="p">,</span><span class="n">tri</span><span class="o">=</span><span class="n">tri_lhrh</span><span class="p">,</span><span class="n">hemi</span><span class="o">=</span><span class="n">hemi</span><span class="p">,</span>
@@ -2164,8 +2222,8 @@ jQuery(document).ready(function($) {
 <div class="input">
 
 
-<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
-<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="collapseheader box-flex1"><span style="font-style: italic; font-size: .7em;  background:transparent;"> (-_-) </span>
+<div class="input_area box-flex1" style="background:transparent">
 <div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/lhrh_infl_surf_scatter.png&#39;</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
@@ -2225,8 +2283,8 @@ jQuery(document).ready(function($) {
 <div class="input">
 
 
-<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
-<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="collapseheader box-flex1"><span style="font-style: italic; font-size: .7em;  background:transparent;"> (-_-) </span>
+<div class="input_area box-flex1" style="background:transparent">
 <div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/lhrh_noinfl_surf_scatter.png&#39;</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
@@ -2308,8 +2366,8 @@ jQuery(document).ready(function($) {
 <div class="input">
 
 
-<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
-<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="collapseheader box-flex1"><span style="font-style: italic; font-size: .7em;  background:transparent;"> (-_-) </span>
+<div class="input_area box-flex1" style="background:transparent">
 <div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/lhrh_infl_shift_surf_scatter.png&#39;</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
@@ -2369,18 +2427,18 @@ jQuery(document).ready(function($) {
 <div class="input">
 
 
-<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
-<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
-<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/bihemi_infl_shift_surf_scatter.png&#39;</span>
+<div class="collapseheader box-flex1"><span style="font-style: italic; font-size: .7em;  background:transparent;"> (-_-) </span>
+<div class="input_area box-flex1" style="background:transparent">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/bihemi_infl_shift_surf_struct.png&#39;</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 
-<span class="n">plot_surface_mpl_mv</span><span class="p">(</span><span class="n">vtx</span><span class="o">=</span><span class="n">vtx_infl_shift_lhrh</span><span class="p">,</span><span class="n">tri</span><span class="o">=</span><span class="n">tri_lhrh</span><span class="p">,</span><span class="n">hemi</span><span class="o">=</span><span class="n">hemi</span><span class="p">,</span><span class="n">reorient</span><span class="o">=</span><span class="s1">&#39;fs&#39;</span><span class="p">)</span>
+<span class="n">plot_surface_mpl_mv</span><span class="p">(</span><span class="n">vtx</span><span class="o">=</span><span class="n">vtx_infl_shift_lhrh</span><span class="p">,</span><span class="n">tri</span><span class="o">=</span><span class="n">tri_lhrh</span><span class="p">,</span><span class="n">hemi</span><span class="o">=</span><span class="n">hemi</span><span class="p">,</span><span class="n">reorient</span><span class="o">=</span><span class="s1">&#39;fs&#39;</span><span class="p">,</span>
+                    <span class="n">shade_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;edgecolors&#39;</span><span class="p">:</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">})</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span> <span class="n">bboc_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
 
 
 <span class="c1"># Upload to cloud</span>
@@ -2403,7 +2461,7 @@ jQuery(document).ready(function($) {
 <div class="output_area"><div class="prompt"></div>
 
 <div class="output_html rendered_html output_subarea ">
-<center><img src="https://macaque_brain_conmat_viz.s3.amazonaws.com/bihemi_infl_shift_surf_scatter.png" alt="broken link"                   title=" . " height="1000px" width="600px" />                   .  </center>
+<center><img src="https://macaque_brain_conmat_viz.s3.amazonaws.com/bihemi_infl_shift_surf_struct.png" alt="broken link"                   title=" . " height="1000px" width="600px" />                   .  </center>
 </div>
 
 </div>
@@ -2507,8 +2565,8 @@ We deal with this by appending a &#39;dummy&#39; entry to then end of our data v
 <div class="input">
 
 
-<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
-<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="collapseheader box-flex1"><span style="font-style: italic; font-size: .7em;  background:transparent;"> (-_-) </span>
+<div class="input_area box-flex1" style="background:transparent">
 <div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/weights_aug_bihemi.png&#39;</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
@@ -2575,8 +2633,8 @@ We deal with this by appending a &#39;dummy&#39; entry to then end of our data v
 <div class="input">
 
 
-<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
-<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="collapseheader box-flex1"><span style="font-style: italic; font-size: .7em;  background:transparent;"> (-_-) </span>
+<div class="input_area box-flex1" style="background:transparent">
 <div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/bihemi_infl_surf_weightsauglhrh_roi1.png&#39;</span>
 
 <span class="n">dat</span><span class="o">=</span><span class="n">weights_aug_lhrh</span><span class="p">[:,</span><span class="n">roi_ind</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -2625,8 +2683,8 @@ We deal with this by appending a &#39;dummy&#39; entry to then end of our data v
 <div class="input">
 
 
-<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
-<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="collapseheader box-flex1"><span style="font-style: italic; font-size: .7em;  background:transparent;"> (-_-) </span>
+<div class="input_area box-flex1" style="background:transparent">
 <div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/bihemi_infl_surf_lengthsauglhrh_roi1.png&#39;</span>
 
 <span class="n">dat</span><span class="o">=</span><span class="n">lengths_aug_lhrh</span><span class="p">[:,</span><span class="n">roi_ind</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -2690,7 +2748,7 @@ We deal with this by appending a &#39;dummy&#39; entry to then end of our data v
     <a class='category' href='https://johngriffiths.github.io/LabNotebook/category/misc.html'>misc</a>
   </span>
   <span class="categories">
-    <a class="category" href="https://johngriffiths.github.io/LabNotebook/tag/tvb.html">TVB</a>,    <a class="category" href="https://johngriffiths.github.io/LabNotebook/tag/viz.html">Viz</a>,    <a class="category" href="https://johngriffiths.github.io/LabNotebook/tag/openaccess.html">OpenAccess</a>  </span>
+    <a class="category" href="https://johngriffiths.github.io/LabNotebook/tag/viz.html">Viz</a>,    <a class="category" href="https://johngriffiths.github.io/LabNotebook/tag/openaccess.html">OpenAccess</a>,    <a class="category" href="https://johngriffiths.github.io/LabNotebook/tag/tvb.html">TVB</a>  </span>
 </p><div class="sharing">
 </div>    </footer>
   </article>
