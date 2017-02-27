@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>JDG Lab Notebook</title>
+  <title>Macaque Brain Visualizations &mdash; JDG Lab Notebook</title>
   <meta name="author" content="John D. Griffiths">
 
 
@@ -1714,6 +1714,8 @@ jQuery(document).ready(function($) {
 
 
 
+
+
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
@@ -1750,34 +1752,950 @@ jQuery(document).ready(function($) {
     <li><a href="https://johngriffiths.github.io/LabNotebook/archives.html">Archives</a></li>
     <li><a href="https://github.com/JohnGriffiths/LabNotebook.html">Github repo</a></li>
     <li><a href="http://en.wikipedia.org/wiki/Open_notebook_science">Open Notebook Science</a></li>
-      <li >
+      <li class="active">
         <a href="https://johngriffiths.github.io/LabNotebook/category/misc.html">Misc</a>
       </li>
 </ul></nav>
   <div id="main">
     <div id="content">
-<div class="blog-index">
-  		<article>
+<div>
+  <article class="hentry" role="article">
 <header>
-      <h1 class="entry-title">
-        <a href="https://johngriffiths.github.io/LabNotebook/hcp-meg-mse-pilot.html">HCP MEG MSE Pilot</a>
-      </h1>
+      <h1 class="entry-title">Macaque Brain Visualizations</h1>
     <p class="meta">
-<time datetime="2016-06-02T00:00:00-07:00" pubdate>Thu 02 June 2016</time>    </p>
+<time datetime="2017-02-27T00:00:00-08:00" pubdate>Mon 27 February 2017</time>    </p>
 </header>
 
-<div class="entry-content">
+  <div class="entry-content"><p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-  <footer>
-    <a rel="full-article" href="https://johngriffiths.github.io/LabNotebook/hcp-meg-mse-pilot.html">Read On &crarr;</a>
-  </footer>
-  		</article>
-<div class="pagination">
-    <a class="prev" href="https://johngriffiths.github.io/LabNotebook/index11.html">&larr; Older</a>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>These are some vary parochial notes solving a particular problem that a colleague of mine had with making surface visualizations of some of their macaque brain data. In other words it may or may not be of general interest...</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Notebook-Setup">Notebook Setup<a class="anchor-link" href="#Notebook-Setup">&#182;</a></h2>
+</div>
+</div>
+</div>
 
-    <a class="next" href="https://johngriffiths.github.io/LabNotebook/index9.html">Newer &rarr;</a>
-  <br />
-</div></div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Define some variables</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># put some system-specific variables in the namespace (&#39;le&#39; dict)</span>
+<span class="o">%</span><span class="k">run</span> <span class="o">~/</span><span class="n">set_localenv_vars</span><span class="o">.</span><span class="n">py</span>
+
+<span class="n">nb_name</span> <span class="o">=</span> <span class="s1">&#39;macaque_brain_conmat_viz&#39;</span>
+
+<span class="c1"># this is where I look for stuf</span>
+<span class="n">outdir</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/notebooks/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">le</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">],</span><span class="n">nb_name</span><span class="p">)</span>
+
+<span class="c1"># this is where stuff actually lives</span>
+<span class="n">outdir_loc</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="s1">&#39;/mnt/titania-hecuba/mcintosh_lab/john/Data/notebooks&#39;</span><span class="p">,</span> <span class="n">nb_name</span><span class="p">)</span>
+
+<span class="c1"># symlink the two</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">outdir_loc</span><span class="p">):</span> <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">outdir_loc</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">outdir</span><span class="p">):</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;ln -s </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">outdir_loc</span><span class="p">,</span><span class="n">outdir</span><span class="p">))</span>
+                                        
+
+<span class="c1"># root path to tvb-library, tvb-data, etc. libraries. </span>
+<span class="n">tvb_folder</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="s1">&#39;code_dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/libraries_of_mine/github&#39;</span>
+
+
+<span class="c1"># stuff for workdocs-cloudfiles</span>
+
+<span class="n">aws_key</span> <span class="o">=</span> <span class="s1">&#39;drowssaperucesyreva&#39;</span>
+<span class="n">aws_secret</span> <span class="o">=</span> <span class="s1">&#39;?teytidettopsuoyevah&#39;</span>  
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Importage</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># Generic imports</span>
+
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">glob</span><span class="o">,</span><span class="nn">h5py</span><span class="o">,</span><span class="nn">itertools</span><span class="o">,</span><span class="nn">multiprocessing</span><span class="o">,</span>\
+       <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span><span class="o">,</span><span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="kn">import</span> <span class="n">cKDTree</span>
+
+<span class="c1"># Visualization stuff</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span><span class="n">display</span> <span class="k">as</span> <span class="n">d</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+
+
+
+<span class="c1"># Neuroimaging stuff</span>
+
+<span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+<span class="kn">from</span> <span class="nn">nilearn.plotting</span> <span class="kn">import</span> <span class="n">plot_roi</span>
+<span class="kn">from</span> <span class="nn">dipy.tracking.utils</span> <span class="kn">import</span> <span class="n">apply_affine</span>
+
+<span class="c1"># TVB stuff</span>
+
+<span class="n">nbso</span><span class="p">,</span><span class="n">nbse</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="c1"># hack part 1/2 to keep output printing properly</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tvb_folder</span> <span class="o">+</span><span class="s1">&#39;/tvb-library&#39;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tvb_folder</span> <span class="o">+</span> <span class="s1">&#39;/tvb-data&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">tvb.simulator.lab</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">nbso</span><span class="p">,</span><span class="n">nbse</span>  <span class="c1"># ...hack part 2/2</span>
+<span class="kn">from</span> <span class="nn">tvb.simulator.plot.tools</span> <span class="kn">import</span> <span class="n">plot_surface_mpl</span><span class="p">,</span><span class="n">plot_surface_mpl_mv</span>
+
+
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span> <span class="c1"># seems that this needs to be done last otherwise it gets </span>
+                      <span class="c1"># replaced with numpy copy function</span>
+    
+    
+<span class="c1"># aws api and workdocs-cloudfiles stuff</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">le</span><span class="p">[</span><span class="s1">&#39;ipynb_workdocs_dir&#39;</span><span class="p">])</span>
+<span class="kn">from</span> <span class="nn">new_utils</span> <span class="kn">import</span> <span class="n">nb_fig</span><span class="p">,</span><span class="n">cloudfiles_nb</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Initialize aws api and workdocs-cloudfiles folder</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">cnb</span> <span class="o">=</span> <span class="n">cloudfiles_nb</span><span class="p">(</span><span class="s1">&#39;aws&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">aws_key</span><span class="p">,</span><span class="n">aws_secret</span><span class="p">])</span>
+<span class="n">cnb</span><span class="o">.</span><span class="n">initialize_folder</span><span class="p">(</span><span class="n">nb_name</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Go to output folder</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ok, let&#39;s get cracking</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Load-data">Load data<a class="anchor-link" href="#Load-data">&#182;</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The surface data we have are left and right hemisphere vertices, faces, and region mappings. The region data we have are weights and tract lengths matrices. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">vtx_noinfl_lh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;coord_left_noninflated.txt&#39;</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">:]</span> 
+<span class="n">vtx_infl_lh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;coord_left_inflated.txt&#39;</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">:]</span>
+<span class="n">tri_lh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;tiles_left.txt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="n">vtx_noinfl_rh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;coord_right_noninflated.txt&#39;</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">:]</span> 
+<span class="n">vtx_infl_rh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;coord_right_inflated.txt&#39;</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">:]</span>
+<span class="n">tri_rh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;tiles_right.txt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="n">rm_lh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;fv91_vertexMap_left.txt&#39;</span><span class="p">)</span>
+<span class="n">rm_rh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;fv91_vertexMap_right.txt&#39;</span><span class="p">)</span>
+
+
+<span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;weights.txt&#39;</span><span class="p">)</span>
+
+<span class="n">lengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;tract_lengths.txt&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Combine hemispheres</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">tri_lhrh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">tri_lh</span><span class="p">,</span><span class="n">tri_rh</span><span class="o">+</span><span class="n">vtx_infl_lh</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+
+<span class="n">vtx_noinfl_lhrh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">vtx_noinfl_lh</span><span class="p">,</span><span class="n">vtx_noinfl_rh</span><span class="p">])</span>
+<span class="n">vtx_infl_lhrh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">vtx_infl_lh</span><span class="p">,</span><span class="n">vtx_infl_rh</span><span class="p">])</span>
+
+<span class="n">hemi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">vtx_infl_lh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">),</span>
+                       <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">vtx_infl_rh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)])</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Initial plots</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/bihemi_noinfl_surf_struct.png&#39;</span>
+
+<span class="n">plot_surface_mpl_mv</span><span class="p">(</span><span class="n">vtx</span><span class="o">=</span><span class="n">vtx_noinfl_lhrh</span><span class="p">,</span><span class="n">tri</span><span class="o">=</span><span class="n">tri_lhrh</span><span class="p">,</span><span class="n">hemi</span><span class="o">=</span><span class="n">hemi</span><span class="p">,</span>
+                    <span class="n">reorient</span><span class="o">=</span><span class="s1">&#39;fs&#39;</span><span class="p">,</span> 
+                    <span class="n">shade_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;edgecolors&#39;</span><span class="p">:</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">})</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="c1"># Upload to cloud</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">600</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://macaque_brain_conmat_viz.s3.amazonaws.com/bihemi_noinfl_surf_struct.png" alt="broken link"                   title=" . " height="1000px" width="600px" />                   .  </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/bihemi_infl_surf_struct.png&#39;</span>
+
+<span class="n">plot_surface_mpl_mv</span><span class="p">(</span><span class="n">vtx</span><span class="o">=</span><span class="n">vtx_infl_lhrh</span><span class="p">,</span><span class="n">tri</span><span class="o">=</span><span class="n">tri_lhrh</span><span class="p">,</span><span class="n">hemi</span><span class="o">=</span><span class="n">hemi</span><span class="p">,</span>
+                    <span class="n">reorient</span><span class="o">=</span><span class="s1">&#39;fs&#39;</span><span class="p">,</span> 
+                    <span class="n">shade_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;edgecolors&#39;</span><span class="p">:</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">})</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+
+<span class="c1"># Upload to cloud</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">600</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://macaque_brain_conmat_viz.s3.amazonaws.com/bihemi_infl_surf_struct.png" alt="broken link"                   title=" . " height="1000px" width="600px" />                   .  </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The lateral and medial plots there are ok, but clearly something wrong with the combined superior view in the middle...</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Fix-inflated-surface-coordinates">Fix inflated surface coordinates<a class="anchor-link" href="#Fix-inflated-surface-coordinates">&#182;</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So it turns out that the inflated surface coordinates are overlapping in the x plane; i.e. the left and right hemispheres are not separated. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The easy way to see this (which is how I found the problem) is with scatter plots</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/lhrh_infl_surf_scatter.png&#39;</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vtx_infl_lh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">vtx_infl_lh</span><span class="p">[:,</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vtx_infl_lh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">vtx_infl_lh</span><span class="p">[:,</span><span class="mi">2</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vtx_infl_lh</span><span class="p">[:,</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">vtx_infl_lh</span><span class="p">[:,</span><span class="mi">2</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vtx_infl_rh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">vtx_infl_rh</span><span class="p">[:,</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vtx_infl_rh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">vtx_infl_rh</span><span class="p">[:,</span><span class="mi">2</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vtx_infl_rh</span><span class="p">[:,</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">vtx_infl_rh</span><span class="p">[:,</span><span class="mi">2</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="c1"># Upload to cloud</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">600</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://macaque_brain_conmat_viz.s3.amazonaws.com/lhrh_infl_surf_scatter.png" alt="broken link"                   title=" . " height="1000px" width="600px" />                   .  </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Compare this to the non-inflated surfaces</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/lhrh_noinfl_surf_scatter.png&#39;</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vtx_noinfl_lh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">vtx_noinfl_lh</span><span class="p">[:,</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vtx_noinfl_lh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">vtx_noinfl_lh</span><span class="p">[:,</span><span class="mi">2</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vtx_noinfl_lh</span><span class="p">[:,</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">vtx_noinfl_lh</span><span class="p">[:,</span><span class="mi">2</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vtx_noinfl_rh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">vtx_noinfl_rh</span><span class="p">[:,</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vtx_noinfl_rh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">vtx_noinfl_rh</span><span class="p">[:,</span><span class="mi">2</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vtx_noinfl_rh</span><span class="p">[:,</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">vtx_noinfl_rh</span><span class="p">[:,</span><span class="mi">2</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="c1"># Upload to cloud</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">600</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://macaque_brain_conmat_viz.s3.amazonaws.com/lhrh_noinfl_surf_scatter.png" alt="broken link"                   title=" . " height="1000px" width="600px" />                   .  </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can fix this by shifting the x coordinates out to the left for the left hemisphere and out to the right for the right hemisphere:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">vtx_infl_shift_lh</span> <span class="o">=</span> <span class="n">vtx_infl_lh</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">vtx_infl_shift_lh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="n">vtx_infl_lh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">vtx_infl_shift_lh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="mf">1.</span>
+
+<span class="n">vtx_infl_shift_rh</span> <span class="o">=</span> <span class="n">vtx_infl_rh</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">vtx_infl_shift_rh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">vtx_infl_rh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> 
+<span class="n">vtx_infl_shift_rh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">1.</span>
+
+
+<span class="n">vtx_infl_shift_lhrh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">vtx_infl_shift_lh</span><span class="p">,</span><span class="n">vtx_infl_shift_rh</span><span class="p">])</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/lhrh_infl_shift_surf_scatter.png&#39;</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vtx_infl_shift_lh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">vtx_infl_shift_lh</span><span class="p">[:,</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vtx_infl_shift_lh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">vtx_infl_shift_lh</span><span class="p">[:,</span><span class="mi">2</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vtx_infl_shift_lh</span><span class="p">[:,</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">vtx_infl_shift_lh</span><span class="p">[:,</span><span class="mi">2</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vtx_infl_shift_rh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">vtx_infl_shift_rh</span><span class="p">[:,</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vtx_infl_shift_rh</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">vtx_infl_shift_rh</span><span class="p">[:,</span><span class="mi">2</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vtx_infl_shift_rh</span><span class="p">[:,</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">vtx_infl_shift_rh</span><span class="p">[:,</span><span class="mi">2</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span> <span class="n">bboc_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="c1"># Upload to cloud</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">600</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://macaque_brain_conmat_viz.s3.amazonaws.com/lhrh_infl_shift_surf_scatter.png" alt="broken link"                   title=" . " height="1000px" width="600px" />                   .  </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And now the surface plots look fine as well</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/bihemi_infl_shift_surf_scatter.png&#39;</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="n">plot_surface_mpl_mv</span><span class="p">(</span><span class="n">vtx</span><span class="o">=</span><span class="n">vtx_infl_shift_lhrh</span><span class="p">,</span><span class="n">tri</span><span class="o">=</span><span class="n">tri_lhrh</span><span class="p">,</span><span class="n">hemi</span><span class="o">=</span><span class="n">hemi</span><span class="p">,</span><span class="n">reorient</span><span class="o">=</span><span class="s1">&#39;fs&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span> <span class="n">bboc_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+
+<span class="c1"># Upload to cloud</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">600</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://macaque_brain_conmat_viz.s3.amazonaws.com/bihemi_infl_shift_surf_scatter.png" alt="broken link"                   title=" . " height="1000px" width="600px" />                   .  </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Plotting-activity-from-a-region-mapping">Plotting activity from a region mapping<a class="anchor-link" href="#Plotting-activity-from-a-region-mapping">&#182;</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we want to plot data from a set of regions that are linked to our surface vertices with a region mapping</p>
+<p>The data we have from Gleb contain region mappings for the left and right hemispheres separately. We want to use these separately, and also together for combined left + right hemisphere plots. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A slight quick of these region mappings is that they contain a code (<code>0</code>) that indicates surface vertices that don&#39;t correspond to any of our brain regions. This makes things a little fiddly, as we&#39;ll see; but not too problematic. 
+We deal with this by appending a &#39;dummy&#39; entry to then end of our data vectors, and changing the <code>0</code>s in the region mapping codes to match this new dummy entry index. </p>
+<p>We do this separately for each hemisphere and for the two hemispheres combined, so we end up with three &#39;augmented&#39; data vectors. </p>
+<p>(We&#39;re actually getting data from a connectivity weights/tract lengths in this case, so we have three augmented matrices. But we are only ever using one column at a time of these matrices. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">nph</span> <span class="o">=</span> <span class="mi">77</span> <span class="c1"># number of nodes per hemiphere</span>
+
+<span class="c1"># Make augmented weights and tract lengths matrices</span>
+
+<span class="n">weights_aug_lh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">nph</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nph</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">weights_aug_lh</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[:</span><span class="n">nph</span><span class="p">,:</span><span class="n">nph</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">weights_aug_rh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">nph</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nph</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">weights_aug_rh</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="n">nph</span><span class="p">:,</span><span class="n">nph</span><span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">weights_aug_lhrh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">nph</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nph</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">weights_aug_lhrh</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">lengths_aug_lh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">nph</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nph</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">lengths_aug_lh</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[:</span><span class="n">nph</span><span class="p">,:</span><span class="n">nph</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">lengths_aug_rh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">nph</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nph</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">lengths_aug_rh</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">lengths</span><span class="p">[</span><span class="n">nph</span><span class="p">:,</span><span class="n">nph</span><span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">lengths_aug_lhrh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">nph</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nph</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">lengths_aug_lhrh</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">lengths</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+
+<span class="c1"># Make augmented region mappings </span>
+
+<span class="n">rm_aug_lh</span> <span class="o">=</span> <span class="n">rm_lh</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">rm_aug_lh</span><span class="p">[</span><span class="n">rm_aug_lh</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">9999</span> <span class="c1"># switch 0 code to  this temporarily</span>
+<span class="n">rm_aug_lh</span><span class="o">-=</span><span class="mi">1</span>  <span class="c1"># convert all indexes from matlab to python  (0-based)</span>
+<span class="n">rm_aug_lh</span><span class="o">-=</span><span class="mi">100</span> <span class="c1"># indices for these should be 0:npm</span>
+<span class="n">rm_aug_lh</span> <span class="o">=</span> <span class="n">rm_aug_lh</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> 
+
+<span class="n">rm_aug_rh</span> <span class="o">=</span> <span class="n">rm_rh</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  
+<span class="n">rm_aug_rh</span><span class="p">[</span><span class="n">rm_aug_rh</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">9999</span>
+<span class="n">rm_aug_rh</span><span class="o">-=</span><span class="mi">1</span>
+<span class="n">rm_aug_rh</span> <span class="o">=</span> <span class="n">rm_aug_rh</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+
+<span class="n">rm_aug_lhrh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">rm_aug_lh</span><span class="p">,</span><span class="n">rm_aug_rh</span><span class="o">+</span><span class="mi">77</span><span class="p">])</span>
+
+<span class="n">rm_aug_lh</span><span class="p">[</span><span class="n">rm_aug_lh</span><span class="o">&gt;</span><span class="mi">9000</span><span class="p">]</span> <span class="o">=</span> <span class="mi">78</span> <span class="c1"># dummy entry index for lh data</span>
+<span class="n">rm_aug_rh</span><span class="p">[</span><span class="n">rm_aug_rh</span><span class="o">&gt;</span><span class="mi">9000</span><span class="p">]</span> <span class="o">=</span> <span class="mi">78</span> <span class="c1"># dummy entry index for rh data</span>
+<span class="n">rm_aug_lhrh</span><span class="p">[</span><span class="n">rm_aug_lhrh</span><span class="o">&gt;</span><span class="mi">9000</span><span class="p">]</span> <span class="o">=</span> <span class="mi">154</span> <span class="c1"># dummy entry index for bihemi data</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So these are the augmented bihemispheric matrices.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/weights_aug_bihemi.png&#39;</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">weights_aug_lhrh</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">yticklabels</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">lengths_aug_lhrh</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">yticklabels</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="c1"># Upload to cloud</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">600</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://macaque_brain_conmat_viz.s3.amazonaws.com/weights_aug_bihemi.png" alt="broken link"                   title=" . " height="1000px" width="600px" />                   .  </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we will do some surface plots for one columns of these matrices. The column is the second column (chosen at random), which corresponds to area 10 (frontal cortex).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="input_area box-flex1 white">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">roi_ind</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/bihemi_infl_surf_weightsauglhrh_roi1.png&#39;</span>
+
+<span class="n">dat</span><span class="o">=</span><span class="n">weights_aug_lhrh</span><span class="p">[:,</span><span class="n">roi_ind</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># set the weight value for the roi to a high value so we can see the region </span>
+<span class="c1"># prominently</span>
+<span class="n">dat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">plot_surface_mpl_mv</span><span class="p">(</span><span class="n">vtx</span><span class="o">=</span><span class="n">vtx_infl_shift_lhrh</span><span class="p">,</span><span class="n">tri</span><span class="o">=</span><span class="n">tri_lhrh</span><span class="p">,</span><span class="n">hemi</span><span class="o">=</span><span class="n">hemi</span><span class="p">,</span><span class="n">reorient</span><span class="o">=</span><span class="s1">&#39;fs&#39;</span><span class="p">,</span>
+                    <span class="n">data</span><span class="o">=</span><span class="n">dat</span><span class="p">,</span><span class="n">rm</span><span class="o">=</span><span class="n">rm_aug_lhrh</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="c1"># Upload to cloud</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">600</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://macaque_brain_conmat_viz.s3.amazonaws.com/bihemi_infl_surf_weightsauglhrh_roi1.png" alt="broken link"                   title=" . " height="1000px" width="600px" />                   .  </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+
+<div class="collapseheader box-flex1"><span style="font-style: italic; background:transparent; font-size: .7em; "> (0_0) </span>
+<div class="input_area box-flex1" style="display:none; background-color:transparent; ">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="n">figf</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;/pics/bihemi_infl_surf_lengthsauglhrh_roi1.png&#39;</span>
+
+<span class="n">dat</span><span class="o">=</span><span class="n">lengths_aug_lhrh</span><span class="p">[:,</span><span class="n">roi_ind</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># (won&#39;t bother changing the value for roi1 this time...)</span>
+
+<span class="n">plot_surface_mpl_mv</span><span class="p">(</span><span class="n">vtx</span><span class="o">=</span><span class="n">vtx_infl_shift_lhrh</span><span class="p">,</span><span class="n">tri</span><span class="o">=</span><span class="n">tri_lhrh</span><span class="p">,</span><span class="n">hemi</span><span class="o">=</span><span class="n">hemi</span><span class="p">,</span><span class="n">reorient</span><span class="o">=</span><span class="s1">&#39;fs&#39;</span><span class="p">,</span>
+                    <span class="n">data</span><span class="o">=</span><span class="n">dat</span><span class="p">,</span><span class="n">rm</span><span class="o">=</span><span class="n">rm_aug_lhrh</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="c1"># Upload to cloud</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">label</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">nb_fig</span><span class="p">(</span><span class="n">figf</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">cap</span><span class="p">,</span><span class="n">cnb</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">600</span><span class="p">),</span><span class="n">show_fignum</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<center><img src="https://macaque_brain_conmat_viz.s3.amazonaws.com/bihemi_infl_surf_lengthsauglhrh_roi1.png" alt="broken link"                   title=" . " height="1000px" width="600px" />                   .  </center>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Looking good to me :)</p>
+</div>
+</div>
+</div></p>
+</div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">
+        John Grif
+    </span>
+  </span>
+<time datetime="2017-02-27T00:00:00-08:00" pubdate>Mon 27 February 2017</time>  <span class="categories">
+    <a class='category' href='https://johngriffiths.github.io/LabNotebook/category/misc.html'>misc</a>
+  </span>
+  <span class="categories">
+    <a class="category" href="https://johngriffiths.github.io/LabNotebook/tag/tvb.html">TVB</a>,    <a class="category" href="https://johngriffiths.github.io/LabNotebook/tag/viz.html">Viz</a>,    <a class="category" href="https://johngriffiths.github.io/LabNotebook/tag/openaccess.html">OpenAccess</a>  </span>
+</p><div class="sharing">
+</div>    </footer>
+  </article>
+
+</div>
 <aside class="sidebar">
   <section>
     <h1>Recent Posts</h1>
