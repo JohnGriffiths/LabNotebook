@@ -639,19 +639,6 @@ _ U,S,V &amp;amp;= svd(Y)  \\
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-
-
-&lt;div class="input_area box-flex1 white"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# picture: projection time series&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -755,16 +742,7 @@ leaves the low regimes and joins the first component in a high regime, climibing
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Note that the projections above are calculated after a burn-in of 5 seconds to remove the initial conditions transient. If you don&amp;#39;t do that, and compute the PCA over the full run, you get PCA plots like this &lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;to do: PCA plots including transients&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Note that the projections above are calculated after a burn-in of 5 seconds to remove the initial conditions transient. If you don&amp;#39;t do that, and compute the PCA over the full run, your PCA plots will look very different (basically you won&amp;#39;t get low firing rate states for low G; the initial conditions will make there always be an initial high firing rate (on average, for some nodes), irrspective of the value of G). &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
