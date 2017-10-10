@@ -58,7 +58,7 @@ NOTEBOOK_DIR = '../../resources/notebooks' # 'downloads/notebooks'
 #THEME = '../pelican-themes/cebong' # 'waterspill-en' # 'pelican-octopress-theme/'
 #THEME = 'pelican-octopress-theme'
 THEME = 'theme/labnotebook-pelican-octopress-theme'
-PLUGIN_PATH = 'plugins/pelican-plugins'
+PLUGIN_PATHS = ['plugins/pelican-plugins']
 
 
 
@@ -93,7 +93,8 @@ STATIC_PATHS = ['images', 'figures', 'downloads', 'favicon.png']
 PLUGINS = ['summary', 'liquid_tags.img', 'liquid_tags.video'
                       'liquid_tags.include_code', 'liquid_tags.notebook',
 		      'liquid_tags.literal',
-	   'encrypt_content']
+	   'encrypt_content',
+           'render_math']
 
 
 DISPLAY_PAGES_ON_MENU = False
