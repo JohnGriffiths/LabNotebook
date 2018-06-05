@@ -90,7 +90,7 @@ STATIC_PATHS = ['images', 'figures', 'downloads', 'favicon.png']
 #PLUGIN_PATH = 'pelican-plugins'
 #PLUGIN_PATH='/media/sf_SharedFolder/Code/git_repos_of_others/PythonicPerambulations/pelican-plugins'
 
-PLUGINS = ['summary', 'liquid_tags.img', 'liquid_tags.video'
+PLUGINS = ['summary', 'liquid_tags.img', 'liquid_tags.video',
                       'liquid_tags.include_code', 'liquid_tags.notebook',
 		      'liquid_tags.literal',
 	   'encrypt_content',
